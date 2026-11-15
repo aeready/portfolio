@@ -1,6 +1,6 @@
 # Manifesto
 
-**Status:** proposed 15 Nov 2026, awaiting Anna's approval.
+**Status:** approved by Anna, 15 Nov 2026.
 
 ## Intent
 

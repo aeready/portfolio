@@ -1,6 +1,6 @@
 # Design DNA
 
-**Status:** proposed 15 Nov 2026, awaiting approval. Values are sampled from `web/overhaul-v2.css` and from the rendered page at commit `336d723`. Nothing here is a guess unless marked.
+**Status:** approved by Anna, 15 Nov 2026. See `DECISIONS.md` for the choices made. Values are sampled from `web/overhaul-v2.css` and from the rendered page at commit `336d723`. Nothing here is a guess unless marked.
 
 ## Colour
 

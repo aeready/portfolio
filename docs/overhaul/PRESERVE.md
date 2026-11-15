@@ -1,6 +1,6 @@
 # Preserve
 
-**Status:** proposed 15 Nov 2026, awaiting approval. These do not change without Anna's explicit yes.
+**Status:** approved by Anna, 15 Nov 2026. See `DECISIONS.md` for the choices made. These do not change without Anna's explicit yes.
 
 | What stays | Why |
 |---|---|
@@ -29,8 +29,6 @@
 - "Email me" becomes the one primary action on every screen.
 - A slot is held for the textbook 첫 출근 했습니다!; nothing shows until Anna says so.
 
-## Needs a decision in this stage
+## Decided in Stage 2
 
-1. **Body typeface.** Monospace (today) or a humanist sans for running text, with mono kept for labels. See `body-font-comparison` images.
-2. **Project order and weights.** See `MOODBOARD_TRANSLATION.md`, "Proposed curation".
-3. **Out-of-date repo rules.** `AGENTS.md` still requires the sage/forest design and a "pale-sage contact section". To be rewritten to match this document once approved.
+See `DECISIONS.md`: humanist sans for running text; the approved project order; ornaments allowed on project entries. `AGENTS.md` still describes the old sage/forest design and is to be rewritten to match.

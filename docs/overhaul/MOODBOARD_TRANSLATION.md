@@ -1,6 +1,6 @@
 # Moodboard translation
 
-**Status:** proposed 15 Nov 2026, awaiting approval. For each reference: what we adopt, what we reject, and how it lands on this site. We take the principle, never the artwork.
+**Status:** approved by Anna, 15 Nov 2026. See `DECISIONS.md` for the choices made. For each reference: what we adopt, what we reject, and how it lands on this site. We take the principle, never the artwork.
 
 ## Art direction
 
@@ -25,7 +25,7 @@
 | *Extra: yellow "UX Principles" chart* | Recognition over recall; visibility of status. | Its styling. (It lists Miller's law twice.) | Supports R9. |
 | *Extra: beige "10 UI/UX Principles"* | Trust and credibility. | Its lifestyle styling. | Supports R7. Real artefacts only; no invented proof. |
 
-## Proposed curation
+## Curation (approved)
 
 Six featured, one archive, one held slot. Classroom work sits last, as Anna asked.
 
@@ -42,9 +42,10 @@ Six featured, one archive, one held slot. Classroom work sits last, as Anna aske
 
 Change from today: Reading for Meaning and Music swap places; USA Camp moves up two; Advice & Suggestions moves to the end.
 
-## Proposed ornament rules (from the 58-asset bank)
+## Ornament rules (as approved: more than first proposed)
 
 - **Hero:** unlimited. It is the loud moment.
-- **Section openers:** one ornament each, from one family per section (brackets and crosshair for Projects; tape for Background; moon disc for How I work).
-- **Project entries, body text, buttons, forms:** none.
+- **Section headings:** one ornament each, from one family per section (brackets and crosshair for Projects; tape for Background; moon disc for How I work).
+- **Project entries:** at most one each.
+- **Body text, buttons, forms:** none.
 - **Never** over a work sample, and never within 16 px of text.
