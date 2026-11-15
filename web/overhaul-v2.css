@@ -632,3 +632,19 @@ html[lang="ko"] #home .hero-art .hero-name {
   .detail-left > .gallery, .detail-left > .project-materials { width: 100%; }
   .detail-left .gallery-stage { aspect-ratio: 4 / 3; }
 }
+
+/* Stage 1 fixes (15 Nov 2026) */
+/* Korean headings inside the aubergine section were ink on ink (1:1). */
+html[lang="ko"] .trainer-section h2,
+html[lang="ko"] .trainer-section h3 { color: var(--paper); }
+html[lang="ko"] .trainer-section .heading-accent { color: var(--acid); }
+
+@media (max-width: 760px) {
+  /* Filters wrap from the left edge, so no option sits off screen. */
+  .work-tools { display: block; overflow: visible; }
+  .filter-group { flex-wrap: wrap; justify-content: flex-start; width: auto; min-width: 0; gap: 0; }
+  .filter-group button { border-bottom: 1px solid var(--rule); }
+  /* Hero copy keeps the page gutter; the credentials row wraps inside it. */
+  .hero-copy { padding: 20px var(--gutter) 0; }
+  .hero .location > span { white-space: normal; }
+}
