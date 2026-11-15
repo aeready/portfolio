@@ -392,7 +392,7 @@ window.PORTFOLIO_PROJECTS = [
       2
     ],
     "ko": {
-      "title": "Reading for Meaning",
+      "title": "의미를 찾는 읽기",
       "label": "교사 연수",
       "audienceLabel": "한국 학교의 영어 교육자",
       "format": "교사 연수 발표 자료 및 예시 읽기 교재",
@@ -410,7 +410,7 @@ window.PORTFOLIO_PROJECTS = [
       "coverAlt": "Reading for Meaning 읽기 이해 지도 연수 표지.",
       "previewCaption": "영어 교육자를 위한 읽기 이해 연수",
       "previewTertiaryAlt": "읽기 이해 지도 연수 슬라이드 3/32.",
-      "displayTitle": "Reading for Meaning",
+      "displayTitle": "의미를 찾는 읽기",
       "displayLabel": "교사 연수 · 읽기 이해",
       "slides": [
         [
@@ -1153,7 +1153,7 @@ window.PORTFOLIO_PROJECTS = [
     "original": "usa-camp-workbook",
     "originalFormat": "pdf",
     "ko": {
-      "title": "USA Camp",
+      "title": "미국 문화 캠프",
       "label": "교육과정 설계",
       "audienceLabel": "영어 수준이 높은 중학교 1·2학년 대상; 실제 수업 인원 14명",
       "format": "3일간 45분 수업 12차시; 16쪽 미니북, 발표 자료 및 활동",
@@ -1277,7 +1277,7 @@ window.PORTFOLIO_PROJECTS = [
           "PDF"
         ]
       ],
-      "displayTitle": "USA Camp",
+      "displayTitle": "미국 문화 캠프",
       "displayLabel": "교육과정 개발",
       "previewTertiaryAlt": "미국 지도, 국기, 국가 상징과 주요 정보를 담은 USA Camp 국가 프로필 페이지."
     },
