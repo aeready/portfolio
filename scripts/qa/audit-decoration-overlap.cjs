@@ -10,6 +10,7 @@ const { PNG } = (()=>{ try { return require('pngjs'); } catch { return {}; } })(
     await p.addInitScript(()=>sessionStorage.setItem('press-intro-seen','1'));
     await p.goto('http://localhost:8765/'+(pg==='home'?'':'#project/'+pg));
     if (lang==='ko') await p.click(pg==='home'?'#language-toggle':'#dialog-language-toggle');
+    await p.mouse.move(5, 600); // keep the desktop registration cursor off the toggle we just clicked
     await p.addStyleTag({content:'*,*::before,*::after{animation:none!important;transition:none!important}'});
     await p.waitForTimeout(600);
     if (pg==='home') { await p.evaluate(async()=>{for(let y=0;y<document.body.scrollHeight;y+=400){scrollTo(0,y);await new Promise(r=>setTimeout(r,30));}scrollTo(0,0)}); }
