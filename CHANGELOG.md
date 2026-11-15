@@ -3,6 +3,25 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 16 Nov 2026 — Second pass: calm, finish, gloss
+
+Second audit (owner's brief: "look like a team of expensive designers made it"; no AI-template tells; nothing in front of words or the gallery). Owner approved: replace the checkerboard with a halftone fade, cut ornaments by about half, retire offset shadows, add gloss, vary the bands.
+
+### Stage A — calm
+- **Measured overlaps fixed** (screenshots with and without decorations, pixel comparison, 375/768/1440 px, EN/KO): the circles ornament covered 34% of the Korean "Selected projects" intro on desktop; X-tape covered 2–3% of the gallery cover on phones; band pieces touched project titles, the Professional background heading and a How I work paragraph on tablets; the checkerboard touched "USA Camp" on phones. All now 0%.
+- **Checkerboard** replaced by a halftone fade from the owner's riso library.
+- **Ornament budget about halved:** riso pieces only on bands 1, 3, 5, 7 (quiet bands between); removed the small cross, circles, graph, bullseye, tape, moon, the contact frame, tape strips on covers and X-tape on the gallery. On phones and tablets the pieces are mostly cropped by the band edge, above the number row.
+- **Hard offset shadows retired** everywhere except the primary buttons (the 2024–25 template signature). Covers and the gallery sit on soft, layered paper shadows instead; hover lifts the print 4 px.
+- **One voice for controls:** buttons in the reading face, sentence case; the mono face kept for small labels only (nav, filters, chips, dates). Hero details in the reading face.
+- **Arrows** only where a link leaves the page (removed from "Explore work", "My background" and "Reveal & copy email address", which never left the page).
+- **Project pages:** coloured left-border boxes and day cards set as ruled text.
+
+### Stage B — finish
+- **Spot-UV varnish:** a clear sheen on covers, the gallery and the hero art that follows the pointer on desktop and sweeps once as a cover scrolls in on phones. Transparent at rest, so source colours are untouched; off under reduced motion.
+- **Sharper covers:** high-density screens were showing 960 px images at about 1,180 device pixels. The full-size originals are now offered in `srcset`, and `sizes` matches the real slot (600 px).
+- **One motion family:** shared durations (140 / 260 / 620 ms) and two curves.
+- **Designed focus ring:** aubergine outline with a lime halo on every control.
+
 ## 15–16 Nov 2026 — "Press run": texture, type, motion, project pages
 
 Approved by Anna on 15 Nov 2026 (game plan, then "go ahead"). Rules R6 and R7 added to the Manifesto. New layer `web/press.css` loads after `refine.css` and before `fixes.css`. Nothing is live until the owner uploads and publishes.

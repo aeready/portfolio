@@ -77,11 +77,11 @@ body,
 /* ---------- One oversized riso piece per band, cropped by the band edge --- */
 .project-collection > .project-card:nth-child(n) { --orn: none; --orn-w: 300px; --orn-ratio: 1; }
 .project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/op-waves--a0060c426c31.webp');     --orn-ratio: 346 / 343; --orn-w: 340px; }
-.project-collection > .project-card:nth-child(7n+2) { --orn: url('assets/riso/lib/target-cream--5f7dee7c9539.webp'); --orn-ratio: 1;         --orn-w: 320px; }
+.project-collection > .project-card:nth-child(7n+2) { --orn: none; }
 .project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/spiral--2d5fd3c42d24.webp');       --orn-ratio: 357 / 350; --orn-w: 330px; }
-.project-collection > .project-card:nth-child(7n+4) { --orn: url('assets/riso/lib/overprint--91335fc9fce5.webp');    --orn-ratio: 369 / 376; --orn-w: 330px; }
-.project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/lib/checker--ddbf47fcd434.webp');      --orn-ratio: 353 / 340; --orn-w: 320px; }
-.project-collection > .project-card:nth-child(7n+6) { --orn: url('assets/riso/lib/letter-u--91c6f51f4bfe.webp');     --orn-ratio: 357 / 361; --orn-w: 340px; }
+.project-collection > .project-card:nth-child(7n+4) { --orn: none; }
+.project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/lib/halftone-fade--bc3bbc9aa7b8.webp'); --orn-ratio: 629 / 320; --orn-w: 480px; }
+.project-collection > .project-card:nth-child(7n+6) { --orn: none; }
 .project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/torn-layers--ba3ba5b6235d.webp');  --orn-ratio: 368 / 374; --orn-w: 340px; }
 
 .project-collection > .project-card:nth-child(n)::after {
@@ -716,3 +716,119 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 @media (max-width: 760px) {
   #project-dialog .detail-footer button { font: 700 .875rem/1.3 var(--read) !important; letter-spacing: 0 !important; text-transform: none !important; white-space: nowrap; }
 }
+
+/* ==========================================================================
+   Stage A — calm (16 Nov 2026). Fewer, bigger riso moments; nothing on the
+   words or the work; one hard shadow left (the primary action). R2, R3, R7.
+   ========================================================================== */
+
+/* Ornament budget: about half. Gone: the small stickers and frames that
+   competed with text (measured overlaps on tablet, phone and Korean desktop). */
+.flourish--cross, .flourish--circles, .flourish--bg-circles, .flourish--graph,
+.flourish--bullseye, .flourish--tape, .flourish--moon { display: none !important; }
+.contact-actions::before { content: none !important; }
+#project-dialog .gallery::before { content: none !important; }          /* X-tape sat on the cover */
+.project-card .artifact-arrangement::after { content: none !important; } /* tape strips sat on every cover */
+
+/* Riso pieces on phones and tablets: mostly cropped by the band's top edge,
+   so the visible part stays above the number row and never meets a title. */
+@media (max-width: 1000px) {
+  .project-collection > .project-card:nth-child(n) { --orn-w: 150px; }
+  .project-collection > .project-card:nth-child(7n+5) { --orn-w: 220px; }
+  .project-collection > .project-card:nth-child(n)::after { top: calc(var(--orn-w) / var(--orn-ratio) * -.55) !important; right: -36px !important; }
+}
+
+/* One hard offset shadow left in the system: the primary action. Everything
+   else sits on the page the way paper does. */
+:is(.button:not(.primary), .language-toggle, .menu-toggle, .close-button, .header-contact, .dialog-contact,
+    .project-action, .project-meta, .eyebrow, #project-position, .filter-group button, .contact-actions .button.outline,
+    #project-dialog .gallery-controls button, .back-projects, .text-link, .project-card .project-action) { box-shadow: none !important; }
+.project-card .artifact-arrangement,
+.project-collection > .project-card:nth-child(n) .artifact-arrangement,
+#project-dialog .gallery-stage {
+  box-shadow:
+    0 1px 1px rgb(40 22 45 / .10),
+    0 10px 18px -10px rgb(40 22 45 / .35),
+    0 34px 60px -30px rgb(40 22 45 / .40) !important;
+}
+.project-collection > .project-card:nth-child(4n+3) .artifact-arrangement {
+  box-shadow: 0 1px 1px rgb(0 0 0 / .2), 0 14px 26px -12px rgb(0 0 0 / .55), 0 40px 70px -30px rgb(0 0 0 / .55) !important;
+}
+@media (hover: hover) {
+  .project-card:hover .artifact-arrangement, .project-collection > .project-card:nth-child(n):hover .artifact-arrangement { transform: translateY(-4px) !important; }
+}
+.project-card:focus-visible .artifact-arrangement { outline: 3px solid var(--band-ink, var(--ink)); outline-offset: 6px; }
+
+/* Controls: one quiet voice. Buttons in the reading face, sentence case;
+   the mono face stays for small labels only (nav, filters, chips, dates). */
+.button, .project-card .project-action, .text-link, .back-projects, .close-button, #project-dialog .detail-footer button {
+  font-family: var(--read) !important; font-weight: 700 !important;
+  text-transform: none !important; letter-spacing: 0 !important;
+  font-size: .9375rem !important;
+}
+.hero .location, .hero .location > span { font-family: var(--read) !important; letter-spacing: 0 !important; font-size: .875rem !important; text-transform: none !important; }
+.project-card .project-action {
+  min-height: 48px; padding: 0 22px !important; border: 1.5px solid var(--band-ink) !important;
+  background: transparent !important; color: var(--band-ink) !important;
+}
+.project-card:is(:hover, :focus-visible) .project-action { background: var(--band-ink) !important; color: var(--band) !important; }
+
+/* Arrows only where a link leaves the page. */
+.hero-actions > a > span[aria-hidden="true"], #contact-email > span[aria-hidden="true"] { display: none !important; }
+
+/* Project pages: callouts and day plans as ruled text, not coloured boxes. */
+#project-dialog :is(.detail-callout, .case-days li, .case-block, .evidence-section) {
+  border-left: 0 !important; background: none !important; box-shadow: none !important;
+}
+#project-dialog :is(.detail-callout, .case-days li) { padding: 14px 0 !important; border-top: 1px solid var(--ink-15, rgb(73 43 81 / .15)) !important; }
+#project-dialog .detail-callout { border-top: 1.5px solid var(--ink) !important; font-style: italic; }
+#project-dialog .gallery-controls button { box-shadow: none !important; }
+#project-dialog .gallery-thumbnails button[aria-pressed="true"] { box-shadow: 0 4px 0 var(--acid) !important; }
+
+/* ==========================================================================
+   Stage B — finish: spot-UV varnish. The print-world gloss: a clear coat on
+   the cover that catches the light as the pointer (desktop) or the scroll
+   (phones) passes. Transparent at rest, so source colours are untouched.
+   ========================================================================== */
+.project-card .artifact-main-frame, #project-dialog .gallery-stage, .hero-art { position: relative; }
+.project-card .artifact-main-frame::after,
+#project-dialog .gallery-stage::after,
+.hero-art::before {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(105deg,
+      transparent 0%, transparent 38%,
+      rgb(255 255 255 / .10) 43%, rgb(255 255 255 / .55) 48.5%, rgb(255 255 255 / .85) 49.5%, rgb(255 255 255 / .25) 51.5%,
+      transparent 58%, transparent 100%);
+  background-size: 260% 100%; background-repeat: no-repeat;
+  background-position: var(--gx, 140%) 0;
+  mix-blend-mode: overlay; opacity: 0;
+  transition: opacity 260ms var(--ease-press);
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .artifact-main-frame::after,
+  #project-dialog .gallery-stage:hover::after,
+  .hero-art:hover::before { opacity: 1; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (hover: none) {
+    .project-card .artifact-main-frame::after {
+      opacity: 1; animation: varnish-sweep linear both; animation-timeline: view(); animation-range: entry 40% cover 60%;
+    }
+    @keyframes varnish-sweep { from { background-position: 140% 0; } to { background-position: -40% 0; } }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card .artifact-main-frame::after, #project-dialog .gallery-stage::after, .hero-art::before { display: none; }
+}
+
+/* One motion family: every hover/press uses the same two curves and three
+   durations (fast 140 ms feedback, 260 ms state, 620 ms choreography). */
+:root { --t-fast: 140ms; --t-state: 260ms; --t-chor: 620ms; }
+.project-card .artifact-arrangement { transition: transform var(--t-state) var(--ease-press), box-shadow var(--t-state) var(--ease-press) !important; }
+
+/* Designed focus: a two-ink ring, aubergine with a lime halo, everywhere. */
+:where(a, button, [tabindex="0"], summary):focus-visible {
+  outline: 2.5px solid var(--ink) !important; outline-offset: 3px !important;
+  box-shadow: 0 0 0 6px var(--acid) !important;
+}
+.project-collection > .project-card:focus-visible { outline-offset: -8px !important; box-shadow: none !important; }

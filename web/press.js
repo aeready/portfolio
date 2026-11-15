@@ -86,6 +86,17 @@
     });
   }
 
+  /* ---------- Spot varnish follows the pointer across covers (desktop) ---- */
+  if (window.matchMedia?.('(hover: hover) and (pointer: fine)').matches && !reduceMotion) {
+    document.addEventListener('pointermove', event => {
+      const frame = event.target.closest?.('.project-card .artifact-main-frame, #project-dialog .gallery-stage, .hero-art');
+      if (!frame) return;
+      const r = frame.getBoundingClientRect();
+      const t = (event.clientX - r.left) / r.width;              // 0 at left, 1 at right
+      frame.style.setProperty('--gx', `${130 - t * 160}%`);      // light travels with the pointer
+    }, {passive: true});
+  }
+
   /* ---------- Registration cursor: the lime plate follows a beat late ----- */
   const finePointer = window.matchMedia?.('(hover: hover) and (pointer: fine)').matches;
   if (finePointer && !reduceMotion) {

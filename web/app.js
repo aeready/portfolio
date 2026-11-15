@@ -103,7 +103,10 @@
     const loading = eager ? 'eager' : 'lazy';
     if (!asset) return `<img class="preview-image image-pending" src="${escape(src)}" alt="" loading="${loading}" decoding="async">`;
     const small = asset.outputs[0];
-    const srcset = asset.outputs.map(v => `${v.path} ${v.width}w`).join(', ');
+    const candidates = asset.outputs.map(v => `${v.path} ${v.width}w`);
+    // Offer the full-size original too, so covers stay sharp on high-density screens.
+    if (asset.width > Math.max(...asset.outputs.map(v => v.width))) candidates.push(`${src} ${asset.width}w`);
+    const srcset = candidates.join(', ');
     return `<img class="preview-image image-pending" src="${escape(small.path)}" srcset="${escape(srcset)}" sizes="${escape(sizes)}" width="${asset.width}" height="${asset.height}" alt="" loading="${loading}" decoding="async">`;
   }
   function wirePreviewImages(root) {
@@ -126,7 +129,7 @@
         const caption = p.slides[sample][1];
         const name = index === 0 ? 'artifact-main' : index === 1 ? 'artifact-fixed' : 'artifact-fixed artifact-tertiary';
         const sizes = index === 0
-          ? featured ? '(max-width: 760px) calc(100vw - 64px), (min-width: 1100px) 440px, 44vw' : '(max-width: 760px) calc(100vw - 64px), (min-width: 1100px) 320px, 44vw'
+          ? '(max-width: 900px) calc(100vw - 64px), (min-width: 1100px) 600px, 56vw'
           : featured ? '(max-width: 760px) 34vw, 180px' : '(min-width: 1100px) 150px, (max-width: 760px) 34vw, 18vw';
         const frame = `<span id="preview-${escape(p.id)}-${index}" class="preview-open ${name}" data-preview="${sample}" title="${escape(caption)}" aria-hidden="true">${previewImage(src, sizes)}</span>`;
         return index === 0 ? `<div class="artifact-main-frame">${frame}</div>` : frame;
