@@ -3,6 +3,44 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 — Third pass: real-device fixes, motion v2, finer riso, Misprint 404, favicon
+
+From the owner's phone screenshots and a full audit (phone and desktop).
+
+### Broken on real phones (fixed)
+- **Sideways "void":** full-bleed band textures made phones lay the page out at ~960 px. Clipped at page level; layout is now exactly the screen width (checked with phone emulation at 320–430 px).
+- **"Explore work" / "My background" did nothing:** the hero artwork's box sat invisibly over the buttons on phones.
+- **In-page links snapped back** (Explore, Background, footer "Back to top") once any project had been opened: the return-to-list logic ran on every link. It now only runs when leaving a project. Jumps also correct themselves when lazy images shift the page during the scroll.
+- **Project pages showed blank cream below the gallery on phones:** the sections waited on a scroll timeline that phone browsers did not run. Content is always visible now.
+- **Gallery jitter:** the image box changed height between slides (and on desktop, tall pages overflowed their frame). The viewing room now has one fixed height; slides wipe in without moving the page.
+
+### Phone design
+- Hero text has proper side margins; "Explore work" and "My background" are an even pair of buttons (the green tap colour is gone).
+- The menu is a full aubergine sheet: numbered links set large in the display face, Contact as a lime block.
+- Filters collapse into one control ("Filter · All work 7 ▾") that opens the list; new strings in both languages ("Filter" / "보기").
+- "Korea" removed from the hero note (EN and KO).
+- The halftone shadow is one shared backing under the whole print pile instead of one per print.
+
+### Motion v2
+- Every scroll-scrubbed animation removed (they froze half-done when you stopped scrolling: doubled numbers, tilted drifting pieces, half-covered work). Elements now print **once, completely**, when they arrive: lines of type rise in sequence; the outlined number's second plate slides into register; big headings rise out of a baseline mask; the print pile is dealt (back prints slide out from under the cover, then the cover settles); the band's riso piece fades in and stays still.
+- Tilts are a system, not noise: cover straight, the two prints behind at a fixed ±2° on every band; hover fans them by a set amount.
+- Without JavaScript or with reduced motion, everything is simply there.
+
+### Riso
+- Chunky square pieces (op-art square, spiral, halftone square, letterform, torn layers, wave band) replaced with finer ones from the owner's library: a registration circle, an overprinted moon, a quartered registration target, a halftone dot disc, torn grid paper. Removed files deleted.
+
+### 404 "Misprint"
+- Three ink plates of "404" (outline, lime, halftone) slide in and stop slightly out of register; on desktop they drift with the pointer. "Misprint." / "오식." with the original copy in both languages; Home and Email me. Styles and script moved to `nf.css` and `nf.js`; the old inline `<style>` was blocked by the site's own security policy.
+
+### Favicon
+- `favicon-ar-v3.svg`: the AR drawn as shapes (no longer a system font, so it looks the same everywhere), in the condensed display style, printed as two plates slightly out of register, with a lime registration mark. Used for the tab, header, opening sequence and 404.
+
+### Checks
+- Phone emulation (Galaxy S9+): layout width = screen width; every in-page link lands on its section, including after opening a project. Text ≥ 12 px and controls ≥ 44 px at 320–1440 px EN/KO; decoration pixel test 0% on text and work at 375/768/1024/1280/1440 px. All validators pass. New Korean characters checked against the font subset ("쇄" is missing, so the 404 uses "오식").
+
+### Owner to upload
+`index.html`, `404.html`, `nf.css`, `nf.js`, `press.css`, `press.js`, `app.js`, `locales.js`, `assets/favicon-ar-v3.svg`, `assets/riso/lib/` (new: reg-circle, moon-overprint, halftone-disc, grid-torn); delete the removed library files from the bucket; publish the rebuilt Worker.
+
 ## 16 Nov 2026 — Second pass: calm, finish, gloss
 
 Second audit (owner's brief: "look like a team of expensive designers made it"; no AI-template tells; nothing in front of words or the gallery). Owner approved: replace the checkerboard with a halftone fade, cut ornaments by about half, retire offset shadows, add gloss, vary the bands.
