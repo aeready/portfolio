@@ -31,6 +31,6 @@ Anna's decisions on the annaready.kr overhaul, newest first. Where a decision ch
 ## Open items for Anna
 
 - Delete the game's PowerPoint and images from the site file bucket.
-- Confirm the source and licence of the "Zine Condensed" and "Zine Mono" fonts.
+- Identify the site's "Zine Condensed" and "Zine Mono" fonts. Checked 15 Nov against the two fonts Anna supplied: **neither matches**. Syne Mono (OFL, free for web use) has rounded, quirky letterforms; Zin Display Condensed is a serif and is a CarnokyType **demo** ("All rights reserved"), which is usually not licensed for live sites. The site's fonts look like a plain sans mono and a bold condensed grotesque, likely from the open-licensed Noto family. To be confirmed in Stage 3; if unidentified, swap for a known open-licence pair that looks the same.
 - Korean copy review by a native speaker before any public launch.
 - Update "Mar 2026–Present" in the background section when the new role starts.
