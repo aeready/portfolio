@@ -2,6 +2,13 @@
 
 Anna's decisions on the annaready.kr overhaul, newest first. Where a decision changes a proposal in another document, this file wins.
 
+## 15 Nov 2026 — Base layout corrected
+
+| Decision | Detail |
+|---|---|
+| **The colour-band layout is the base** | Branch `claude/wizardly-newton-mtmf99` (alternating paper, lime and aubergine project bands; outlined numerals; riso ornaments) is the design to polish. Earlier Stage 1–3 branches were built on the older `main` by mistake and are superseded by `claude/colour-bands-polish`. |
+| Stage 3 stylesheet dropped | The colour-band layer (`refine.css`) already provides the type scale, spacing, humanist body text and 12 px label token. Only small fixes are added, in `fixes.css`. |
+
 ## 15 Nov 2026 — Stage 2 approval
 
 | Decision | Detail |
@@ -29,6 +36,9 @@ Anna's decisions on the annaready.kr overhaul, newest first. Where a decision ch
 | Riso asset bank | Free to use. |
 
 ## Open items for Anna
+
+- Korean titles for "Reading for Meaning" and "USA Camp" (both show in English in Korean mode): keep, or give Korean titles.
+- The page is about 14 phone screens long; deciding how much to shorten is a Stage 4 layout question.
 
 - Delete the game's PowerPoint and images from the site file bucket.
 - Identify the site's "Zine Condensed" and "Zine Mono" fonts. Checked 15 Nov against the two fonts Anna supplied: **neither matches**. Syne Mono (OFL, free for web use) has rounded, quirky letterforms; Zin Display Condensed is a serif and is a CarnokyType **demo** ("All rights reserved"), which is usually not licensed for live sites. The site's fonts look like a plain sans mono and a bold condensed grotesque, likely from the open-licensed Noto family. To be confirmed in Stage 3; if unidentified, swap for a known open-licence pair that looks the same.
