@@ -29,6 +29,8 @@ Second audit (owner's brief: "look like a team of expensive designers made it"; 
 - **The print pile** replaces "one big image, two small below": the cover lies on top of the other two samples like prints on a table, slightly rotated. They fan open on hover (desktop) and as the band scrolls in (phones). Prints cast **halftone shadows** (a riso dot screen, lime on aubergine bands) instead of soft blurs.
 - **View buttons** are solid in each band's contrast ink (aubergine on paper and lime, lime on aubergine) so they never blend into the band.
 - Checks: decoration pixel test 0% on text and the cover at 375/768/1024/1440 px EN/KO; no text under 12 px, every control ≥ 44 px; all validators pass.
+- **Project page gallery** gets the same halftone print shadow (replacing the soft blur and crop marks).
+- **Share card:** a 1200 × 630 poster image (`assets/share-card--8c00ecbff6ae.jpg`) and Open Graph / Twitter tags, so links pasted into KakaoTalk, LinkedIn or Slack show the poster instead of a blank box. The site is still `noindex`, so search engines stay out.
 
 ## 15–16 Nov 2026 — "Press run": texture, type, motion, project pages
 

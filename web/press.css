@@ -1079,3 +1079,19 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
     translate: clamp(12px, 1.5vw, 22px) clamp(14px, 1.8vw, 24px); transition: translate 520ms var(--ease-press);
   }
 }
+
+/* Project page gallery: the same halftone shadow as the print piles
+   (replaces the soft blur and the crop marks). */
+#project-dialog .gallery-stage { box-shadow: none !important; isolation: isolate; }
+#project-dialog .gallery-stage::before {
+  inset: 0 !important; z-index: -1 !important; translate: 14px 16px;
+  background: radial-gradient(circle, rgb(73 43 81 / .9) 1.15px, transparent 1.45px) 0 0 / 5px 5px !important;
+  -webkit-mask-image: linear-gradient(150deg, transparent 18%, #000 62%); mask-image: linear-gradient(150deg, transparent 18%, #000 62%);
+}
+#project-dialog .gallery-stage::before {
+  translate: none !important; inset: 0 -14px -16px 0 !important;
+  clip-path: polygon(calc(100% - 14px) 16px, 100% 16px, 100% 100%, 14px 100%, 14px calc(100% - 16px), calc(100% - 14px) calc(100% - 16px));
+  -webkit-mask-image: none; mask-image: none;
+}
+#project-dialog .gallery-stage { overflow: visible !important; }
+#project-dialog .gallery-stage > img { position: relative; z-index: 1; }
