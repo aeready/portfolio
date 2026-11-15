@@ -249,12 +249,12 @@
     const oldId = activeProject?.id, oldSlide = slideIndex, oldGallery = activeGallery, scroll = dialog.scrollTop;
     const projectOrder = [
       'adult-communication',
-      'epik-music',
       'reading-for-meaning',
+      'epik-music',
       'teacher-development',
+      'usa-camp-workbook',
       'chuseok-thanksgiving-storybook',
-      'advice-suggestions-lesson',
-      'usa-camp-workbook'
+      'advice-suggestions-lesson'
     ];
     language = next === 'ko' ? 'ko' : 'en';
     projects = baseProjects.map(localize).sort((a, b) => projectOrder.indexOf(a.id) - projectOrder.indexOf(b.id));

@@ -25,3 +25,35 @@ Nothing here is live until the owner uploads and publishes.
 - **Change:** `.hero-copy` gets the standard side gutter below 760 px; the credentials row wraps inside it. Text was 1 px from both edges.
 - **Serves:** R7 white space and alignment.
 - **Undo:** same block.
+
+## 15 Nov 2026 — Stage 3 design system (branch `claude/stage3-system`)
+
+### Design tokens in `web/system.css`
+- **Change:** one file holding colour roles, three type voices, a fluid type scale, 8-point spacing, mount, lines, controls, motion and ornament limits. Linked last in `index.html`.
+- **Serves:** all five manifesto rules; R2 "thorough down to the last detail".
+- **Undo:** remove `<link rel="stylesheet" href="system.css">` from `web/index.html`.
+
+### Running text in humanist sans
+- **Change:** body copy moves from monospace to Portfolio Sans (Noto Sans, already loaded). Mono stays for labels, nav and buttons. Lead text 17–20 px, body 16 px, 62-character lines.
+- **Serves:** Decision 15 Nov; R5 (English now matches the Korean text face).
+
+### Three type voices
+- **Change:** the hero role ("Teacher trainer & curriculum designer") moves from Georgia, a system fallback, to the display face. Korean role uses the Korean face at 800.
+- **Serves:** R3; R6 "limit font and style variations".
+
+### 12 px text floor and AA contrast
+- **Change:** every label, chip, date, nav item and count is 12 px or larger (was 8.6–11.5 px). Project numbers move from 45% ink (2.4:1) to full ink (10.15:1). Counts and footer use `--ink-muted` (7.04:1).
+- **Serves:** WCAG 2.2 AA; R9 legibility.
+
+### Korean heading scale
+- **Change:** Korean H2 32 → 72 px, H3 22 → 32 px, heavier and tighter.
+- **Serves:** R5.
+
+### Approved project order
+- **Change:** 01 Clearer Global Communication · 02 Reading for Meaning · 03 Music in English Classes · 04 Beyond Teacher Induction · 05 USA Camp · 06 How Does It Taste? · 07 Advice & Suggestions.
+- **Serves:** Decision 15 Nov; R9 serial position.
+- **Undo:** revert the `projects.js` and `app.js` changes in this commit.
+
+### Style guide
+- **Change:** `docs/overhaul/STYLE_GUIDE.md` and a rendered `web/style-guide.html` (noindex, unlinked). Includes the content model for adding projects. `AGENTS.md` updated to the approved system.
+- **Note:** the style guide page shows ornaments from `claude-code/`, which is outside `web/`; those images only appear when previewed from the repo root.

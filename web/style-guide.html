@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Style guide — annaready.kr</title>
+  <link rel="icon" href="assets/favicon-ar-v2.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="overhaul-v2.css">
+  <link rel="stylesheet" href="system.css">
+  <style>
+    body { padding: 0; }
+    .sg { width: min(100%, var(--measure)); margin: 0 auto; padding: var(--space-xl) var(--gutter) var(--space-3xl); }
+    .sg > section { padding-block: var(--space-xl); border-top: var(--line-strong); }
+    .sg h1 { font: 700 var(--fs-display)/var(--lh-display) var(--display); text-transform: uppercase; color: var(--ink); letter-spacing: var(--ls-display); margin: 0 0 var(--space-s); }
+    .sg h2 { margin: 0 0 var(--space-m); }
+    .sg .lab { font: 600 var(--fs-label)/var(--lh-label) var(--mono); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--ink-muted); margin: 0 0 var(--space-xs); }
+    .sg .chip { display: inline-block; padding: .3em .5em .25em; background: var(--acid); color: var(--ink); font: 600 var(--fs-label)/1.2 var(--mono); letter-spacing: var(--ls-label); text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-m); }
+    .sw { border: var(--line); }
+    .sw div { height: 96px; }
+    .sw p { margin: 0; padding: var(--space-xs) var(--space-s); font: 400 var(--fs-small)/1.4 var(--mono); }
+    .row { display: grid; grid-template-columns: 140px 1fr; gap: var(--space-m); align-items: baseline; padding-block: var(--space-s); border-bottom: var(--line); }
+    .row .lab { margin: 0; }
+    .scale { display: flex; align-items: flex-end; gap: var(--space-s); flex-wrap: wrap; }
+    .scale span { display: block; background: var(--ink); }
+    .rule-demo { height: 24px; }
+    .demo-buttons { display: flex; flex-wrap: wrap; gap: var(--space-m); align-items: center; }
+    .mount { aspect-ratio: var(--mount-ratio); border: var(--mount-border); background: var(--mount-bg); padding: var(--mount-pad); display: grid; place-items: center; max-width: 420px; }
+    .mount div { width: 100%; height: 100%; background: repeating-linear-gradient(45deg, #d9e6f5, #d9e6f5 12px, #f2d7c9 12px, #f2d7c9 24px); display: grid; place-items: center; font: 600 var(--fs-small) var(--text); color: #1d2b4a; }
+    .orn { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-s); }
+    .orn figure { margin: 0; border: var(--line); padding: var(--space-s); }
+    .orn img { width: 100%; height: 84px; object-fit: contain; }
+    .orn figcaption { font: 400 var(--fs-label)/1.3 var(--mono); color: var(--ink-muted); margin-top: var(--space-xs); }
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-l); }
+    .do-dont ul { padding-left: 1.1em; margin: 0; }
+    .do-dont li { margin-bottom: var(--space-xs); max-width: 48ch; }
+    .ko-demo { font-family: var(--kr); word-break: keep-all; }
+    .ko-demo .h2 { font: 800 var(--fs-h2-ko)/1.15 var(--kr); letter-spacing: -.02em; color: var(--ink); margin: 0; }
+    .ko-demo .h3 { font: 800 var(--fs-h3-ko)/1.3 var(--kr); color: var(--ink); margin: var(--space-xs) 0; }
+    .ko-demo p { line-height: var(--lh-text-ko); max-width: 40em; }
+    @media (max-width: 760px) { .do-dont { grid-template-columns: 1fr; } .row { grid-template-columns: 1fr; gap: var(--space-xs); } }
+  </style>
+</head>
+<body>
+<main class="sg">
+  <p class="lab">annaready.kr · design system · Stage 3 · 15 Nov 2026</p>
+  <h1>Style guide</h1>
+  <p class="intro" style="font-size:var(--fs-lead);max-width:var(--measure-text)">One press run: two inks on one sheet of paper, so the teaching work is the only full colour on the page. Every token below is defined in <code>system.css</code>.</p>
+
+  <section>
+    <h2>Colour</h2>
+    <div class="grid">
+      <div class="sw"><div style="background:var(--paper)"></div><p>Paper #F3EBDD<br>ground · 60</p></div>
+      <div class="sw"><div style="background:var(--paper-deep)"></div><p>Paper deep #EADFCB<br>image mounts</p></div>
+      <div class="sw"><div style="background:var(--ink)"></div><p>Aubergine #492B51<br>headings, fields · 30<br>10.15:1</p></div>
+      <div class="sw"><div style="background:var(--ink-text)"></div><p>Text #37243C<br>running text<br>11.99:1</p></div>
+      <div class="sw"><div style="background:var(--ink-muted)"></div><p>Muted #5E4566<br>meta, captions<br>7.04:1</p></div>
+      <div class="sw"><div style="background:var(--acid)"></div><p>Lime #D6DF66<br>chips, shadows, focus · 10<br>never text on paper</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Type</h2>
+    <div class="row"><p class="lab">Display · Zine Condensed 700</p><div style="font:700 var(--fs-h1)/var(--lh-display) var(--display);text-transform:uppercase;color:var(--ink);letter-spacing:var(--ls-display)">Anna Ready</div></div>
+    <div class="row"><p class="lab">H2 · 36 → 84 px</p><div style="font:700 var(--fs-h2)/var(--lh-display) var(--display);text-transform:uppercase;color:var(--ink)">Selected projects</div></div>
+    <div class="row"><p class="lab">H3 · 24 → 36 px</p><div style="font:700 var(--fs-h3)/1 var(--display);text-transform:uppercase;color:var(--ink)">Clearer global communication</div></div>
+    <div class="row"><p class="lab">Lead · 17 → 20 px</p><p style="font:400 var(--fs-lead)/1.55 var(--text);margin:0;max-width:var(--measure-text)">Seven years in Korean public schools taught me what classrooms need.</p></div>
+    <div class="row"><p class="lab">Body · 16 px · 1.6</p><p style="margin:0;max-width:var(--measure-text)">A workplace communication module where education staff revise messages for audience, tone, clarity, and purpose. Running text never exceeds 62 characters a line.</p></div>
+    <div class="row"><p class="lab">Label · 12 px floor</p><div><span class="chip">Teacher training · EPIK</span>&nbsp;&nbsp;<span class="lab" style="display:inline">01 · Mar 2026 — Present</span></div></div>
+  </section>
+
+  <section class="ko-demo" lang="ko">
+    <h2 lang="en">Korean</h2>
+    <p class="lab" lang="en">Same weight and size as English, never condensed. keep-all breaking, 1.75 line height.</p>
+    <p class="h2">주요 프로젝트</p>
+    <p class="h3">명확한 국제적 소통</p>
+    <p>교육 관계자가 독자, 어조, 명확성과 목적에 맞춰 업무 메시지를 수정하는 연수입니다.</p>
+  </section>
+
+  <section>
+    <h2>Space</h2>
+    <div class="scale">
+      <div><span style="width:4px;height:4px"></span><p class="lab">4</p></div>
+      <div><span style="width:8px;height:8px"></span><p class="lab">8</p></div>
+      <div><span style="width:16px;height:16px"></span><p class="lab">16</p></div>
+      <div><span style="width:24px;height:24px"></span><p class="lab">24</p></div>
+      <div><span style="width:40px;height:40px"></span><p class="lab">40</p></div>
+      <div><span style="width:64px;height:64px"></span><p class="lab">64</p></div>
+      <div><span style="width:96px;height:96px"></span><p class="lab">96</p></div>
+      <div><span style="width:144px;height:144px"></span><p class="lab">144</p></div>
+    </div>
+    <p style="max-width:var(--measure-text)">Sections are separated by 64–144 px of paper. Content column 1240 px, 12 columns, 24 px gutters.</p>
+  </section>
+
+  <section>
+    <h2>Lines</h2>
+    <div class="row"><p class="lab">Hairline · 1 px 45%</p><div class="rule-demo" style="border-top:var(--line)"></div></div>
+    <div class="row"><p class="lab">Strong · 2 px ink</p><div class="rule-demo" style="border-top:var(--line-strong)"></div></div>
+    <div class="row"><p class="lab">Band · 8 px ink</p><div class="rule-demo" style="border-top:var(--line-band)"></div></div>
+  </section>
+
+  <section>
+    <h2>Controls</h2>
+    <p style="max-width:var(--measure-text)">Square, hard offset shadow, one press: the block slides into its shadow in 90 ms. Minimum target 44 px, 48 px on touch. Tab through them to see the focus ring.</p>
+    <div class="demo-buttons">
+      <a class="button primary" href="#">Email me ↗</a>
+      <a class="button outline" href="#">View résumé ↗</a>
+      <a class="project-action" href="#">View →</a>
+      <button class="language-toggle" type="button" lang="ko">한국어</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Image mount</h2>
+    <p style="max-width:var(--measure-text)">One frame per picture group. 4:3 plate on deep paper, 1 px ink border, 8–12 px padding. Samples keep their original colours.</p>
+    <div class="mount"><div>work sample</div></div>
+  </section>
+
+  <section>
+    <h2>Ornaments</h2>
+    <p style="max-width:var(--measure-text)">From the riso asset bank. Hero: unlimited. Section headings: one each. Project entries: at most one. Never over a work sample, never within 16 px of text, never on buttons, forms or running text.</p>
+    <div class="orn">
+      <figure><img src="../claude-code/riso-assets/png/sheet01_asset01.png" alt=""><figcaption>Moon disc · How I work</figcaption></figure>
+      <figure><img src="../claude-code/riso-assets/png/sheet03_asset02.png" alt=""><figcaption>Brackets · Projects</figcaption></figure>
+      <figure><img src="../claude-code/riso-assets/png/sheet02_asset02.png" alt=""><figcaption>Crosshair · Projects</figcaption></figure>
+      <figure><img src="../claude-code/riso-assets/png/sheet04_asset01.png" alt=""><figcaption>Tape · Background</figcaption></figure>
+      <figure><img src="../claude-code/riso-assets/png/sheet04_asset11.png" alt=""><figcaption>Crossed tape · entries</figcaption></figure>
+      <figure><img src="../claude-code/riso-assets/png/sheet02_asset12.png" alt=""><figcaption>Field notes · entries</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Motion</h2>
+    <div class="row"><p class="lab">Press · 90 ms</p><p style="margin:0">Controls slide into their shadow.</p></div>
+    <div class="row"><p class="lab">Quick · 150 ms</p><p style="margin:0">Hover colour, underline weight.</p></div>
+    <div class="row"><p class="lab">Reveal · 320 ms</p><p style="margin:0">Sections rise 12 px and fade, once.</p></div>
+    <div class="row"><p class="lab">View · 400 ms max</p><p style="margin:0">Card to case study. Nothing longer.</p></div>
+    <p style="max-width:var(--measure-text)">One curve: cubic-bezier(.2, .7, .3, 1). No bounce, no parallax, no scroll-jacking. All of it off under reduced motion.</p>
+  </section>
+
+  <section>
+    <h2>Do and don't</h2>
+    <div class="do-dont">
+      <div><p class="lab">Do</p><ul>
+        <li>Paper, aubergine, lime. Nothing else in the chrome.</li>
+        <li>One standout per screen, then space.</li>
+        <li>Square corners, hard shadows, hairlines.</li>
+        <li>Design Korean at the same weight as English.</li>
+        <li>Show the real artefact, large, on one mount.</li>
+      </ul></div>
+      <div><p class="lab">Don't</p><ul>
+        <li>Lime text on paper (1.21:1).</li>
+        <li>Text under 12 px, or text at 45% ink.</li>
+        <li>Rounded corners or blurred shadows.</li>
+        <li>Condense, stretch or letter-space Hangul.</li>
+        <li>Ornaments over work samples, or invented proof of any kind.</li>
+      </ul></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

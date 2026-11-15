@@ -146,191 +146,9 @@ window.PORTFOLIO_PROJECTS = [
     "evidence": "The worked revision identifies unclear references, timing, idioms, and assumptions."
   },
   {
-    "id": "epik-music",
-    "number": "02",
-    "title": "Music in English classes",
-    "label": "Teacher training",
-    "categories": [
-      "training"
-    ],
-    "audiences": [
-      "educators"
-    ],
-    "audienceLabel": "English teachers in Korean schools",
-    "format": "Workshop slides & written course guide",
-    "context": "EPIK teacher training",
-    "summary": "A practical workshop connecting textbook language targets with short, focused music-listening activities.",
-    "intro": "A teacher-training workshop on using music within regular English lessons, with a companion guide for rationale, technical support, and adaptations.",
-    "role": "Training design, presentation & companion guide development",
-    "contribution": "I developed the workshop and guide, from choosing a textbook topic to making and sharing a short listening task.",
-    "decisions": [
-      "Build from topics teachers already teach.",
-      "Use 10–30-second listening clips tied to a language target."
-    ],
-    "note": "The complete workshop slide deck and written course guide are available below.",
-    "cover": "assets/music-workshop/title--5e719da85795.webp",
-    "color": "lilac",
-    "slides": [
-      [
-        "assets/music-workshop/title--5e719da85795.webp",
-        "Workshop title slide: Integrating Music into English Classes.",
-        "Title slide"
-      ],
-      [
-        "assets/music-workshop/finding-textbook-windows--25d18d4d03fe.webp",
-        "Finding music windows in themes already taught in English textbooks.",
-        "Finding textbook music windows"
-      ],
-      [
-        "assets/music-workshop/wanting-wishing--44b09d6a2c5b.webp",
-        "Finding music windows through pop songs about wanting and wishing.",
-        "Wanting and wishing"
-      ],
-      [
-        "assets/music-workshop/open-music-windows--5688bd175aaa.webp",
-        "Examples of common textbook expressions that create windows for music.",
-        "Open music windows"
-      ],
-      [
-        "assets/music-workshop/micro-listening--520af0aedaa7.webp",
-        "What is micro-listening? Focus on a 10–30-second section rather than a full song.",
-        "What is micro-listening?"
-      ],
-      [
-        "assets/music-workshop/micro-listening-segment--292361af752f.webp",
-        "A short 10–30-second song segment can focus attention on target grammar and vocabulary.",
-        "Micro-listening: a 10–30-second segment"
-      ],
-      [
-        "assets/music-workshop/music-video-tip--31c388d9b822.webp",
-        "Choosing songs with music videos: visual input, age-appropriate content, and lyric-video alternatives.",
-        "Choosing songs with music videos"
-      ],
-      [
-        "assets/music-workshop/open-discussion--29aafa0a69a7.webp",
-        "Discussion prompts about using music in English classes and anticipating challenges.",
-        "Open discussion"
-      ],
-      [
-        "assets/epik-guide-3--7780b46582d7.webp",
-        "The companion course guide explains the micro-listening approach and possible uses within a lesson.",
-        "Course guide sample, page 3"
-      ],
-      [
-        "assets/epik-guide-7--a60714249f8b.webp",
-        "An activity table pairs objectives and instructions with ways to adapt a task.",
-        "Course guide sample, page 7"
-      ]
-    ],
-    "documents": [
-      [
-        "assets/epik-workshop-full.pdf",
-        "Workshop slide deck",
-        "89-page PDF"
-      ],
-      [
-        "assets/epik-course-guide.pdf",
-        "Course guide",
-        "10-page PDF"
-      ]
-    ],
-    "source": "The gallery shows selected workshop slides. The course guide includes citations and adaptation credit.",
-    "original": "epik-music",
-    "ko": {
-      "title": "영어 수업과 음악",
-      "label": "교사 연수",
-      "audienceLabel": "한국 학교에서 근무하는 영어 교사",
-      "format": "워크숍 슬라이드 및 강의 원고",
-      "context": "EPIK 교사 연수",
-      "summary": "교과서 언어 목표를 짧고 집중적인 음악 듣기 활동과 연결하는 실습형 교사 연수입니다.",
-      "intro": "일반 영어 수업에 음악을 활용하는 교사 연수와 이론적 근거, 제작 방법, 활동 변형을 담은 강의 원고입니다.",
-      "role": "연수 설계, 발표 및 강의 원고 개발",
-      "contribution": "교과서 주제 선정부터 짧은 듣기 활동 제작과 공유까지 이어지는 워크숍과 원고를 개발했습니다.",
-      "decisions": [
-        "교사가 이미 가르치는 주제에서 출발했습니다.",
-        "언어 목표에 맞춰 10~30초 듣기 구간을 활용했습니다."
-      ],
-      "note": "전체 워크숍 슬라이드 자료와 강의 원고를 아래에서 제공합니다.",
-      "source": "갤러리에는 워크숍 슬라이드 일부를 실었습니다. 강의 원고에는 인용과 자료 변형 출처를 유지했습니다.",
-      "coverAlt": "영어 수업에 음악 활용하기 워크숍의 제목 슬라이드.",
-      "previewCaption": "워크숍 + 강의 원고",
-      "slides": [
-        [
-          "워크숍 제목 슬라이드: 영어 수업에 음악 활용하기.",
-          "제목 슬라이드"
-        ],
-        [
-          "초등 영어 교과서에서 이미 다루는 주제와 음악을 연결할 지점을 찾습니다.",
-          "교과서에서 음악 활용 지점 찾기"
-        ],
-        [
-          "바람과 소망을 표현하는 팝송에서 음악 활용 지점을 찾습니다.",
-          "바람과 소망 표현"
-        ],
-        [
-          "여러 교과서에서 공통으로 자주 다루는 영어 표현의 예시입니다.",
-          "음악을 활용할 수 있는 공통 표현"
-        ],
-        [
-          "마이크로 리스닝이란? 노래 전체가 아닌 10~30초 구간을 집중해서 듣습니다.",
-          "마이크로 리스닝이란?"
-        ],
-        [
-          "노래의 10~30초 구간을 활용해 목표 문법과 어휘에 집중합니다.",
-          "10~30초 듣기 구간"
-        ],
-        [
-          "뮤직비디오 활용의 장점, 연령에 적절한 콘텐츠, 가사 영상 대안을 다룹니다.",
-          "뮤직비디오로 노래 고르기"
-        ],
-        [
-          "영어 수업에서 음악을 활용하는 방법과 예상되는 어려움을 함께 논의합니다.",
-          "열린 토론"
-        ],
-        [
-          "강의 원고에서 마이크로 리스닝의 취지와 수업에서의 활용 방법을 설명합니다.",
-          "강의 원고 예시 · 3쪽"
-        ],
-        [
-          "활동 목표와 진행 방법, 변형 방안을 함께 제시한 표입니다.",
-          "강의 원고 예시 · 7쪽"
-        ]
-      ],
-      "documents": [
-        [
-          "워크숍 슬라이드 자료",
-          "89쪽 PDF"
-        ],
-        [
-          "강의 원고",
-          "10쪽 PDF"
-        ]
-      ],
-      "previewTertiaryAlt": "바람과 소망을 표현하는 팝송에서 음악 활용 지점을 찾습니다.",
-      "displayTitle": "영어 수업과 음악",
-      "displayLabel": "교사 연수 · EPIK",
-      "materialsNote": "PDF는 정적 자료이며 원본에 포함된 오디오와 동영상은 제공되지 않습니다.",
-      "evidence": "교사는 교과서 주제를 짧은 듣기 활동으로 바꾸고 직접 만든 슬라이드를 공유합니다."
-    },
-    "previewCaption": "Workshop + companion guide",
-    "coverAlt": "Workshop title slide: Integrating Music into English Classes.",
-    "previewTertiary": "assets/music-workshop/wanting-wishing--44b09d6a2c5b.webp",
-    "previewTertiaryAlt": "Finding music windows through pop songs about wanting and wishing.",
-    "displayTitle": "Music in English classes",
-    "displayLabel": "Teacher training · EPIK",
-    "previewSecondary": "assets/music-workshop/micro-listening--520af0aedaa7.webp",
-    "previewIndices": [
-      0,
-      4,
-      2
-    ],
-    "materialsNote": "The PDF is static; embedded audio and video from the original deck are not included.",
-    "evidence": "Teachers turn a textbook topic into a short listening task and share a slide they created."
-  },
-  {
     "id": "reading-for-meaning",
     "original": "reading-for-meaning",
-    "number": "03",
+    "number": "02",
     "title": "Reading for Meaning",
     "label": "Teacher training",
     "categories": [
@@ -765,6 +583,188 @@ window.PORTFOLIO_PROJECTS = [
     "evidence": "The sample pages model vocabulary scaffolds, guided questions, evidence-based answers, and follow-up tasks."
   },
   {
+    "id": "epik-music",
+    "number": "03",
+    "title": "Music in English classes",
+    "label": "Teacher training",
+    "categories": [
+      "training"
+    ],
+    "audiences": [
+      "educators"
+    ],
+    "audienceLabel": "English teachers in Korean schools",
+    "format": "Workshop slides & written course guide",
+    "context": "EPIK teacher training",
+    "summary": "A practical workshop connecting textbook language targets with short, focused music-listening activities.",
+    "intro": "A teacher-training workshop on using music within regular English lessons, with a companion guide for rationale, technical support, and adaptations.",
+    "role": "Training design, presentation & companion guide development",
+    "contribution": "I developed the workshop and guide, from choosing a textbook topic to making and sharing a short listening task.",
+    "decisions": [
+      "Build from topics teachers already teach.",
+      "Use 10–30-second listening clips tied to a language target."
+    ],
+    "note": "The complete workshop slide deck and written course guide are available below.",
+    "cover": "assets/music-workshop/title--5e719da85795.webp",
+    "color": "lilac",
+    "slides": [
+      [
+        "assets/music-workshop/title--5e719da85795.webp",
+        "Workshop title slide: Integrating Music into English Classes.",
+        "Title slide"
+      ],
+      [
+        "assets/music-workshop/finding-textbook-windows--25d18d4d03fe.webp",
+        "Finding music windows in themes already taught in English textbooks.",
+        "Finding textbook music windows"
+      ],
+      [
+        "assets/music-workshop/wanting-wishing--44b09d6a2c5b.webp",
+        "Finding music windows through pop songs about wanting and wishing.",
+        "Wanting and wishing"
+      ],
+      [
+        "assets/music-workshop/open-music-windows--5688bd175aaa.webp",
+        "Examples of common textbook expressions that create windows for music.",
+        "Open music windows"
+      ],
+      [
+        "assets/music-workshop/micro-listening--520af0aedaa7.webp",
+        "What is micro-listening? Focus on a 10–30-second section rather than a full song.",
+        "What is micro-listening?"
+      ],
+      [
+        "assets/music-workshop/micro-listening-segment--292361af752f.webp",
+        "A short 10–30-second song segment can focus attention on target grammar and vocabulary.",
+        "Micro-listening: a 10–30-second segment"
+      ],
+      [
+        "assets/music-workshop/music-video-tip--31c388d9b822.webp",
+        "Choosing songs with music videos: visual input, age-appropriate content, and lyric-video alternatives.",
+        "Choosing songs with music videos"
+      ],
+      [
+        "assets/music-workshop/open-discussion--29aafa0a69a7.webp",
+        "Discussion prompts about using music in English classes and anticipating challenges.",
+        "Open discussion"
+      ],
+      [
+        "assets/epik-guide-3--7780b46582d7.webp",
+        "The companion course guide explains the micro-listening approach and possible uses within a lesson.",
+        "Course guide sample, page 3"
+      ],
+      [
+        "assets/epik-guide-7--a60714249f8b.webp",
+        "An activity table pairs objectives and instructions with ways to adapt a task.",
+        "Course guide sample, page 7"
+      ]
+    ],
+    "documents": [
+      [
+        "assets/epik-workshop-full.pdf",
+        "Workshop slide deck",
+        "89-page PDF"
+      ],
+      [
+        "assets/epik-course-guide.pdf",
+        "Course guide",
+        "10-page PDF"
+      ]
+    ],
+    "source": "The gallery shows selected workshop slides. The course guide includes citations and adaptation credit.",
+    "original": "epik-music",
+    "ko": {
+      "title": "영어 수업과 음악",
+      "label": "교사 연수",
+      "audienceLabel": "한국 학교에서 근무하는 영어 교사",
+      "format": "워크숍 슬라이드 및 강의 원고",
+      "context": "EPIK 교사 연수",
+      "summary": "교과서 언어 목표를 짧고 집중적인 음악 듣기 활동과 연결하는 실습형 교사 연수입니다.",
+      "intro": "일반 영어 수업에 음악을 활용하는 교사 연수와 이론적 근거, 제작 방법, 활동 변형을 담은 강의 원고입니다.",
+      "role": "연수 설계, 발표 및 강의 원고 개발",
+      "contribution": "교과서 주제 선정부터 짧은 듣기 활동 제작과 공유까지 이어지는 워크숍과 원고를 개발했습니다.",
+      "decisions": [
+        "교사가 이미 가르치는 주제에서 출발했습니다.",
+        "언어 목표에 맞춰 10~30초 듣기 구간을 활용했습니다."
+      ],
+      "note": "전체 워크숍 슬라이드 자료와 강의 원고를 아래에서 제공합니다.",
+      "source": "갤러리에는 워크숍 슬라이드 일부를 실었습니다. 강의 원고에는 인용과 자료 변형 출처를 유지했습니다.",
+      "coverAlt": "영어 수업에 음악 활용하기 워크숍의 제목 슬라이드.",
+      "previewCaption": "워크숍 + 강의 원고",
+      "slides": [
+        [
+          "워크숍 제목 슬라이드: 영어 수업에 음악 활용하기.",
+          "제목 슬라이드"
+        ],
+        [
+          "초등 영어 교과서에서 이미 다루는 주제와 음악을 연결할 지점을 찾습니다.",
+          "교과서에서 음악 활용 지점 찾기"
+        ],
+        [
+          "바람과 소망을 표현하는 팝송에서 음악 활용 지점을 찾습니다.",
+          "바람과 소망 표현"
+        ],
+        [
+          "여러 교과서에서 공통으로 자주 다루는 영어 표현의 예시입니다.",
+          "음악을 활용할 수 있는 공통 표현"
+        ],
+        [
+          "마이크로 리스닝이란? 노래 전체가 아닌 10~30초 구간을 집중해서 듣습니다.",
+          "마이크로 리스닝이란?"
+        ],
+        [
+          "노래의 10~30초 구간을 활용해 목표 문법과 어휘에 집중합니다.",
+          "10~30초 듣기 구간"
+        ],
+        [
+          "뮤직비디오 활용의 장점, 연령에 적절한 콘텐츠, 가사 영상 대안을 다룹니다.",
+          "뮤직비디오로 노래 고르기"
+        ],
+        [
+          "영어 수업에서 음악을 활용하는 방법과 예상되는 어려움을 함께 논의합니다.",
+          "열린 토론"
+        ],
+        [
+          "강의 원고에서 마이크로 리스닝의 취지와 수업에서의 활용 방법을 설명합니다.",
+          "강의 원고 예시 · 3쪽"
+        ],
+        [
+          "활동 목표와 진행 방법, 변형 방안을 함께 제시한 표입니다.",
+          "강의 원고 예시 · 7쪽"
+        ]
+      ],
+      "documents": [
+        [
+          "워크숍 슬라이드 자료",
+          "89쪽 PDF"
+        ],
+        [
+          "강의 원고",
+          "10쪽 PDF"
+        ]
+      ],
+      "previewTertiaryAlt": "바람과 소망을 표현하는 팝송에서 음악 활용 지점을 찾습니다.",
+      "displayTitle": "영어 수업과 음악",
+      "displayLabel": "교사 연수 · EPIK",
+      "materialsNote": "PDF는 정적 자료이며 원본에 포함된 오디오와 동영상은 제공되지 않습니다.",
+      "evidence": "교사는 교과서 주제를 짧은 듣기 활동으로 바꾸고 직접 만든 슬라이드를 공유합니다."
+    },
+    "previewCaption": "Workshop + companion guide",
+    "coverAlt": "Workshop title slide: Integrating Music into English Classes.",
+    "previewTertiary": "assets/music-workshop/wanting-wishing--44b09d6a2c5b.webp",
+    "previewTertiaryAlt": "Finding music windows through pop songs about wanting and wishing.",
+    "displayTitle": "Music in English classes",
+    "displayLabel": "Teacher training · EPIK",
+    "previewSecondary": "assets/music-workshop/micro-listening--520af0aedaa7.webp",
+    "previewIndices": [
+      0,
+      4,
+      2
+    ],
+    "materialsNote": "The PDF is static; embedded audio and video from the original deck are not included.",
+    "evidence": "Teachers turn a textbook topic into a short listening task and share a slide they created."
+  },
+  {
     "id": "teacher-development",
     "number": "04",
     "title": "Beyond teacher induction",
@@ -993,327 +993,8 @@ window.PORTFOLIO_PROJECTS = [
     "source": "The gallery and PDF contain the same complete 16-slide presentation."
   },
   {
-    "id": "chuseok-thanksgiving-storybook",
-    "number": "05",
-    "title": "How does it taste?",
-    "label": "Curriculum design",
-    "categories": [
-      "students",
-      "curriculum"
-    ],
-    "audiences": [
-      "young"
-    ],
-    "audienceLabel": "Elementary Grades 3–4",
-    "format": "Digital storybook & lesson slides",
-    "context": "School-requested unit for a school visit program",
-    "summary": "A Grades 3–4 storybook unit connecting Chuseok and Thanksgiving through food and taste language.",
-    "intro": "A school-requested Grade 3–4 unit connecting Chuseok and Thanksgiving through a story about cousins Nomi and Tashi.",
-    "role": "Unit design, lesson materials & AI-assisted digital storybook production",
-    "contribution": "I developed the unit and AI-assisted storybook, with taste vocabulary, model dialogues, comprehension checks, and paired speaking.",
-    "decisions": [
-      "Use the cousins’ cultural exchange to connect the holidays.",
-      "Reinforce “How does it taste?” and “It’s…” through story and food examples."
-    ],
-    "evidence": "The unit practises taste language through a story, review questions, and paired dialogue.",
-    "note": "I used AI to produce the digital storybook; the gallery shows selected lesson pages.",
-    "cover": "assets/nomi-tashi-preview-title--570294e02a7c.webp",
-    "coverAlt": "How Does It Taste? Storybook title surrounded by autumn foods and the two cousins, Nomi and Tashi.",
-    "previewSecondary": "assets/nomi-tashi-preview-story--19b9ccf2795d.webp",
-    "previewCaption": "Storybook + taste-word lesson",
-    "color": "rose",
-    "slides": [
-      [
-        "assets/nomi-tashi-preview-title--570294e02a7c.webp",
-        "How Does It Taste? The storybook title introduces the cousins and food theme.",
-        "Storybook cover"
-      ],
-      [
-        "assets/storybook-3--97bb5965d652.webp",
-        "Taste words are introduced with familiar foods and English–Korean labels.",
-        "Original slide 3"
-      ],
-      [
-        "assets/storybook-26--7298d309b51d.webp",
-        "A Chuseok story scene uses kimchi to model “It’s spicy” and preference questions.",
-        "Original slide 26"
-      ],
-      [
-        "assets/storybook-56--802afa2195c1.webp",
-        "The holiday introduction connects family gatherings and shared meals.",
-        "Original slide 56"
-      ],
-      [
-        "assets/nomi-tashi-preview-story--19b9ccf2795d.webp",
-        "Nomi asks how turkey tastes; Tashi describes it as salty, like chicken.",
-        "Storybook dialogue · original slide 63"
-      ],
-      [
-        "assets/storybook-89--3a65d4784c82.webp",
-        "A paired speaking task asks learners to choose a food, ask about taste, and switch roles.",
-        "Original slide 89"
-      ],
-      [
-        "assets/how-does-it-taste-wordsearch--9098d2b97d5b.webp",
-        "A taste-word search reviews sweet, salty, spicy, sour, fresh, and delicious.",
-        "Taste-word handout · page 1"
-      ],
-      [
-        "assets/how-does-it-taste-writing--acf58e8e9493.webp",
-        "A guided handout supports spelling, copying, and completing the sentence “It’s …”.",
-        "Taste-word handout · page 2"
-      ]
-    ],
-    "documents": [
-      [
-        "assets/how-does-it-taste-handout-optimized.pdf",
-        "Taste-word handout",
-        "2-page PDF"
-      ],
-      [
-        "assets/downloads/how-does-it-taste-complete.pdf",
-        "Complete How does it taste? materials",
-        "PDF"
-      ]
-    ],
-    "materialsNote": "The full lesson PDF and a separate two-page taste-word handout are below.",
-    "source": "The gallery shows selected lesson pages; both supplied PDFs are linked below.",
-    "original": "chuseok-thanksgiving-storybook",
-    "ko": {
-      "title": "어떤 맛이 나요?",
-      "label": "교육과정 설계",
-      "audienceLabel": "초등학교 3~4학년",
-      "format": "디지털 이야기책 및 수업 슬라이드",
-      "context": "학교 요청에 맞춘 학교 방문 프로그램 단원",
-      "summary": "음식과 맛 표현을 통해 추석과 추수감사절을 연결하는 초등 3–4학년 이야기책 단원입니다.",
-      "intro": "학교 요청에 따라 초등학교 3~4학년을 위해 노미와 타시의 이야기를 통해 추석과 추수감사절을 연결한 단원입니다.",
-      "role": "단원 설계, 수업 자료 및 AI 활용 디지털 이야기책 제작",
-      "contribution": "단원과 AI 활용 이야기책을 개발하고 맛 어휘, 대화 예시, 이해 확인, 짝 말하기 활동을 구성했습니다.",
-      "decisions": [
-        "사촌들의 문화 교류 이야기로 두 명절을 연결했습니다.",
-        "이야기와 음식 예시에서 “How does it taste?”와 “It’s…”를 익히게 했습니다."
-      ],
-      "evidence": "이야기, 복습 문제, 짝 대화를 통해 맛 표현을 연습합니다.",
-      "note": "AI를 활용해 디지털 이야기책을 제작했습니다. 갤러리는 수업 자료 일부를 보여 줍니다.",
-      "materialsNote": "전체 수업 PDF와 별도의 2쪽 맛 표현 유인물을 아래에서 볼 수 있습니다.",
-      "source": "갤러리에는 수업 자료 일부를 실었습니다. 제공된 PDF 두 종은 아래에 연결했습니다.",
-      "coverAlt": "가을 음식과 사촌 노미, 타시가 등장하는 How Does It Taste? 이야기책 표지.",
-      "previewCaption": "이야기책 + 맛 표현 수업",
-      "slides": [
-        [
-          "이야기책 표지에서 두 사촌과 음식·맛이라는 주제를 소개합니다.",
-          "이야기책 표지"
-        ],
-        [
-          "익숙한 음식과 영어·한국어 표기로 맛 어휘를 도입합니다.",
-          "원본 3번 슬라이드"
-        ],
-        [
-          "추석 이야기에서 김치로 “It’s spicy”와 선호 질문을 연습합니다.",
-          "원본 26번 슬라이드"
-        ],
-        [
-          "가족이 모여 함께 식사하는 명절의 공통점을 소개합니다.",
-          "원본 56번 슬라이드"
-        ],
-        [
-          "노미가 칠면조의 맛을 묻자 타시가 닭고기처럼 짭짤하다고 설명합니다.",
-          "이야기 대화 · 원본 63번 슬라이드"
-        ],
-        [
-          "음식을 골라 맛을 묻고 답한 뒤 역할을 바꾸는 짝 말하기 과제.",
-          "원본 89번 슬라이드"
-        ],
-        [
-          "sweet, salty, spicy, sour, fresh, delicious 맛 어휘를 복습하는 단어 찾기 활동.",
-          "맛 표현 유인물 · 1쪽"
-        ],
-        [
-          "철자 쓰기와 It’s ___ 문장 완성을 연습하는 안내형 유인물.",
-          "맛 표현 유인물 · 2쪽"
-        ]
-      ],
-      "documents": [
-        [
-          "맛 표현 유인물",
-          "2쪽 PDF"
-        ],
-        [
-          "How does it taste 전체 자료",
-          "PDF"
-        ]
-      ],
-      "previewTertiaryAlt": "음식을 골라 맛을 묻고 답한 뒤 역할을 바꾸는 짝 말하기 과제.",
-      "displayTitle": "어떤 맛이 나요?",
-      "displayLabel": "이야기책과 말하기 활동 · 초등 자료"
-    },
-    "previewTertiary": "assets/storybook-89--3a65d4784c82.webp",
-    "previewTertiaryAlt": "A paired speaking task asks learners to choose a food, ask about taste, and switch roles.",
-    "displayTitle": "How does it taste?",
-    "displayLabel": "Storybook & speaking activities · Elementary materials",
-    "previewIndices": [
-      0,
-      4,
-      5
-    ]
-  },
-  {
-    "id": "advice-suggestions-lesson",
-    "number": "06",
-    "title": "Advice & Suggestions",
-    "label": "Learning materials",
-    "categories": [
-      "students",
-      "curriculum"
-    ],
-    "audiences": [
-      "young"
-    ],
-    "audienceLabel": "Middle-school English learners",
-    "format": "Lesson presentation & student handout",
-    "context": "Teacher-requested middle-school visit program lesson",
-    "summary": "A middle-school lesson distinguishing suggestions, advice, necessity, and warnings through guided practice.",
-    "intro": "A teacher-requested lesson for a middle-school visit program on the nuances of giving advice in English.",
-    "role": "Lesson planning, presentation & handout design",
-    "contribution": "I grouped common expressions by meaning and strength, then built practice around situations, a naturalness quiz, and advice prompts.",
-    "decisions": [
-      "Compare similar expressions by meaning and tone.",
-      "Move from Korean-supported examples to choosing and giving advice."
-    ],
-    "evidence": "Students compare expressions in context, choose natural responses, and practise giving advice.",
-    "note": "The gallery shows selected stills; the complete lesson deck is available as a PDF below.",
-    "cover": "assets/advice-title-optimized--cd4e4058dee6.webp",
-    "coverAlt": "Advice & Suggestions title slide with students discussing advice.",
-    "previewSecondary": "assets/advice-required-optimized--4f83c7476469.webp",
-    "previewTertiary": "assets/advice-difference-optimized--f3f86f13b841.webp",
-    "previewTertiaryAlt": "Comparison slide asking how advice and suggestion phrases differ.",
-    "previewCaption": "Nuance in everyday classroom English",
-    "color": "blue",
-    "slides": [
-      [
-        "assets/advice-title-optimized--cd4e4058dee6.webp",
-        "Advice & Suggestions: title slide introduces advice and suggestion expressions.",
-        "Lesson title"
-      ],
-      [
-        "assets/advice-required-optimized--4f83c7476469.webp",
-        "“You should,” “You need to,” and “You have to” are framed as advice and stronger necessity.",
-        "Advice expressions"
-      ],
-      [
-        "assets/advice-difference-optimized--f3f86f13b841.webp",
-        "A comparison asks how the advice and suggestion forms differ.",
-        "Expression comparison"
-      ],
-      [
-        "assets/advice-suggestions-optimized--fb6bf452ae05.webp",
-        "“How about” and “Why don’t you” introduce lighter suggestions.",
-        "Suggestions"
-      ],
-      [
-        "assets/advice-warning-optimized--a795f00052e2.webp",
-        "“You had better” is shown as a warning, with situational examples.",
-        "Warnings"
-      ],
-      [
-        "assets/advice-quiz-optimized--2de3f4082f57.webp",
-        "Students choose a natural response to a shoe-removal situation.",
-        "Practice quiz"
-      ],
-      [
-        "assets/advice-give-advice-optimized--928e77a50ba7.webp",
-        "A missing-hamster prompt invites students to give advice.",
-        "Speaking prompt"
-      ],
-      [
-        "assets/advice-handout-optimized--a829d71dfbfd.webp",
-        "The student handout summarizes the forms, their meaning, and when to use them.",
-        "Student handout"
-      ]
-    ],
-    "documents": [
-      [
-        "assets/advice-suggestions.pdf",
-        "Full lesson deck",
-        "27-page PDF"
-      ]
-    ],
-    "source": "The gallery shows selected slides and the student handout; the complete lesson PDF is below.",
-    "original": "advice-suggestions-lesson",
-    "ko": {
-      "title": "조언과 제안 표현",
-      "label": "학습 자료",
-      "audienceLabel": "중학교 영어 학습자",
-      "format": "수업 발표 자료 및 학생용 유인물",
-      "context": "교사 요청에 맞춘 중학교 방문 수업",
-      "summary": "안내된 연습을 통해 영어의 제안, 조언, 필요·의무 표현과 경고를 구분하는 중학교 수업입니다.",
-      "intro": "중학교 방문 프로그램에서 영어 조언 표현의 뉘앙스를 다뤄 달라는 교사 요청으로 만든 수업입니다.",
-      "role": "수업 계획, 발표 자료 및 유인물 설계",
-      "contribution": "표현을 의미와 강도에 따라 묶고 상황 예시, 자연스러운 표현 고르기, 조언하기 활동을 구성했습니다.",
-      "decisions": [
-        "비슷한 표현의 의미와 말투를 비교했습니다.",
-        "한국어 설명에서 자연스러운 표현 선택과 직접 조언하기로 이어지게 했습니다."
-      ],
-      "evidence": "상황에 맞는 표현을 고르고 직접 조언하며 표현의 차이를 연습합니다.",
-      "note": "갤러리는 선정한 정지 화면입니다. 아래에서 전체 수업 자료를 PDF로 볼 수 있습니다.",
-      "source": "갤러리에는 슬라이드와 학생용 유인물 일부를 실었습니다. 전체 수업 PDF는 아래에서 볼 수 있습니다.",
-      "coverAlt": "학생들이 대화하는 그림과 Advice & Suggestions 제목이 있는 표지.",
-      "previewCaption": "일상 영어 조언 표현의 뉘앙스",
-      "previewTertiaryAlt": "조언과 제안 표현이 어떻게 다른지 묻는 비교 화면.",
-      "slides": [
-        [
-          "조언과 제안 표현을 소개하는 수업 표지.",
-          "수업 표지"
-        ],
-        [
-          "You should, You need to, You have to를 조언과 필수 표현으로 설명합니다.",
-          "조언 표현"
-        ],
-        [
-          "조언·필수 표현과 제안 표현의 차이를 묻는 비교 화면.",
-          "표현 비교"
-        ],
-        [
-          "How about과 Why don’t you로 가벼운 제안을 소개합니다.",
-          "제안 표현"
-        ],
-        [
-          "You had better를 경고 표현으로 소개하고 상황별 예시를 보여 줍니다.",
-          "경고 표현"
-        ],
-        [
-          "신발을 벗는 상황에 자연스러운 영어 표현을 고르는 퀴즈.",
-          "연습 퀴즈"
-        ],
-        [
-          "잃어버린 햄스터 상황에서 학생들이 조언을 말해 보는 활동.",
-          "말하기 활동"
-        ],
-        [
-          "학생용 유인물에 표현별 의미와 사용 상황을 정리했습니다.",
-          "학생용 유인물"
-        ]
-      ],
-      "documents": [
-        [
-          "전체 수업 자료",
-          "27쪽 PDF"
-        ]
-      ],
-      "displayTitle": "조언과 제안 표현",
-      "displayLabel": "중등 자료"
-    },
-    "displayTitle": "Advice & Suggestions",
-    "displayLabel": "Secondary materials",
-    "previewIndices": [
-      0,
-      1,
-      2
-    ]
-  },
-  {
     "id": "usa-camp-workbook",
-    "number": "07",
+    "number": "05",
     "title": "USA Camp",
     "label": "Curriculum design",
     "categories": [
@@ -1605,6 +1286,325 @@ window.PORTFOLIO_PROJECTS = [
     "previewIndices": [
       0,
       5,
+      2
+    ]
+  },
+  {
+    "id": "chuseok-thanksgiving-storybook",
+    "number": "06",
+    "title": "How does it taste?",
+    "label": "Curriculum design",
+    "categories": [
+      "students",
+      "curriculum"
+    ],
+    "audiences": [
+      "young"
+    ],
+    "audienceLabel": "Elementary Grades 3–4",
+    "format": "Digital storybook & lesson slides",
+    "context": "School-requested unit for a school visit program",
+    "summary": "A Grades 3–4 storybook unit connecting Chuseok and Thanksgiving through food and taste language.",
+    "intro": "A school-requested Grade 3–4 unit connecting Chuseok and Thanksgiving through a story about cousins Nomi and Tashi.",
+    "role": "Unit design, lesson materials & AI-assisted digital storybook production",
+    "contribution": "I developed the unit and AI-assisted storybook, with taste vocabulary, model dialogues, comprehension checks, and paired speaking.",
+    "decisions": [
+      "Use the cousins’ cultural exchange to connect the holidays.",
+      "Reinforce “How does it taste?” and “It’s…” through story and food examples."
+    ],
+    "evidence": "The unit practises taste language through a story, review questions, and paired dialogue.",
+    "note": "I used AI to produce the digital storybook; the gallery shows selected lesson pages.",
+    "cover": "assets/nomi-tashi-preview-title--570294e02a7c.webp",
+    "coverAlt": "How Does It Taste? Storybook title surrounded by autumn foods and the two cousins, Nomi and Tashi.",
+    "previewSecondary": "assets/nomi-tashi-preview-story--19b9ccf2795d.webp",
+    "previewCaption": "Storybook + taste-word lesson",
+    "color": "rose",
+    "slides": [
+      [
+        "assets/nomi-tashi-preview-title--570294e02a7c.webp",
+        "How Does It Taste? The storybook title introduces the cousins and food theme.",
+        "Storybook cover"
+      ],
+      [
+        "assets/storybook-3--97bb5965d652.webp",
+        "Taste words are introduced with familiar foods and English–Korean labels.",
+        "Original slide 3"
+      ],
+      [
+        "assets/storybook-26--7298d309b51d.webp",
+        "A Chuseok story scene uses kimchi to model “It’s spicy” and preference questions.",
+        "Original slide 26"
+      ],
+      [
+        "assets/storybook-56--802afa2195c1.webp",
+        "The holiday introduction connects family gatherings and shared meals.",
+        "Original slide 56"
+      ],
+      [
+        "assets/nomi-tashi-preview-story--19b9ccf2795d.webp",
+        "Nomi asks how turkey tastes; Tashi describes it as salty, like chicken.",
+        "Storybook dialogue · original slide 63"
+      ],
+      [
+        "assets/storybook-89--3a65d4784c82.webp",
+        "A paired speaking task asks learners to choose a food, ask about taste, and switch roles.",
+        "Original slide 89"
+      ],
+      [
+        "assets/how-does-it-taste-wordsearch--9098d2b97d5b.webp",
+        "A taste-word search reviews sweet, salty, spicy, sour, fresh, and delicious.",
+        "Taste-word handout · page 1"
+      ],
+      [
+        "assets/how-does-it-taste-writing--acf58e8e9493.webp",
+        "A guided handout supports spelling, copying, and completing the sentence “It’s …”.",
+        "Taste-word handout · page 2"
+      ]
+    ],
+    "documents": [
+      [
+        "assets/how-does-it-taste-handout-optimized.pdf",
+        "Taste-word handout",
+        "2-page PDF"
+      ],
+      [
+        "assets/downloads/how-does-it-taste-complete.pdf",
+        "Complete How does it taste? materials",
+        "PDF"
+      ]
+    ],
+    "materialsNote": "The full lesson PDF and a separate two-page taste-word handout are below.",
+    "source": "The gallery shows selected lesson pages; both supplied PDFs are linked below.",
+    "original": "chuseok-thanksgiving-storybook",
+    "ko": {
+      "title": "어떤 맛이 나요?",
+      "label": "교육과정 설계",
+      "audienceLabel": "초등학교 3~4학년",
+      "format": "디지털 이야기책 및 수업 슬라이드",
+      "context": "학교 요청에 맞춘 학교 방문 프로그램 단원",
+      "summary": "음식과 맛 표현을 통해 추석과 추수감사절을 연결하는 초등 3–4학년 이야기책 단원입니다.",
+      "intro": "학교 요청에 따라 초등학교 3~4학년을 위해 노미와 타시의 이야기를 통해 추석과 추수감사절을 연결한 단원입니다.",
+      "role": "단원 설계, 수업 자료 및 AI 활용 디지털 이야기책 제작",
+      "contribution": "단원과 AI 활용 이야기책을 개발하고 맛 어휘, 대화 예시, 이해 확인, 짝 말하기 활동을 구성했습니다.",
+      "decisions": [
+        "사촌들의 문화 교류 이야기로 두 명절을 연결했습니다.",
+        "이야기와 음식 예시에서 “How does it taste?”와 “It’s…”를 익히게 했습니다."
+      ],
+      "evidence": "이야기, 복습 문제, 짝 대화를 통해 맛 표현을 연습합니다.",
+      "note": "AI를 활용해 디지털 이야기책을 제작했습니다. 갤러리는 수업 자료 일부를 보여 줍니다.",
+      "materialsNote": "전체 수업 PDF와 별도의 2쪽 맛 표현 유인물을 아래에서 볼 수 있습니다.",
+      "source": "갤러리에는 수업 자료 일부를 실었습니다. 제공된 PDF 두 종은 아래에 연결했습니다.",
+      "coverAlt": "가을 음식과 사촌 노미, 타시가 등장하는 How Does It Taste? 이야기책 표지.",
+      "previewCaption": "이야기책 + 맛 표현 수업",
+      "slides": [
+        [
+          "이야기책 표지에서 두 사촌과 음식·맛이라는 주제를 소개합니다.",
+          "이야기책 표지"
+        ],
+        [
+          "익숙한 음식과 영어·한국어 표기로 맛 어휘를 도입합니다.",
+          "원본 3번 슬라이드"
+        ],
+        [
+          "추석 이야기에서 김치로 “It’s spicy”와 선호 질문을 연습합니다.",
+          "원본 26번 슬라이드"
+        ],
+        [
+          "가족이 모여 함께 식사하는 명절의 공통점을 소개합니다.",
+          "원본 56번 슬라이드"
+        ],
+        [
+          "노미가 칠면조의 맛을 묻자 타시가 닭고기처럼 짭짤하다고 설명합니다.",
+          "이야기 대화 · 원본 63번 슬라이드"
+        ],
+        [
+          "음식을 골라 맛을 묻고 답한 뒤 역할을 바꾸는 짝 말하기 과제.",
+          "원본 89번 슬라이드"
+        ],
+        [
+          "sweet, salty, spicy, sour, fresh, delicious 맛 어휘를 복습하는 단어 찾기 활동.",
+          "맛 표현 유인물 · 1쪽"
+        ],
+        [
+          "철자 쓰기와 It’s ___ 문장 완성을 연습하는 안내형 유인물.",
+          "맛 표현 유인물 · 2쪽"
+        ]
+      ],
+      "documents": [
+        [
+          "맛 표현 유인물",
+          "2쪽 PDF"
+        ],
+        [
+          "How does it taste 전체 자료",
+          "PDF"
+        ]
+      ],
+      "previewTertiaryAlt": "음식을 골라 맛을 묻고 답한 뒤 역할을 바꾸는 짝 말하기 과제.",
+      "displayTitle": "어떤 맛이 나요?",
+      "displayLabel": "이야기책과 말하기 활동 · 초등 자료"
+    },
+    "previewTertiary": "assets/storybook-89--3a65d4784c82.webp",
+    "previewTertiaryAlt": "A paired speaking task asks learners to choose a food, ask about taste, and switch roles.",
+    "displayTitle": "How does it taste?",
+    "displayLabel": "Storybook & speaking activities · Elementary materials",
+    "previewIndices": [
+      0,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "advice-suggestions-lesson",
+    "number": "07",
+    "title": "Advice & Suggestions",
+    "label": "Learning materials",
+    "categories": [
+      "students",
+      "curriculum"
+    ],
+    "audiences": [
+      "young"
+    ],
+    "audienceLabel": "Middle-school English learners",
+    "format": "Lesson presentation & student handout",
+    "context": "Teacher-requested middle-school visit program lesson",
+    "summary": "A middle-school lesson distinguishing suggestions, advice, necessity, and warnings through guided practice.",
+    "intro": "A teacher-requested lesson for a middle-school visit program on the nuances of giving advice in English.",
+    "role": "Lesson planning, presentation & handout design",
+    "contribution": "I grouped common expressions by meaning and strength, then built practice around situations, a naturalness quiz, and advice prompts.",
+    "decisions": [
+      "Compare similar expressions by meaning and tone.",
+      "Move from Korean-supported examples to choosing and giving advice."
+    ],
+    "evidence": "Students compare expressions in context, choose natural responses, and practise giving advice.",
+    "note": "The gallery shows selected stills; the complete lesson deck is available as a PDF below.",
+    "cover": "assets/advice-title-optimized--cd4e4058dee6.webp",
+    "coverAlt": "Advice & Suggestions title slide with students discussing advice.",
+    "previewSecondary": "assets/advice-required-optimized--4f83c7476469.webp",
+    "previewTertiary": "assets/advice-difference-optimized--f3f86f13b841.webp",
+    "previewTertiaryAlt": "Comparison slide asking how advice and suggestion phrases differ.",
+    "previewCaption": "Nuance in everyday classroom English",
+    "color": "blue",
+    "slides": [
+      [
+        "assets/advice-title-optimized--cd4e4058dee6.webp",
+        "Advice & Suggestions: title slide introduces advice and suggestion expressions.",
+        "Lesson title"
+      ],
+      [
+        "assets/advice-required-optimized--4f83c7476469.webp",
+        "“You should,” “You need to,” and “You have to” are framed as advice and stronger necessity.",
+        "Advice expressions"
+      ],
+      [
+        "assets/advice-difference-optimized--f3f86f13b841.webp",
+        "A comparison asks how the advice and suggestion forms differ.",
+        "Expression comparison"
+      ],
+      [
+        "assets/advice-suggestions-optimized--fb6bf452ae05.webp",
+        "“How about” and “Why don’t you” introduce lighter suggestions.",
+        "Suggestions"
+      ],
+      [
+        "assets/advice-warning-optimized--a795f00052e2.webp",
+        "“You had better” is shown as a warning, with situational examples.",
+        "Warnings"
+      ],
+      [
+        "assets/advice-quiz-optimized--2de3f4082f57.webp",
+        "Students choose a natural response to a shoe-removal situation.",
+        "Practice quiz"
+      ],
+      [
+        "assets/advice-give-advice-optimized--928e77a50ba7.webp",
+        "A missing-hamster prompt invites students to give advice.",
+        "Speaking prompt"
+      ],
+      [
+        "assets/advice-handout-optimized--a829d71dfbfd.webp",
+        "The student handout summarizes the forms, their meaning, and when to use them.",
+        "Student handout"
+      ]
+    ],
+    "documents": [
+      [
+        "assets/advice-suggestions.pdf",
+        "Full lesson deck",
+        "27-page PDF"
+      ]
+    ],
+    "source": "The gallery shows selected slides and the student handout; the complete lesson PDF is below.",
+    "original": "advice-suggestions-lesson",
+    "ko": {
+      "title": "조언과 제안 표현",
+      "label": "학습 자료",
+      "audienceLabel": "중학교 영어 학습자",
+      "format": "수업 발표 자료 및 학생용 유인물",
+      "context": "교사 요청에 맞춘 중학교 방문 수업",
+      "summary": "안내된 연습을 통해 영어의 제안, 조언, 필요·의무 표현과 경고를 구분하는 중학교 수업입니다.",
+      "intro": "중학교 방문 프로그램에서 영어 조언 표현의 뉘앙스를 다뤄 달라는 교사 요청으로 만든 수업입니다.",
+      "role": "수업 계획, 발표 자료 및 유인물 설계",
+      "contribution": "표현을 의미와 강도에 따라 묶고 상황 예시, 자연스러운 표현 고르기, 조언하기 활동을 구성했습니다.",
+      "decisions": [
+        "비슷한 표현의 의미와 말투를 비교했습니다.",
+        "한국어 설명에서 자연스러운 표현 선택과 직접 조언하기로 이어지게 했습니다."
+      ],
+      "evidence": "상황에 맞는 표현을 고르고 직접 조언하며 표현의 차이를 연습합니다.",
+      "note": "갤러리는 선정한 정지 화면입니다. 아래에서 전체 수업 자료를 PDF로 볼 수 있습니다.",
+      "source": "갤러리에는 슬라이드와 학생용 유인물 일부를 실었습니다. 전체 수업 PDF는 아래에서 볼 수 있습니다.",
+      "coverAlt": "학생들이 대화하는 그림과 Advice & Suggestions 제목이 있는 표지.",
+      "previewCaption": "일상 영어 조언 표현의 뉘앙스",
+      "previewTertiaryAlt": "조언과 제안 표현이 어떻게 다른지 묻는 비교 화면.",
+      "slides": [
+        [
+          "조언과 제안 표현을 소개하는 수업 표지.",
+          "수업 표지"
+        ],
+        [
+          "You should, You need to, You have to를 조언과 필수 표현으로 설명합니다.",
+          "조언 표현"
+        ],
+        [
+          "조언·필수 표현과 제안 표현의 차이를 묻는 비교 화면.",
+          "표현 비교"
+        ],
+        [
+          "How about과 Why don’t you로 가벼운 제안을 소개합니다.",
+          "제안 표현"
+        ],
+        [
+          "You had better를 경고 표현으로 소개하고 상황별 예시를 보여 줍니다.",
+          "경고 표현"
+        ],
+        [
+          "신발을 벗는 상황에 자연스러운 영어 표현을 고르는 퀴즈.",
+          "연습 퀴즈"
+        ],
+        [
+          "잃어버린 햄스터 상황에서 학생들이 조언을 말해 보는 활동.",
+          "말하기 활동"
+        ],
+        [
+          "학생용 유인물에 표현별 의미와 사용 상황을 정리했습니다.",
+          "학생용 유인물"
+        ]
+      ],
+      "documents": [
+        [
+          "전체 수업 자료",
+          "27쪽 PDF"
+        ]
+      ],
+      "displayTitle": "조언과 제안 표현",
+      "displayLabel": "중등 자료"
+    },
+    "displayTitle": "Advice & Suggestions",
+    "displayLabel": "Secondary materials",
+    "previewIndices": [
+      0,
+      1,
       2
     ]
   }

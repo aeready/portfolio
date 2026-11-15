@@ -1,0 +1,184 @@
+/* ==========================================================================
+   annaready.kr — design system (Stage 3, approved 15 Nov 2026)
+   Loads last. Every value here cites a manifesto rule:
+     R1 Two inks, one sheet     R2 The work is the loudest thing
+     R3 Loud once, then quiet   R4 Print where people look, standard where they click
+     R5 Both languages at full weight
+   To undo the whole system: remove the <link> to system.css in index.html.
+   ========================================================================== */
+
+:root {
+  /* --- Colour roles (R1). Only these. All text pairs measured AA. --- */
+  --paper: #f3ebdd;          /* ground */
+  --paper-deep: #eadfcb;     /* image mount */
+  --ink: #492b51;            /* headings, rules, fields     10.15:1 on paper */
+  --ink-text: #37243c;       /* running text                11.99:1 on paper */
+  --ink-muted: #5e4566;      /* secondary text, meta        7.04:1 on paper  */
+  --acid: #d6df66;           /* fields, chips, shadows, focus. Never text on paper (1.21:1) */
+  --acid-deep: #c3cd4a;      /* pressed */
+  --rule: rgba(73, 43, 81, .45);   /* hairlines only, never text */
+  --shadow-quiet: rgba(73, 43, 81, .15);
+
+  /* 60-30-10: paper is the 60, aubergine the 30, lime the 10 (R1). */
+
+  /* --- Type families: three voices (R3, R5) --- */
+  --display: 'Zine Condensed', 'Portfolio Display', Impact, sans-serif;  /* headings, name */
+  --text: 'Portfolio Sans', 'Noto Sans', 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif;  /* running text, EN + KO */
+  --mono: 'Zine Mono', 'Noto Sans Mono', ui-monospace, monospace;   /* labels, nav, buttons */
+  --kr: 'Portfolio Sans', 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+
+  /* --- Fluid type scale (360 → 1440 px) --- */
+  --fs-display: clamp(2.75rem, 1.6rem + 6vw, 7rem);      /* 44 → 112 */
+  --fs-h1:      clamp(2.5rem, 1.5rem + 5vw, 5.5rem);     /* 40 → 88  */
+  --fs-h2:      clamp(2.25rem, 1.4rem + 4.2vw, 5.25rem); /* 36 → 84  */
+  --fs-h3:      clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);  /* 24 → 36  */
+  --fs-lead:    clamp(1.0625rem, 1rem + .3vw, 1.25rem);  /* 17 → 20  */
+  --fs-body:    1rem;                                    /* 16       */
+  --fs-small:   .875rem;                                 /* 14       */
+  --fs-label:   .75rem;                                  /* 12, the floor for any text */
+  --fs-button:  .8125rem;                                /* 13       */
+
+  --lh-display: .9;  --lh-heading: 1;  --lh-text: 1.6;  --lh-text-ko: 1.75;  --lh-label: 1.3;
+  --ls-display: -.015em; --ls-label: .1em; --ls-text: 0;
+  --measure-text: 62ch;      /* longest running line */
+
+  /* Korean display matches Latin in weight and size, never in width (R5). */
+  --fs-h2-ko: clamp(2rem, 1.3rem + 3.6vw, 4.5rem);       /* 32 → 72 */
+  --fs-h3-ko: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);     /* 22 → 32 */
+
+  /* --- Space: 8-point scale, section rhythm --- */
+  --space-2xs: 4px; --space-xs: 8px; --space-s: 16px; --space-m: 24px;
+  --space-l: 40px;  --space-xl: 64px; --space-2xl: 96px; --space-3xl: 144px;
+  --section-gap: clamp(var(--space-xl), 10vw, var(--space-3xl));  /* 64 → 144: long silences (R3) */
+  --measure: 1240px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --grid-columns: 12; --grid-gap: 24px;
+
+  /* --- Image mount (R2): one frame per picture, one ratio --- */
+  --mount-ratio: 4 / 3;
+  --mount-pad: clamp(8px, 1vw, 12px);
+  --mount-border: 1px solid var(--ink);
+  --mount-bg: var(--paper-deep);
+
+  /* --- Lines and depth: square, hard, no blur --- */
+  --radius: 0;
+  --line: 1px solid var(--rule);
+  --line-strong: 2px solid var(--ink);
+  --line-band: 8px solid var(--ink);
+  --offset: 4px;          /* resting shadow */
+  --offset-press: 2px;    /* hover */
+  --focus-ring: 3px solid var(--acid);
+  --focus-offset: 2px;
+
+  /* --- Motion: one family, off under reduced motion --- */
+  --ease: cubic-bezier(.2, .7, .3, 1);
+  --dur-press: 90ms;    /* control press */
+  --dur-quick: 150ms;   /* hover, colour */
+  --dur-reveal: 320ms;  /* entrance */
+  --dur-view: 400ms;    /* view transitions, the maximum */
+  --rise: 12px;
+
+  /* --- Targets --- */
+  --target: 44px;
+  --target-touch: 48px;
+
+  /* --- Ornaments (riso asset bank): placement limits --- */
+  --ornament-hero-max: none;       /* unlimited in the hero */
+  --ornament-section-max: 1;       /* one per section heading */
+  --ornament-entry-max: 1;         /* one per project entry */
+  --ornament-clearance: 16px;      /* never closer than this to text */
+  --ornament-opacity: .9;
+}
+
+/* ---------- Running text: humanist sans (Decision 15 Nov) ---------- */
+body {
+  font-family: var(--text);
+  font-size: var(--fs-body);
+  line-height: var(--lh-text);
+  letter-spacing: var(--ls-text);
+  color: var(--ink-text);
+}
+.hero .intro,
+.section-heading > p,
+.project-copy > p,
+.timeline p,
+.trainer-section p:not(.scope-label):not(.row-index),
+.training-rows p,
+.contact-section p,
+.detail-body p, .detail-body li,
+.university-lockup p,
+.software-skills li,
+.language-skills,
+.qualifications p {
+  font-family: var(--text) !important;
+  letter-spacing: 0 !important;
+  text-wrap: pretty;
+}
+.hero .intro, .section-heading > p, .contact-section p { font-size: var(--fs-lead) !important; line-height: 1.55 !important; max-width: var(--measure-text); }
+.project-copy > p, .timeline p, .training-rows p, .detail-body p, .detail-body li { font-size: var(--fs-body) !important; line-height: var(--lh-text) !important; max-width: var(--measure-text); }
+
+/* ---------- Three voices: the hero role joins the display face (R3) ---------- */
+.hero .hero-copy .role {
+  font-family: var(--display) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-display) !important;
+  line-height: var(--lh-heading) !important;
+  font-size: var(--fs-h3) !important;
+}
+@media (min-width: 761px) { .hero .hero-copy .role { font-size: clamp(2.25rem, 1rem + 2.6vw, 3.5rem) !important; } }
+
+/* ---------- Headings ---------- */
+h2 { font-size: var(--fs-h2); line-height: var(--lh-display); letter-spacing: var(--ls-display); text-wrap: balance; }
+h3 { text-wrap: balance; }
+html[lang="ko"] h2 { font-size: var(--fs-h2-ko); line-height: 1.15; font-weight: 800; letter-spacing: -.02em; }
+html[lang="ko"] h3, html[lang="ko"] .project-title { font-size: var(--fs-h3-ko); font-weight: 800; letter-spacing: -.01em; }
+html[lang="ko"] .hero .hero-copy .role { font-family: var(--kr) !important; font-weight: 800 !important; letter-spacing: -.02em !important; line-height: 1.25 !important; text-transform: none; }
+
+/* ---------- Label floor: no text under 12 px ---------- */
+.site-header nav,
+.language-toggle, .menu-toggle,
+.filter-group button,
+.project-meta, .project-index, .project-results, .project-action,
+.timeline-date, .row-index, .scope-label,
+.hero .location, .hero-art-note,
+.gallery-controls, .site-footer, .site-footer small,
+.qualifications h4,
+.dialog-top .back-projects, .dialog-top .language-toggle, .dialog-top .close-button {
+  font-size: max(var(--fs-label), 1em) !important;
+}
+.site-header nav, .project-meta, .project-index, .project-results, .timeline-date, .row-index,
+.hero .location, .hero-art-note, .site-footer, .filter-group button, .language-toggle, .menu-toggle {
+  font-size: var(--fs-label) !important;
+  line-height: var(--lh-label);
+}
+.button, .project-action, .contact-actions .button { font-size: var(--fs-button) !important; }
+.hero .location { letter-spacing: .02em !important; }
+
+/* Text never sits at 45% ink: project numbers move to full ink (was 2.4:1). */
+.project-index { color: var(--ink) !important; }
+.project-results, .site-footer, .file-scope { color: var(--ink-muted) !important; }
+
+/* ---------- Mount (R2) ---------- */
+.artifact-arrangement { border: var(--mount-border); background: var(--mount-bg); padding: var(--mount-pad); border-radius: var(--radius); }
+
+/* ---------- Controls: minimum targets ---------- */
+.identity { min-width: var(--target); min-height: var(--target); }
+.detail-body a, .project-materials a { display: inline-flex; align-items: center; min-height: var(--target); }
+@media (max-width: 760px) {
+  .identity { min-width: var(--target-touch); min-height: var(--target-touch); }
+  .menu-toggle, .language-toggle { min-width: var(--target-touch); }
+}
+
+/* Focus: lime ring plus an ink shadow, because lime alone is invisible on paper. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  box-shadow: 0 0 0 calc(var(--focus-offset) + 3px) var(--ink);
+}
+
+/* ---------- Small things ---------- */
+::selection { background: var(--acid); color: var(--ink); }
+a { text-underline-offset: .22em; text-decoration-thickness: 1.5px; }
+.timeline-date, .project-index, .training-scope strong { font-variant-numeric: tabular-nums; }
+.site-header nav a, .site-header nav .nav-contact { font-size: var(--fs-label) !important; min-width: var(--target); justify-content: center; }
