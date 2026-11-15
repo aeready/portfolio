@@ -1493,3 +1493,7 @@ html { overflow-x: clip; }
 #trainer::after { content: none !important; }
 #project-dialog #gallery-image { max-height: min(70vh, 760px) !important; }
 @media (max-width: 760px) { #project-dialog #gallery-image { max-height: 58vh !important; } }
+@media (max-width: 760px) { .work-tools.has-toggle.is-open #category-filters { width: 100% !important; box-sizing: border-box; } .work-tools.has-toggle { display: block !important; } }
+@media (max-width: 760px) { .work-tools.has-toggle { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; } }
+@media (max-width: 760px) { .work-tools.has-toggle, .work-tools.has-toggle #category-filters { -webkit-mask-image: none !important; mask-image: none !important; } .work-tools.has-toggle::after, .work-tools.has-toggle::before { content: none !important; } }
+@media (max-width: 760px) { .work-tools.has-toggle.is-open #category-filters button { align-items: center !important; } .work-tools.has-toggle.is-open #category-filters button::after { vertical-align: baseline; margin-left: auto; } }
