@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true">
+  <defs>
+    <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1.4" cy="1.4" r="1.2" fill="#dfaa32"/></pattern>
+    <clipPath id="disc"><circle cx="120" cy="120" r="115"/></clipPath>
+  </defs>
+  <g clip-path="url(#disc)"><circle cx="120" cy="120" r="115" fill="#f3dfab"/><rect width="240" height="240" fill="url(#dots)" opacity=".82"/></g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 156" aria-hidden="true">
+  <defs>
+    <pattern id="ink" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#f7f5ef" opacity=".45"/></pattern>
+  </defs>
+  <path d="M12 143C17 87 52 38 104 12" fill="none" stroke="#27534c" stroke-width="3" stroke-linecap="round"/>
+  <path d="M56 80C43 42 63 18 112 8c-4 45-19 68-56 72ZM41 110C9 105 1 81 9 52c33 5 51 23 32 58Z" fill="#27534c"/>
+  <path d="M60 84C47 46 67 22 116 12c-4 45-19 68-56 72ZM45 114C13 109 5 85 13 56c33 5 51 23 32 58Z" fill="#e25535" opacity=".58"/>
+  <path d="M56 80C43 42 63 18 112 8c-4 45-19 68-56 72ZM41 110C9 105 1 81 9 52c33 5 51 23 32 58Z" fill="url(#ink)"/>
+</svg>
