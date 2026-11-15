@@ -111,7 +111,7 @@
   function renderProjects() {
     const visible = matchedProjects();
     grid.innerHTML = visible.map((p, position) => {
-      const featured = ['adult-communication', 'epik-music', 'reading-for-meaning'].includes(p.id);
+      const featured = ['adult-communication', 'reading-for-meaning', 'epik-music'].includes(p.id);
       const previews = [p.cover, p.previewSecondary, p.previewTertiary].filter(Boolean);
       const previewButtons = previews.map((src, index) => {
         const sample = p.previewIndices[index];
@@ -250,12 +250,12 @@
     const oldId = activeProject?.id, oldSlide = slideIndex, oldGallery = activeGallery, scroll = dialog.scrollTop;
     const projectOrder = [
       'adult-communication',
-      'epik-music',
       'reading-for-meaning',
+      'epik-music',
       'teacher-development',
+      'usa-camp-workbook',
       'chuseok-thanksgiving-storybook',
-      'advice-suggestions-lesson',
-      'usa-camp-workbook'
+      'advice-suggestions-lesson'
     ];
     language = next === 'ko' ? 'ko' : 'en';
     projects = baseProjects.map(localize).sort((a, b) => projectOrder.indexOf(a.id) - projectOrder.indexOf(b.id));
