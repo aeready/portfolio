@@ -32,3 +32,47 @@
   }
   #category-filters button { flex: 0 0 auto; border-bottom: 1px solid var(--ink-45, rgba(73,43,81,.45)); }
 }
+
+/* ==========================================================================
+   Stage 4 — phones (15 Nov 2026)
+   ========================================================================== */
+
+/* "Email me" is the primary action (Decision 15 Nov). A Contact button sits in
+   the phone header so the email is one tap away from any scroll position
+   (R8 key action in thumb reach; R11 never hide contact). Desktop already
+   has Contact in the nav. */
+.header-contact { display: none; }
+@media (max-width: 760px) {
+  .header-contact {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; min-width: 48px; padding: 0 12px;
+    background: var(--acid); color: var(--ink);
+    border: 1.5px solid var(--ink);
+    font: 700 .75rem/1 var(--label, var(--mono)); letter-spacing: .08em; text-transform: uppercase;
+    text-decoration: none;
+  }
+  html[lang="ko"] .header-contact { letter-spacing: 0; font-family: var(--read); }
+  .header-contact:active { transform: translate(2px, 2px); }
+}
+@media (max-width: 360px) {
+  .site-header .header-tools { gap: 6px; }
+  .site-header .language-toggle, .site-header .menu-toggle, .header-contact { padding-inline: 10px; }
+}
+
+/* One artefact per project on phones (Manifesto R2): the cover plate shows;
+   the two smaller slides, unreadable at phone width, stay in the project
+   gallery one tap away. Desktop keeps the full trio composition. */
+@media (max-width: 900px) {
+  .project-card .artifact-fixed { display: none !important; }
+  .project-card .preview-papers { display: block; }
+  .project-card .artifact-main-frame { width: 100%; }
+}
+
+/* Tighter band rhythm on phones (R3: loud, then quiet, but not 14 screens). */
+@media (max-width: 900px) {
+  .project-collection > .project-card,
+  .project-collection > .project-card.is-featured,
+  .project-collection > .project-card.is-compact { padding-block: var(--s5, 48px) var(--s5, 48px) !important; row-gap: var(--s2, 16px) !important; }
+  .project-card .project-copy { gap: var(--s2, 16px) !important; }
+  .project-card .project-index { font-size: clamp(3rem, 14vw, 4rem) !important; }
+}
