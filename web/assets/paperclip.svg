@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 150" aria-hidden="true">
+  <defs>
+    <linearGradient id="cherry" x1="0" y1="0" x2="1" y2=".12">
+      <stop stop-color="#81463e"/>
+      <stop offset=".22" stop-color="#ac5f51"/>
+      <stop offset=".57" stop-color="#c77c68"/>
+      <stop offset="1" stop-color="#98544c"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-20%" width="170%" height="150%"><feDropShadow dx="2" dy="3" stdDeviation="2" flood-color="#2f3330" flood-opacity=".28"/></filter>
+  </defs>
+  <!-- Rear wire vanishes at the upper edge of the paper. -->
+  <path d="M17 42C12 23 22 11 36 10c15-1 24 9 27 24l2 8" fill="none" stroke="#713d39" stroke-width="11" stroke-linecap="round" filter="url(#shadow)"/>
+  <path d="M17 42C12 23 22 11 36 10c15-1 24 9 27 24l2 8" fill="none" stroke="url(#cherry)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M16 34c0-12 7-20 19-21m16 2c6 3 9 9 11 18" fill="none" stroke="#dfa396" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <!-- Front wire emerges on the face of the card; the unpainted gap is the paper edge. -->
+  <path d="M19 58 40 124c5 15 15 21 28 18 15-3 22-14 17-29L68 58" fill="none" stroke="#713d39" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)"/>
+  <path d="M19 58 40 124c5 15 15 21 28 18 15-3 22-14 17-29L68 58" fill="none" stroke="url(#cherry)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 61 43 124c4 12 13 17 23 15m2-78 17 53" fill="none" stroke="#dfa396" stroke-width="1.8" stroke-linecap="round" opacity=".86"/>
+</svg>
