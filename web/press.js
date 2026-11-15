@@ -131,6 +131,22 @@
     requestAnimationFrame(() => requestAnimationFrame(() => fitShadow(img)));
   }, true);
 
+  /* ---------- Gallery height fitted to the project's tallest slide -------- */
+  const fitStage = () => {
+    const stage = document.querySelector('#project-dialog .gallery-stage');
+    const ratios = [...document.querySelectorAll('#project-dialog .gallery-thumbnails img')].map(i =>
+      i.naturalWidth ? i.naturalHeight / i.naturalWidth : (+i.getAttribute('height') || 0) / (+i.getAttribute('width') || 1)).filter(r => r > 0);
+    if (!stage || !ratios.length) return;
+    const tallest = Math.max(...ratios);
+    const cap = window.innerHeight * (window.innerWidth <= 760 ? .52 : .56);
+    const h = Math.min(cap, 760, stage.getBoundingClientRect().width * tallest);
+    if (h > 0) stage.style.setProperty('--stage-h', `${Math.round(h)}px`);
+  };
+  const galleryHost = document.querySelector('#project-detail');
+  if (galleryHost) new MutationObserver(() => requestAnimationFrame(fitStage)).observe(galleryHost, {childList: true, subtree: true});
+  window.addEventListener('resize', fitStage, {passive: true});
+  document.addEventListener('load', e => { if (e.target?.closest?.('#project-dialog .gallery-thumbnails')) fitStage(); }, true);
+
   /* ---------- Motion v2: print each element once when it arrives ---------- */
   if (!reduceMotion && 'IntersectionObserver' in window) {
     const selector = '.project-card, #work .section-heading, .work-tools, .section-ribbon, .background-intro, .timeline article, .qualifications, .contact-section > div, .contact-links';
@@ -144,6 +160,8 @@
       io.observe(el);
     });
     root.classList.add('rv-on');
+    // Keyboard users never land on an element that is still waiting to print.
+    document.addEventListener('focusin', e => e.target.closest?.('.rv:not(.is-in)')?.classList.add('is-in'));
     arm(document);
     const grid2 = document.querySelector('#project-grid');
     if (grid2) new MutationObserver(records => records.forEach(r => r.addedNodes.forEach(n => n.nodeType === 1 && arm(n)))).observe(grid2, {childList: true});

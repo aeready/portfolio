@@ -1441,8 +1441,8 @@ html { overflow-x: clip; }
 
 /* 2. The choreography. */
 @media (prefers-reduced-motion: no-preference) {
-  html.rv-on .rv:not(.is-in) { visibility: hidden; }
-  html.rv-on .rv.is-in { visibility: visible; }
+  html.rv-on .rv:not(.is-in) { opacity: 0; }
+  html.rv-on .rv.is-in { opacity: 1; }
 
   /* Lines of type set one after another. */
   html.rv-on .rv.is-in :is(.project-meta, .project-title, .wall-label, .project-copy > p, .project-foot, .section-heading > p, .work-tools,
@@ -1497,3 +1497,34 @@ html { overflow-x: clip; }
 @media (max-width: 760px) { .work-tools.has-toggle { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; } }
 @media (max-width: 760px) { .work-tools.has-toggle, .work-tools.has-toggle #category-filters { -webkit-mask-image: none !important; mask-image: none !important; } .work-tools.has-toggle::after, .work-tools.has-toggle::before { content: none !important; } }
 @media (max-width: 760px) { .work-tools.has-toggle.is-open #category-filters button { align-items: center !important; } .work-tools.has-toggle.is-open #category-filters button::after { vertical-align: baseline; margin-left: auto; } }
+
+/* ==========================================================================
+   Fourth pass (17 Nov 2026)
+   ========================================================================== */
+/* Proof numbers: always two columns, in both languages (labels wrap inside). */
+.hero .hero-proof { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px !important; }
+.hero .hero-proof p { max-width: none !important; }
+#home.hero--poster .hero-copy > .hero-proof { flex-direction: unset; }
+@media (min-width: 1001px) { #home.hero--poster .hero-copy > .hero-proof { grid-template-columns: minmax(0, 1fr); } }
+
+/* Education → Skills: one rule, one gap (was a rule, empty space, another rule). */
+.qualifications > div + div { margin-top: var(--s4, 32px) !important; padding-top: var(--s4, 32px) !important; }
+.qualifications .university-lockup:last-of-type { border-bottom: 0 !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+
+/* Project gallery: strip directly under the work, then counter and caption.
+   On phones the viewing room is sized to the project's own slides, so a
+   landscape deck no longer floats in a tall empty box. */
+#project-dialog .gallery-tabs { order: 0; }
+#project-dialog .gallery-stage { order: 1; }
+#project-dialog .gallery-thumbnails { order: 2; margin-top: var(--s3, 24px) !important; }
+#project-dialog .gallery-controls { order: 3; margin-top: var(--s3, 24px) !important; }
+#project-dialog .gallery-caption { order: 4; }
+#project-dialog .gallery-stage { height: var(--stage-h, min(70vh, 760px)) !important; }
+#project-dialog #gallery-image { max-height: var(--stage-h, min(70vh, 760px)) !important; }
+@media (max-width: 760px) {
+  #project-dialog .gallery { padding-top: 20px !important; }
+  #project-dialog .gallery-stage { height: var(--stage-h, 58vh) !important; }
+  #project-dialog #gallery-image { max-height: var(--stage-h, 58vh) !important; }
+}
+.hero .hero-actions > a { white-space: nowrap; }
+@media (max-width: 380px) { .hero .hero-actions { grid-template-columns: 1fr !important; } }

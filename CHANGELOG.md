@@ -3,6 +3,17 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 — Fourth pass (owner's phone review)
+
+- **Hero proof numbers:** always two side-by-side columns in both languages (English stacked when the phone's text size was larger).
+- **Hero buttons:** labels never wrap; below 380 px the two buttons stack full-width.
+- **Education → Skills:** one rule and one 32 px gap instead of rule, empty space, rule.
+- **Project gallery:** the numbered strip now sits directly under the work, then the counter and caption. The viewing room is sized to the project's own tallest slide (capped at 56% of the screen height on desktop, 52% on phones), so landscape decks no longer float in a tall empty box and the strip is visible without scrolling.
+- **404:** "오식." is set in the same face, size and lime offset as "MISPRINT."
+- **Korean copy checked against English, line by line:** "Contact me" was "연락 및 이력서" ("Contact & résumé") and is now "연락하기"; the phone filter label was "보기", the same word as the View buttons, and is now "분류". Both checked against the Korean font subset. Every other string matches in meaning and register.
+- **Accessibility fix found in the audit:** elements waiting to animate were `visibility: hidden`, which removed off-screen project cards from keyboard Tab order. They are now transparent (still focusable), and focusing one shows it immediately. All seven cards are reachable by Tab.
+- Checks: phone emulation at 320–430 px and desktop 1024–1440 px, EN/KO; text ≥ 12 px, controls ≥ 44 px, decoration pixel test 0%, all links land, all validators pass.
+
 ## 17 Nov 2026 — Third pass: real-device fixes, motion v2, finer riso, Misprint 404
 
 From the owner's phone screenshots and a full audit (phone and desktop). Body font: the owner chose to keep Noto Sans / Noto Sans KR (option A).

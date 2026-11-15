@@ -16,7 +16,7 @@ body.nf { min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; 
 .nf-mark--a { left: 2%; top: 4%; } .nf-mark--b { right: 2%; bottom: 2%; }
 .nf-copy h1 { margin: 0 0 16px; font: 700 clamp(3rem, 1.5rem + 5vw, 6rem)/.9 var(--display); text-transform: uppercase; text-shadow: -.03em .025em 0 var(--acid); }
 .nf-copy p { margin: 0 0 12px; max-width: 44ch; font: 400 1.0625rem/1.6 var(--read); color: var(--ink-text, #37243c); }
-.nf-copy .nf-ko-h { margin-top: 28px; font: 700 clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem)/1.2 var(--read); color: var(--ink); }
+.nf-copy .nf-ko-h { margin: 28px 0 16px; font: 700 clamp(3rem, 1.5rem + 5vw, 6rem)/.95 'Zine Condensed', 'Portfolio KR Display', 'Portfolio Sans', sans-serif; letter-spacing: -.015em; color: var(--ink); text-shadow: -.03em .025em 0 var(--acid); }
 .nf-copy p[lang="ko"] { word-break: keep-all; line-height: 1.75; }
 .nf-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .nf-actions a { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border: 1.5px solid var(--ink); font: 700 .9375rem/1 var(--read); text-decoration: none; }
