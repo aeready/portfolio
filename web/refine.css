@@ -571,3 +571,74 @@ html[lang="ko"] .project-collection .project-card .project-title { word-break: k
   background-image: radial-gradient(circle, rgba(73, 43, 81, .2) .9px, transparent 1.3px);
   background-size: 6px 6px;
 }
+
+/* ==========================================================================
+   Language parity.
+   English display type is Open Sans Condensed Bold, uppercase. Korean now uses
+   the same face for numerals and Latin letters, and Noto Sans KR Black for
+   Hangul, so a title carries the same weight in either language.
+   ========================================================================== */
+@font-face {
+  font-family: 'Portfolio KR Display';
+  src: url('assets/fonts/NotoSans-Korean-site-Black--3c9618a2894e.woff2') format('woff2');
+  font-style: normal; font-weight: 900; font-display: swap;
+  unicode-range: U+AC00-D7AF;
+}
+html[lang="ko"] {
+  --display: 'Zine Condensed', 'Portfolio KR Display', 'Portfolio Sans', 'Malgun Gothic', Arial, sans-serif;
+  --label: 'Zine Mono', 'Noto Sans Mono', 'Portfolio Sans', 'Malgun Gothic', Arial, sans-serif;
+}
+html[lang="ko"] :is(h1, h2, h3, h4, .project-title, .project-index, .section-ribbon, .contact-section h2,
+  .training-scope strong, .timeline h3, .qualifications h3, .training-rows h3, .detail-head h2,
+  .detail-role h3, .detail-story h3, .project-materials h3) {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -.015em;
+  word-break: keep-all;
+}
+html[lang="ko"] :is(h2, #work h2, .background-heading h2, .trainer-section h2) { font-size: clamp(2.25rem, 1.4rem + 3.2vw, 4rem); line-height: 1.08; }
+html[lang="ko"] .contact-section h2 { font-size: clamp(2.75rem, 1.6rem + 4.2vw, 5.25rem); line-height: 1.02; }
+html[lang="ko"] .project-card .project-title { font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.625rem); line-height: 1.12; max-width: 15ch; }
+html[lang="ko"] .project-collection > .project-card:is(:nth-child(4n+2), :nth-child(4n+3)) .project-title { max-width: 15ch; }
+html[lang="ko"] :is(.timeline h3, .training-rows h3) { font-size: clamp(1.5rem, 1.3rem + .6vw, 1.875rem); line-height: 1.2; }
+html[lang="ko"] .qualifications h3 { font-size: clamp(1.75rem, 1.5rem + .8vw, 2.25rem); line-height: 1.1; }
+html[lang="ko"] .detail-head h2 { line-height: 1.1; }
+html[lang="ko"] :is(.detail-role h3, .detail-story h3, .project-materials h3) { font-size: 1.375rem; line-height: 1.2; }
+html[lang="ko"] .section-ribbon { font-size: clamp(1.25rem, 1.05rem + .8vw, 1.75rem); letter-spacing: .01em; }
+html[lang="ko"] .training-scope strong { font-size: clamp(2.5rem, 4vw, 3.5rem) !important; letter-spacing: 0; }
+/* The numerals outline in both languages */
+html[lang="ko"] .project-card .project-index { font-weight: 700; letter-spacing: -.03em; }
+
+/* Labels: numerals use the same mono face as English; Hangul falls back to Noto Sans KR */
+html[lang="ko"] :is(.project-meta, .eyebrow, .timeline-date, .project-results, .hero-art-note, .hero .location,
+  .site-footer, .qualifications h4, .filter-group button, .site-header nav, .button, .language-toggle, .menu-toggle) {
+  font-family: var(--label);
+  letter-spacing: 0;
+}
+
+/* ---------- Gallery View buttons: solid, never the colour of the band ------ */
+.project-collection > .project-card {
+  --btn-bg: var(--ink); --btn-fg: var(--paper); --btn-shadow: var(--acid);
+}
+.project-collection > .project-card:nth-child(4n+2) { --btn-bg: var(--ink); --btn-fg: var(--acid); --btn-shadow: var(--paper); }
+.project-collection > .project-card:nth-child(4n+3) { --btn-bg: var(--acid); --btn-fg: var(--ink); --btn-shadow: var(--paper); }
+.project-collection .project-card .project-action {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 52px; padding: 0 28px;
+  border: 2px solid var(--btn-bg); border-radius: 0;
+  background: var(--btn-bg); color: var(--btn-fg);
+  box-shadow: 5px 5px 0 var(--btn-shadow);
+  font: 700 var(--fs-button)/1 var(--label); letter-spacing: .12em; text-transform: uppercase;
+  transition: transform 100ms var(--ease-print), box-shadow 100ms var(--ease-print) !important;
+}
+html[lang="ko"] .project-collection .project-card .project-action { font-size: .9375rem; letter-spacing: .02em; text-transform: none; }
+.project-collection .project-card:hover .project-action,
+.project-collection .project-card:focus-visible .project-action {
+  padding-inline: 28px; background: var(--btn-bg); color: var(--btn-fg);
+  transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--btn-shadow);
+}
+.project-collection .project-card:focus-visible .project-action { outline: 3px solid var(--btn-shadow); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .project-collection .project-card:hover .project-action { transform: none; }
+}
