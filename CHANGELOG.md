@@ -22,6 +22,14 @@ Second audit (owner's brief: "look like a team of expensive designers made it"; 
 - **One motion family:** shared durations (140 / 260 / 620 ms) and two curves.
 - **Designed focus ring:** aubergine outline with a lime halo on every control.
 
+### Stage C — composition
+- **How I work removed** (owner agreed it added nothing): its three generic steps and intro repeated the hero. Its two real numbers moved into the hero as proof, in the display face: **250+ educators reached through training · 15+ schools visited for lessons** (existing EN/KO strings, no new claims). Nav link removed; the ribbon "Good materials get better with use." stays. `validate.mjs` updated for the new section order.
+- **Poster hero** (new default): the artwork full-bleed, "ANNA READY" set huge across its bottom edge (half on the image, half on the paper), then role, intro, proof and details in three columns. Your role line shows above the fold on a 1280 × 800 laptop and at about 420 px on phones. **Undo / switch back:** remove `hero--poster` from `<section id="home">` in `index.html`; the framed version is untouched.
+- **Seven band compositions** on desktop, by position, so the rhythm survives filtering: spread · statement (title across the band) · centre stage · mirrored spread · contact sheet (three proofs in a row) · offset print · title-led spread. Riso pieces follow the work's side so they never sit behind text.
+- **The print pile** replaces "one big image, two small below": the cover lies on top of the other two samples like prints on a table, slightly rotated. They fan open on hover (desktop) and as the band scrolls in (phones). Prints cast **halftone shadows** (a riso dot screen, lime on aubergine bands) instead of soft blurs.
+- **View buttons** are solid in each band's contrast ink (aubergine on paper and lime, lime on aubergine) so they never blend into the band.
+- Checks: decoration pixel test 0% on text and the cover at 375/768/1024/1440 px EN/KO; no text under 12 px, every control ≥ 44 px; all validators pass.
+
 ## 15–16 Nov 2026 — "Press run": texture, type, motion, project pages
 
 Approved by Anna on 15 Nov 2026 (game plan, then "go ahead"). Rules R6 and R7 added to the Manifesto. New layer `web/press.css` loads after `refine.css` and before `fixes.css`. Nothing is live until the owner uploads and publishes.

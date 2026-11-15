@@ -832,3 +832,250 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
   box-shadow: 0 0 0 6px var(--acid) !important;
 }
 .project-collection > .project-card:focus-visible { outline-offset: -8px !important; box-shadow: none !important; }
+
+/* ==========================================================================
+   Stage C — composition (16 Nov 2026)
+   ========================================================================== */
+
+/* Proof in the first five seconds: the two numbers from the old "How I work"
+   section, set large in the display face (R9 serial position). */
+.hero .hero-proof { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: var(--s3, 24px) 0 0; padding: var(--s2, 16px) 0 0; border-top: 1.5px solid var(--ink); }
+.hero .hero-proof p { display: grid; gap: 2px; margin: 0; max-width: 16ch; }
+.hero .hero-proof strong {
+  font: 700 clamp(2.5rem, 1.6rem + 2.6vw, 4rem)/.9 var(--display); color: var(--ink); letter-spacing: -.01em;
+  text-shadow: .045em .04em 0 var(--acid);
+}
+.hero .hero-proof span { font: 400 .875rem/1.4 var(--read); color: var(--ink-text); }
+.hero .location { border-top: 0 !important; padding-top: 0 !important; margin-top: var(--s3, 24px) !important; }
+
+/* Hero option B, "poster": the artwork full-bleed, the name set huge across
+   its bottom edge, half on the image and half on the paper, like a poster
+   overprint. Switch: class "hero--poster" on #home (index.html). */
+#home.hero--poster { display: block !important; padding: 0 0 var(--s6, 64px) !important; max-width: none !important; }
+#home.hero--poster .hero-art {
+  position: relative; width: 100vw; margin: 0 0 0 calc(50% - 50vw) !important;
+  min-height: 0 !important; height: min(62vh, 660px); aspect-ratio: auto !important;
+  border: 0 !important; box-shadow: none !important; overflow: visible !important; background: var(--ink);
+}
+#home.hero--poster .hero-art .hero-image { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; object-fit: cover; object-position: 50% 42%; }
+#home.hero--poster .hero-art::after { inset: 0; }
+#home.hero--poster .hero-art .hero-name {
+  position: absolute; left: var(--edge) !important; right: auto; bottom: 0 !important; top: auto !important; z-index: 4;
+  transform: translateY(46%); max-width: none !important;
+  font-size: clamp(4.25rem, 1.5rem + 12.5vw, 16rem) !important; line-height: .84 !important;
+  padding: .02em .12em .04em !important; white-space: nowrap;
+}
+#home.hero--poster .hero-art-note { top: var(--s4, 32px) !important; bottom: auto !important; left: var(--edge) !important; }
+#home.hero--poster .hero-copy {
+  display: grid !important; max-width: calc(var(--measure) - 2 * var(--gutter)) !important; margin: 0 auto !important;
+  padding: calc(clamp(4.25rem, 1.5rem + 12.5vw, 16rem) * .55 + var(--s4, 32px)) var(--gutter) 0 !important;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); grid-template-areas: 'role intro proof' 'actions location proof';
+  gap: var(--s3, 24px) clamp(24px, 4vw, 64px); align-items: start; text-align: left !important;
+}
+#home.hero--poster .hero-copy > .role { grid-area: role; font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem) !important; }
+#home.hero--poster .hero-copy > .intro { grid-area: intro; margin: 0 !important; }
+#home.hero--poster .hero-copy > .location { grid-area: location; margin: 0 !important; }
+#home.hero--poster .hero-copy > .hero-proof { grid-area: proof; flex-direction: column; margin: 0; }
+#home.hero--poster .hero-copy > .hero-actions { grid-area: actions; margin: 0 !important; }
+#home.hero--poster::after { left: auto; right: calc(var(--edge) - 40px); bottom: auto; top: calc(min(76vh, 780px) - 120px); z-index: 2; }
+@media (max-width: 1000px) {
+  #home.hero--poster .hero-copy { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: 'role role' 'intro proof' 'location location' 'actions actions'; }
+}
+@media (max-width: 760px) {
+  #home.hero--poster .hero-art { height: auto; aspect-ratio: 4 / 4.6 !important; }
+  #home.hero--poster .hero-art .hero-name { left: 16px !important; font-size: clamp(3.25rem, 16.5vw, 5.5rem) !important; }
+  #home.hero--poster .hero-art-note { left: 16px !important; right: 16px; top: 16px !important; }
+  #home.hero--poster .hero-copy { padding: calc(clamp(3.25rem, 16.5vw, 5.5rem) * .55 + 24px) var(--gutter) 0 !important; grid-template-columns: minmax(0, 1fr); grid-template-areas: 'role' 'intro' 'proof' 'location' 'actions'; }
+  #home.hero--poster .hero-copy > .hero-proof { flex-direction: row; }
+  #home.hero--poster::after { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #home.hero--poster .hero-art .hero-name { animation: poster-drop 720ms var(--ease-press) calc(var(--intro, 0ms) + 380ms) both; }
+  @keyframes poster-drop { from { opacity: 0; transform: translateY(80%); } to { opacity: 1; transform: translateY(46%); } }
+}
+#home.hero--poster { overflow: visible !important; }
+#home.hero--poster::after { display: none !important; }
+.hero .hero-proof, .hero .hero-proof p { text-align: left !important; justify-items: start; }
+#home.hero--poster .hero-art { z-index: 3 !important; }
+#home.hero--poster .hero-copy { z-index: 2 !important; background: none !important; box-shadow: none !important; border: 0 !important; }
+@media (prefers-reduced-motion: no-preference) {
+  #home.hero--poster .hero-art { animation-name: roller-poster !important; }
+  @keyframes roller-poster { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 -10% -80% -10%); } }
+}
+#home.hero--poster .hero-copy { padding-left: 0 !important; padding-right: 0 !important; width: calc(100% - 2 * var(--edge) + 2 * var(--gutter)); }
+@media (min-width: 1001px) { #home.hero--poster .hero-copy { width: auto; margin-inline: calc(var(--edge) - var(--gutter)) !important; max-width: none !important; } }
+
+/* ---------- Curated band variety (desktop) --------------------------------
+   Seven bands, seven compositions, set by position so the loud / quiet
+   rhythm survives filtering (R3, R4 Superside "variety within unity"):
+   1 spread · 2 statement · 3 centre stage · 4 mirrored spread ·
+   5 contact sheet · 6 offset print · 7 spread, title-led. */
+@media (min-width: 1001px) {
+  .project-collection > .project-card:nth-child(n) { --side: left; }
+  .project-collection > .project-card:nth-child(n)::after { left: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; right: auto !important; }
+
+  /* 2 · Statement: the title runs across the band; copy left, work right. */
+  .project-collection > .project-card:nth-child(7n+2) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) !important;
+    grid-template-areas: 'head head' 'copy media' !important; align-items: start !important;
+  }
+  .project-collection > .project-card:nth-child(7n+2) .project-heading { flex-direction: row !important; align-items: flex-end !important; flex-wrap: wrap; gap: var(--s2) var(--s4) !important; }
+  .project-collection > .project-card:nth-child(7n+2) .project-title { max-width: none !important; font-size: clamp(3rem, 1.5rem + 4.4vw, 6.25rem) !important; }
+
+  /* 3 · Centre stage: the work, large and centred; text in two columns below. */
+  .project-collection > .project-card:nth-child(7n+3) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-areas: 'media media' 'head copy' !important; align-items: start !important;
+  }
+  .project-collection > .project-card:nth-child(7n+3) .artifact-arrangement { width: min(100%, 900px); justify-self: center; }
+
+  /* 4 · Mirrored spread (text left, work right) keeps the base even layout. */
+  .project-collection > .project-card:nth-child(7n+4)::after { display: none; }
+
+  /* 5 · Contact sheet: three pages in a row, like proofs on a light table. */
+  .project-collection > .project-card:nth-child(7n+5) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-areas: 'head copy' 'media media' !important; align-items: end !important;
+  }
+  .project-collection > .project-card:nth-child(7n+5) .artifact-arrangement {
+    display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; grid-template-rows: auto !important;
+    gap: clamp(16px, 2vw, 32px) !important; padding: clamp(16px, 2vw, 28px) !important; align-items: start;
+  }
+  .project-collection > .project-card:nth-child(7n+5) :is(.artifact-main-frame, .artifact-fixed) {
+    grid-column: auto !important; grid-row: auto !important; position: relative !important; inset: auto !important;
+    width: 100% !important; height: auto !important; aspect-ratio: auto !important; transform: none !important; display: block !important;
+  }
+  .project-collection > .project-card:nth-child(7n+5) :is(.artifact-main-frame, .artifact-fixed) img { width: 100% !important; height: auto !important; object-fit: contain !important; position: static !important; }
+  .project-collection > .project-card:nth-child(7n+5) .artifact-main-frame .preview-open { position: static !important; height: auto !important; }
+  .project-collection > .project-card:nth-child(7n+5)::after { left: auto !important; right: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; }
+
+  /* 6 · Offset print: a smaller work, set slightly off square, text leading. */
+  .project-collection > .project-card:nth-child(7n+6) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) !important;
+    grid-template-areas: 'media head' 'media copy' !important;
+  }
+  .project-collection > .project-card:nth-child(7n+6) .artifact-arrangement { rotate: -1.6deg; }
+  .project-collection > .project-card:nth-child(7n+6) .project-title { font-size: clamp(2.75rem, 1.5rem + 3.4vw, 5rem) !important; max-width: 12ch !important; }
+
+  /* 7 · Spread, title-led: work on the right, the riso piece follows it. */
+  .project-collection > .project-card:nth-child(7n+7) {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr) !important;
+    grid-template-areas: 'head media' 'copy media' !important;
+  }
+  .project-collection > .project-card:nth-child(7n+7)::after { left: auto !important; right: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; }
+}
+@media (min-width: 1001px) {
+  .project-collection > .project-card:nth-child(7n+5)::after { top: auto !important; bottom: calc(var(--orn-w) / var(--orn-ratio) * -.4) !important; }
+}
+
+/* ==========================================================================
+   Stage C — the print pile (16 Nov 2026). Replaces "one big image, two small
+   below": the cover lies on top of the two other samples like prints on a
+   table; they fan open on hover (desktop) or as the band scrolls in (phones).
+   Band 5 on desktop keeps its contact-sheet row.
+   ========================================================================== */
+.project-collection > .project-card.project-card .artifact-arrangement {
+  display: block !important; position: relative; aspect-ratio: auto !important;
+  padding: 0 0 9% 0 !important; background: none !important; border: 0 !important; box-shadow: none !important;
+  rotate: none;
+}
+.project-collection > .project-card.project-card .artifact-arrangement::before { content: none !important; }
+.project-collection > .project-card .artifact-fixed { display: block !important; }
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) {
+  background: var(--paper) !important; padding: clamp(5px, .7vw, 9px) !important; border: 0 !important;
+  box-shadow: 0 1px 1px rgb(40 22 45 / .12), 0 12px 20px -10px rgb(40 22 45 / .38), 0 30px 50px -28px rgb(40 22 45 / .45) !important;
+  transform: none !important; height: auto !important; aspect-ratio: auto !important;
+  transition: translate 520ms var(--ease-press), rotate 520ms var(--ease-press) !important;
+}
+.project-collection > .project-card:nth-child(4n+3) :is(.artifact-main-frame, .artifact-fixed) {
+  box-shadow: 0 1px 1px rgb(0 0 0 / .25), 0 14px 24px -10px rgb(0 0 0 / .6), 0 34px 60px -28px rgb(0 0 0 / .6) !important;
+}
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) img,
+.project-collection > .project-card.project-card .artifact-main-frame .preview-open {
+  position: static !important; display: block; width: 100% !important; height: auto !important; max-height: none !important;
+  object-fit: contain !important; inset: auto !important; transform: none !important; aspect-ratio: auto !important;
+}
+/* Cover on top, in flow. */
+.project-collection > .project-card.project-card .artifact-main-frame {
+  position: relative !important; z-index: 3; width: 78% !important; margin: 0 !important; inset: auto !important;
+  translate: 0 0; rotate: -1deg;
+}
+/* Second and third samples behind it. */
+.project-collection > .project-card.project-card .artifact-fixed {
+  position: absolute !important; z-index: 2; width: 50% !important; inset: auto !important; right: 0 !important; top: 7% !important; left: auto !important; bottom: auto !important;
+  translate: 0 0; rotate: 4deg;
+}
+.project-collection > .project-card.project-card .artifact-fixed.artifact-tertiary {
+  z-index: 1; width: 44% !important; top: auto !important; bottom: 0 !important; right: 9% !important; rotate: -5deg;
+}
+/* Mirror on bands whose work sits on the right (desktop). */
+@media (min-width: 1001px) {
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)) .artifact-main-frame { margin-left: auto !important; rotate: 1deg; }
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)) .artifact-fixed { right: auto !important; left: 0 !important; rotate: -4deg; }
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)) .artifact-fixed.artifact-tertiary { left: 9% !important; rotate: 5deg; }
+  .project-collection > .project-card:nth-child(7n+6) .artifact-arrangement { rotate: none !important; }
+}
+/* Fan open on hover / focus (desktop). */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-arrangement { transform: none !important; }
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-main-frame { translate: -3% -3%; rotate: -2.5deg; }
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-fixed { translate: 7% -7%; rotate: 8deg; }
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-fixed.artifact-tertiary { translate: 2% 9%; rotate: -9deg; }
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-main-frame { translate: 3% -3%; rotate: 2.5deg; }
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-fixed { translate: -7% -7%; rotate: -8deg; }
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-fixed.artifact-tertiary { translate: -2% 9%; rotate: 9deg; }
+}
+/* Phones and tablets: the pile fans as it scrolls in. */
+@supports (animation-timeline: view()) {
+  @media (hover: none) and (prefers-reduced-motion: no-preference) {
+    .project-collection > .project-card.project-card .artifact-fixed { animation: fan-2 linear both; animation-timeline: view(); animation-range: entry 20% cover 55%; }
+    .project-collection > .project-card.project-card .artifact-fixed.artifact-tertiary { animation-name: fan-3; }
+    @keyframes fan-2 { from { translate: -30% 4%; rotate: 0deg; } to { translate: 0 0; rotate: 4deg; } }
+    @keyframes fan-3 { from { translate: -40% -6%; rotate: 0deg; } to { translate: 0 0; rotate: -5deg; } }
+  }
+}
+/* Desktop band 5: the contact sheet row stays (variety). */
+@media (min-width: 1001px) {
+  .project-collection > .project-card:nth-child(7n+5) .artifact-arrangement { display: grid !important; padding: 0 !important; }
+  .project-collection > .project-card:nth-child(7n+5) :is(.artifact-main-frame, .artifact-fixed, .artifact-fixed.artifact-tertiary) {
+    position: relative !important; width: 100% !important; top: auto !important; right: auto !important; bottom: auto !important; left: auto !important; rotate: none; translate: none;
+  }
+  .project-collection > .project-card:nth-child(7n+5):is(:hover, :focus-visible) :is(.artifact-main-frame, .artifact-fixed) { translate: 0 -6px !important; rotate: none !important; }
+}
+
+/* View: a solid button in the band's contrast ink, never the band colour. */
+.project-collection > .project-card .project-action {
+  background: var(--view-bg, var(--ink)) !important; color: var(--view-ink, var(--paper)) !important;
+  border: 1.5px solid var(--view-bg, var(--ink)) !important;
+}
+.project-collection > .project-card:nth-child(4n+2) { --view-bg: var(--ink); --view-ink: var(--acid); }
+.project-collection > .project-card:nth-child(4n+3) { --view-bg: var(--acid); --view-ink: var(--ink); }
+.project-collection > .project-card.project-card:is(:hover, :focus-visible) .project-action {
+  background: var(--view-ink) !important; color: var(--view-bg) !important; border-color: var(--view-bg) !important;
+}
+
+/* Halftone shadows: each print casts a riso dot screen, offset and fading,
+   instead of a soft digital blur. The paper border now lives on the image,
+   so the dots only show outside the print. */
+.project-collection > .project-card { --dot-ink: rgb(73 43 81 / .9); }
+.project-collection > .project-card:nth-child(4n+3) { --dot-ink: var(--acid); }
+.project-collection > .project-card:nth-child(4n+2) { --dot-ink: var(--ink); }
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) {
+  background: none !important; padding: 0 !important; box-shadow: none !important; isolation: isolate;
+}
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) img {
+  border: clamp(5px, .7vw, 9px) solid var(--paper) !important; box-sizing: border-box; background: var(--paper);
+}
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed)::before {
+  content: '' !important; display: block !important; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  translate: clamp(8px, 1.1vw, 16px) clamp(10px, 1.3vw, 18px);
+  background: radial-gradient(circle, var(--dot-ink) 1.15px, transparent 1.45px) 0 0 / 5px 5px !important;
+  -webkit-mask-image: linear-gradient(150deg, transparent 18%, #000 62%); mask-image: linear-gradient(150deg, transparent 18%, #000 62%);
+  opacity: 1 !important; border: 0 !important; box-shadow: none !important; transform: none !important;
+}
+/* The contact-sheet band uses the same shadow on its three proofs. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) :is(.artifact-main-frame, .artifact-fixed)::before {
+    translate: clamp(12px, 1.5vw, 22px) clamp(14px, 1.8vw, 24px); transition: translate 520ms var(--ease-press);
+  }
+}
