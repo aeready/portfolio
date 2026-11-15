@@ -76,13 +76,13 @@ body,
 
 /* ---------- One oversized riso piece per band, cropped by the band edge --- */
 .project-collection > .project-card:nth-child(n) { --orn: none; --orn-w: 300px; --orn-ratio: 1; }
-.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/plum-moon.webp');          --orn-ratio: 324 / 294; --orn-w: 340px; }
-.project-collection > .project-card:nth-child(7n+2) { --orn: url('assets/riso/target-plum.webp');        --orn-ratio: 248 / 256; --orn-w: 300px; }
-.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/bullseye.webp');           --orn-ratio: 223 / 214; --orn-w: 280px; }
-.project-collection > .project-card:nth-child(7n+4) { --orn: url('assets/riso/overprint-circles.webp');  --orn-ratio: 345 / 382; --orn-w: 320px; }
-.project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/halftone-fade.webp');      --orn-ratio: 420 / 214; --orn-w: 460px; }
-.project-collection > .project-card:nth-child(7n+6) { --orn: url('assets/riso/bars-crosshairs.webp');    --orn-ratio: 353 / 357; --orn-w: 320px; }
-.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/plum-cream-circles.webp'); --orn-ratio: 360 / 267; --orn-w: 380px; }
+.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/op-waves--a0060c426c31.webp');     --orn-ratio: 346 / 343; --orn-w: 340px; }
+.project-collection > .project-card:nth-child(7n+2) { --orn: url('assets/riso/lib/target-cream--5f7dee7c9539.webp'); --orn-ratio: 1;         --orn-w: 320px; }
+.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/spiral--2d5fd3c42d24.webp');       --orn-ratio: 357 / 350; --orn-w: 330px; }
+.project-collection > .project-card:nth-child(7n+4) { --orn: url('assets/riso/lib/overprint--91335fc9fce5.webp');    --orn-ratio: 369 / 376; --orn-w: 330px; }
+.project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/lib/checker--ddbf47fcd434.webp');      --orn-ratio: 353 / 340; --orn-w: 320px; }
+.project-collection > .project-card:nth-child(7n+6) { --orn: url('assets/riso/lib/letter-u--91c6f51f4bfe.webp');     --orn-ratio: 357 / 361; --orn-w: 340px; }
+.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/torn-layers--ba3ba5b6235d.webp');  --orn-ratio: 368 / 374; --orn-w: 340px; }
 
 .project-collection > .project-card:nth-child(n)::after {
   content: '' !important;
@@ -98,8 +98,7 @@ body,
 .project-collection > .project-card:nth-child(even)::after { right: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; left: auto !important; }
 
 @media (max-width: 1000px) {
-  .project-collection > .project-card:nth-child(n) { --orn-w: 180px; }
-  .project-collection > .project-card:nth-child(7n+5) { --orn-w: 240px; }
+  .project-collection > .project-card:nth-child(n) { --orn-w: 176px; }
   .project-collection > .project-card:nth-child(n)::after {
     top: calc(var(--orn-w) / var(--orn-ratio) * -.42) !important;
     right: -56px !important; left: auto !important;
@@ -265,4 +264,198 @@ html[lang="ko"] .project-card .wall-label dt { font-family: var(--read); letter-
 html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr; }
 @media (min-width: 1001px) and (max-width: 1279px) {
   #work .section-heading .flourish--circles { top: -64px !important; width: 96px !important; }
+}
+
+/* ==========================================================================
+   Phase 3 — the press run: motion (R6 Ink moves like ink)
+   Everything here animates transform, opacity, clip-path or mask only.
+   Nothing runs under prefers-reduced-motion; nothing gates content on JS.
+   ========================================================================== */
+
+/* ---------- Opening sequence: once per session (press-boot.js) ---------- */
+.press-intro-sheet { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  html.press-intro { --intro: 1000ms; }
+  html.press-intro .press-intro-sheet {
+    position: fixed; inset: 0; z-index: 2000;
+    display: grid; place-items: center;
+    background: var(--paper) var(--grain-ink) 0 0 / 320px 320px;
+    animation: sheet-feed 520ms var(--ease-plate) 880ms both;
+    cursor: pointer;
+  }
+  html.press-intro .press-intro-sheet.is-skipped { animation-duration: 200ms; animation-delay: 0ms; }
+  .press-plate {
+    position: absolute; left: 50%; top: 50%;
+    width: min(56vw, 360px); height: min(30vw, 190px);
+    translate: -50% -50%;
+  }
+  .press-plate--lime { background: var(--acid) var(--grain-ink) 0 0 / 320px; animation: plate-lime 640ms var(--ease-press) both; }
+  .press-plate--ink  { background: var(--ink) var(--grain-paper) 0 0 / 320px; animation: plate-ink 640ms var(--ease-press) 60ms both; }
+  .press-mark { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: min(14vw, 84px); animation: mark-in 360ms var(--ease-press) 420ms both; }
+  .press-mark img { width: 100%; height: auto; display: block; }
+  .press-name {
+    position: absolute; left: 50%; top: calc(50% + min(15vw, 95px) + 28px); translate: -50% 0;
+    font: 700 clamp(1.5rem, 1rem + 2.4vw, 2.75rem)/1 var(--display); letter-spacing: .01em; text-transform: uppercase;
+    color: var(--ink); white-space: nowrap;
+    text-shadow: .06em .05em 0 var(--acid);
+    animation: name-print 420ms var(--ease-press) 360ms both;
+  }
+  .press-tick { position: absolute; width: 28px; height: 28px; border: 0 solid var(--ink); animation: mark-in 300ms var(--ease-press) 200ms both; }
+  .press-tick--tl { left: calc(50% - min(28vw, 180px) - 24px); top: calc(50% - min(15vw, 95px) - 24px); border-width: 1.5px 0 0 1.5px; }
+  .press-tick--br { left: calc(50% + min(28vw, 180px) - 4px); top: calc(50% + min(15vw, 95px) - 4px); border-width: 0 1.5px 1.5px 0; }
+
+  @keyframes plate-lime { from { transform: translate(-70vw, 18px); } 70% { transform: translate(14px, 10px); } to { transform: translate(7px, 7px); } }
+  @keyframes plate-ink  { from { transform: translate(70vw, -18px); } 70% { transform: translate(-6px, -3px); } to { transform: none; } }
+  @keyframes mark-in    { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: none; } }
+  @keyframes name-print { from { clip-path: inset(0 100% 0 0); text-shadow: .3em .2em 0 var(--acid); } to { clip-path: inset(0 0 0 0); text-shadow: .06em .05em 0 var(--acid); } }
+  @keyframes sheet-feed { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 100% 0); visibility: hidden; pointer-events: none; } }
+
+  /* ---------- Hero: printed in two passes ---------- */
+  .hero-art { animation: roller 760ms var(--ease-plate) calc(var(--intro, 0ms) + 40ms) both; }
+  .hero-art .hero-image { animation: settle 1100ms var(--ease-press) calc(var(--intro, 0ms) + 40ms) both; }
+  #home .hero-art .hero-name { animation: plate-drop 620ms var(--ease-press) calc(var(--intro, 0ms) + 420ms) both; }
+  .hero-art-note { animation: wipe-right 420ms var(--ease-press) calc(var(--intro, 0ms) + 640ms) both; }
+  .hero-copy > :is(.role, .intro, .location, .hero-actions) { animation: rise 560ms var(--ease-press) both; }
+  .hero-copy > .role         { animation-delay: calc(var(--intro, 0ms) + 220ms); }
+  .hero-copy > .intro        { animation-delay: calc(var(--intro, 0ms) + 320ms); }
+  .hero-copy > .location     { animation-delay: calc(var(--intro, 0ms) + 420ms); }
+  .hero-copy > .hero-actions { animation-delay: calc(var(--intro, 0ms) + 520ms); }
+
+  @keyframes roller     { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes settle     { from { transform: scale(1.07) translateY(-2%); } to { transform: none; } }
+  @keyframes plate-drop { from { opacity: 0; transform: translateY(.25em); text-shadow: .22em .16em 0 color-mix(in srgb, var(--paper) 60%, transparent); } to { opacity: 1; transform: none; } }
+  @keyframes wipe-right { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes rise       { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+}
+
+/* ---------- Scrolling: ink laid down as each band arrives ---------------- */
+@property --dot { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --reg { syntax: '<length>'; inherits: true; initial-value: 0px; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Cover: appears through a halftone screen whose dots grow until solid. */
+    .project-card .artifact-arrangement {
+      -webkit-mask-image: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + .5px));
+              mask-image: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + .5px));
+      -webkit-mask-size: 12px 12px; mask-size: 12px 12px;
+      animation: halftone linear both; animation-timeline: view(); animation-range: entry 5% entry 90%;
+    }
+    @keyframes halftone { from { --dot: 0px; } 92% { --dot: 9px; } to { --dot: 12px; -webkit-mask-image: none; mask-image: none; } }
+
+    /* Numeral: the outline is printed first; the second plate drops into
+       registration as the band reaches the middle of the screen. */
+    .project-card .project-index { animation: register linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+    @keyframes register {
+      from { text-shadow: .32em -.12em 0 transparent; transform: translateX(-.08em); }
+      40%  { text-shadow: .22em .14em 0 var(--misreg, var(--acid)); }
+      to   { text-shadow: .045em .035em 0 var(--misreg, var(--acid)); transform: none; }
+    }
+
+    /* Band text: set line by line. */
+    .project-card :is(.project-meta, .project-title, .wall-label, .project-copy > p, .project-foot) {
+      animation: rise linear both; animation-timeline: view(); animation-range: entry 10% entry 80%;
+    }
+
+    /* The riso piece drifts against the scroll, a sheet still on the drum. */
+    .project-collection > .project-card:nth-child(n)::after {
+      animation: drift linear both; animation-timeline: view(); animation-range: cover 0% cover 100%;
+    }
+    @keyframes drift { from { transform: translateY(60px) rotate(-10deg); } to { transform: translateY(-60px) rotate(8deg); } }
+
+    /* Monumental words slide out of the gutter as they enter. */
+    #work .section-heading h2, .contact-section h2 {
+      animation: slide-in linear both; animation-timeline: view(); animation-range: entry 0% entry 100%;
+    }
+    @keyframes slide-in { from { transform: translateX(-12vw); clip-path: inset(0 100% 0 0); } to { transform: none; clip-path: inset(0 -10% 0 0); } }
+
+    /* Section ribbon and checker strip feed through like paper. */
+    .section-ribbon { animation: wipe-right linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
+  }
+}
+
+/* ---------- Controls: still standard, but they answer like plates -------- */
+@media (prefers-reduced-motion: no-preference) {
+  .button, .project-card .project-action, .header-contact {
+    transition: transform 140ms var(--ease-press), box-shadow 180ms var(--ease-press), background-color 160ms var(--ease-press), color 160ms var(--ease-press) !important;
+  }
+}
+@media (hover: hover) {
+  .button.primary:hover, .project-card:hover .project-action { transform: translate(-2px, -2px); }
+  .button:active, .button.is-pressed, .project-card:active .project-action { transform: translate(3px, 3px) !important; box-shadow: 0 0 0 transparent !important; }
+}
+
+/* ---------- Registration-mark cursor: desktop only (fine pointer) ------- */
+@media (hover: hover) and (pointer: fine) {
+  .hero, .project-collection, .section-ribbon, #work .section-heading {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke-linecap='square'%3E%3Cpath d='M16 2v28M2 16h28' stroke='%23F3EBDD' stroke-width='3.6'/%3E%3Ccircle cx='16' cy='16' r='7.5' stroke='%23F3EBDD' stroke-width='3.6'/%3E%3Cpath d='M16 2v28M2 16h28' stroke='%23492B51' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='7.5' stroke='%23492B51' stroke-width='1.6'/%3E%3C/g%3E%3C/svg%3E") 16 16, crosshair;
+  }
+  .project-card {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke-linecap='square'%3E%3Cpath d='M16 2v28M2 16h28' stroke='%23F3EBDD' stroke-width='3.6'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='%23D6DF66' stroke='%23F3EBDD' stroke-width='3.6'/%3E%3Cpath d='M16 2v28M2 16h28' stroke='%23492B51' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='7.5' stroke='%23492B51' stroke-width='1.6'/%3E%3C/g%3E%3C/svg%3E") 16 16, pointer;
+  }
+  .project-card .project-action, .hero a, .hero button { cursor: pointer; }
+  .hero :is(p, h1, span.hero-art-note) { cursor: text; }
+
+  /* The second plate: a lime ring that follows the mark a beat late
+     (press.js), so the cursor is out of register while it moves. */
+  .press-plate-cursor {
+    position: fixed; left: 0; top: 0; z-index: 1500; pointer-events: none;
+    width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
+    border: 3px solid var(--acid); mix-blend-mode: multiply;
+    opacity: 0; transition: opacity 160ms var(--ease-press), scale 200ms var(--ease-press);
+  }
+  .press-plate-cursor.is-on { opacity: 1; }
+  .press-plate-cursor.is-card { scale: 1.6; }
+}
+
+
+/* ---------- Riso library compositions (owner's 58-piece bank) -----------
+   One composed moment per section, on the grid, never behind body text:
+   a large cropped piece plus, at most, one small precise companion. */
+.flourish--hero-dots { display: none !important; }
+#home::after {
+  content: ''; position: absolute; z-index: 0; pointer-events: none;
+  left: calc(var(--gutter, 32px) - 64px); bottom: 8px; width: 260px; aspect-ratio: 438 / 207;
+  background: url('assets/riso/lib/halftone-square--f00538bc9280.webp') center / contain no-repeat; rotate: -4deg;
+}
+#home > * { position: relative; z-index: 1; }
+@media (max-width: 760px) { #home::after { width: 170px; left: -40px; bottom: 4px; } }
+
+/* Professional background: a monumental letterform cropped by the page edge,
+   type as image (R5), in the margin only, so wide screens only. */
+@media (min-width: 1280px) {
+  #background { overflow-x: clip; }
+  #background::after {
+    content: ''; position: absolute; z-index: 0; pointer-events: none;
+    right: calc(-1 * 260px + (100vw - min(100vw, var(--measure))) / 2 - 40px); top: 22%;
+    width: 420px; aspect-ratio: 416 / 389;
+    background: url('assets/riso/lib/letter-crop--affaeea73a5e.webp') center / contain no-repeat;
+  }
+}
+
+/* How I work: op-art wave band laid across the seam between two sheets. */
+#trainer::after {
+  content: ''; position: absolute; z-index: 3; pointer-events: none;
+  right: var(--edge, 24px); top: -58px; width: min(46vw, 440px); aspect-ratio: 889 / 265;
+  background: url('assets/riso/lib/wave-band--eeab7612ff89.webp') center / contain no-repeat; rotate: -2.5deg;
+}
+@media (max-width: 760px) { #trainer::after { top: -34px; width: 62vw; right: 12px; } }
+
+/* Contact: a torn sheet with an ink circle, taped across the seam. */
+#contact::after {
+  content: ''; position: absolute; z-index: 1; pointer-events: none;
+  right: calc(var(--edge, 24px) + 34%); top: -46px; width: min(36vw, 320px); aspect-ratio: 491 / 225;
+  background: url('assets/riso/lib/torn-circle--d0066dab040e.webp') center / contain no-repeat; rotate: 3deg;
+}
+#contact { overflow: visible !important; }
+@media (max-width: 760px) { #contact::after { right: 16px; top: -30px; width: 52vw; } }
+
+/* Opening sequence: quarter-target registration marks at the sheet corners. */
+.press-tick { border: 0 !important; width: 56px !important; height: 44px !important; background: url('assets/riso/lib/quarter-target--0d756a39498b.webp') center / contain no-repeat; }
+@media (max-width: 760px) {
+  .contact-section h2 { font-size: clamp(3rem, 2rem + 9vw, 4.5rem) !important; max-width: none !important; }
+  html[lang="ko"] .contact-section h2 { font-size: clamp(2.25rem, 1.5rem + 6vw, 3.25rem) !important; }
+}
+@media (max-width: 760px) {
+  .contact-section h2 { padding-left: 0 !important; text-indent: 0 !important; }
+  #contact::after { right: auto !important; left: 8px; }
 }

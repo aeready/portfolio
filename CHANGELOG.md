@@ -28,6 +28,16 @@ Approved by Anna on 15 Nov 2026 (game plan, then "go ahead"). Rules R6 and R7 ad
 - **Change:** a museum wall label on every band: Format and Audience from the existing project records, in both languages. No new facts.
 - **Undo:** delete the "Phase 2" block in `press.css`; remove the `wall-label` markup and `data-count` line in `app.js`.
 
+### Phase 3 — the press run: motion, cursor, riso library (R6, R7)
+- **Opening sequence** (once per browser session; never under reduced motion; never on a direct project link): a lime plate and an aubergine plate slide into registration, the AR mark and name print, quarter-target registration marks sit at the corners, then the sheet feeds up off the page. About 1.4 s; a tap or any key skips it. The page loads underneath throughout. `press-boot.js` (a 0.5 KB external script, because the site's security policy blocks inline scripts) sets it up before first paint.
+- **Hero:** the artwork prints from the top as if through rollers, the image settles, the name drops into place, the copy sets line by line.
+- **Scrolling** (browsers with scroll-driven animations; others see the finished page): each cover prints through a halftone screen whose dots grow until solid; each outlined number's lime plate slides into registration; band text sets line by line; riso pieces drift against the scroll; "Selected projects" and "Contact me" slide in from the gutter.
+- **Controls:** buttons lift slightly on hover and press into their shadow; placement and behaviour unchanged (R4).
+- **Registration-mark cursor** on desktop (fine pointer only) over the hero, filters and project bands; a lime ring follows a beat behind, so the two plates are out of register while moving. Links, buttons and text keep normal cursors. No lime ring under reduced motion.
+- **Riso library:** 15 pieces from the owner's 58-piece bank (`claude-code/riso-assets/png/`, untouched) converted to WebP in `assets/riso/lib/`: op-art waves, cream target, spiral, overprint circles, checkerboard, letterform crops, torn layers, halftone square, wave band, torn circle, quarter targets, X-tape, lime corners, hazard stripe. One composed moment per section: halftone square under the hero art; a cropped letterform in the right margin of Professional background (wide screens); a wave band and a torn sheet laid across the seams into How I work and Contact; a new piece for every project band.
+- **Fixes found on the way:** "Contact me" no longer clipped at 375 px; the opening plates no longer overprint to brown.
+- **Undo:** remove the `press-boot.js` and `press.js` script tags and the `.press-intro-sheet` element from `index.html`; delete the "Phase 3" block in `press.css`.
+
 ## 15 Nov 2026
 
 ### Remove the ordering-food game project
