@@ -147,7 +147,7 @@ window.PORTFOLIO_PROJECTS = [
   },
   {
     "id": "epik-music",
-    "number": "03",
+    "number": "02",
     "title": "Music in English classes",
     "label": "Teacher training",
     "categories": [
@@ -330,7 +330,7 @@ window.PORTFOLIO_PROJECTS = [
   {
     "id": "reading-for-meaning",
     "original": "reading-for-meaning",
-    "number": "02",
+    "number": "03",
     "title": "Reading for Meaning",
     "label": "Teacher training",
     "categories": [
@@ -994,7 +994,7 @@ window.PORTFOLIO_PROJECTS = [
   },
   {
     "id": "chuseok-thanksgiving-storybook",
-    "number": "07",
+    "number": "05",
     "title": "How does it taste?",
     "label": "Curriculum design",
     "categories": [
@@ -1313,7 +1313,7 @@ window.PORTFOLIO_PROJECTS = [
   },
   {
     "id": "usa-camp-workbook",
-    "number": "05",
+    "number": "07",
     "title": "USA Camp",
     "label": "Curriculum design",
     "categories": [
@@ -1605,161 +1605,6 @@ window.PORTFOLIO_PROJECTS = [
     "previewIndices": [
       0,
       5,
-      2
-    ]
-  },
-  {
-    "id": "ordering-food-game",
-    "number": "08",
-    "title": "Ordering food",
-    "label": "Interactive learning",
-    "categories": [
-      "students"
-    ],
-    "audiences": [
-      "young"
-    ],
-    "audienceLabel": "Elementary and middle-school English learners",
-    "format": "Interactive PowerPoint speaking game",
-    "context": "Food-ordering practice in English classes",
-    "summary": "A flexible customer–cashier game using two menu levels and point-changing mini-games for repeated speaking.",
-    "intro": "A flexible food-ordering game for pairs or classes of 30+, used with middle-school and elementary learners.",
-    "role": "Speaking-game design, interactive PowerPoint & classroom facilitation",
-    "contribution": "I built café and fast-food menus with score-changing mini-games to prompt repeated customer–cashier exchanges.",
-    "decisions": [
-      "Keep the two speaking roles clear at any group size.",
-      "Vary menu vocabulary while keeping the exchange familiar."
-    ],
-    "evidence": "Mini-games change the score between speaking turns and prompt another order.",
-    "note": "I have used this interactive game repeatedly in middle-school classes and with elementary students. The gallery shows stills rather than the playable deck.",
-    "cover": "assets/ordering-menu--0a53da64e024.webp",
-    "coverAlt": "Red pixel-art fast-food menu with burgers, drinks, and prices.",
-    "previewSecondary": "assets/ordering-bubble-tea--c8011029d857.webp",
-    "previewCaption": "Menu choices + point-changing mini-games",
-    "color": "rose",
-    "slides": [
-      [
-        "assets/ordering-menu--0a53da64e024.webp",
-        "Fast-food menu: students order burgers, sides and drinks as customer and cashier.",
-        "Fast-food menu"
-      ],
-      [
-        "assets/ordering-bubble-tea--c8011029d857.webp",
-        "A bubble-tea choice screen adds drink vocabulary to the café ordering level.",
-        "Café menu"
-      ],
-      [
-        "assets/ordering-wheel--cf0f26961e89.webp",
-        "The wheel changes team points after an ordering exchange.",
-        "Points wheel"
-      ],
-      [
-        "assets/ordering-sauce--f4ee7b0b5141.webp",
-        "A dry chicken burger prompts students to pick a sauce.",
-        "Sauce choice"
-      ],
-      [
-        "assets/ordering-pizza--21e4b6a40a59.webp",
-        "Students choose a pizza from three options.",
-        "Pizza choice"
-      ],
-      [
-        "assets/ordering-pick-three--3c0a37d28f4e.webp",
-        "A “Pick 3” mini-game offers another chance to win or lose points.",
-        "Mini-game"
-      ],
-      [
-        "assets/ordering-restaurant--617690951ccc.webp",
-        "A pixel-art restaurant scene presents a coin reward moment.",
-        "Restaurant scene"
-      ]
-    ],
-    "documents": [
-      [
-        "assets/downloads/ordering-game-2025.pptx",
-        "Ordering Game (2025 version)",
-        "PPTX"
-      ],
-      [
-        "https://www.dafont.com/dogica.font",
-        "download at dafont.com",
-        "Dogica font"
-      ]
-    ],
-    "materialsNote": "The 2025 PowerPoint opens below. Dogica is available at dafont.com; Hancom compatibility may vary, and the game is not interactive in Google Slides.",
-    "source": "The gallery shows selected static screens from the interactive PowerPoint.",
-    "original": "ordering-food-game",
-    "ko": {
-      "title": "음식 주문하기",
-      "label": "인터랙티브 학습",
-      "audienceLabel": "초등학교·중학교 영어 학습자",
-      "format": "인터랙티브 파워포인트 말하기 게임",
-      "context": "영어 수업의 음식 주문하기 연습",
-      "summary": "두 단계 메뉴와 점수 미니게임으로 주문 대화를 반복 연습하는 손님·계산원 역할 게임입니다.",
-      "intro": "짝 활동부터 30명 이상 학급까지 활용할 수 있는 음식 주문 게임으로, 중·초등학생 수업에서 사용했습니다.",
-      "role": "말하기 게임 설계, 인터랙티브 파워포인트 제작 및 수업 진행",
-      "contribution": "카페와 패스트푸드 메뉴, 점수 미니게임을 구성해 손님과 계산원의 주문 대화가 이어지도록 했습니다.",
-      "decisions": [
-        "인원수와 관계없이 두 역할을 명확히 유지했습니다.",
-        "익숙한 대화 구조 안에서 메뉴 어휘를 바꾸었습니다."
-      ],
-      "evidence": "말하기 차례 사이의 미니게임에서 점수가 바뀌어 다시 주문하게 합니다.",
-      "note": "중학교 수업에서 반복해 사용했고 초등학생에게도 활용한 인터랙티브 게임입니다. 갤러리는 플레이 가능한 파일 대신 정지 화면을 보여 줍니다.",
-      "materialsNote": "2025년 파워포인트는 아래에서 열립니다. Dogica는 dafont.com에서 받을 수 있습니다. 한컴오피스 호환성은 다를 수 있으며 Google Slides에서는 게임이 작동하지 않습니다.",
-      "source": "갤러리에는 인터랙티브 파워포인트의 정지 화면 일부를 실었습니다.",
-      "coverAlt": "햄버거, 음료, 가격이 표시된 빨간색 픽셀아트 패스트푸드 메뉴.",
-      "previewCaption": "메뉴 선택 + 점수 미니게임",
-      "slides": [
-        [
-          "손님과 계산원 역할로 햄버거, 사이드 메뉴, 음료를 주문하는 패스트푸드 메뉴.",
-          "패스트푸드 메뉴"
-        ],
-        [
-          "버블티를 고르며 카페 주문에 필요한 음료 어휘를 연습합니다.",
-          "카페 메뉴"
-        ],
-        [
-          "주문 대화 뒤 팀 점수를 바꾸는 룰렛.",
-          "점수 룰렛"
-        ],
-        [
-          "퍽퍽한 치킨버거에 넣을 소스를 고릅니다.",
-          "소스 선택"
-        ],
-        [
-          "세 가지 피자 중 하나를 고릅니다.",
-          "피자 선택"
-        ],
-        [
-          "점수를 얻거나 잃을 수 있는 “Pick 3” 미니게임.",
-          "미니게임"
-        ],
-        [
-          "픽셀아트 식당 장면에서 동전 보상을 보여 줍니다.",
-          "식당 장면"
-        ]
-      ],
-      "documents": [
-        [
-          "Ordering Game (2025 버전)",
-          "PPTX"
-        ],
-        [
-          "다폰트에서 Dogica 다운로드",
-          "Dogica 글꼴"
-        ]
-      ],
-      "previewTertiaryAlt": "주문 대화 사이에 점수를 바꾸는 룰렛.",
-      "displayTitle": "음식 주문하기",
-      "displayLabel": "말하기 활동 · 중등 자료"
-    },
-    "previewTertiary": "assets/ordering-wheel--cf0f26961e89.webp",
-    "previewTertiaryAlt": "The ordering game wheel changes points between speaking turns.",
-    "displayTitle": "Ordering food",
-    "displayLabel": "Speaking activities · Secondary materials",
-    "previewIndices": [
-      0,
-      1,
       2
     ]
   }

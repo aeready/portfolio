@@ -254,8 +254,7 @@
       'teacher-development',
       'chuseok-thanksgiving-storybook',
       'advice-suggestions-lesson',
-      'usa-camp-workbook',
-      'ordering-food-game'
+      'usa-camp-workbook'
     ];
     language = next === 'ko' ? 'ko' : 'en';
     projects = baseProjects.map(localize).sort((a, b) => projectOrder.indexOf(a.id) - projectOrder.indexOf(b.id));
