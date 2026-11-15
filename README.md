@@ -6,7 +6,9 @@
 - Spacing: 8px scale; sections 80px mobile / 128px desktop; one left content edge for bands, ribbon, contact and footer (ribbon text was 100px off at 1440px; hero copy sat 1px from the phone edge).
 - Hero: one primary action; "My background" is a text link. The art label is bilingual (`home.note`) and no longer claims the site is printed.
 - Projects: card numbers follow display order (were 01, 03, 02, 04, 07, 06, 05, 08); dialog "n of 8" matches. Card-to-dialog view-transition morph, scroll reveals and timeline print-in removed; content is never hidden waiting for scroll.
-- Background: university seals and software brand marks hidden (text kept). Reversible in two rules if the owner prefers them.
+- Background: university seals and software logos kept as icon rows (owner's preference), with hairline rules and Noto Sans text.
+- Gallery: catalogue spreads. Each project is a full-width colour band (sand, acid, aubergine, cream, repeating) separated by a 6px full-bleed ink rule; desktop alternates samples left/text right and mirrored. Outlined display numerals, inverted tags on acid, a bordered View button, and one Riso piece per spread in the text column's corner. USA Camp shows its three portrait pages side by side. Phones stack numeral/title, samples, then summary on the same bands.
+- Additional Riso pieces: halftone dots (hero), plum/cream circles (Background heading), tape stack crossing the How I work band, crop marks around the contact actions, small cross in the footer.
 - How I work: ruled-paper lines no longer cross the text. Korean heading and step titles were invisible (aubergine on aubergine); fixed.
 - Korean hero name no longer clips (keeps the condensed face).
 - Six decorative Riso pieces from `claude-code/riso-assets/` are served from `web/assets/riso/` as WebP. They are `aria-hidden`, pointer-transparent and placed only in margins.
