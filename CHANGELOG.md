@@ -21,6 +21,13 @@ Approved by Anna on 15 Nov 2026 (game plan, then "go ahead"). Rules R6 and R7 ad
 - **New files:** `assets/riso/grain-ink`, `grain-paper`, `mottle-ink`, `mottle-light` (tileable, generated; 12–21 KB each). `press.css` and `fixes.css` added to the Worker package list in `scripts/build-worker.mjs` (fixes.css was missing).
 - **Undo:** remove the `press.css` link from `index.html` and `404.html`.
 
+### Phase 2 — type as architecture, the filter index, wall labels
+- **Change:** "Selected projects" and "Contact me" set monumentally (up to 168 px) in a Bauhaus staircase: the second line steps in. Korean set at the same weight, kept on whole words. Intro paragraph sits beside the heading on desktop. (R1, R3, R5)
+- **Change:** project numbers up to 184 px on desktop, 80–112 px on phones.
+- **Change:** filters become a one-line index with counts ("All work 7 / Training & workshops 3 / …"). Still toggle buttons with `aria-pressed`, 44 px tall; the active one has a lime marker bar under aubergine text. The separate "7 projects" line is now screen-reader only (still announced on every filter change). (R4, R9 Hick's law)
+- **Change:** a museum wall label on every band: Format and Audience from the existing project records, in both languages. No new facts.
+- **Undo:** delete the "Phase 2" block in `press.css`; remove the `wall-label` markup and `data-count` line in `app.js`.
+
 ## 15 Nov 2026
 
 ### Remove the ordering-food game project

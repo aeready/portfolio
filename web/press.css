@@ -165,3 +165,104 @@ body,
 .contact-section h2 { text-shadow: -.035em .03em 0 var(--paper); }
 #trainer h2 { text-shadow: -.035em .03em 0 color-mix(in srgb, var(--acid) 55%, transparent); }
 .hero-name { text-shadow: .03em .03em 0 color-mix(in srgb, var(--paper) 35%, transparent); }
+
+/* ==========================================================================
+   Phase 2 — editorial type, the filter index, wall labels
+   ========================================================================== */
+
+/* Monumental section words (R3 loud once): "Selected projects" and the
+   closing "Contact" are set as architecture, in a staircase: the second
+   line steps in, the way the Bauhaus poster steps its text blocks (R1). */
+#work .section-heading { display: block !important; position: relative; padding-bottom: var(--s4); }
+#work .section-heading h2,
+.contact-section h2 {
+  font-size: clamp(4rem, 1rem + 9vw, 10.5rem) !important;
+  line-height: .8 !important;
+  letter-spacing: -.012em !important;
+  padding-left: 1.1em; text-indent: -1.1em;
+  max-width: 7.2ch;
+  overflow-wrap: normal;
+}
+#work .section-heading > p {
+  max-width: 30ch !important; padding-right: 0 !important;
+  margin: var(--s4) 0 0 auto !important;
+  font-size: var(--fs-lead) !important;
+}
+@media (min-width: 1001px) {
+  #work .section-heading { display: grid !important; grid-template-columns: minmax(0, 1fr) 28ch; align-items: end; column-gap: var(--s5); }
+  #work .section-heading > p { margin: 0 0 .4em !important; }
+  #work .section-heading .flourish--circles { top: 0; bottom: auto; right: 0; }
+}
+html[lang="ko"] #work .section-heading h2,
+html[lang="ko"] .contact-section h2 {
+  font-size: clamp(3rem, 1rem + 8vw, 8.5rem) !important;
+  line-height: 1.05 !important; letter-spacing: -.02em !important;
+  max-width: 6.5em; word-break: keep-all;
+}
+.contact-section h2 { max-width: 6ch; }
+html[lang="ko"] .contact-section h2 { max-width: 5em; }
+
+/* The filter index: one line of words with counts, like a catalogue index.
+   Still real toggle buttons with aria-pressed (R4 standard where people
+   click; R9 Hick's law), 44 px tall, no boxes. */
+#category-filters {
+  display: flex !important; flex-wrap: wrap !important; align-items: center;
+  gap: 4px 0 !important; border: 0 !important; box-shadow: none !important; background: none !important;
+}
+#category-filters button {
+  position: relative;
+  min-height: 44px !important; padding: 0 14px 0 0 !important; margin: 0 14px 0 0 !important;
+  border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  background: none !important; color: var(--ink) !important;
+  font-size: .875rem !important; font-weight: 700; letter-spacing: .07em;
+}
+#category-filters button:not(:last-child)::before {
+  content: '/'; position: absolute; right: -5px; top: 50%; translate: 0 -50%;
+  color: var(--ink-45, rgba(73, 43, 81, .45)); font-weight: 400;
+}
+#category-filters button::after {
+  content: attr(data-count);
+  display: inline-block; margin-left: 6px; vertical-align: super;
+  font: 700 .75rem/1 var(--label); letter-spacing: 0;
+  color: var(--ink-70, rgba(73, 43, 81, .78));
+}
+#category-filters button > * { position: relative; }
+#category-filters button[aria-pressed="true"] {
+  background: linear-gradient(var(--acid), var(--acid)) 0 calc(50% + .3em) / calc(100% - 14px) .8em no-repeat !important;
+}
+#category-filters button:hover:not([aria-pressed="true"]) { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .35em; }
+#category-filters button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.work-tools { border: 0 !important; padding: 0 !important; margin-top: var(--s3) !important; overflow: visible !important; }
+html[lang="ko"] #category-filters button { letter-spacing: 0; font-size: .9375rem !important; }
+
+/* The total is announced to screen readers; on screen the counts sit on the
+   index itself, so the orphaned "7 projects" line goes. */
+#result-count {
+  position: absolute !important; width: 1px !important; height: 1px !important;
+  margin: -1px !important; padding: 0 !important; overflow: hidden !important;
+  clip: rect(0 0 0 0) !important; white-space: nowrap !important; border: 0 !important;
+}
+
+/* Bigger outlined numerals: the number is the band's monument. */
+:root { --fs-numeral: clamp(5.5rem, 2rem + 8vw, 11.5rem); }
+@media (max-width: 1000px) { :root { --fs-numeral: clamp(5rem, 3rem + 10vw, 7rem); } }
+.project-card .project-index { font-size: var(--fs-numeral) !important; line-height: .78 !important; -webkit-text-stroke-width: 1.5px; }
+
+/* Wall label: format and audience, set like a museum caption (mono label,
+   quiet text), between the work and its one line of intent. */
+.project-card .wall-label {
+  display: grid; gap: 6px; margin: 0; padding: 12px 0 0;
+  border-top: 1.5px solid var(--band-ink, var(--ink));
+  max-width: 44ch;
+}
+.project-card .wall-label > div { display: grid; grid-template-columns: 9ch 1fr; gap: 12px; }
+.project-card .wall-label dt {
+  font: 700 .75rem/1.5 var(--label); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--band-ink, var(--ink)); opacity: .82;
+}
+.project-card .wall-label dd { margin: 0; font: 400 .875rem/1.5 var(--read); color: var(--band-text, var(--ink-text)); }
+html[lang="ko"] .project-card .wall-label dt { font-family: var(--read); letter-spacing: 0; }
+html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr; }
+@media (min-width: 1001px) and (max-width: 1279px) {
+  #work .section-heading .flourish--circles { top: -64px !important; width: 96px !important; }
+}

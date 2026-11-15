@@ -123,13 +123,16 @@
         const frame = `<span id="preview-${escape(p.id)}-${index}" class="preview-open ${name}" data-preview="${sample}" title="${escape(caption)}" aria-hidden="true">${previewImage(src, sizes)}</span>`;
         return index === 0 ? `<div class="artifact-main-frame">${frame}</div>` : frame;
       }).join('');
-      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div></div><div class="project-copy"><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
+      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div></div><div class="project-copy"><dl class="wall-label"><div><dt>${escape(t('format'))}</dt><dd>${escape(p.format)}</dd></div><div><dt>${escape(t('audience'))}</dt><dd>${escape(p.audienceLabel)}</dd></div></dl><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
     }).join('');
     wirePreviewImages(grid);
     grid.setAttribute('aria-busy', 'false');
     $('#result-count').textContent = visible.length === 1 ? t('resultOne') : t('resultMany', {count:visible.length});
     $('#empty-state').hidden = visible.length > 0;
-    $$('#category-filters button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === category)));
+    $$('#category-filters button').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.filter === category));
+      button.setAttribute('data-count', String(projects.filter(p => button.dataset.filter === 'all' || p.categories.includes(button.dataset.filter)).length));
+    });
     if (revealObserver) prepareReveals(grid);
   }
   function setFilters(nextCategory = 'all') {
