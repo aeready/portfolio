@@ -17,7 +17,8 @@
   let revealObserver = null;
   let listScrollY = 0;
   let sectionObserver = null, timelineObserver = null;
-  const supportsViewTransitions = typeof document.startViewTransition === 'function';
+  // Card-to-dialog morphing is disabled: the dialog opens in place, without a shared-element transition.
+  const supportsViewTransitions = false;
   function withViewTransition(callback, sharedCard = null) {
     if (reduceMotion || !supportsViewTransitions) { callback(); return; }
     try {
@@ -109,7 +110,7 @@
   const matchedProjects = () => projects.filter(p => category === 'all' || p.categories.includes(category));
   function renderProjects() {
     const visible = matchedProjects();
-    grid.innerHTML = visible.map(p => {
+    grid.innerHTML = visible.map((p, position) => {
       const featured = ['adult-communication', 'epik-music', 'reading-for-meaning'].includes(p.id);
       const previews = [p.cover, p.previewSecondary, p.previewTertiary].filter(Boolean);
       const previewButtons = previews.map((src, index) => {
@@ -122,7 +123,7 @@
         const frame = `<span id="preview-${escape(p.id)}-${index}" class="preview-open ${name}" data-preview="${sample}" title="${escape(caption)}" aria-hidden="true">${previewImage(src, sizes)}</span>`;
         return index === 0 ? `<div class="artifact-main-frame">${frame}</div>` : frame;
       }).join('');
-      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${escape(p.number)}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div></div><div class="project-copy"><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
+      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div></div><div class="project-copy"><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
     }).join('');
     wirePreviewImages(grid);
     grid.setAttribute('aria-busy', 'false');
@@ -208,7 +209,7 @@
     if (!wasOpen) { lastFocus = document.activeElement; listScrollY = window.scrollY; }
     if (!wasOpen || activeProject?.id !== id) activeGallery = 'slides'; activeProject = p; slideIndex = Math.max(0, Math.min(keepSlide, p.slides.length - 1));
     const file = window.PORTFOLIO_ORIGINALS[p.original];
-    $('#project-position').textContent = t('projectPosition', {number:Number(p.number), total:projects.length});
+    $('#project-position').textContent = t('projectPosition', {number:projects.indexOf(p) + 1, total:projects.length});
     const mainSample = p.slides[slideIndex];
     const dimensions = variants[mainSample[0]] || {width:1872, height:1053};
     $('#project-detail').innerHTML = `

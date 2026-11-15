@@ -1,3 +1,19 @@
+# Refinement layer — November 15, 2026 (review draft, unpublished)
+
+`web/refine.css` is one documented layer loaded after `style.css` and `overhaul-v2.css`. It keeps the aubergine (#492b51) / acid (#d6df66) Riso identity and changes type roles, spacing, alignment, interaction and decoration on mobile, tablet and desktop.
+
+- Type: reading text uses Noto Sans + Noto Sans KR (already self-hosted as Portfolio Sans); Noto Sans Mono is limited to labels; Open Sans Condensed Bold stays for display. Korean never receives uppercase or wide tracking. Body 16→17px, minimum label 12px (was 8.6px).
+- Spacing: 8px scale; sections 80px mobile / 128px desktop; one left content edge for bands, ribbon, contact and footer (ribbon text was 100px off at 1440px; hero copy sat 1px from the phone edge).
+- Hero: one primary action; "My background" is a text link. The art label is bilingual (`home.note`) and no longer claims the site is printed.
+- Projects: card numbers follow display order (were 01, 03, 02, 04, 07, 06, 05, 08); dialog "n of 8" matches. Card-to-dialog view-transition morph, scroll reveals and timeline print-in removed; content is never hidden waiting for scroll.
+- Background: university seals and software brand marks hidden (text kept). Reversible in two rules if the owner prefers them.
+- How I work: ruled-paper lines no longer cross the text. Korean heading and step titles were invisible (aubergine on aubergine); fixed.
+- Korean hero name no longer clips (keeps the condensed face).
+- Six decorative Riso pieces from `claude-code/riso-assets/` are served from `web/assets/riso/` as WebP. They are `aria-hidden`, pointer-transparent and placed only in margins.
+- `scripts/build-worker.mjs` includes `refine.css`.
+
+Validation: `validate.mjs`, `validate-locales.mjs`, `validate-downloads.mjs` pass; Worker build 39.4 MB. Browser review in English and Korean at 390, 768 and 1440px plus 352px; project dialog at 390 and 1440px. Not published. Do not upload to the production bucket without the owner's approval.
+
 # Narrow-phone hero inset correction — October 31, 2026
 
 Removed inherited wrapper padding from the hero container. A max-380px `.hero.wrap` rule was leaving 16px blank strips inside the border. The artwork and intro surface now fill the card width; the intro retains its own text padding. No typography, artwork, project or contact content changed.
