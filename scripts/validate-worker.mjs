@@ -18,6 +18,11 @@ for(const [name,type]of [['app.js','text/javascript; charset=utf-8'],['style.css
  objects.set('site/'+name,{bytes,opts:{httpMetadata:{contentType:'text/plain'}}});
  res=await worker.fetch(new Request('https://test/'+name,{method:'HEAD'}),env);assert.equal(res.headers.get('content-type'),type);assert.equal(await res.text(),'');
 }
+// Missing pages get the designed 404 page with a 404 status; missing files stay plain.
+objects.set('site/404.html',{bytes:new TextEncoder().encode('<h1>404</h1>'),opts:{httpMetadata:{contentType:'text/html'}}});
+res=await worker.fetch(new Request('https://test/no-such-page'),env);assert.equal(res.status,404);assert.equal(res.headers.get('content-type'),'text/html; charset=utf-8');assert.equal(await res.text(),'<h1>404</h1>');assert.match(res.headers.get('content-security-policy')||'',/frame-ancestors 'none'/);
+res=await worker.fetch(new Request('https://test/missing.png'),env);assert.equal(res.status,404);assert.equal(await res.text(),'Not found');
+res=await worker.fetch(new Request('https://test/no-such-page',{method:'HEAD'}),env);assert.equal(res.status,404);
 const builtSource=fs.readFileSync('dist/server/index.js','utf8');
 const built=(await import('data:text/javascript;base64,'+Buffer.from(builtSource).toString('base64'))).default;
 for(const route of ['/','/index.html']){

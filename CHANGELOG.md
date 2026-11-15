@@ -44,3 +44,29 @@ Checked in Chrome at 360, 375, 430, 768, 1280 and 1440 px in English and Korean:
 - **Result:** page height at 375 px 11,400 → 9,990 (English) and 10,940 → 9,500 (Korean); at 768 px 11,940 → 10,000.
 - **Serves:** Manifesto R2 and R3.
 - **Undo:** delete the "Stage 4" block in `web/fixes.css`; move the email button back to third in `index.html`.
+
+## 15 Nov 2026 — Stages 4 and 5: pop-up, footer, 404, motion; style guide
+
+### Project pop-up
+- **Change:** "2 of 7" counter now shows on phones (an old rule hid it). Phone header is one row of controls (back, language, close) with the counter beneath; Close no longer wraps alone. Labels to 12 px; the file-scope note set as a sentence instead of tracked capitals; "View in new tab" and "Download" now 44 px targets; gallery arrows larger.
+- **Serves:** R8 show where you are; WCAG target size and legibility.
+
+### Footer
+- **Change:** adds the licence line (CC BY-NC 4.0, for Anna's original materials), "Email me" and "Back to top", and the year: © 2026 Anna Ready. Both languages. The small cross ornament moves to the top-right, clear of text.
+- **Serves:** brief (contact from every page, licence stated, copyright year); R11.
+
+### 404 page
+- **Change:** new `web/404.html` in the house style (lime band, outlined 404, English and Korean, Home and Email me). `worker/index.js` now serves it with status 404 for missing pages; missing files (images, PDFs) still return plain "Not found". Three new checks in `scripts/validate-worker.mjs`.
+- **Owner to do:** upload `404.html` and publish the rebuilt Worker.
+
+### Motion
+- **Change:** outlined numerals fill with their band's ink on hover or focus (220 ms fade; instant under reduced motion). Footer link underlines thicken (150 ms). Header Contact presses like other buttons.
+- **Serves:** R6 meaningful transitions; brief "numerals fill".
+
+### Style guide
+- **Change:** `docs/overhaul/STYLE_GUIDE.md`, rewritten for the colour-band layout: colours, the band pattern, type, spacing, controls, ornaments, motion, and how to add a project (including the Korean font-subset check).
+
+### Korean wording
+- **Change:** three new Korean phrases reworded to avoid syllables missing from the font subset (밝, 맨, 잘): 출처를 표시하면, 위로 가기, 다르게 입력되었을.
+
+Checked at 360–1440 px in both languages: no text under 12 px; every control at least 44 px (the inline licence link is exempt as text in a sentence); nothing cut off. All four validators pass, including the Worker.

@@ -76,3 +76,81 @@
   .project-card .project-copy { gap: var(--s2, 16px) !important; }
   .project-card .project-index { font-size: clamp(3rem, 14vw, 4rem) !important; }
 }
+
+/* ==========================================================================
+   Stage 4 — project pop-up, footer (15 Nov 2026)
+   ========================================================================== */
+
+/* Pop-up header: show "2 of 7" on phones too (an old style.css rule hid it),
+   and lift every label to 12 px. */
+.dialog-top #project-position { display: inline-flex !important; align-items: center; }
+.dialog-top .back-projects,
+.dialog-top #project-position,
+.gallery-tabs button,
+.file-scope,
+.document-format { font-size: max(.75rem, 1em) !important; }
+.dialog-top .back-projects, .file-scope, .document-format { font-size: .75rem !important; }
+@media (max-width: 760px) {
+  /* Row 1: back, language, close. Row 2: the "2 of 7" counter. */
+  .dialog-top { display: grid !important; grid-template-columns: 1fr auto auto; grid-template-areas: 'back lang close' 'pos pos pos'; align-items: center; gap: 4px 8px; }
+  .dialog-top .back-projects { grid-area: back; justify-self: start; padding-inline: 4px; }
+  .dialog-top #project-position { grid-area: pos; justify-self: start; margin: 0 0 4px 4px !important; }
+  .dialog-top .language-toggle { grid-area: lang; }
+  .dialog-top .close-button { grid-area: close; }
+}
+.gallery-controls button { font-size: 1rem !important; }
+
+/* The scope note is a sentence: set it as one, not as tracked capitals. */
+.file-scope { text-transform: none !important; letter-spacing: .01em !important; line-height: 1.45 !important; font-family: var(--read, sans-serif) !important; font-weight: 600 !important; }
+
+/* File links ("View in new tab", "Download"): 44 px targets, same look. */
+.document-actions a, .project-materials a {
+  display: inline-flex; align-items: center; min-height: 44px; padding-block: 0;
+}
+
+/* Footer: contact, licence, back to top. One left edge (R7 alignment). */
+.site-footer { display: grid; gap: 12px 32px; grid-template-columns: 1fr auto; align-items: start; }
+.site-footer .footer-licence { grid-column: 1; max-width: 62ch; margin: 0; font: 400 .875rem/1.55 var(--read, sans-serif); letter-spacing: 0; text-transform: none; color: var(--ink-text, #37243c); }
+.site-footer .footer-licence a { color: inherit; }
+.site-footer .footer-links { grid-column: 2; grid-row: 1 / span 2; display: flex; gap: 8px 24px; flex-wrap: wrap; justify-content: flex-end; }
+.site-footer .footer-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink, #492b51); font: 700 .75rem/1 var(--label, monospace); letter-spacing: .08em; text-transform: uppercase; text-underline-offset: .3em; }
+html[lang="ko"] .site-footer .footer-links a { letter-spacing: 0; font-family: var(--read, sans-serif); }
+.site-footer small { grid-column: 1; }
+@media (max-width: 760px) {
+  .site-footer { grid-template-columns: 1fr; }
+  .site-footer .footer-links { grid-column: 1; grid-row: auto; justify-content: flex-start; }
+}
+
+/* ==========================================================================
+   Stage 5 — motion (15 Nov 2026). Runway, not fairground: one curve,
+   150–400 ms, nothing on first paint, all of it off under reduced motion.
+   ========================================================================== */
+/* The outlined numeral fills with its band's ink on hover or focus. This is
+   feedback, so it also happens under reduced motion, just without the fade. */
+.project-collection .project-card:is(:hover, :focus-visible) .project-index { color: var(--band-ink, var(--ink)); }
+@media (prefers-reduced-motion: no-preference) {
+  /* The outlined numeral fills with its band's ink when the card is pointed
+     at or focused: clear feedback that reads as a second ink pass. */
+  .project-collection .project-card .project-index {
+    transition: color 220ms cubic-bezier(.2, .7, .3, 1) !important;
+  }
+
+  /* Footer and 404 links: underline thickens instead of jumping. */
+  .site-footer .footer-links a { text-decoration-thickness: 1.5px; transition: text-decoration-thickness 150ms cubic-bezier(.2, .7, .3, 1); }
+  .site-footer .footer-links a:hover { text-decoration-thickness: 4px; }
+
+  /* Header Contact presses into place like every other control. */
+  .header-contact { transition: transform 90ms cubic-bezier(.2, .7, .3, 1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-collection .project-card .project-index,
+  .site-footer .footer-links a,
+  .header-contact { transition: none !important; }
+  .header-contact:active { transform: none; }
+}
+
+/* Footer ornament keeps 16 px clear of text: it sits at the top-right corner. */
+.site-footer { position: relative; }
+.site-footer .flourish--footer-cross { top: 12px !important; right: 12px !important; bottom: auto !important; transform: none !important; }
+.site-footer .footer-links { padding-right: 40px; }
+@media (max-width: 760px) { .site-footer .footer-links { padding-right: 0; } .site-footer .footer-licence { padding-right: 40px; } }

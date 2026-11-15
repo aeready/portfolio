@@ -132,7 +132,7 @@ assert.equal(byId('contact-email').getAttribute('aria-expanded'),'false');
 assert(!html.includes('annaready@live.com'));
 assert(!app.includes('annaready@live.com'));
 assert(!html.includes('mailto:'));
-assert(html.includes('© Anna Ready'));
+assert(html.includes('© 2026 Anna Ready'));
 assert(!html.includes('experience-note'));
 assert(html.includes('강릉영어회화모임'));
 await byId('contact-email').emit('click');

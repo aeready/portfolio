@@ -62,7 +62,7 @@ export default {async fetch(request,env){
   return new Response(body,{headers});
  }
  const key=path.startsWith('/assets/originals/')?'originals/'+path.slice('/assets/originals/'.length):'site/'+(path==='/'?'index.html':path.slice(1));
- const object=await env.BUCKET.get(key);if(!object)return respond('Not found',404);
+ const object=await env.BUCKET.get(key);if(!object){const page=request.method==='GET'&&!/\.[a-z0-9]{2,5}$/i.test(path)?await env.BUCKET.get('site/404.html'):null;if(!page)return respond('Not found',404);const h=new Headers({'content-type':'text/html; charset=utf-8','cache-control':'no-store'});secure(h);return new Response(page.body,{status:404,headers:h});}
  const headers=new Headers();object.writeHttpMetadata(headers);
  const contentType=siteContentType(key);if(contentType)headers.set('content-type',contentType);if(key==='site/assets/anna-ready-cv.pdf')headers.set('x-robots-tag','noindex, nofollow');
  // Changing the response type must invalidate an older cached response with incorrect metadata.

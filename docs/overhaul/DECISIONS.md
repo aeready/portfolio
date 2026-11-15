@@ -37,6 +37,10 @@ Anna's decisions on the annaready.kr overhaul, newest first. Where a decision ch
 
 ## Open items for Anna
 
+- **Korean font gaps (existing, high priority):** the Korean web-font subset lacks 11 syllables the site already uses (것 엇 웠 듭 좋 누 잘 흥 쉬 난 째), including in the Korean hero sentence and the tagline 좋은 자료는…. On Windows and some phones these show in a different font. Fix: regenerate the subset from the full Noto Sans KR font (not in the repo).
+- Confirm the new Korean wording: titles 의미를 찾는 읽기 and 미국 문화 캠프; footer licence line; 404 page.
+- The CC BY-NC 4.0 footer line covers "my original teaching materials". Work you made for an employer stays theirs; mark any exceptions.
+
 - Korean titles for "Reading for Meaning" and "USA Camp" (both show in English in Korean mode): keep, or give Korean titles.
 - The page is about 14 phone screens long; deciding how much to shorten is a Stage 4 layout question.
 
