@@ -86,6 +86,44 @@
     });
   }
 
+  /* ---------- Header height for the phone menu sheet ---------------------- */
+  const header = document.querySelector('.site-header');
+  const setHeader = () => header && root.style.setProperty('--header-h', `${Math.round(header.getBoundingClientRect().height)}px`);
+  setHeader(); window.addEventListener('resize', setHeader, {passive: true});
+
+  /* ---------- Phone filters: a single "Filter: …" control ------------------ */
+  const tools = document.querySelector('.work-tools');
+  const filters = document.querySelector('#category-filters');
+  if (tools && filters) {
+    const ui = () => window.PORTFOLIO_LOCALES?.[root.lang === 'ko' ? 'ko' : 'en']?.ui || {};
+    const toggle = document.createElement('button');
+    toggle.type = 'button'; toggle.className = 'filter-toggle';
+    toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-controls', 'category-filters');
+    tools.prepend(toggle); tools.classList.add('has-toggle');
+    const label = () => {
+      const active = filters.querySelector('[aria-pressed="true"]');
+      const span = (cls, text) => { const s = document.createElement('span'); s.className = cls; s.textContent = text; return s; };
+      toggle.replaceChildren(span('ft-label', ui().filterBy || 'Filter'), span('ft-value', `${active?.textContent.trim() || ''} ${active?.dataset.count || ''}`.trim()), span('ft-caret', '▾'));
+      toggle.lastChild.setAttribute('aria-hidden', 'true');
+    };
+    const setOpen = open => { tools.classList.toggle('is-open', open); toggle.setAttribute('aria-expanded', String(open)); };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    filters.addEventListener('click', event => { if (event.target.closest('button[data-filter]')) { setOpen(false); toggle.focus({preventScroll: true}); } });
+    new MutationObserver(label).observe(filters, {subtree: true, attributes: true, attributeFilter: ['aria-pressed', 'data-count'], childList: true, characterData: true});
+    new MutationObserver(label).observe(root, {attributes: true, attributeFilter: ['lang']});
+    label();
+  }
+
+  /* ---------- Gallery: the halftone shadow follows the current print ------- */
+  document.addEventListener('load', event => {
+    const img = event.target;
+    if (img?.id !== 'gallery-image') return;
+    const stage = img.parentElement, a = img.getBoundingClientRect(), b = stage.getBoundingClientRect();
+    stage.style.setProperty('--sx', `${a.left - b.left}px`); stage.style.setProperty('--sy', `${a.top - b.top}px`);
+    stage.style.setProperty('--sw', `${a.width}px`); stage.style.setProperty('--sh', `${a.height}px`);
+  }, true);
+  window.addEventListener('resize', () => { const img = document.getElementById('gallery-image'); if (img?.complete) img.dispatchEvent(new Event('load')); }, {passive: true});
+
   /* ---------- In-page links land where they say ------------------------
      Lazy images load during a smooth scroll and push the target down, so
      the jump falls short. After the scroll settles, correct it once. */

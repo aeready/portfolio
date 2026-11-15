@@ -1297,3 +1297,111 @@ main, .site-header, .site-footer, .project-collection, .section-ribbon, #backgro
 html { overflow-x: clip; }
 /* The hero artwork must never sit on top of the hero buttons. */
 #home .hero-art { pointer-events: none; }
+
+/* ---------- Hero: gutters and an even pair of actions --------------------- */
+@media (max-width: 1000px) {
+  #home.hero--poster .hero-copy { width: auto !important; padding-left: var(--gutter) !important; padding-right: var(--gutter) !important; }
+}
+.hero .hero-actions { display: grid !important; grid-template-columns: repeat(2, max-content); gap: 12px !important; align-items: stretch; width: auto !important; }
+.hero .hero-actions > a {
+  display: inline-flex !important; align-items: center; justify-content: center; min-height: 52px !important; padding: 0 26px !important;
+  border: 1.5px solid var(--ink) !important; font: 700 .9375rem/1 var(--read) !important; letter-spacing: 0 !important; text-transform: none !important;
+  text-decoration: none !important; background-image: none !important; margin: 0 !important; width: auto !important;
+}
+.hero .hero-actions > .button.primary { background: var(--ink) !important; color: var(--paper) !important; box-shadow: 4px 4px 0 var(--acid) !important; }
+.hero .hero-actions > .text-link { background: transparent !important; color: var(--ink) !important; box-shadow: none !important; }
+@media (hover: hover) {
+  .hero .hero-actions > .button.primary:hover { background: #3a2241 !important; }
+  .hero .hero-actions > .text-link:hover { background: var(--acid) !important; }
+}
+.button.primary:hover, .button.primary:active, .button.primary:focus { background-color: var(--ink) !important; }
+@media (max-width: 760px) {
+  .hero .hero-actions { grid-template-columns: 1fr 1fr; width: 100% !important; }
+  .hero .hero-actions > a { padding: 0 12px !important; }
+}
+
+/* ---------- Phone menu: a full sheet, set as type ------------------------- */
+@media (max-width: 760px) {
+  .site-header nav.open {
+    position: fixed !important; top: var(--header-h, 72px); left: 0; right: 0; bottom: 0; z-index: 60;
+    display: flex !important; flex-direction: column; align-items: stretch; gap: 0 !important;
+    max-height: none !important; padding: 24px var(--gutter) 32px !important; overflow-y: auto;
+    background: var(--ink) var(--grain-paper) 0 0 / 320px 320px !important; counter-reset: navi;
+    border: 0 !important; box-shadow: none !important;
+  }
+  .site-header nav.open a {
+    counter-increment: navi; position: relative; display: flex !important; align-items: baseline; gap: 14px;
+    min-height: 64px !important; padding: 10px 0 !important; justify-content: flex-start !important;
+    border: 0 !important; border-bottom: 1px solid color-mix(in srgb, var(--paper) 22%, transparent) !important;
+    background: none !important; color: var(--paper) !important; box-shadow: none !important;
+    font: 700 clamp(2rem, 1.2rem + 5vw, 2.75rem)/1 var(--display) !important; letter-spacing: -.005em !important; text-transform: uppercase !important;
+  }
+  html[lang="ko"] .site-header nav.open a { font-family: var(--read) !important; text-transform: none !important; font-size: clamp(1.75rem, 1.2rem + 3.5vw, 2.25rem) !important; }
+  .site-header nav.open a::before { content: counter(navi, decimal-leading-zero); font: 700 .75rem/1 var(--label); letter-spacing: .06em; color: var(--acid); transform: translateY(-.9em); }
+  .site-header nav.open a.nav-contact { margin-top: 24px; justify-content: center !important; border: 0 !important; background: var(--acid) !important; color: var(--ink) !important; }
+  .site-header nav.open a.nav-contact::before { color: var(--ink); }
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header nav.open { animation: menu-sheet 360ms var(--ease-plate) both; }
+    .site-header nav.open a { animation: rise 420ms var(--ease-press) both; }
+    .site-header nav.open a:nth-child(2) { animation-delay: 50ms; } .site-header nav.open a:nth-child(3) { animation-delay: 100ms; } .site-header nav.open a:nth-child(4) { animation-delay: 150ms; }
+    @keyframes menu-sheet { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+  }
+}
+
+/* ---------- Phone filters: one "Filter: All work 7" control --------------- */
+.filter-toggle { display: none; }
+@media (max-width: 760px) {
+  .filter-toggle {
+    display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 52px; padding: 0 16px;
+    border: 1.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    font: 700 .9375rem/1 var(--read); text-align: left;
+  }
+  .filter-toggle .ft-label { font: 700 .75rem/1 var(--label); letter-spacing: .08em; text-transform: uppercase; margin-right: 10px; opacity: .75; }
+  html[lang="ko"] .filter-toggle .ft-label { font-family: var(--read); letter-spacing: 0; }
+  .filter-toggle .ft-value { flex: 1; }
+  .filter-toggle .ft-caret { transition: rotate 220ms var(--ease-press); }
+  .filter-toggle[aria-expanded="true"] .ft-caret { rotate: 180deg; }
+  .work-tools.has-toggle #category-filters { display: none !important; }
+  .work-tools.has-toggle.is-open #category-filters {
+    display: flex !important; flex-direction: column; align-items: stretch !important; gap: 0 !important;
+    border: 1.5px solid var(--ink) !important; border-top: 0 !important; background: var(--paper) !important;
+  }
+  .work-tools.has-toggle.is-open #category-filters button { justify-content: space-between; display: flex; padding: 0 16px !important; margin: 0 !important; min-height: 48px !important; border-top: 1px solid var(--ink-15, rgb(73 43 81 / .15)) !important; }
+  .work-tools.has-toggle.is-open #category-filters button::before { content: none !important; }
+  .work-tools.has-toggle.is-open #category-filters button[aria-pressed="true"] { background: var(--acid) !important; }
+}
+
+/* ---------- Print pile: one halftone backing under the whole pile -------- */
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed)::before { content: none !important; }
+.project-collection > .project-card.project-card .artifact-arrangement { isolation: isolate; }
+.project-collection > .project-card.project-card .artifact-arrangement::before {
+  content: '' !important; display: block !important; position: absolute; z-index: -1; pointer-events: none;
+  inset: 12% -3% -5% 9%; rotate: none; translate: none;
+  background: radial-gradient(circle, var(--dot-ink) 1.2px, transparent 1.5px) 0 0 / 6px 6px !important;
+  -webkit-mask-image: linear-gradient(140deg, transparent 8%, #000 55%); mask-image: linear-gradient(140deg, transparent 8%, #000 55%);
+  opacity: .9 !important; border: 0 !important; box-shadow: none !important;
+}
+@media (min-width: 1001px) {
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)) .artifact-arrangement::before { inset: 12% 9% -5% -3%; -webkit-mask-image: linear-gradient(220deg, transparent 8%, #000 55%); mask-image: linear-gradient(220deg, transparent 8%, #000 55%); }
+  .project-collection > .project-card:nth-child(7n+5) .artifact-arrangement::before { inset: 14% -2% -6% 2%; }
+}
+
+/* ---------- Project page: content never waits on a scroll timeline;
+   the gallery keeps one height so the page never jumps between slides. ---- */
+#project-dialog :is(.detail-role, .detail-story > *, .case-study > *:not(h3), .project-materials),
+#project-dialog .detail-role > p:first-of-type strong { animation: none !important; opacity: 1 !important; transform: none !important; clip-path: none !important; }
+#project-dialog .gallery-stage {
+  width: 100% !important; height: min(70vh, 760px) !important; display: grid !important; place-items: center; justify-self: stretch;
+}
+#project-dialog #gallery-image { max-width: 100% !important; max-height: 100% !important; width: auto !important; height: auto !important; }
+#project-dialog .gallery-stage::before {
+  content: '' !important; position: absolute; z-index: 0 !important; clip-path: none !important;
+  inset: auto !important; left: var(--sx, 0); top: var(--sy, 0); width: var(--sw, 0); height: var(--sh, 0); translate: 16px 18px !important;
+  background: radial-gradient(circle, var(--acid) 1.2px, transparent 1.5px) 0 0 / 6px 6px !important;
+}
+#project-dialog .gallery-stage > img { position: relative; z-index: 1; }
+@media (max-width: 760px) { #project-dialog .gallery-stage { height: 58vh !important; } }
+@media (prefers-reduced-motion: no-preference) {
+  #project-dialog #gallery-image.slide-enter { animation: sheet-in 300ms var(--ease-press) both !important; }
+  @keyframes sheet-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+}
