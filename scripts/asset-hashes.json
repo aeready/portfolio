@@ -1,0 +1,32 @@
+[
+  {
+    "old": "assets/fonts/zine-condensed.woff2",
+    "next": "assets/fonts/zine-condensed--8bd1bda598c9.woff2",
+    "bytes": 15564,
+    "hash": "8bd1bda598c9"
+  },
+  {
+    "old": "assets/zine-book-collage.webp",
+    "next": "assets/zine-book-collage--3cd147da07bf.webp",
+    "bytes": 481764,
+    "hash": "3cd147da07bf"
+  },
+  {
+    "old": "assets/fonts/zine-mono.woff2",
+    "next": "assets/fonts/zine-mono--b72360e991c5.woff2",
+    "bytes": 18096,
+    "hash": "b72360e991c5"
+  },
+  {
+    "old": "assets/linkedin-mark.png",
+    "next": "assets/linkedin-mark--5c40fb93330c.png",
+    "bytes": 10309,
+    "hash": "5c40fb93330c"
+  },
+  {
+    "old": "assets/zine-favicon.svg",
+    "next": "assets/zine-favicon--bde8c84ebb1a.svg",
+    "bytes": 366,
+    "hash": "bde8c84ebb1a"
+  }
+]
