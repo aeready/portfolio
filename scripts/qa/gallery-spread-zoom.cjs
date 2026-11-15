@@ -1,0 +1,27 @@
+const { chromium, devices } = require('playwright');
+(async () => {
+  const b = await chromium.launch(); const O=process.env.OUT||'.'; const errs=[];
+  const d = await b.newPage({ viewport:{width:1440,height:900} }); d.on('pageerror',e=>errs.push(e.message));
+  await d.addInitScript(()=>sessionStorage.setItem('press-intro-seen','1'));
+  await d.goto('http://localhost:8765/#project/usa-camp-workbook'); await d.waitForTimeout(1500);
+  const y = await d.evaluate(()=>{const g=document.querySelector('#project-dialog .gallery');return g.getBoundingClientRect().top+document.querySelector('#project-dialog').scrollTop-80});
+  await d.evaluate(y=>document.querySelector('#project-dialog').scrollTop=y,y); await d.waitForTimeout(800);
+  await d.screenshot({path:`${O || '.'}/d-cover.png`});
+  const st=[]; st.push(await d.evaluate(()=>document.getElementById('slide-count').textContent));
+  await d.click('#next-slide'); await d.waitForTimeout(900); await d.screenshot({path:`${O || '.'}/d-spread1.png`}); st.push(await d.evaluate(()=>document.getElementById('slide-count').textContent));
+  await d.click('#next-slide'); await d.waitForTimeout(900); st.push(await d.evaluate(()=>document.getElementById('slide-count').textContent));
+  await d.click('#previous-slide'); await d.waitForTimeout(500); st.push(await d.evaluate(()=>document.getElementById('slide-count').textContent));
+  await d.click('#gallery-thumbnails button:nth-child(18)'); await d.waitForTimeout(800); st.push(await d.evaluate(()=>[document.getElementById('slide-count').textContent, document.getElementById('next-slide').disabled]));
+  await d.goto('http://localhost:8765/#project/epik-music'); await d.waitForTimeout(1200); st.push(await d.evaluate(()=>[document.getElementById('slide-count').textContent, !!document.getElementById('gallery-image-b')]));
+  console.log(JSON.stringify(st));
+  const ctx = await b.newContext({ ...devices['Galaxy S9+'], deviceScaleFactor: 1 }); const p = await ctx.newPage(); p.on('pageerror',e=>errs.push(e.message));
+  await p.addInitScript(()=>sessionStorage.setItem('press-intro-seen','1'));
+  await p.goto('http://localhost:8765/#project/usa-camp-workbook'); await p.waitForTimeout(1500);
+  await p.evaluate(()=>document.querySelector('#open-image').scrollIntoView({block:'center'})); await p.waitForTimeout(500);
+  await p.tap('#gallery-image'); await p.waitForTimeout(500); await p.screenshot({path:`${O || '.'}/m-zoom.png`});
+  await p.tap('.zoom-view img', {position:{x:150,y:200}}); await p.waitForTimeout(500); await p.screenshot({path:`${O || '.'}/m-zoomed.png`});
+  await p.tap('.zv-next'); await p.waitForTimeout(600); const cnt = await p.evaluate(()=>document.querySelector('.zv-count').textContent);
+  await p.keyboard.press('Escape'); await p.waitForTimeout(300);
+  console.log(cnt, await p.evaluate(()=>[document.querySelector('.zoom-view').hidden, document.querySelector('#project-dialog').open, !!document.getElementById('gallery-image-b')]), errs);
+  await b.close();
+})();

@@ -1,0 +1,21 @@
+const { chromium, devices } = require('playwright');
+(async () => {
+  const b = await chromium.launch();
+  const ctx = await b.newContext({ ...devices['Galaxy S9+'] });
+  const p = await ctx.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+  await p.addInitScript(()=>sessionStorage.setItem('press-intro-seen','1'));
+  await p.goto('http://localhost:8765/'); await p.waitForTimeout(800);
+  const top = s => p.evaluate(s=>Math.round(document.querySelector(s).getBoundingClientRect().top), s);
+  const r={};
+  await p.tap('.hero-actions .button.primary'); await p.waitForTimeout(1200); r.explore1 = await top('#work');
+  await p.evaluate(()=>scrollTo(0,0)); await p.waitForTimeout(300);
+  await p.tap('.hero-actions .text-link'); await p.waitForTimeout(1200); r.background1 = await top('#background');
+  await p.evaluate(()=>document.getElementById('explore-epik-music').scrollIntoView()); await p.waitForTimeout(400);
+  await p.tap('#explore-epik-music .project-title'); await p.waitForTimeout(1300);
+  await p.tap('#back-projects'); await p.waitForTimeout(1500);
+  r.backToCard = await top('#explore-epik-music');
+  await p.evaluate(()=>document.querySelector('.footer-links a[href="#home"]').scrollIntoView()); await p.waitForTimeout(400);
+  await p.tap('.footer-links a[href="#home"]'); await p.waitForTimeout(1500); r.backToTop = await p.evaluate(()=>scrollY);
+  await p.tap('.hero-actions .button.primary'); await p.waitForTimeout(1200); r.explore2 = await top('#work');
+  r.errs=errs; console.log(JSON.stringify(r)); await b.close();
+})();

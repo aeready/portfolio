@@ -14,3 +14,5 @@
 - Do not commit PowerPoint byte data to Git or include it in build archives. Keep user originals in their existing Library records and the Site file bucket. The local `storage-data/` cache is ignored. Verify new uploads against the hashes in `web/originals.js`.
 
 - Verify the live Content-Type headers for the homepage, CSS, JavaScript, SVGs, fonts, and PDFs after uploads or hosting changes. Byte hashes alone do not verify browser rendering. The Worker derives website response types from file extensions and must override incorrect stored metadata. Run `node scripts/validate-worker.mjs` and `node scripts/build-worker.mjs` after router changes.
+
+- Nov 2026 overhaul: new design work goes in `web/press.css` (loads after `refine.css`, before `fixes.css`) and `web/press.js`. Read `CLAUDE.md` and `docs/overhaul/WORKPLAN.md` before continuing; browser QA scripts are in `scripts/qa/`.
