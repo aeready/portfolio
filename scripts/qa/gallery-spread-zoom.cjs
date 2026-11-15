@@ -1,6 +1,6 @@
 const { chromium, devices } = require('playwright');
 (async () => {
-  const b = await chromium.launch(); const O=process.env.OUT||'.'; const errs=[];
+  const b = await chromium.launch(); const O=process.env.OUT||require('os').tmpdir(); const errs=[];
   const d = await b.newPage({ viewport:{width:1440,height:900} }); d.on('pageerror',e=>errs.push(e.message));
   await d.addInitScript(()=>sessionStorage.setItem('press-intro-seen','1'));
   await d.goto('http://localhost:8765/#project/usa-camp-workbook'); await d.waitForTimeout(1500);
