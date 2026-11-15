@@ -103,13 +103,6 @@ window.PORTFOLIO_ORIGINALS = {
       }
     ]
   },
-  "ordering-food-game": {
-    "available": false,
-    "filename": "Ordering Game (2025 version) by ar97 (2).pptx",
-    "bytes": 28340389,
-    "sha256": "c113719d25172711c38280bcd27dfe49ee321ba58e7fae349f15aacc4ff7583f",
-    "url": "assets/originals/ordering-food-game.pptx"
-  },
   "usa-camp-workbook": {
     "available": false,
     "filename": "new usa camp book.pdf",
