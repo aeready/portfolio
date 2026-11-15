@@ -19,6 +19,73 @@
     }
   }
 
+  /* ---------- Project pages: carry the band's colour, number and riso piece */
+  const dialog = document.querySelector('#project-dialog');
+  const detail = document.querySelector('#project-detail');
+  const grid = document.querySelector('#project-grid');
+  let currentId = null, goContact = false;
+  const projectId = () => history.state?.portfolioProject || (location.hash.startsWith('#project/') ? location.hash.slice(9) : null);
+  const cardFor = id => id ? document.getElementById('explore-' + id) : null;
+  function decorate() {
+    if (!dialog?.open) return;
+    currentId = projectId() || currentId;
+    const card = cardFor(currentId);
+    const head = detail?.querySelector('.detail-head');
+    if (!card || !head) return;
+    const cards = [...grid.querySelectorAll('.project-card')];
+    const index = cards.indexOf(card);
+    dialog.dataset.band = String((index % 4) + 1);
+    dialog.style.setProperty('--orn', getComputedStyle(card).getPropertyValue('--orn'));
+    if (!head.querySelector('.detail-number')) {
+      const number = document.createElement('span');
+      number.className = 'detail-number'; number.setAttribute('aria-hidden', 'true');
+      number.textContent = card.querySelector('.project-index')?.textContent || '';
+      head.prepend(number);
+    }
+  }
+  if (dialog && detail && grid) {
+    new MutationObserver(decorate).observe(detail, {childList: true});
+    new MutationObserver(() => { if (dialog.open) decorate(); }).observe(dialog, {attributes: true, attributeFilter: ['open']});
+
+    /* Contact from a project page: close the page, then land on Contact. */
+    dialog.querySelector('.dialog-contact')?.addEventListener('click', event => {
+      event.preventDefault();
+      goContact = true;
+      document.querySelector('#close-dialog')?.click();
+    });
+
+    /* Back on the main page: re-print the band you came from. */
+    dialog.addEventListener('close', () => {
+      const id = currentId; currentId = null;
+      if (goContact) {
+        goContact = false;
+        window.setTimeout(() => {
+          document.querySelector('#contact')?.scrollIntoView({behavior: 'instant', block: 'start'});
+          document.querySelector('#contact-email')?.focus({preventScroll: true});
+        }, reduceMotion ? 0 : 640);
+        return;
+      }
+      if (reduceMotion) return;
+      window.setTimeout(() => {
+        const card = cardFor(id);
+        if (!card) return;
+        card.querySelectorAll('.return-stamp, .return-sweep').forEach(el => el.remove());
+        const numeral = card.querySelector('.project-index');
+        const box = card.getBoundingClientRect(), n = numeral?.getBoundingClientRect();
+        const stamp = document.createElement('span'), sweep = document.createElement('span');
+        stamp.className = 'return-stamp'; sweep.className = 'return-sweep';
+        stamp.setAttribute('aria-hidden', 'true'); sweep.setAttribute('aria-hidden', 'true');
+        if (n) {
+          stamp.style.left = `${n.left - box.left}px`; stamp.style.top = `${n.top - box.top}px`;
+          sweep.style.top = `${n.top - box.top + n.height * .62}px`;
+        }
+        card.append(sweep, stamp);
+        card.classList.remove('is-returning'); void card.offsetWidth; card.classList.add('is-returning');
+        window.setTimeout(() => { card.classList.remove('is-returning'); stamp.remove(); sweep.remove(); }, 1700);
+      }, 560);
+    });
+  }
+
   /* ---------- Registration cursor: the lime plate follows a beat late ----- */
   const finePointer = window.matchMedia?.('(hover: hover) and (pointer: fine)').matches;
   if (finePointer && !reduceMotion) {

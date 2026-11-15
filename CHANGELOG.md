@@ -38,6 +38,17 @@ Approved by Anna on 15 Nov 2026 (game plan, then "go ahead"). Rules R6 and R7 ad
 - **Fixes found on the way:** "Contact me" no longer clipped at 375 px; the opening plates no longer overprint to brown.
 - **Undo:** remove the `press-boot.js` and `press.js` script tags and the `.press-intro-sheet` element from `index.html`; delete the "Phase 3" block in `press.css`.
 
+### Phase 4 — project pages instead of a pop-up
+- **Why:** the pop-up floated as a cramped box over a dimmed page, stacked competing frames (dialog border, gallery box, chips, boxed facts that looked like buttons), showed the work small, left a dead hole under the left column, and had a timid title with none of its band's identity.
+- **Change:** each project now opens as a full-screen page (same `#project/…` address, same Back/Forward, focus and Escape behaviour; still the accessible `<dialog>` underneath).
+  - Sticky page bar: Back to projects · "5 of 7" · **Contact** (new, one tap from every project; lands on Contact with the email button focused) · language · Close.
+  - Opener in the colour of the project's own band, with its outlined number (misregistered), monumental title, and that band's riso piece.
+  - Gallery first: the work on a mount with crop marks and X-tape, sticky beside the reading column on desktop; 56 px arrows; a swipeable filmstrip of larger thumbnails with a fade showing it scrolls.
+  - Reading column: facts set as a ruled list, not boxes.
+  - Phones: Previous / Next project is a sticky bar at the bottom, in thumb reach (R8).
+- **Motion** (View Transitions where supported; reduced motion gets instant open/close): the card's cover morphs into the page's gallery while the page feeds up like a sheet. On the way back the page feeds off, the cover flies back into its band, and the band you came from is re-printed: a riso registration stamp lands on its number, a lime pass sweeps across the band, and the number takes a full ink pass before settling, so you can see where you are.
+- **Undo:** delete the "Phase 4" block in `press.css` and the project-page section of `press.js`; remove the `.dialog-contact` link from `index.html`; restore `withViewTransition` in `app.js` from the previous commit.
+
 ## 15 Nov 2026
 
 ### Remove the ordering-food game project

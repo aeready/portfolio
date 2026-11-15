@@ -459,3 +459,237 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
   .contact-section h2 { padding-left: 0 !important; text-indent: 0 !important; }
   #contact::after { right: auto !important; left: 8px; }
 }
+
+/* ==========================================================================
+   Phase 4 — project pages: the pop-up becomes a full editorial page
+   (same <dialog>, same URL, focus and history; R4 predictable controls)
+   ========================================================================== */
+#project-dialog {
+  --page-pad: max(var(--gutter, 20px), calc((100vw - var(--measure, 1280px)) / 2 + var(--gutter, 20px)));
+  position: fixed; inset: 0;
+  width: 100vw !important; max-width: none !important;
+  height: 100dvh !important; max-height: none !important;
+  margin: 0 !important; padding: 0 !important; border: 0 !important; box-shadow: none !important;
+  background: var(--paper) !important;
+  background-image: var(--grain-ink), var(--mottle-ink) !important;
+  background-size: 320px 320px, 512px 512px !important;
+  overflow-y: auto; overflow-x: clip; overscroll-behavior: contain;
+}
+#project-dialog::backdrop { background: var(--paper) !important; }
+
+/* Page bar: the site header's job inside a project. */
+#project-dialog .dialog-top {
+  position: sticky; top: 0; z-index: 30;
+  display: flex !important; align-items: center; gap: 12px;
+  min-height: 72px; margin: 0; padding: 10px var(--page-pad) !important;
+  background: var(--paper) var(--grain-ink) 0 0 / 320px 320px !important;
+  border-bottom: 1.5px solid var(--ink) !important; box-shadow: none !important;
+}
+#project-dialog .dialog-top .back-projects { margin-right: 4px; }
+#project-dialog .dialog-top #project-position { margin: 0 auto 0 0 !important; }
+#project-dialog .dialog-contact {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px;
+  background: var(--acid); color: var(--ink); border: 1.5px solid var(--ink); text-decoration: none;
+  font: 700 .75rem/1 var(--label); letter-spacing: .08em; text-transform: uppercase;
+}
+html[lang="ko"] #project-dialog .dialog-contact { font-family: var(--read); letter-spacing: 0; font-size: .875rem; }
+@media (max-width: 760px) {
+  #project-dialog .dialog-top {
+    display: grid !important; grid-template-columns: 1fr auto auto; gap: 6px 8px;
+    grid-template-areas: 'back lang close' 'pos contact contact' !important;
+    min-height: 0; padding: 8px 16px !important;
+  }
+  #project-dialog .dialog-top .back-projects { grid-area: back; }
+  #project-dialog .dialog-top #project-position { grid-area: pos; justify-self: start; margin: 0 !important; }
+  #project-dialog .dialog-top .dialog-contact { grid-area: contact; justify-self: end; min-height: 40px; }
+  #project-dialog .dialog-top .language-toggle { grid-area: lang; }
+  #project-dialog .dialog-top .close-button { grid-area: close; }
+}
+
+#project-detail { padding: 0 var(--page-pad) var(--s7, 96px); }
+
+/* The opener: the project's own band colour, number and riso piece, so the
+   page is visibly the band you opened (R2, R3). */
+#project-dialog { --band: var(--paper-deep); --band-ink: var(--ink); --band-text: var(--ink-text); --tag-bg: var(--acid); --tag-ink: var(--ink); --misreg: var(--acid); }
+#project-dialog[data-band="2"] { --band: var(--acid); --tag-bg: var(--ink); --tag-ink: var(--acid); --misreg: var(--paper); }
+#project-dialog[data-band="3"] { --band: var(--ink); --band-ink: var(--paper); --band-text: var(--paper); --misreg: var(--acid); }
+#project-dialog[data-band="4"] { --band: var(--paper); }
+#project-dialog .detail-head {
+  position: relative; isolation: isolate;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s2, 16px);
+  margin: 0 0 var(--s6, 64px); padding: var(--s6, 64px) 0 var(--s5, 48px);
+  background: var(--band); box-shadow: 0 0 0 100vmax var(--band); clip-path: inset(0 -100vmax);
+  color: var(--band-text); border: 0 !important;
+}
+#project-dialog .detail-head::before {
+  content: ''; position: absolute; inset: 0 -100vmax; z-index: -1; pointer-events: none;
+  background: var(--grain-ink), var(--mottle-ink); background-size: 320px 320px, 512px 512px;
+}
+#project-dialog[data-band="3"] .detail-head::before { background-image: var(--grain-paper), var(--mottle-light); }
+#project-dialog .detail-head::after {
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
+  right: calc(-1 * min(120px, var(--page-pad) - 8px)); top: -18%;
+  width: clamp(200px, 30vw, 400px); aspect-ratio: 1;
+  background: var(--orn, none) center / contain no-repeat;
+}
+#project-dialog .detail-head[data-number]::marker { content: none; }
+#project-dialog .detail-head .detail-number {
+  display: block; color: transparent; -webkit-text-stroke: 1.5px var(--band-ink);
+  font: 700 clamp(6rem, 3rem + 9vw, 12rem)/.78 var(--display); letter-spacing: -.03em;
+  text-shadow: .045em .035em 0 var(--misreg);
+}
+#project-dialog .detail-head .eyebrow { justify-self: start; background: var(--tag-bg) !important; color: var(--tag-ink) !important; }
+#project-dialog .detail-head h2 {
+  max-width: 16ch; margin: 0; color: var(--band-ink) !important;
+  font-size: clamp(2.75rem, 1.4rem + 5vw, 6.5rem) !important; line-height: .9 !important;
+  text-shadow: -.03em .025em 0 var(--misreg);
+}
+html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2rem + 3.6vw, 4.5rem) !important; line-height: 1.15 !important; word-break: keep-all; }
+#project-dialog .detail-head > p:last-child { max-width: 52ch; margin: var(--s1, 8px) 0 0; font-size: var(--fs-lead) !important; color: var(--band-text) !important; }
+
+/* Body: gallery first and wide, then a clear reading column beside it. */
+#project-dialog .detail-body {
+  display: grid !important; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important;
+  grid-template-areas: 'left role' 'left story' !important; gap: var(--s4, 32px) clamp(32px, 5vw, 80px) !important;
+  align-items: start;
+}
+#project-dialog .detail-left { grid-area: left; position: sticky; top: 96px; }
+#project-dialog .detail-role { grid-area: role; }
+#project-dialog .detail-story { grid-area: story; }
+@media (max-width: 1000px) {
+  #project-dialog .detail-body { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: 'left' 'role' 'story' !important; }
+  #project-dialog .detail-left { position: static; }
+}
+
+/* Gallery: the work on a mount with crop marks and X-tape, a large counter,
+   and a filmstrip you can swipe or scroll. */
+#project-dialog .gallery { position: relative; padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; }
+#project-dialog .gallery::before {
+  content: ''; position: absolute; z-index: 4; pointer-events: none;
+  left: -26px; top: -30px; width: 116px; aspect-ratio: 292 / 198;
+  background: url('assets/riso/lib/tape-x--4361c7a31c87.webp') center / contain no-repeat; rotate: -8deg;
+}
+#project-dialog .gallery-stage {
+  position: relative; display: grid !important; place-items: center;
+  min-height: min(62vh, 640px); padding: clamp(12px, 2vw, 28px) !important;
+  background: var(--paper) !important; border: 1.5px solid var(--ink) !important;
+  box-shadow: 10px 10px 0 var(--ink) !important;
+}
+#project-dialog .gallery-stage::before {
+  --tick: var(--ink); --t: 18px; --w: 1.5px;
+  content: ''; position: absolute; inset: -16px; pointer-events: none;
+  background:
+    linear-gradient(var(--tick), var(--tick)) 0 0 / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 0 0 / var(--w) var(--t),
+    linear-gradient(var(--tick), var(--tick)) 100% 0 / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 100% 0 / var(--w) var(--t),
+    linear-gradient(var(--tick), var(--tick)) 0 100% / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 0 100% / var(--w) var(--t),
+    linear-gradient(var(--tick), var(--tick)) 100% 100% / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 100% 100% / var(--w) var(--t);
+  background-repeat: no-repeat;
+}
+#project-dialog #gallery-image { width: auto !important; max-width: 100% !important; height: auto !important; max-height: min(58vh, 600px) !important; object-fit: contain; }
+#project-dialog .gallery-controls {
+  display: grid !important; grid-template-columns: 1fr auto; align-items: center; gap: 16px;
+  margin-top: var(--s4, 32px) !important; padding: 0 !important; border: 0 !important;
+}
+#project-dialog #slide-count { font: 700 .875rem/1.4 var(--label); letter-spacing: .04em; color: var(--ink); }
+#project-dialog .gallery-controls button {
+  min-width: 56px !important; min-height: 56px !important; border: 1.5px solid var(--ink) !important;
+  background: var(--paper) !important; color: var(--ink) !important; font-size: 1.25rem !important; box-shadow: 4px 4px 0 var(--ink) !important;
+}
+#project-dialog .gallery-controls button:not(:disabled):hover { background: var(--ink) !important; color: var(--paper) !important; }
+#project-dialog .gallery-controls button:disabled { opacity: .35; box-shadow: none !important; }
+#project-dialog .gallery-caption { margin-top: 12px !important; font-size: var(--fs-body) !important; max-width: 60ch; }
+#project-dialog .gallery-thumbnails {
+  display: flex !important; gap: 10px !important; margin-top: var(--s3, 24px) !important;
+  overflow-x: auto !important; overflow-y: hidden; scroll-snap-type: x proximity; padding: 4px 4px 14px !important;
+  scrollbar-color: var(--ink) transparent; scrollbar-width: thin;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
+}
+#project-dialog .gallery-thumbnails button {
+  flex: 0 0 auto !important; width: auto !important; height: 84px !important; min-width: 56px; padding: 0 !important;
+  scroll-snap-align: start; border: 1.5px solid var(--ink-45, rgba(73,43,81,.45)) !important; background: var(--paper) !important;
+  opacity: .72; transition: opacity 160ms var(--ease-press), transform 160ms var(--ease-press);
+}
+#project-dialog .gallery-thumbnails button img { height: 100% !important; width: auto !important; max-width: none !important; object-fit: contain; }
+#project-dialog .gallery-thumbnails button:hover { opacity: 1; }
+#project-dialog .gallery-thumbnails button[aria-pressed="true"] { opacity: 1; border: 3px solid var(--ink) !important; box-shadow: 4px 4px 0 var(--acid) !important; transform: translateY(-2px); }
+
+/* Reading column: one rhythm, no boxed facts pretending to be buttons. */
+#project-dialog :is(.detail-role, .detail-story) h3,
+#project-dialog .case-study > h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem) !important; margin-bottom: 12px; }
+#project-dialog .case-facts { display: grid; gap: 0 !important; margin: 0 0 var(--s3) !important; padding: 0 !important; border-top: 1.5px solid var(--ink); }
+#project-dialog .case-facts li {
+  display: block; margin: 0 !important; padding: 12px 0 !important; border: 0 !important; border-bottom: 1px solid var(--ink-15, rgba(73,43,81,.15)) !important;
+  background: none !important; box-shadow: none !important; font-weight: 700; font-size: var(--fs-body) !important;
+}
+#project-dialog .project-materials { margin-top: var(--s5, 48px); }
+
+/* Phones: previous / next is a sticky bar in thumb reach (R8). */
+@media (max-width: 760px) {
+  #project-detail { padding-bottom: 0; }
+  #project-dialog .detail-head { padding-top: var(--s5, 48px); }
+  #project-dialog .gallery-stage { min-height: 0; }
+  #project-dialog .gallery-thumbnails button { height: 64px !important; }
+  #project-dialog .detail-footer {
+    position: sticky; bottom: 0; z-index: 20;
+    display: grid !important; grid-template-columns: 1fr 1fr; gap: 0 !important;
+    margin: var(--s5, 48px) calc(-1 * var(--page-pad)) 0 !important; padding: 0 !important; border: 0 !important;
+    background: var(--ink); box-shadow: 0 -6px 0 var(--acid);
+  }
+  #project-dialog .detail-footer button {
+    min-height: 56px; justify-content: center; color: var(--paper) !important; background: none !important; border: 0 !important;
+    font: 700 .8125rem/1 var(--label); letter-spacing: .06em; text-transform: uppercase;
+  }
+  #project-dialog .detail-footer button + button { border-left: 1px solid color-mix(in srgb, var(--paper) 30%, transparent) !important; }
+  html[lang="ko"] #project-dialog .detail-footer button { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .9375rem; }
+}
+
+/* ---------- Page transitions (View Transitions; app.js) ------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(project-cover) { animation-duration: 620ms; animation-timing-function: var(--ease-plate); z-index: 10; }
+  ::view-transition-old(project-cover), ::view-transition-new(project-cover) { animation-duration: 620ms; height: 100%; object-fit: contain; }
+  html.vt-open::view-transition-old(root) { animation: 520ms var(--ease-plate) both vt-hold; }
+  html.vt-open::view-transition-new(root) { animation: 620ms var(--ease-plate) both vt-sheet-in; }
+  html.vt-close::view-transition-old(root) { animation: 560ms var(--ease-plate) both vt-sheet-out; z-index: 2; }
+  html.vt-close::view-transition-new(root) { animation: 560ms var(--ease-plate) both vt-hold; }
+  html.vt-swap::view-transition-old(root), html.vt-swap::view-transition-new(root) { animation-duration: 220ms; }
+  @keyframes vt-sheet-in  { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes vt-sheet-out { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 100% 0); } }
+  @keyframes vt-hold { from { opacity: 1; } to { opacity: 1; } }
+
+  /* Opener elements set in sequence once the sheet lands. */
+  #project-dialog[open] .detail-head > * { animation: rise 520ms var(--ease-press) both; }
+  #project-dialog[open] .detail-head > :nth-child(2) { animation-delay: 90ms; }
+  #project-dialog[open] .detail-head > :nth-child(3) { animation-delay: 160ms; }
+  #project-dialog[open] .detail-head > :nth-child(4) { animation-delay: 230ms; }
+  #project-dialog[open] .detail-head .detail-number { animation: register-in 760ms var(--ease-press) both; }
+  @keyframes register-in { from { text-shadow: .3em -.1em 0 transparent; transform: translateX(-.06em); } 50% { text-shadow: .2em .14em 0 var(--misreg); } to { text-shadow: .045em .035em 0 var(--misreg); transform: none; } }
+}
+
+/* ---------- Back on the main page: "you were here" ----------------------
+   After closing a project the band you came from is re-printed: the riso
+   registration stamp lands on its number, a lime pass sweeps across the
+   band, and the number takes a full ink pass before settling (press.js). */
+.return-stamp, .return-sweep { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .project-card.is-returning .return-stamp {
+    display: block; position: absolute; z-index: 5; pointer-events: none;
+    width: 112px; aspect-ratio: 224 / 173; margin: -36px 0 0 -40px;
+    background: url('assets/riso/lib/quarter-target--0d756a39498b.webp') center / contain no-repeat;
+    animation: stamp 1500ms var(--ease-press) both;
+  }
+  .project-card.is-returning .return-sweep {
+    display: block; position: absolute; z-index: 1; pointer-events: none;
+    left: -100vmax; right: -100vmax; height: 22px; background: var(--acid);
+    transform-origin: left center; animation: sweep 1300ms var(--ease-plate) both;
+  }
+  .project-collection > .project-card:nth-child(4n+2).is-returning .return-sweep { background: var(--ink); }
+  .project-card.is-returning .project-index { animation: ink-pass 1500ms var(--ease-press) both !important; }
+  @keyframes stamp { 0% { opacity: 0; transform: scale(2.6) rotate(-35deg); } 28% { opacity: 1; transform: scale(.92) rotate(4deg); } 40% { transform: scale(1) rotate(0); } 80% { opacity: 1; } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes sweep { 0% { transform: scaleX(0); opacity: 1; } 45% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+  @keyframes ink-pass { 0%, 15% { color: transparent; } 35%, 65% { color: var(--band-ink, var(--ink)); text-shadow: .12em .1em 0 var(--misreg, var(--acid)); } 100% { color: transparent; text-shadow: .045em .035em 0 var(--misreg, var(--acid)); } }
+}
+#project-dialog .detail-head { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: none !important; grid-auto-flow: row !important; text-align: left !important; }
+#project-dialog .detail-head > * { grid-column: 1 / -1 !important; grid-row: auto !important; margin-inline: 0 !important; }
+@media (max-width: 760px) {
+  #project-dialog .detail-footer button { display: flex !important; align-items: center; justify-content: center; text-align: center; padding: 0 12px !important; font-size: .75rem !important; letter-spacing: .04em !important; line-height: 1.25 !important; }
+}

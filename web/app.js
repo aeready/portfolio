@@ -15,25 +15,33 @@
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? true;
   const revealSelectors = '.hero-art,.hero-copy,.section-heading,.work-tools,.project-card,.section-intro,.training-rows,.timeline article,.qualifications,.contact-section';
   let revealObserver = null;
-  let listScrollY = 0;
+  let listScrollY = 0, closingProject = false;
   let sectionObserver = null, timelineObserver = null;
-  // Card-to-dialog morphing is disabled: the dialog opens in place, without a shared-element transition.
-  const supportsViewTransitions = false;
-  function withViewTransition(callback, sharedCard = null) {
+  // Press run (R6): the card's cover morphs into the project page's gallery and back,
+  // while the page itself feeds in and out like a sheet. Native View Transitions only;
+  // without them (or under reduced motion) the page simply opens and closes.
+  const supportsViewTransitions = typeof document.startViewTransition === 'function';
+  function withViewTransition(callback, sharedCard = null, direction = '') {
     if (reduceMotion || !supportsViewTransitions) { callback(); return; }
+    const cardCover = () => sharedCard?.querySelector?.('.artifact-main-frame') || null;
+    const pageCover = () => $('#open-image');
+    const name = (el, value) => { if (el) el.style.viewTransitionName = value; };
     try {
-      if (sharedCard) sharedCard.style.viewTransitionName = 'project-detail';
+      document.documentElement.classList.add('vt-' + (direction || 'swap'));
+      name(direction === 'close' ? pageCover() : cardCover(), 'project-cover');
       const transition = document.startViewTransition(() => {
-        if (sharedCard) $('#project-detail .detail-head').style.viewTransitionName = 'project-detail';
+        name(direction === 'close' ? pageCover() : cardCover(), '');
         callback();
+        name(direction === 'close' ? cardCover() : pageCover(), 'project-cover');
       });
       const cleanup = () => {
-        if (sharedCard) sharedCard.style.viewTransitionName = '';
-        const detailHead = $('#project-detail .detail-head');
-        if (detailHead) detailHead.style.viewTransitionName = '';
+        name(cardCover(), ''); name(pageCover(), '');
+        document.documentElement.classList.remove('vt-open', 'vt-close', 'vt-swap');
       };
+      transition.ready.catch(() => {});
       transition.finished.then(cleanup, cleanup);
-    } catch { if (sharedCard) sharedCard.style.viewTransitionName = ''; callback(); }
+      return transition;
+    } catch { name(cardCover(), ''); name(pageCover(), ''); document.documentElement.classList.remove('vt-open', 'vt-close', 'vt-swap'); callback(); }
   }
   function prepareReveals(root = document) {
     if (reduceMotion || !('IntersectionObserver' in window)) return;
@@ -234,7 +242,7 @@
     renderThumbnails(); renderSlide(); renderDownloadState();
     if (!wasOpen) {
       const sourceCard = typeof grid.querySelectorAll === 'function' ? [...grid.querySelectorAll('[data-project-card]')].find(card => card.dataset.projectCard === id) || null : null;
-      withViewTransition(() => { dialog.showModal(); document.body.classList.add('modal-open'); }, sourceCard);
+      withViewTransition(() => { dialog.showModal(); document.body.classList.add('modal-open'); }, sourceCard, 'open');
     }
     dialog.scrollTop = 0;
     $('#close-dialog').focus({preventScroll:true});
@@ -394,7 +402,14 @@
     if (location.hash.startsWith('#project/')) {
       const id = location.hash.slice(9);
       if (!dialog.open || activeProject?.id !== id) openProject(id, false);
-    } else if (dialog.open) dialog.close();
+    } else if (dialog.open) {
+      if (closingProject) return;
+      closingProject = true;
+      const done = () => { closingProject = false; };
+      const card = activeProject && typeof grid.querySelectorAll === 'function' ? [...grid.querySelectorAll('[data-project-card]')].find(c => c.dataset.projectCard === activeProject.id) || null : null;
+      const transition = withViewTransition(() => { dialog.close(); document.body.classList.remove('modal-open'); window.scrollTo({top:listScrollY, behavior:'instant'}); }, card, 'close');
+      if (transition?.updateCallbackDone) transition.updateCallbackDone.then(done, done); else done();
+    }
     else if (lastFocus && Number.isFinite(listScrollY)) window.scrollTo({top:listScrollY, behavior:'instant'});
   }
   window.addEventListener('hashchange', syncRoute); window.addEventListener('popstate', syncRoute);
