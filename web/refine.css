@@ -562,3 +562,12 @@ html[lang="ko"] .project-card .project-title { color: var(--band-ink); font-size
   border-image: linear-gradient(var(--ink), var(--ink)) 1 / 6px 0 0 0 / 0 100vmax;
 }
 html[lang="ko"] .project-collection .project-card .project-title { word-break: keep-all; }
+
+/* Professional background: the house polka-dot texture, colour-swapped to aubergine on cream,
+   so the section separates from the cream 08 spread above it. */
+.background-section {
+  border-top: 6px solid var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(circle, rgba(73, 43, 81, .2) .9px, transparent 1.3px);
+  background-size: 6px 6px;
+}
