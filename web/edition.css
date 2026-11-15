@@ -121,3 +121,44 @@ html[lang="ko"] #project-dialog .detail-story :is(p, li) { line-height: 1.8 !imp
 /* "My role" label on the lead statement's first baseline. */
 #project-dialog .detail-role { align-items: first baseline; }
 #project-dialog .detail-role > h3 { grid-row: 1 !important; padding-top: 0 !important; }
+
+/* ---------- Group 3 · Composition ---------------------------------------- */
+
+/* One left edge. The hero's text block started at 80 px at 1440 (everything
+   else at 152) and touched both screen edges at 1024. It now uses the same
+   --edge as the header, title, sections and footer. */
+#home.hero--poster .hero-copy {
+  max-width: none !important; margin-inline: 0 !important;
+  padding-left: var(--edge) !important; padding-right: var(--edge) !important;
+}
+
+/* Lead project: an opening spread. The first band gives the work most of
+   the width and sets the title larger, so the order of the list reads in
+   the layout (it was the same weight as every other band). Desktop only;
+   follows whatever card leads the current filter. */
+@media (min-width: 1001px) {
+  .project-collection > .project-card:first-child {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important;
+    padding-block: clamp(96px, 9vw, 144px) !important; align-items: center !important;
+  }
+  .project-collection > .project-card:first-child .artifact-arrangement { align-self: center !important; }
+  .project-collection > .project-card:first-child .artifact-main-frame { width: 90% !important; }
+  .project-collection > .project-card:first-child .project-heading { container-type: inline-size; }
+  .project-collection > .project-card:first-child .project-title {
+    font-size: min(4.5rem, 14cqi) !important; line-height: .9 !important; max-width: none !important; /* longest word fits the column */
+  }
+  .project-collection > .project-card:first-child .project-index { font-size: calc(var(--fs-numeral) * 1.25) !important; }
+}
+@media (min-width: 1001px) {
+  html[lang="ko"] .project-collection > .project-card:first-child .project-title { line-height: 1.12 !important; }
+}
+
+/* Colophon: what the page is set in and printed with, under the licence. */
+.site-footer .footer-colophon {
+  grid-column: 1; max-width: 62ch; margin: 0;
+  font: 400 .8125rem/1.55 var(--read); color: var(--ink-text, #37243c); opacity: .78;
+}
+html[lang="ko"] .site-footer .footer-colophon { line-height: 1.7; }
+.site-footer .footer-colophon { text-transform: none !important; letter-spacing: 0 !important; }
+@media (max-width: 760px) { .site-footer .footer-links { order: 5; } }
+.site-footer .footer-licence a { white-space: nowrap; }

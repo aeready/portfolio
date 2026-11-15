@@ -26,6 +26,13 @@ New work for this round is in `web/edition.css` and `web/edition.js` (loaded aft
 - **Case study (USA Camp) width fix:** a paragraph-measure rule was squeezing the whole case study (facts, brief, the day-by-day plan) into a ~600 px column in both languages; the rows are full rail width again.
 - Checked: copy already uses curly quotes, real dashes and × throughout — nothing to change.
 
+### Group 3 · Composition
+- **One left edge.** The hero's text block started at 80 px at 1440 px wide while the logo, name, sections and footer start at 152 px; at 1024 px it touched both screen edges. It now uses the same page edge as everything else.
+- **Lead project as an opening spread** (desktop): the first band gives the work about 60% of the width, sets the numeral and title larger (the title is sized to its column so the longest word always fits), and has more air above and below. Korean title leading adjusted so the lines don't touch. It follows whatever card leads the current filter.
+- **Colophon** in the footer, both languages: "Set in Open Sans Condensed, Noto Sans, Noto Sans Mono and Noto Sans KR. Two inks, aubergine and lime, on cream paper." / "서체는 … 크림색 종이 위에 가지색과 라임색, 두 가지 잉크로 인쇄했습니다." On phones the footer links now come last. "CC BY-NC 4.0" no longer breaks across lines.
+- New script `scripts/build-korean-font.py` rebuilds the Korean subsets whenever new Korean text is added (it fetched 쇄 and 잉 for the colophon). Fonts renamed again: upload the three current `NotoSans-Korean-site*--*.woff2`.
+- Looked at and left alone: rule weights (already two weights: 1.5 px ink for section breaks, 1 px at 15% for rows) and the band ornaments (already pinned to band corners).
+
 ## 17 Nov 2026 — Booklet spreads and tap-to-zoom
 
 - **Desktop, portrait galleries (USA Camp workbook):** pages show as an open booklet: the cover alone on the right, then 2–3, 4–5 … side by side, the last page alone. Arrows, swipe and arrow keys turn a whole spread; the counter reads "2–3 / 18"; both pages are highlighted in the strip; the caption names both. Pages turn in from the spine (fade, slight 3-D turn, focus pull). The halftone shadow sits under the whole spread. Landscape decks are unchanged (one slide at a time).

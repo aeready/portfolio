@@ -580,7 +580,7 @@ html[lang="ko"] .project-collection .project-card .project-title { word-break: k
    ========================================================================== */
 @font-face {
   font-family: 'Portfolio KR Display';
-  src: url('assets/fonts/NotoSans-Korean-site-Black--dcb581d5a718.woff2') format('woff2');
+  src: url('assets/fonts/NotoSans-Korean-site-Black--53dac5fab926.woff2') format('woff2');
   font-style: normal; font-weight: 900; font-display: swap;
   unicode-range: U+AC00-D7AF;
 }
