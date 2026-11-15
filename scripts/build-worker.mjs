@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-const core=['index.html','style.css','overhaul-v2.css','refine.css','press.css','fixes.css','press-boot.js','press.js','preview-assets.js','projects.js','app.js','downloads.js','locales.js','originals.js'];
+const core=['index.html','style.css','overhaul-v2.css','refine.css','press.css','edition.css','fixes.css','press-boot.js','press.js','edition.js','preview-assets.js','projects.js','app.js','downloads.js','locales.js','originals.js'];
 const fileTypes={html:'text/html; charset=utf-8',css:'text/css; charset=utf-8',js:'text/javascript; charset=utf-8',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',avif:'image/avif',woff2:'font/woff2',otf:'font/otf',pdf:'application/pdf'};
 const sources=core.map(name=>fs.readFileSync(`web/${name}`,'utf8')).join('\n');
 const referenced=[...sources.matchAll(/assets\/[\w./()+ -]+?\.(?:svg|png|jpe?g|webp|avif|woff2?|otf|pdf)/g)].map(match=>match[0]);

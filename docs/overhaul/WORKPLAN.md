@@ -17,6 +17,7 @@ R7 "Texture is the substrate" were added in this overhaul).
 |---|---|
 | `web/style.css`, `overhaul-v2.css`, `refine.css` | Older layers (base colour-band layout). Rarely edited now. |
 | `web/press.css` | **Everything from this overhaul.** Loads after `refine.css`, before `fixes.css`. Appended in dated blocks; later blocks override earlier ones, so read it bottom-up when debugging. |
+| `web/edition.css`, `edition.js` | "Editorial edition" round (18 Nov): fixes, typography, composition, gallery ideas, motion. |
 | `web/fixes.css` | Accessibility fixes; stays last. |
 | `web/press-boot.js` | Tiny pre-paint gate for the once-per-session opening sequence (external file because the CSP forbids inline scripts). |
 | `web/press.js` | Progressive enhancement: opening sequence, motion v2 reveals (`.rv` / `.is-in`), project-page band colours + return stamp, phone filter control, phone menu height, gallery stage sizing + halftone shadow, phone tap-to-zoom viewer, in-page link landing fix, desktop varnish + registration cursor. |
@@ -39,8 +40,8 @@ R7 "Texture is the substrate" were added in this overhaul).
 ## Before publishing (owner does this; nothing is live yet)
 
 1. Review in a **private window** (opening sequence is once per session; phones cache old CSS).
-2. Upload to the Site bucket: `index.html`, `404.html`, `nf.css`, `nf.js`, `press.css`, `press.js`, `press-boot.js`, `fixes.css`, `app.js`, `locales.js`, `assets/riso/grain-*`, `assets/riso/mottle-*`, all of `assets/riso/lib/`, `assets/share-card--8c00ecbff6ae.jpg`.
-3. Delete from the bucket: removed library pieces (checker, target-cream, overprint, letter-u, hazard, corners-lime, op-waves, spiral, halftone-square, letter-crop, torn-layers, wave-band, halftone-fade), `assets/downloads/ordering-game-2025.pptx` and the ordering-game images (older to-do).
+2. Upload to the Site bucket: `index.html`, `404.html`, `nf.css`, `nf.js`, `press.css`, `press.js`, `press-boot.js`, `edition.css`, `edition.js`, `fixes.css`, `style.css`, `refine.css`, the three new `assets/fonts/NotoSans-Korean-site*--*.woff2`, `app.js`, `locales.js`, `assets/riso/grain-*`, `assets/riso/mottle-*`, all of `assets/riso/lib/`, `assets/share-card--8c00ecbff6ae.jpg`.
+3. Delete from the bucket: the old Korean subsets (`NotoSans-Korean-site--56c063187bf8`, `-Bold--9555065860f6`, `-Black--3c9618a2894e`), removed library pieces (checker, target-cream, overprint, letter-u, hazard, corners-lime, op-waves, spiral, halftone-square, letter-crop, torn-layers, wave-band, halftone-fade), `assets/downloads/ordering-game-2025.pptx` and the ordering-game images (older to-do).
 4. `node scripts/build-worker.mjs`, publish the Worker, then check live Content-Type headers for the new CSS/JS/WebP/JPG.
 
 ## How to continue in a new session

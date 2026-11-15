@@ -3,6 +3,18 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Editorial edition (owner said yes to the full list)
+
+New work for this round is in `web/edition.css` and `web/edition.js` (loaded after `press.css` / `press.js`). **Undo the whole round:** remove those two tags from `index.html` (and the two names from `scripts/build-worker.mjs`).
+
+### Group 1 · Fixes
+- **Project details / Source & scope** looked like empty rows: they were collapsed fold-outs whose open marker had been styled away. They are now ordinary open sections; the Audience / Context / Format facts sit in a ruled three-column row (one column on phones). Undo: restore the two `<details>` in `app.js` `openProject`.
+- **Double rule above Project files** (rule, 48 px of nothing, rule) is now one rule. The empty "original download" block is hidden when there is no original to download.
+- **Project files card:** title + PDF chip on the left, "View in new tab" and "Download" side by side on the right (on phones: chip beside the title, links on one line under it). The "PD/F" chip break on phones is gone.
+- **Hero:** "Teacher trainer & / curriculum designer" now always sets on two lines on desktop (it was leaving "designer" alone on a third line).
+- **"My background" button** had no bottom edge (an older rule removed it). It is now a complete outlined box, same height as "Explore work", lime on hover.
+- **Korean font gaps closed.** The three Korean subsets (regular, bold, black) were rebuilt from the full Noto Sans KR (same design and metrics) and now include every syllable the site uses; the 11 that fell back to another font (것 난 누 듭 쉬 엇 웠 잘 좋 째 흥) now match. Files are ~30% smaller. New check: `python3 scripts/check-korean-font.py`. Undo: restore the three old font files and their names in `style.css` / `refine.css`.
+
 ## 17 Nov 2026 — Booklet spreads and tap-to-zoom
 
 - **Desktop, portrait galleries (USA Camp workbook):** pages show as an open booklet: the cover alone on the right, then 2–3, 4–5 … side by side, the last page alone. Arrows, swipe and arrow keys turn a whole spread; the counter reads "2–3 / 18"; both pages are highlighted in the strip; the caption names both. Pages turn in from the spine (fade, slight 3-D turn, focus pull). The halftone shadow sits under the whole spread. Landscape decks are unchanged (one slide at a time).
