@@ -1285,3 +1285,5 @@ html[lang="ko"] #project-dialog details > summary { font-family: var(--read); le
 #project-dialog .gallery-stage { aspect-ratio: auto !important; max-height: none !important; min-height: 0 !important; height: auto !important; overflow: visible !important; }
 @media (max-width: 760px) { #project-dialog .close-button { font-size: 0 !important; } }
 #project-dialog .gallery-controls { margin-top: calc(var(--s4, 32px) + 22px) !important; }
+#project-dialog .detail-role > p:first-of-type { max-width: min(100%, 26ch * 2.2) !important; }
+#project-dialog .detail-role > p:first-of-type strong { max-width: 24ch; }
