@@ -3,6 +3,14 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 — Fifth pass
+
+- **Desktop language switch** is lime (aubergine on hover), matching the phone Contact button.
+- **USA Camp band piece:** the halftone blot replaced with a registration grid from the owner's riso library (`reg-grid`); `halftone-fade` deleted.
+- **Gallery:** the lime "open full size" arrow badge is gone on all screens (tapping the image still opens it full size).
+- **Slide change motion:** a soft dissolve (fade, slight lift and focus pull, 460 ms) instead of a wipe from the top.
+- Note: the owner's phone screenshots were of the previous upload; the strip-under-the-image layout and deck-sized gallery from the fourth pass are in this branch.
+
 ## 17 Nov 2026 — Fourth pass (owner's phone review)
 
 - **Hero proof numbers:** always two side-by-side columns in both languages (English stacked when the phone's text size was larger).

@@ -80,7 +80,7 @@ body,
 .project-collection > .project-card:nth-child(7n+2) { --orn: none; }
 .project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/moon-overprint--7871739a814c.webp');       --orn-ratio: 357 / 350; --orn-w: 330px; }
 .project-collection > .project-card:nth-child(7n+4) { --orn: none; }
-.project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/lib/halftone-fade--bc3bbc9aa7b8.webp'); --orn-ratio: 629 / 320; --orn-w: 480px; }
+.project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/lib/reg-grid--ee1a29799b16.webp'); --orn-ratio: 437 / 203; --orn-w: 420px; }
 .project-collection > .project-card:nth-child(7n+6) { --orn: none; }
 .project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/quarter-target--0d756a39498b.webp');  --orn-ratio: 368 / 374; --orn-w: 340px; }
 
@@ -1528,3 +1528,27 @@ html { overflow-x: clip; }
 }
 .hero .hero-actions > a { white-space: nowrap; }
 @media (max-width: 380px) { .hero .hero-actions { grid-template-columns: 1fr !important; } }
+
+/* ==========================================================================
+   Fifth pass (17 Nov 2026)
+   ========================================================================== */
+/* Desktop: the language switch in lime, like Contact on phones. */
+@media (min-width: 761px) {
+  .site-header .language-toggle { background: var(--acid) !important; color: var(--ink) !important; border-color: var(--ink) !important; }
+  .site-header .language-toggle:hover { background: var(--ink) !important; color: var(--acid) !important; }
+}
+
+/* Gallery: no "open full size" badge (the image itself still opens full
+   size); the viewing room hugs the work. */
+#project-dialog .gallery-stage .image-enlarge { display: none !important; }
+
+/* Slide change: a soft dissolve — the new page fades and settles into place
+   from slightly soft focus, instead of wiping down from the top. */
+@media (prefers-reduced-motion: no-preference) {
+  #project-dialog #gallery-image.slide-enter { animation: slide-settle 460ms cubic-bezier(.2, .7, .1, 1) both !important; }
+  @keyframes slide-settle {
+    from { opacity: 0; transform: translateY(8px) scale(.985); filter: blur(5px); }
+    60%  { opacity: 1; filter: blur(0); }
+    to   { opacity: 1; transform: none; filter: none; }
+  }
+}
