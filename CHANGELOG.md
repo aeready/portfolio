@@ -49,6 +49,17 @@ Approved by Anna on 15 Nov 2026 (game plan, then "go ahead"). Rules R6 and R7 ad
 - **Motion** (View Transitions where supported; reduced motion gets instant open/close): the card's cover morphs into the page's gallery while the page feeds up like a sheet. On the way back the page feeds off, the cover flies back into its band, and the band you came from is re-printed: a riso registration stamp lands on its number, a lime pass sweeps across the band, and the number takes a full ink pass before settling, so you can see where you are.
 - **Undo:** delete the "Phase 4" block in `press.css` and the project-page section of `press.js`; remove the `.dialog-contact` link from `index.html`; restore `withViewTransition` in `app.js` from the previous commit.
 
+### Phase 5 — QA
+- Checked in Chromium at 320, 375, 430, 768, 1024, 1280 and 1440 px, English and Korean, home page and project page: no text under 12 px, every control at least 44 × 44 px, nothing cut off.
+- Fixed on the way: Close label 11.5 → 12 px; the page bar's Contact 40 → 44 px tall on phones; Korean "이력서" nav link 42 → 44 px wide; "PROJECTS" and "CONTACT" lost their last letter after the slide-in; "Contact me" ran under the email button at 768 px (both languages); the circles ornament covered "PROFESSIONAL" on tablets; the project page could be shifted sideways by focus (overflow fix).
+- Flows tested: open a project, Escape / Back / Close return focus to its card; the page bar's Contact lands on Contact with the email button focused and on screen; direct links (`#project/…`) open without the opening sequence; browser Back closes the page; reduced motion shows no sequence, no scroll effects, no lime cursor ring.
+- All validators pass: `validate.mjs` (also with direct entry), `validate-locales.mjs`, `validate-downloads.mjs`, `build-worker.mjs`, `validate-worker.mjs`. No new Korean characters were added, so the font subset is unchanged.
+
+### Owner to do before publishing
+- Review on your phone and laptop (the opening sequence shows once per session; open a private window to see it again).
+- Upload to the site bucket: `press.css`, `press.js`, `press-boot.js`, `fixes.css`, the changed `index.html`, `404.html`, `app.js`, and the new images in `assets/riso/` (`grain-ink`, `grain-paper`, `mottle-ink`, `mottle-light`) and `assets/riso/lib/` (15 files). Then publish the rebuilt Worker.
+- Check the live Content-Type headers for the new CSS, JS and WebP files.
+
 ## 15 Nov 2026
 
 ### Remove the ordering-food game project
