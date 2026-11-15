@@ -1287,3 +1287,13 @@ html[lang="ko"] #project-dialog details > summary { font-family: var(--read); le
 #project-dialog .gallery-controls { margin-top: calc(var(--s4, 32px) + 22px) !important; }
 #project-dialog .detail-role > p:first-of-type { max-width: min(100%, 26ch * 2.2) !important; }
 #project-dialog .detail-role > p:first-of-type strong { max-width: 24ch; }
+
+/* ==========================================================================
+   Third pass (17 Nov 2026) — real-device fixes
+   ========================================================================== */
+/* Phones widened the layout to ~960 px to fit full-bleed band textures (the
+   "void" to the right). Clip at element level, not only on body. */
+main, .site-header, .site-footer, .project-collection, .section-ribbon, #background, #contact { overflow-x: clip; }
+html { overflow-x: clip; }
+/* The hero artwork must never sit on top of the hero buttons. */
+#home .hero-art { pointer-events: none; }

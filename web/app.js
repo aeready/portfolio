@@ -415,8 +415,10 @@
       const transition = withViewTransition(() => { dialog.close(); document.body.classList.remove('modal-open'); window.scrollTo({top:listScrollY, behavior:'instant'}); }, card, 'close');
       if (transition?.updateCallbackDone) transition.updateCallbackDone.then(done, done); else done();
     }
-    else if (lastFocus && Number.isFinite(listScrollY)) window.scrollTo({top:listScrollY, behavior:'instant'});
+    else if (cameFromProject && lastFocus && Number.isFinite(listScrollY)) window.scrollTo({top:listScrollY, behavior:'instant'});
+    cameFromProject = location.hash.startsWith('#project/');
   }
+  let cameFromProject = location.hash.startsWith('#project/');
   window.addEventListener('hashchange', syncRoute); window.addEventListener('popstate', syncRoute);
   setLanguage(language, false);
   if (location.hash.startsWith('#project/') && !history.state?.portfolioProject) {

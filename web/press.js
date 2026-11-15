@@ -86,6 +86,29 @@
     });
   }
 
+  /* ---------- In-page links land where they say ------------------------
+     Lazy images load during a smooth scroll and push the target down, so
+     the jump falls short. After the scroll settles, correct it once. */
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('a[href^="#"]');
+    const hash = link?.getAttribute('href');
+    if (!hash || hash === '#' || hash.startsWith('#project/')) return;
+    const target = document.querySelector(hash);
+    if (!target) return;
+    let settled = 0;
+    const land = () => {
+      const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      const off = target.getBoundingClientRect().top - pad;
+      if (hash === '#home' ? window.scrollY > 2 : Math.abs(off) > 4) {
+        if (hash === '#home') window.scrollTo({top: 0, behavior: 'instant'});
+        else window.scrollTo({top: window.scrollY + off, behavior: 'instant'});
+      }
+    };
+    const onEnd = () => { if (settled++) return; window.removeEventListener('scrollend', onEnd); land(); window.setTimeout(land, 250); };
+    window.addEventListener('scrollend', onEnd);
+    window.setTimeout(onEnd, 1600);
+  });
+
   /* ---------- Spot varnish follows the pointer across covers (desktop) ---- */
   if (window.matchMedia?.('(hover: hover) and (pointer: fine)').matches && !reduceMotion) {
     document.addEventListener('pointermove', event => {
