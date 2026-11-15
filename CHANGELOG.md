@@ -30,6 +30,8 @@ Second audit (owner's brief: "look like a team of expensive designers made it"; 
 - **View buttons** are solid in each band's contrast ink (aubergine on paper and lime, lime on aubergine) so they never blend into the band.
 - Checks: decoration pixel test 0% on text and the cover at 375/768/1024/1440 px EN/KO; no text under 12 px, every control ≥ 44 px; all validators pass.
 - **Project page gallery** gets the same halftone print shadow (replacing the soft blur and crop marks).
+- **Project gallery, redesigned as a viewing room:** the gallery now spans the page on a dark aubergine ground directly under the opener. The work is shown as large as the screen allows (up to 70% of the screen height) as a print with a lime halftone shadow; no box around it. The counter is set as type (a large "6" over "/ 18" and the slide's own label). 64 px arrows. The strip is a numbered contact sheet; the current frame is lit. Each new page is laid down with a quick top-to-bottom wipe.
+- **Project page reading order** (owner: "cream, wordy, no eye line"): gallery → role as a large lead statement → every section on a left label rail with its text on one measure to the right → files. Facts as a ruled row. Sections set in as you scroll. Content unchanged.
 - **Share card:** a 1200 × 630 poster image (`assets/share-card--8c00ecbff6ae.jpg`) and Open Graph / Twitter tags, so links pasted into KakaoTalk, LinkedIn or Slack show the poster instead of a blank box. The site is still `noindex`, so search engines stay out.
 
 ## 15–16 Nov 2026 — "Press run": texture, type, motion, project pages

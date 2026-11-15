@@ -1095,3 +1095,193 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 }
 #project-dialog .gallery-stage { overflow: visible !important; }
 #project-dialog .gallery-stage > img { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   Project gallery, redesigned (16 Nov 2026): a viewing room.
+   The gallery leaves the narrow column and spans the page on an aubergine
+   ground, like prints pinned in a dark room; the work is as large as the
+   screen allows; the counter is set as type; the strip is a contact sheet.
+   ========================================================================== */
+#project-dialog .detail-body { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important; grid-template-areas: 'left left' 'role story' !important; }
+#project-dialog .detail-left { position: static !important; display: contents; }
+#project-dialog .gallery { grid-column: 1 / -1; grid-row: 1; }
+#project-dialog .project-materials { grid-column: 1 / -1; grid-row: 3; margin-top: var(--s5, 48px); }
+#project-dialog .detail-role { grid-row: 2; grid-column: 1; }
+#project-dialog .detail-story { grid-row: 2; grid-column: 2; }
+@media (max-width: 1000px) {
+  #project-dialog .detail-body { grid-template-columns: minmax(0, 1fr) !important; }
+  #project-dialog :is(.gallery, .detail-role, .detail-story, .project-materials) { grid-column: 1 !important; grid-row: auto !important; }
+}
+
+#project-dialog .gallery {
+  --room: var(--ink); --room-ink: var(--paper); --room-dot: var(--acid);
+  position: relative; isolation: isolate;
+  display: grid !important; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'tabs tabs' 'stage stage' 'count arrows' 'caption caption' 'strip strip';
+  gap: 0 24px; margin: calc(-1 * var(--s6, 64px)) 0 var(--s5, 48px) !important; padding: clamp(32px, 5vw, 72px) 0 clamp(24px, 3vw, 40px) !important;
+  background: var(--room) !important; box-shadow: 0 0 0 100vmax var(--room) !important; clip-path: inset(0 -100vmax);
+  color: var(--room-ink);
+}
+#project-dialog[data-band="3"] .gallery { --room: #2c1a31; }
+#project-dialog .gallery::after {
+  content: ''; position: absolute; inset: 0 -100vmax; z-index: -1; pointer-events: none;
+  background: var(--grain-paper), var(--mottle-light); background-size: 320px 320px, 512px 512px;
+}
+#project-dialog .gallery-tabs { grid-area: tabs; margin: 0 0 var(--s3, 24px) !important; }
+#project-dialog .gallery-tabs button { color: var(--room-ink) !important; background: none !important; border: 0 !important; border-bottom: 2px solid transparent !important; box-shadow: none !important; min-height: 44px; }
+#project-dialog .gallery-tabs button[aria-pressed="true"] { border-bottom-color: var(--acid) !important; }
+
+/* The stage: no box. The page itself floats, with its halftone shadow. */
+#project-dialog .gallery-stage {
+  grid-area: stage; min-height: 0 !important; height: min(70vh, 760px); padding: 0 !important;
+  background: none !important; border: 0 !important; box-shadow: none !important; cursor: zoom-in;
+}
+#project-dialog .gallery-stage::before { content: none !important; }
+#project-dialog #gallery-image {
+  max-height: 100% !important; max-width: 100% !important; width: auto !important; height: auto !important;
+  border: clamp(4px, .5vw, 8px) solid var(--paper); background: var(--paper);
+  filter: drop-shadow(14px 16px 0 transparent);
+  box-shadow: 14px 16px 0 -1px transparent;
+}
+#project-dialog .gallery-stage { --dots: radial-gradient(circle, var(--room-dot) 1.15px, transparent 1.45px); }
+#project-dialog .gallery-stage .image-enlarge { top: 12px !important; right: 12px !important; }
+
+/* Counter set as type: "03" huge, "/ 18" small, the slide's own label after. */
+#project-dialog .gallery-controls { grid-area: count / count / arrows / arrows; margin-top: var(--s4, 32px) !important; }
+#project-dialog #slide-count {
+  font: 700 clamp(2.5rem, 1.5rem + 3vw, 4.5rem)/.9 var(--display) !important; letter-spacing: -.01em !important;
+  color: var(--room-ink) !important; text-shadow: .05em .045em 0 var(--acid);
+}
+#project-dialog .gallery-controls button {
+  min-width: 64px !important; min-height: 64px !important; border: 1.5px solid var(--room-ink) !important;
+  background: transparent !important; color: var(--room-ink) !important; font-size: 1.5rem !important;
+}
+#project-dialog .gallery-controls button:not(:disabled):hover { background: var(--acid) !important; color: var(--ink) !important; border-color: var(--acid) !important; }
+#project-dialog .gallery-controls button:disabled { opacity: .25; }
+#project-dialog .gallery-caption { grid-area: caption; margin: 12px 0 0 !important; color: color-mix(in srgb, var(--room-ink) 88%, transparent) !important; font-size: var(--fs-lead) !important; max-width: 62ch; }
+
+/* Contact sheet: numbered frames on the dark ground; the current one is lit. */
+#project-dialog .gallery-thumbnails { grid-area: strip; counter-reset: frame; margin-top: var(--s4, 32px) !important; gap: 14px !important; padding: 22px 4px 10px !important; scrollbar-color: var(--acid) transparent; }
+#project-dialog .gallery-thumbnails button {
+  counter-increment: frame; position: relative; height: 92px !important;
+  border: 0 !important; background: var(--paper) !important; padding: 3px !important; opacity: .5;
+}
+#project-dialog .gallery-thumbnails button::before {
+  content: counter(frame, decimal-leading-zero); position: absolute; left: 0; top: -20px;
+  font: 700 .75rem/1 var(--label); letter-spacing: .06em; color: var(--room-ink);
+}
+#project-dialog .gallery-thumbnails button:hover { opacity: .85; }
+#project-dialog .gallery-thumbnails button[aria-pressed="true"] { opacity: 1; transform: translateY(-4px); box-shadow: 0 8px 0 -4px var(--acid) !important; border: 0 !important; }
+#project-dialog .gallery-thumbnails button[aria-pressed="true"]::before { color: var(--acid); }
+
+/* Each new page is laid down: a quick wipe, like a sheet onto the table. */
+@media (prefers-reduced-motion: no-preference) {
+  #project-dialog #gallery-image.slide-enter { animation: sheet-down 340ms var(--ease-press) both !important; }
+  @keyframes sheet-down { from { clip-path: inset(0 0 100% 0); transform: translateY(-10px); } to { clip-path: inset(0 0 0 0); transform: none; } }
+}
+@media (max-width: 760px) {
+  #project-dialog .gallery { margin-top: calc(-1 * var(--s6, 64px)) !important; padding: 28px 0 20px !important; }
+  #project-dialog .gallery-stage { height: auto; max-height: 64vh; }
+  #project-dialog #gallery-image { max-height: 60vh !important; }
+  #project-dialog .gallery-controls button { min-width: 52px !important; min-height: 52px !important; }
+  #project-dialog .gallery-thumbnails button { height: 68px !important; }
+}
+
+/* Gallery stage hugs the page so the halftone shadow sits on the print. */
+#project-dialog .gallery-stage { justify-self: center; width: fit-content !important; max-width: 100%; height: auto !important; display: block !important; }
+#project-dialog #gallery-image { display: block; max-height: min(70vh, 760px) !important; }
+#project-dialog .gallery-stage::before {
+  content: '' !important; position: absolute; inset: 0 -16px -18px 0 !important; z-index: -1 !important; translate: none !important;
+  background: radial-gradient(circle, var(--acid) 1.15px, transparent 1.45px) 0 0 / 5px 5px !important;
+  clip-path: polygon(calc(100% - 16px) 18px, 100% 18px, 100% 100%, 16px 100%, 16px calc(100% - 18px), calc(100% - 16px) calc(100% - 18px));
+  -webkit-mask-image: none !important; mask-image: none !important;
+}
+@media (max-width: 760px) { #project-dialog #gallery-image { max-height: 60vh !important; } }
+
+/* ---------- Reading: one eye line ----------------------------------------
+   Gallery → role as a lead statement → the story on a left label rail →
+   files. Labels on the left edge, text on one measure to their right, so
+   the eye runs straight down the rail (R1 grid, R7 alignment). */
+#project-dialog .detail-body { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: none !important; row-gap: 0 !important; }
+#project-dialog :is(.gallery, .detail-role, .detail-story, .project-materials) { grid-column: 1 !important; grid-row: auto !important; }
+#project-dialog .detail-role { order: 2; } #project-dialog .detail-story { order: 3; } #project-dialog .project-materials { order: 4; }
+#project-dialog .gallery { order: 1; }
+
+#project-dialog .detail-role {
+  display: grid; grid-template-columns: minmax(140px, 3fr) minmax(0, 9fr); gap: 12px clamp(24px, 4vw, 64px);
+  padding: var(--s5, 48px) 0; border-bottom: 1.5px solid var(--ink);
+}
+#project-dialog .detail-role > h3 { grid-column: 1; grid-row: 1 / span 2; }
+#project-dialog .detail-role > p { grid-column: 2; margin: 0; max-width: 46ch; }
+#project-dialog .detail-role > p:first-of-type strong {
+  display: block; font: 700 clamp(1.75rem, 1.1rem + 2.2vw, 3.25rem)/1.05 var(--display); color: var(--ink);
+  letter-spacing: -.005em; text-transform: none;
+}
+html[lang="ko"] #project-dialog .detail-role > p:first-of-type strong { font-family: var(--read); line-height: 1.3; font-size: clamp(1.5rem, 1rem + 1.6vw, 2.5rem); word-break: keep-all; }
+#project-dialog .detail-role > p + p { font-size: var(--fs-lead); color: var(--ink-text); }
+
+/* Rail labels: every section heading becomes a small mono label on the left. */
+#project-dialog :is(.detail-role > h3, .detail-story h3, .detail-story h4, .project-materials > h3) {
+  font: 700 .8125rem/1.4 var(--label) !important; letter-spacing: .08em !important; text-transform: uppercase !important;
+  color: var(--ink) !important; margin: 0 !important; padding-top: .35em; text-shadow: none !important;
+}
+html[lang="ko"] #project-dialog :is(.detail-role > h3, .detail-story h3, .detail-story h4, .project-materials > h3) { font-family: var(--read) !important; letter-spacing: 0 !important; font-size: .9375rem !important; }
+
+#project-dialog .detail-story > *, #project-dialog .case-study > *:not(h3) {
+  display: grid; grid-template-columns: minmax(140px, 3fr) minmax(0, 9fr); gap: 8px clamp(24px, 4vw, 64px);
+  padding: var(--s4, 32px) 0; border-bottom: 1px solid var(--ink-15, rgb(73 43 81 / .15)); margin: 0 !important;
+}
+#project-dialog .detail-story > .case-study { display: block; padding: 0; border: 0; }
+#project-dialog .case-study > h3 { display: none; }
+#project-dialog .detail-story :is(section, div, .case-block) > :not(h3):not(h4) { grid-column: 2; max-width: 62ch; }
+#project-dialog .detail-story :is(h3, h4) { grid-column: 1; }
+#project-dialog .case-facts { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important; gap: 0 24px !important; border-top: 0 !important; }
+#project-dialog .case-facts li { border-top: 1.5px solid var(--ink) !important; border-bottom: 0 !important; font-size: var(--fs-lead) !important; }
+#project-dialog .case-days { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+#project-dialog .case-days li { display: grid; grid-template-columns: 11ch 1fr; gap: 16px; }
+#project-dialog .case-days li strong { font: 700 .875rem/1.5 var(--read); }
+#project-dialog .case-days li p { margin: 0; }
+#project-dialog .detail-callout { grid-column: 2; max-width: 52ch; font: 400 italic var(--fs-lead)/1.5 var(--read); }
+#project-dialog details { display: block !important; }
+#project-dialog details > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font: 700 .8125rem/1.4 var(--label); letter-spacing: .08em; text-transform: uppercase; }
+html[lang="ko"] #project-dialog details > summary { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .9375rem; }
+
+#project-dialog .project-materials { display: grid; grid-template-columns: minmax(140px, 3fr) minmax(0, 9fr); gap: 12px clamp(24px, 4vw, 64px); padding-top: var(--s5, 48px); }
+#project-dialog .project-materials > h3 { grid-column: 1; grid-row: 1 / span 3; }
+#project-dialog .project-materials > :not(h3) { grid-column: 2; }
+
+@media (max-width: 760px) {
+  #project-dialog :is(.detail-role, .detail-story > *, .case-study > *:not(h3), .project-materials) { grid-template-columns: minmax(0, 1fr) !important; }
+  #project-dialog .detail-story :is(section, div, .case-block) > :not(h3):not(h4),
+  #project-dialog :is(.detail-role, .project-materials) > * { grid-column: 1 !important; grid-row: auto !important; }
+  #project-dialog .case-days li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+
+/* Sections set in as they scroll into the page (dialog scroller). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #project-dialog :is(.detail-role, .detail-story > *, .case-study > *:not(h3), .project-materials) {
+      animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 60%;
+    }
+    #project-dialog .detail-role > p:first-of-type strong { animation: wipe-right linear both; animation-timeline: view(); animation-range: entry 10% entry 70%; }
+  }
+}
+
+/* Gallery grid, explicit rows: tabs · stage · counter+arrows · caption · strip. */
+#project-dialog .gallery { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: none !important; }
+#project-dialog .gallery > * { grid-column: 1 !important; grid-row: auto !important; }
+#project-dialog .gallery-controls { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+#project-dialog #slide-count { font: 700 1rem/1 var(--label) !important; letter-spacing: .04em !important; text-shadow: none !important; color: var(--room-ink) !important; }
+#project-dialog #slide-count .count-now {
+  font: 700 clamp(3rem, 2rem + 3vw, 5rem)/.8 var(--display); letter-spacing: -.01em; margin-right: .1em;
+  text-shadow: .05em .045em 0 var(--acid);
+}
+#project-dialog #slide-count .count-source { display: block; margin-top: 10px; font: 400 .875rem/1.4 var(--read); letter-spacing: 0; opacity: .8; }
+
+/* Rail rows: only the real sections, never nested, full width. */
+#project-dialog .detail-story :is(section, div, .case-block) > :not(h3):not(h4) { max-width: 62ch !important; }
+#project-dialog :is(.detail-story > *, .case-study > *:not(h3)) { max-width: none !important; width: 100%; }
+#project-dialog .case-block > :is(p, ol, ul) { max-width: 62ch !important; }
+#project-dialog .evidence-section { border: 0 !important; border-bottom: 1px solid var(--ink-15, rgb(73 43 81 / .15)) !important; padding: var(--s4, 32px) 0 !important; }
+#project-dialog .gallery-stage { aspect-ratio: auto !important; max-height: none !important; min-height: 0 !important; height: auto !important; overflow: visible !important; }
+@media (max-width: 760px) { #project-dialog .close-button { font-size: 0 !important; } }
+#project-dialog .gallery-controls { margin-top: calc(var(--s4, 32px) + 22px) !important; }

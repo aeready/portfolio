@@ -189,7 +189,9 @@
       img.classList.add('slide-enter');
     }
     $('#gallery-caption').textContent = caption;
-    $('#slide-count').textContent = `${slideIndex + 1} / ${slides.length} · ${source}`;
+    const count = $('#slide-count');
+    count.textContent = `${slideIndex + 1} / ${slides.length} · ${source}`;
+    if (typeof count.insertAdjacentHTML === 'function') count.innerHTML = `<b class="count-now">${slideIndex + 1}</b> / ${slides.length}<span class="count-source">${escape(source)}</span>`;
     $('#previous-slide').disabled = slideIndex === 0;
     $('#next-slide').disabled = slideIndex === slides.length - 1;
     $('#open-image').href = src;
