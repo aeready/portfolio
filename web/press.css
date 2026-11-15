@@ -76,13 +76,13 @@ body,
 
 /* ---------- One oversized riso piece per band, cropped by the band edge --- */
 .project-collection > .project-card:nth-child(n) { --orn: none; --orn-w: 300px; --orn-ratio: 1; }
-.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/op-waves--a0060c426c31.webp');     --orn-ratio: 346 / 343; --orn-w: 340px; }
+.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/reg-circle--4a30f4ec4cba.webp');     --orn-ratio: 346 / 343; --orn-w: 340px; }
 .project-collection > .project-card:nth-child(7n+2) { --orn: none; }
-.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/spiral--2d5fd3c42d24.webp');       --orn-ratio: 357 / 350; --orn-w: 330px; }
+.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/moon-overprint--7871739a814c.webp');       --orn-ratio: 357 / 350; --orn-w: 330px; }
 .project-collection > .project-card:nth-child(7n+4) { --orn: none; }
 .project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/lib/halftone-fade--bc3bbc9aa7b8.webp'); --orn-ratio: 629 / 320; --orn-w: 480px; }
 .project-collection > .project-card:nth-child(7n+6) { --orn: none; }
-.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/torn-layers--ba3ba5b6235d.webp');  --orn-ratio: 368 / 374; --orn-w: 340px; }
+.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/quarter-target--0d756a39498b.webp');  --orn-ratio: 368 / 374; --orn-w: 340px; }
 
 .project-collection > .project-card:nth-child(n)::after {
   content: '' !important;
@@ -415,7 +415,7 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
 #home::after {
   content: ''; position: absolute; z-index: 0; pointer-events: none;
   left: calc(var(--gutter, 32px) - 64px); bottom: 8px; width: 260px; aspect-ratio: 438 / 207;
-  background: url('assets/riso/lib/halftone-square--f00538bc9280.webp') center / contain no-repeat; rotate: -4deg;
+  background: url('assets/riso/lib/halftone-disc--2be18b346bb8.webp') center / contain no-repeat; rotate: -4deg;
 }
 #home > * { position: relative; z-index: 1; }
 @media (max-width: 760px) { #home::after { width: 170px; left: -40px; bottom: 4px; } }
@@ -428,7 +428,7 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
     content: ''; position: absolute; z-index: 0; pointer-events: none;
     right: calc(-1 * 260px + (100vw - min(100vw, var(--measure))) / 2 - 40px); top: 22%;
     width: 420px; aspect-ratio: 416 / 389;
-    background: url('assets/riso/lib/letter-crop--affaeea73a5e.webp') center / contain no-repeat;
+    background: url('assets/riso/lib/grid-torn--10837020f74d.webp') center / contain no-repeat;
   }
 }
 
@@ -436,7 +436,7 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
 #trainer::after {
   content: ''; position: absolute; z-index: 3; pointer-events: none;
   right: var(--edge, 24px); top: -58px; width: min(46vw, 440px); aspect-ratio: 889 / 265;
-  background: url('assets/riso/lib/wave-band--eeab7612ff89.webp') center / contain no-repeat; rotate: -2.5deg;
+  background: none center / contain no-repeat; rotate: -2.5deg;
 }
 @media (max-width: 760px) { #trainer::after { top: -34px; width: 62vw; right: 12px; } }
 
@@ -1293,7 +1293,7 @@ html[lang="ko"] #project-dialog details > summary { font-family: var(--read); le
    ========================================================================== */
 /* Phones widened the layout to ~960 px to fit full-bleed band textures (the
    "void" to the right). Clip at element level, not only on body. */
-main, .site-header, .site-footer, .project-collection, .section-ribbon, #background, #contact { overflow-x: clip; }
+main, .site-header, .site-footer { overflow-x: clip; }
 html { overflow-x: clip; }
 /* The hero artwork must never sit on top of the hero buttons. */
 #home .hero-art { pointer-events: none; }
@@ -1405,3 +1405,91 @@ html { overflow-x: clip; }
   #project-dialog #gallery-image.slide-enter { animation: sheet-in 300ms var(--ease-press) both !important; }
   @keyframes sheet-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
 }
+
+/* ==========================================================================
+   Motion system v2 (17 Nov 2026). One rule: things are *printed* once,
+   completely, when they arrive — never scrubbed by the scroll position,
+   so nothing is ever left half-registered, tilted mid-way or ghosted.
+   Timing: 700 ms per element, 70 ms stagger, one curve (--ease-press).
+   Hidden states only apply when press.js is running (html.rv-on) and
+   motion is allowed; without JS everything is simply there.
+   ========================================================================== */
+
+/* 1. Retire the scroll-scrubbed animations and the arbitrary tilts. */
+.project-card .artifact-arrangement, .project-card .project-index,
+.project-card :is(.project-meta, .project-title, .wall-label, .project-copy > p, .project-foot),
+.project-collection > .project-card:nth-child(n)::after,
+#work .section-heading h2, .contact-section h2, .section-ribbon,
+.project-card .artifact-main-frame::after,
+.project-collection > .project-card.project-card .artifact-fixed {
+  animation: none !important; -webkit-mask-image: none; mask-image: none;
+}
+.project-card .artifact-main-frame::after { opacity: 0; }
+.project-collection > .project-card:nth-child(7n+6) .artifact-arrangement { rotate: none !important; }
+/* The pile: square, ordered. The top print sits straight; the two behind
+   it are set at a fixed ±2°, the same on every band (a system, not noise). */
+.project-collection > .project-card.project-card .artifact-main-frame { rotate: 0deg !important; }
+.project-collection > .project-card.project-card .artifact-fixed { rotate: 2deg !important; }
+.project-collection > .project-card.project-card .artifact-fixed.artifact-tertiary { rotate: -2deg !important; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-main-frame { translate: 0 -8px !important; rotate: 0deg !important; }
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-fixed { translate: 6% -4% !important; rotate: 3.5deg !important; }
+  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-fixed.artifact-tertiary { translate: -4% 6% !important; rotate: -3.5deg !important; }
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-fixed { translate: -6% -4% !important; rotate: -3.5deg !important; }
+  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-fixed.artifact-tertiary { translate: 4% 6% !important; rotate: 3.5deg !important; }
+}
+
+/* 2. The choreography. */
+@media (prefers-reduced-motion: no-preference) {
+  html.rv-on .rv:not(.is-in) { visibility: hidden; }
+  html.rv-on .rv.is-in { visibility: visible; }
+
+  /* Lines of type set one after another. */
+  html.rv-on .rv.is-in :is(.project-meta, .project-title, .wall-label, .project-copy > p, .project-foot, .section-heading > p, .work-tools,
+    .timeline-date, .timeline h3, .timeline p, .qualifications > div, .contact-section p, .contact-actions) {
+    animation: v2-rise 700ms var(--ease-press) both; animation-delay: calc(var(--i, 0) * 70ms + 120ms);
+  }
+  html.rv-on .rv.is-in .project-meta { --i: 1; } html.rv-on .rv.is-in .project-title { --i: 2; } html.rv-on .rv.is-in .wall-label { --i: 3; }
+  html.rv-on .rv.is-in .project-copy > p { --i: 4; } html.rv-on .rv.is-in .project-foot { --i: 5; }
+  html.rv-on .rv.is-in .timeline h3 { --i: 1; } html.rv-on .rv.is-in .timeline p { --i: 2; } html.rv-on .rv.is-in .contact-actions { --i: 3; }
+
+  /* The number: the outline prints, then the second plate slides into register. */
+  html.rv-on .rv.is-in .project-index { animation: v2-register 900ms var(--ease-press) both; }
+
+  /* Monumental words: rise out of a baseline mask. */
+  html.rv-on .rv.is-in :is(h2) { animation: v2-mask-up 820ms var(--ease-press) both; }
+
+  /* The pile is dealt: the two back prints slide out from under the cover
+     to their places, then the cover settles on top. */
+  html.rv-on .rv.is-in .artifact-fixed { animation: v2-deal 760ms var(--ease-press) 260ms both; }
+  html.rv-on .rv.is-in .artifact-fixed.artifact-tertiary { animation-delay: 340ms; }
+  html.rv-on .rv.is-in .artifact-main-frame { animation: v2-settle 760ms var(--ease-press) 80ms both; }
+  html.rv-on .rv.is-in .artifact-arrangement::before { animation: v2-fade 900ms var(--ease-press) 420ms both; }
+
+  /* The band's riso piece arrives once and stays put. */
+  html.rv-on .project-card.rv.is-in::after { animation: v2-fade-scale 900ms var(--ease-press) 200ms both !important; }
+
+  /* The ribbon feeds through once. */
+  html.rv-on .section-ribbon.rv.is-in { animation: wipe-right 900ms var(--ease-plate) both; }
+
+  @keyframes v2-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes v2-mask-up { from { clip-path: inset(0 -20% 100% -20%); transform: translateY(.35em); } to { clip-path: inset(-20% -20% -20% -20%); transform: none; } }
+  @keyframes v2-register { from { opacity: 0; text-shadow: .2em .14em 0 transparent; } 40% { opacity: 1; text-shadow: .16em .12em 0 var(--misreg, var(--acid)); } to { opacity: 1; text-shadow: .045em .035em 0 var(--misreg, var(--acid)); } }
+  @keyframes v2-deal { from { opacity: 0; translate: -18% 6%; } 30% { opacity: 1; } to { opacity: 1; translate: 0 0; } }
+  @keyframes v2-settle { from { opacity: 0; transform: translateY(26px) scale(1.03); } to { opacity: 1; transform: none; } }
+  @keyframes v2-fade { from { opacity: 0; } to { opacity: .9; } }
+  @keyframes v2-fade-scale { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+}
+
+/* ---------- Finer riso pieces (owner: "chunky squares distract") ---------
+   Registration marks, overprint circles, halftone dots, torn grid paper:
+   precise and light, never a solid block. */
+.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/reg-circle--4a30f4ec4cba.webp') !important; --orn-ratio: 248 / 256 !important; --orn-w: 260px !important; }
+.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/moon-overprint--7871739a814c.webp') !important; --orn-ratio: 362 / 268 !important; --orn-w: 340px !important; }
+.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/quarter-target--0d756a39498b.webp') !important; --orn-ratio: 224 / 173 !important; --orn-w: 240px !important; }
+@media (max-width: 1000px) { .project-collection > .project-card:nth-child(n) { --orn-w: 150px !important; } .project-collection > .project-card:nth-child(7n+5) { --orn-w: 220px !important; } }
+#home::after { background-image: url('assets/riso/lib/halftone-disc--2be18b346bb8.webp') !important; aspect-ratio: 271 / 213 !important; rotate: none !important; width: 200px !important; }
+@media (min-width: 1440px) { #background::after { background-image: url('assets/riso/lib/grid-torn--10837020f74d.webp') !important; aspect-ratio: 396 / 264 !important; width: 340px !important; } }
+#trainer::after { content: none !important; }
+#project-dialog #gallery-image { max-height: min(70vh, 760px) !important; }
+@media (max-width: 760px) { #project-dialog #gallery-image { max-height: 58vh !important; } }

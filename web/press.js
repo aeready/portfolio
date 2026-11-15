@@ -115,14 +115,42 @@
   }
 
   /* ---------- Gallery: the halftone shadow follows the current print ------- */
+  const fitShadow = img => {
+    const stage = img?.parentElement;
+    if (!stage || !img.isConnected) return;
+    const a = img.getBoundingClientRect(), b = stage.getBoundingClientRect();
+    if (!a.width || !a.height) return;
+    stage.style.setProperty('--sx', `${a.left - b.left}px`); stage.style.setProperty('--sy', `${a.top - b.top}px`);
+    stage.style.setProperty('--sw', `${a.width}px`); stage.style.setProperty('--sh', `${a.height}px`);
+  };
+  const sizeWatch = 'ResizeObserver' in window ? new ResizeObserver(entries => entries.forEach(e => fitShadow(e.target))) : null;
   document.addEventListener('load', event => {
     const img = event.target;
     if (img?.id !== 'gallery-image') return;
-    const stage = img.parentElement, a = img.getBoundingClientRect(), b = stage.getBoundingClientRect();
-    stage.style.setProperty('--sx', `${a.left - b.left}px`); stage.style.setProperty('--sy', `${a.top - b.top}px`);
-    stage.style.setProperty('--sw', `${a.width}px`); stage.style.setProperty('--sh', `${a.height}px`);
+    sizeWatch?.observe(img);
+    requestAnimationFrame(() => requestAnimationFrame(() => fitShadow(img)));
   }, true);
-  window.addEventListener('resize', () => { const img = document.getElementById('gallery-image'); if (img?.complete) img.dispatchEvent(new Event('load')); }, {passive: true});
+
+  /* ---------- Motion v2: print each element once when it arrives ---------- */
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const selector = '.project-card, #work .section-heading, .work-tools, .section-ribbon, .background-intro, .timeline article, .qualifications, .contact-section > div, .contact-links';
+    const io = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-in'); io.unobserve(entry.target);
+    }), {threshold: 0.12, rootMargin: '0px 0px -6% 0px'});
+    const arm = scope => (scope.matches?.(selector) ? [scope] : [...scope.querySelectorAll(selector)]).forEach(el => {
+      if (el.classList.contains('rv')) return;
+      el.classList.add('rv');
+      io.observe(el);
+    });
+    root.classList.add('rv-on');
+    arm(document);
+    const grid2 = document.querySelector('#project-grid');
+    if (grid2) new MutationObserver(records => records.forEach(r => r.addedNodes.forEach(n => n.nodeType === 1 && arm(n)))).observe(grid2, {childList: true});
+    // Safety: anything still waiting after 4 s (e.g. a print-preview) is shown.
+    window.setTimeout(() => document.querySelectorAll('.rv:not(.is-in)').forEach(el => { if (el.getBoundingClientRect().top < innerHeight) el.classList.add('is-in'); }), 4000);
+    window.addEventListener('beforeprint', () => document.querySelectorAll('.rv').forEach(el => el.classList.add('is-in')));
+  }
 
   /* ---------- In-page links land where they say ------------------------
      Lazy images load during a smooth scroll and push the target down, so

@@ -5,51 +5,36 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="theme-color" content="#492b51">
-  <title>Page not found — Anna Ready</title>
+  <title>Misprint (404) — Anna Ready</title>
   <link rel="icon" href="/assets/favicon-ar-v2.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/overhaul-v2.css">
   <link rel="stylesheet" href="/refine.css">
   <link rel="stylesheet" href="/press.css">
   <link rel="stylesheet" href="/fixes.css">
-  <style>
-    .nf { min-height: 100vh; min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; background: var(--paper); }
-    .nf-head { display: flex; align-items: center; justify-content: space-between; padding: 16px var(--edge, 20px); border-bottom: 2px solid var(--ink); }
-    .nf-head img { width: 48px; height: 48px; display: block; }
-    .nf-band { position: relative; display: grid; align-content: center; gap: 24px; padding: clamp(48px, 10vw, 128px) var(--edge, 20px); background: var(--acid); overflow: hidden; }
-    .nf-band .nf-num { margin: 0; color: transparent; -webkit-text-stroke: 2px var(--ink); font: 700 clamp(7rem, 4rem + 18vw, 16rem)/.8 var(--display); letter-spacing: -.03em; }
-    .nf-band h1 { margin: 0; max-width: 16ch; color: var(--ink); font: 700 clamp(2.25rem, 1.4rem + 3.6vw, 4.5rem)/.95 var(--display); text-transform: uppercase; letter-spacing: -.015em; }
-    .nf-band p.ko-h { margin: 0; color: var(--ink); font: 700 clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem)/1.25 var(--read); letter-spacing: -.02em; word-break: keep-all; }
-    .nf-band p:not(.nf-num):not(.ko-h) { margin: 0; max-width: 48ch; color: var(--ink-text); font: 400 1.0625rem/1.6 var(--read); }
-    .nf-band p[lang="ko"]:not(.ko-h) { line-height: 1.75; word-break: keep-all; }
-    .nf-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
-    .nf-actions a { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border: 1.5px solid var(--ink); font: 700 .8125rem/1 var(--label); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; transition: transform 90ms cubic-bezier(.2,.7,.3,1), box-shadow 90ms cubic-bezier(.2,.7,.3,1); }
-    .nf-actions .primary { background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 var(--paper); }
-    .nf-actions .secondary { background: var(--paper); color: var(--ink); box-shadow: 4px 4px 0 var(--ink); }
-    .nf-actions a:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 currentColor; }
-    .nf-actions a:active { transform: translate(4px, 4px); box-shadow: none; }
-    .nf-actions a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-    .nf-mark { position: absolute; right: var(--edge, 20px); top: clamp(24px, 6vw, 72px); width: clamp(72px, 12vw, 140px); aspect-ratio: 240 / 228; background: url('/assets/riso/registration-cross.webp') center / contain no-repeat; pointer-events: none; }
-    .nf-foot { padding: 20px var(--edge, 20px); font: 400 .75rem/1.4 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
-    @media (prefers-reduced-motion: reduce) { .nf-actions a { transition: none; } .nf-actions a:hover, .nf-actions a:active { transform: none; } }
-  </style>
+  <link rel="stylesheet" href="/nf.css">
+  <script defer src="/nf.js"></script>
 </head>
-<body>
-  <div class="nf">
-    <header class="nf-head"><a href="/" aria-label="Anna Ready — home"><img src="/assets/favicon-ar-v2.svg" alt="" width="48" height="48"></a></header>
-    <main class="nf-band">
-      <span class="nf-mark" aria-hidden="true"></span>
-      <p class="nf-num" aria-hidden="true">404</p>
-      <h1>This page isn’t here.</h1>
-      <p>The link may be old or mistyped. Everything on the site starts from the home page.</p>
-      <p class="ko-h" lang="ko">페이지를 찾을 수 없습니다.</p>
-      <p lang="ko">주소가 바뀌었거나 다르게 입력되었을 수 있습니다. 홈페이지에서 모든 내용을 보실 수 있습니다.</p>
+<body class="nf">
+  <header class="nf-head"><a href="/" aria-label="Anna Ready — home"><img src="/assets/favicon-ar-v2.svg" alt="" width="48" height="48"></a><span class="nf-code" aria-hidden="true">ERR · 404</span></header>
+  <main class="nf-sheet">
+    <div class="nf-plates" aria-hidden="true">
+      <span class="nf-plate nf-plate--dots">404</span>
+      <span class="nf-plate nf-plate--lime">404</span>
+      <span class="nf-plate nf-plate--ink">404</span>
+      <span class="nf-mark nf-mark--a"></span><span class="nf-mark nf-mark--b"></span>
+    </div>
+    <div class="nf-copy">
+      <h1>Misprint.</h1>
+      <p>This page isn’t here. The link may be old or mistyped; everything on the site starts from the home page.</p>
+      <p class="nf-ko-h" lang="ko">오식.</p>
+      <p lang="ko">페이지를 찾을 수 없습니다. 주소가 바뀌었거나 다르게 입력되었을 수 있습니다. 홈페이지에서 모든 내용을 보실 수 있습니다.</p>
       <div class="nf-actions">
-        <a class="primary" href="/">Home · 홈</a>
-        <a class="secondary" href="/#contact">Email me · 이메일 문의</a>
+        <a class="nf-primary" href="/">Home · 홈</a>
+        <a class="nf-secondary" href="/#contact">Email me · 이메일 문의</a>
       </div>
-    </main>
-    <footer class="nf-foot">© 2026 Anna Ready</footer>
-  </div>
+    </div>
+  </main>
+  <footer class="nf-foot">© 2026 Anna Ready</footer>
 </body>
 </html>
