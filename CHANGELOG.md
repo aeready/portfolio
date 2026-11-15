@@ -15,6 +15,17 @@ New work for this round is in `web/edition.css` and `web/edition.js` (loaded aft
 - **"My background" button** had no bottom edge (an older rule removed it). It is now a complete outlined box, same height as "Explore work", lime on hover.
 - **Korean font gaps closed.** The three Korean subsets (regular, bold, black) were rebuilt from the full Noto Sans KR (same design and metrics) and now include every syllable the site uses; the 11 that fell back to another font (것 난 누 듭 쉬 엇 웠 잘 좋 째 흥) now match. Files are ~30% smaller. New check: `python3 scripts/check-korean-font.py`. Undo: restore the three old font files and their names in `style.css` / `refine.css`.
 
+### Group 2 · Typography
+- Kerning and standard ligatures switched on explicitly (the display face already carries a kerning table, so no hand-kerning was needed).
+- Headings balance their lines; paragraphs avoid one-word last lines (`text-wrap: balance / pretty`). English paragraphs hang opening punctuation.
+- Figures: lining, tabular numerals in stats, counters and dates.
+- **Korean:** lines break between words, never inside one (`keep-all`, strict line breaking); body leading raised to 1.75–1.8 for Hangul; no negative tracking on Hangul text.
+- **Project reading rail:** every paragraph and list is one size (paragraphs were 14.4 px beside 17 px lists; now 17 px, 16 px on phones). Labels sit on the first baseline of the text beside them, including "My role".
+- **Hanging dashes:** bullet lists in the rail use an en dash that hangs in the gutter, so the text keeps the rail's left edge.
+- **Gallery counter:** the big misregistered numeral and its "/ N" share a baseline; the total is set in the display face.
+- **Case study (USA Camp) width fix:** a paragraph-measure rule was squeezing the whole case study (facts, brief, the day-by-day plan) into a ~600 px column in both languages; the rows are full rail width again.
+- Checked: copy already uses curly quotes, real dashes and × throughout — nothing to change.
+
 ## 17 Nov 2026 — Booklet spreads and tap-to-zoom
 
 - **Desktop, portrait galleries (USA Camp workbook):** pages show as an open booklet: the cover alone on the right, then 2–3, 4–5 … side by side, the last page alone. Arrows, swipe and arrow keys turn a whole spread; the counter reads "2–3 / 18"; both pages are highlighted in the strip; the caption names both. Pages turn in from the spine (fade, slight 3-D turn, focus pull). The halftone shadow sits under the whole spread. Landscape decks are unchanged (one slide at a time).

@@ -224,7 +224,7 @@
     $('#gallery-caption').textContent = pair ? `${caption} / ${pair[1]}` : caption;
     const count = $('#slide-count');
     count.textContent = `${label} / ${slides.length} · ${source}`;
-    if (typeof count.insertAdjacentHTML === 'function') count.innerHTML = `<b class="count-now">${label}</b> / ${slides.length}<span class="count-source">${escape(source)}</span>`;
+    if (typeof count.insertAdjacentHTML === 'function') count.innerHTML = `<b class="count-now">${label}</b><span class="count-total"> / ${slides.length}</span><span class="count-source">${escape(source)}</span>`;
     $('#previous-slide').disabled = slideIndex === 0;
     $('#next-slide').disabled = lastShown >= slides.length - 1;
     $('#open-image').href = src;

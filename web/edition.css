@@ -63,3 +63,61 @@ html[lang="ko"] #project-dialog .detail-facts strong { font-family: var(--read);
   #project-dialog .document-card { padding: 18px 20px !important; gap: 8px !important; }
   #project-dialog .document-card .document-actions { justify-content: flex-start !important; width: 100%; }
 }
+
+/* ---------- Group 2 · Typography ---------------------------------------- */
+
+/* Kerning and standard ligatures always on (the faces carry kern tables). */
+html { font-kerning: normal; font-variant-ligatures: common-ligatures; text-rendering: optimizeLegibility; }
+
+/* Rag: headings balance their lines; paragraphs avoid one-word last lines. */
+:is(h1, h2, h3, h4, .role, .hero-name, .detail-role strong, blockquote) { text-wrap: balance; }
+:is(p, li, dd, figcaption, .gallery-caption) { text-wrap: pretty; }
+html[lang="en"] :is(p, li) { hanging-punctuation: first; }
+
+/* Figures: lining in headings and stats; tabular where numbers line up. */
+:is(.hero-proof strong, #slide-count, .project-number, .timeline-date, .zv-count, #project-position) { font-variant-numeric: lining-nums tabular-nums; }
+
+/* Korean: break between words, never inside one; stricter line breaking;
+   a little more leading for Hangul; no negative tracking on Hangul text. */
+html[lang="ko"] body { word-break: keep-all; line-break: strict; overflow-wrap: anywhere; }
+html[lang="ko"] :is(p, li, dd) { line-height: 1.75; letter-spacing: 0; }
+html[lang="ko"] #home.hero--poster .hero-copy > .role { line-height: 1.3; letter-spacing: -.01em; }
+
+/* Project reading rail: one text size for every paragraph and list
+   (paragraphs were 14.4 px beside 17 px lists). */
+#project-dialog .detail-story :is(p, li),
+#project-dialog .case-block > :is(p, ol, ul),
+#project-dialog .case-days p { font-size: 1.0625rem !important; line-height: 1.65 !important; }
+html[lang="ko"] #project-dialog .detail-story :is(p, li) { line-height: 1.8 !important; }
+
+/* Labels sit on the first line's baseline of the text beside them. */
+#project-dialog :is(.detail-story > section, .detail-story > div:not(.case-study), .case-study > *:not(h3)) { align-items: first baseline; }
+#project-dialog .detail-story :is(h3, h4) { padding-top: 0 !important; }
+
+/* Hanging bullets: the text keeps the rail's left edge; an en dash hangs
+   in the gutter, as in a printed list. */
+#project-dialog .detail-story ul:not(.case-facts):not(.case-days) { list-style: none; padding-left: 0 !important; margin-left: 0 !important; }
+#project-dialog .detail-story ul:not(.case-facts):not(.case-days) > li { position: relative; }
+#project-dialog .detail-story ul:not(.case-facts):not(.case-days) > li::before {
+  content: '\2013'; position: absolute; right: calc(100% + .6em); color: var(--ink); font-weight: 700;
+}
+@media (max-width: 760px) {
+  #project-dialog .detail-story ul:not(.case-facts):not(.case-days) > li { padding-left: 1.2em; }
+  #project-dialog .detail-story ul:not(.case-facts):not(.case-days) > li::before { right: auto; left: 0; }
+}
+
+/* Gallery counter: the big misregistered numeral and its "/ N" share a
+   baseline, and the total is set in the same face, smaller. */
+#project-dialog #slide-count { display: flex !important; flex-wrap: wrap; align-items: baseline; column-gap: .35em; }
+#project-dialog #slide-count .count-total { font: 700 clamp(1.25rem, 1rem + .8vw, 1.75rem)/1 var(--display); letter-spacing: 0; opacity: .7; }
+#project-dialog #slide-count .count-source { flex-basis: 100%; }
+@media (max-width: 760px) {
+  #project-dialog .detail-story :is(p, li), #project-dialog .case-block > :is(p, ol, ul), #project-dialog .case-days p { font-size: 1rem !important; }
+}
+/* Case study rows are rail rows, full width. The 62-character measure is for
+   their text, not the rows (it was squeezing the facts, plan and days into
+   a ~600 px column in both languages). */
+#project-dialog .detail-story .case-study > *:not(h3):not(h4) { max-width: none !important; width: 100%; }
+/* "My role" label on the lead statement's first baseline. */
+#project-dialog .detail-role { align-items: first baseline; }
+#project-dialog .detail-role > h3 { grid-row: 1 !important; padding-top: 0 !important; }
