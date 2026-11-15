@@ -3,9 +3,9 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
-## 17 Nov 2026 — Third pass: real-device fixes, motion v2, finer riso, Misprint 404, favicon
+## 17 Nov 2026 — Third pass: real-device fixes, motion v2, finer riso, Misprint 404
 
-From the owner's phone screenshots and a full audit (phone and desktop).
+From the owner's phone screenshots and a full audit (phone and desktop). Body font: the owner chose to keep Noto Sans / Noto Sans KR (option A).
 
 ### Broken on real phones (fixed)
 - **Sideways "void":** full-bleed band textures made phones lay the page out at ~960 px. Clipped at page level; layout is now exactly the screen width (checked with phone emulation at 320–430 px).
@@ -33,13 +33,13 @@ From the owner's phone screenshots and a full audit (phone and desktop).
 - Three ink plates of "404" (outline, lime, halftone) slide in and stop slightly out of register; on desktop they drift with the pointer. "Misprint." / "오식." with the original copy in both languages; Home and Email me. Styles and script moved to `nf.css` and `nf.js`; the old inline `<style>` was blocked by the site's own security policy.
 
 ### Favicon
-- `favicon-ar-v3.svg`: the AR drawn as shapes (no longer a system font, so it looks the same everywhere), in the condensed display style, printed as two plates slightly out of register, with a lime registration mark. Used for the tab, header, opening sequence and 404.
+- A drawn, misregistered AR favicon was tried and reverted at the owner's request; the original `favicon-ar-v2.svg` stays.
 
 ### Checks
 - Phone emulation (Galaxy S9+): layout width = screen width; every in-page link lands on its section, including after opening a project. Text ≥ 12 px and controls ≥ 44 px at 320–1440 px EN/KO; decoration pixel test 0% on text and work at 375/768/1024/1280/1440 px. All validators pass. New Korean characters checked against the font subset ("쇄" is missing, so the 404 uses "오식").
 
 ### Owner to upload
-`index.html`, `404.html`, `nf.css`, `nf.js`, `press.css`, `press.js`, `app.js`, `locales.js`, `assets/favicon-ar-v3.svg`, `assets/riso/lib/` (new: reg-circle, moon-overprint, halftone-disc, grid-torn); delete the removed library files from the bucket; publish the rebuilt Worker.
+`index.html`, `404.html`, `nf.css`, `nf.js`, `press.css`, `press.js`, `app.js`, `locales.js`, `assets/riso/lib/` (new: reg-circle, moon-overprint, halftone-disc, grid-torn); delete the removed library files from the bucket; publish the rebuilt Worker.
 
 ## 16 Nov 2026 — Second pass: calm, finish, gloss
 

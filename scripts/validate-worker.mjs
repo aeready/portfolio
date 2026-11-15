@@ -41,7 +41,7 @@ for(const method of ['GET','HEAD']){
 console.log('Worker upload authorization, storage hash, routing, content type, HEAD, cache, and embedded homepage checks passed.');
 
 // Lossless text packaging and shared identity/favicon payloads must serve original bytes.
-for(const file of ['style.css','overhaul-v2.css','app.js','assets/favicon-ar-v3.svg',...fs.readdirSync('web/assets').filter(name=>name.startsWith('zine-book-collage--')).map(name=>'assets/'+name)]){
+for(const file of ['style.css','overhaul-v2.css','app.js','assets/favicon-ar-v2.svg',...fs.readdirSync('web/assets').filter(name=>name.startsWith('zine-book-collage--')).map(name=>'assets/'+name)]){
  const res=await built.fetch(new Request('https://test/'+file),{BUCKET:{get:async()=>{throw Error('Expected embedded asset '+file);}}});
  assert.equal(res.status,200);const expected=fs.readFileSync('web/'+file);
  assert.deepEqual(Buffer.from(await res.arrayBuffer()),expected,file+' must remain byte-identical');
