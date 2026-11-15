@@ -3,6 +3,24 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 15–16 Nov 2026 — "Press run": texture, type, motion, project pages
+
+Approved by Anna on 15 Nov 2026 (game plan, then "go ahead"). Rules R6 and R7 added to the Manifesto. New layer `web/press.css` loads after `refine.css` and before `fixes.css`. Nothing is live until the owner uploads and publishes.
+
+### Phase 0 — fixes
+- "My background" link drew two underlines (border plus background line); now one.
+- Hero details (Suwon / F-6 / US Citizen / languages): left-aligned two-column list, icon beside its text, instead of centred cells that wrapped away from their icons.
+- Project band ornament overlapped the category tag at 375 px; ornaments moved (below).
+- USA Camp cover filled only a quarter of its mount on phones and tablets; every cover now fills its mount at its own proportions.
+
+### Phase 1 — texture is the substrate (R7)
+- **Change:** riso grain and soft ink mottle printed into the paper, header, footer, every project band (full bleed), the ribbon, How I work, Background and Contact. Aubergine specks on paper and lime; paper specks on aubergine. Backgrounds only: work samples are never textured.
+- **Change:** one oversized riso piece per band (moon, target, bullseye, overprint circles, halftone, bars, circles), cropped by the band's top edge and tucked behind the cover mount, replacing the small corner stickers.
+- **Change:** each cover mount gets hairline crop marks and a strip of riso tape.
+- **Change:** misregistration on display type only: the outlined project numbers and section headings carry a second plate 2–3 px off (lime on paper, paper on lime).
+- **New files:** `assets/riso/grain-ink`, `grain-paper`, `mottle-ink`, `mottle-light` (tileable, generated; 12–21 KB each). `press.css` and `fixes.css` added to the Worker package list in `scripts/build-worker.mjs` (fixes.css was missing).
+- **Undo:** remove the `press.css` link from `index.html` and `404.html`.
+
 ## 15 Nov 2026
 
 ### Remove the ordering-food game project

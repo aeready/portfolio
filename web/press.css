@@ -1,0 +1,167 @@
+/* ==========================================================================
+   annaready.kr — "press run" layer (Nov 2026)
+   Loads after refine.css and before fixes.css (fixes.css stays last).
+   Keeps the colour bands, outlined numerals and riso ornaments; changes how
+   they are printed. Rules cited: Manifesto R1–R7 (docs/overhaul/MANIFESTO.md).
+   Undo: remove <link rel="stylesheet" href="press.css"> from index.html.
+   ========================================================================== */
+
+:root {
+  --grain-ink: url('assets/riso/grain-ink--237afa0da36e.webp');
+  --grain-paper: url('assets/riso/grain-paper--a248cb0ef8c4.webp');
+  --mottle-ink: url('assets/riso/mottle-ink--8350ea4557a6.webp');
+  --mottle-light: url('assets/riso/mottle-light--8bdc971fc779.webp');
+  --ease-press: cubic-bezier(.2, .7, .1, 1);
+  --ease-plate: cubic-bezier(.7, 0, .2, 1);
+}
+
+/* ---------- Phase 0: bug fixes ------------------------------------------ */
+
+/* "My background" drew its underline twice (border + background line). */
+.hero .hero-actions .text-link { border-bottom: 0 !important; }
+
+/* Hero details: a left-aligned two-column list, icon beside its text,
+   instead of centred cells that wrap away from their icons (R7 alignment). */
+.hero .location {
+  display: grid !important;
+  grid-template-columns: repeat(2, max-content) !important;
+  justify-content: start !important; justify-items: start !important;
+  align-items: start !important;
+  gap: 10px 32px !important;
+  text-align: left !important;
+}
+.hero .location > span { justify-content: flex-start !important; text-align: left !important; align-items: center; gap: 8px; }
+@media (max-width: 339px) {
+  .hero .location { grid-template-columns: max-content !important; }
+}
+
+/* ---------- R7 Texture is the substrate ---------------------------------
+   Every ink field is printed: aubergine specks and faint density on paper
+   and lime; paper specks and lighter patches knocked out of aubergine.
+   Backgrounds only, so the work samples keep their original colours. */
+body,
+.site-header,
+.site-footer {
+  background-image: var(--grain-ink), var(--mottle-ink) !important;
+  background-size: 320px 320px, 512px 512px !important;
+  background-repeat: repeat !important;
+}
+.section-ribbon,
+#trainer {
+  background-image: var(--grain-paper), var(--mottle-light) !important;
+  background-size: 320px 320px, 512px 512px !important;
+  background-repeat: repeat !important;
+}
+.contact-section,
+#background {
+  background-image: var(--grain-ink), var(--mottle-ink) !important;
+  background-size: 320px 320px, 512px 512px !important;
+  background-repeat: repeat !important;
+}
+
+/* Project bands: the texture runs the full bleed, behind everything. */
+.project-collection > .project-card { --tex: var(--grain-ink), var(--mottle-ink); }
+.project-collection > .project-card:nth-child(4n+3) { --tex: var(--grain-paper), var(--mottle-light); }
+.project-collection > .project-card:nth-child(n)::before {
+  content: '' !important;
+  position: absolute !important; inset: 0 -100vmax !important; z-index: 0 !important;
+  width: auto !important; height: auto !important; margin: 0 !important;
+  display: block !important; rotate: none !important; mix-blend-mode: normal !important;
+  background: var(--tex) !important;
+  background-size: 320px 320px, 512px 512px !important;
+  pointer-events: none;
+  opacity: 1 !important; transform: none !important; border: 0 !important;
+}
+.project-card > * { position: relative; z-index: 2; }
+
+/* ---------- One oversized riso piece per band, cropped by the band edge --- */
+.project-collection > .project-card:nth-child(n) { --orn: none; --orn-w: 300px; --orn-ratio: 1; }
+.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/plum-moon.webp');          --orn-ratio: 324 / 294; --orn-w: 340px; }
+.project-collection > .project-card:nth-child(7n+2) { --orn: url('assets/riso/target-plum.webp');        --orn-ratio: 248 / 256; --orn-w: 300px; }
+.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/bullseye.webp');           --orn-ratio: 223 / 214; --orn-w: 280px; }
+.project-collection > .project-card:nth-child(7n+4) { --orn: url('assets/riso/overprint-circles.webp');  --orn-ratio: 345 / 382; --orn-w: 320px; }
+.project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/halftone-fade.webp');      --orn-ratio: 420 / 214; --orn-w: 460px; }
+.project-collection > .project-card:nth-child(7n+6) { --orn: url('assets/riso/bars-crosshairs.webp');    --orn-ratio: 353 / 357; --orn-w: 320px; }
+.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/plum-cream-circles.webp'); --orn-ratio: 360 / 267; --orn-w: 380px; }
+
+.project-collection > .project-card:nth-child(n)::after {
+  content: '' !important;
+  position: absolute; z-index: 1;
+  top: calc(var(--orn-w) / var(--orn-ratio) * -.34) !important;
+  width: var(--orn-w) !important; aspect-ratio: var(--orn-ratio) !important;
+  background: var(--orn) center / contain no-repeat !important;
+  pointer-events: none;
+}
+/* Media on the left: the piece sits behind the mount's top-left corner. */
+.project-collection > .project-card:nth-child(odd)::after { left: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; right: auto !important; }
+/* Media on the right: behind the mount's top-right corner. */
+.project-collection > .project-card:nth-child(even)::after { right: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; left: auto !important; }
+
+@media (max-width: 1000px) {
+  .project-collection > .project-card:nth-child(n) { --orn-w: 180px; }
+  .project-collection > .project-card:nth-child(7n+5) { --orn-w: 240px; }
+  .project-collection > .project-card:nth-child(n)::after {
+    top: calc(var(--orn-w) / var(--orn-ratio) * -.42) !important;
+    right: -56px !important; left: auto !important;
+  }
+}
+
+/* ---------- The mount: crop marks, a strip of tape, the work at full size -- */
+.project-card .artifact-arrangement { position: relative; overflow: visible; }
+/* Crop marks: hairline corner ticks set 14 px outside the mount, the way a
+   printer marks the trim (precision as the luxury signal, R2). */
+.project-card .artifact-arrangement::before {
+  --tick: var(--band-ink, var(--ink)); --t: 18px; --w: 1.5px;
+  content: ''; position: absolute; inset: -16px; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(var(--tick), var(--tick)) 0 0 / var(--t) var(--w),
+    linear-gradient(var(--tick), var(--tick)) 0 0 / var(--w) var(--t),
+    linear-gradient(var(--tick), var(--tick)) 100% 0 / var(--t) var(--w),
+    linear-gradient(var(--tick), var(--tick)) 100% 0 / var(--w) var(--t),
+    linear-gradient(var(--tick), var(--tick)) 0 100% / var(--t) var(--w),
+    linear-gradient(var(--tick), var(--tick)) 0 100% / var(--w) var(--t),
+    linear-gradient(var(--tick), var(--tick)) 100% 100% / var(--t) var(--w),
+    linear-gradient(var(--tick), var(--tick)) 100% 100% / var(--w) var(--t);
+  background-repeat: no-repeat;
+  opacity: .8;
+}
+.project-card .artifact-arrangement::after {
+  content: ''; position: absolute; top: -18px; left: 50%; z-index: 3; pointer-events: none;
+  width: 120px; aspect-ratio: 420 / 162; translate: -50% 0; rotate: -4deg;
+  background: url('assets/riso/tape-stack.webp') center / contain no-repeat;
+}
+.project-collection > .project-card:nth-child(odd) .artifact-arrangement::after { left: 22%; rotate: -5deg; }
+.project-collection > .project-card:nth-child(even) .artifact-arrangement::after { left: 78%; rotate: 4deg; }
+
+/* Phones and tablets: the cover fills its mount, at its own proportions
+   (USA Camp was a quarter-width thumbnail in an empty frame; R2). */
+@media (max-width: 900px) {
+  .project-card .artifact-arrangement,
+  .project-05 .artifact-arrangement {
+    display: block !important; aspect-ratio: auto !important; padding: 10px !important;
+  }
+  .project-card .artifact-main-frame,
+  .project-05 .artifact-main-frame {
+    width: 100% !important; aspect-ratio: auto !important; height: auto !important;
+  }
+  .project-card .artifact-main-frame .preview-open,
+  .project-card .artifact-main-frame .artifact-main { position: static !important; display: block; width: 100% !important; height: auto !important; aspect-ratio: auto !important; }
+  .project-card .artifact-main-frame img {
+    display: block; width: 100% !important; height: auto !important; max-height: 72vh;
+    object-fit: contain !important; margin-inline: auto;
+  }
+  .project-05 .artifact-main-frame img { width: auto !important; max-width: 100%; }
+  .project-card .artifact-arrangement::before { inset: -12px; --t: 14px; }
+  .project-card .artifact-arrangement::after { width: 92px; top: -14px; }
+}
+
+/* ---------- Misregistration on display type (R6, R7) --------------------
+   A second plate printed 2–3 px off: lime under aubergine on paper, paper
+   under paper-coloured type on aubergine. Display sizes only, never body. */
+.project-card .project-index { text-shadow: .045em .035em 0 var(--misreg, var(--acid)); }
+.project-collection > .project-card:nth-child(4n+2) .project-index { --misreg: var(--paper); }
+.project-collection > .project-card:nth-child(4n+3) .project-index { --misreg: var(--acid); }
+:is(#work, #background) h2 { text-shadow: -.035em .03em 0 var(--acid); }
+.contact-section h2 { text-shadow: -.035em .03em 0 var(--paper); }
+#trainer h2 { text-shadow: -.035em .03em 0 color-mix(in srgb, var(--acid) 55%, transparent); }
+.hero-name { text-shadow: .03em .03em 0 color-mix(in srgb, var(--paper) 35%, transparent); }
