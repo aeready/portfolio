@@ -3,6 +3,13 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 — Booklet spreads and tap-to-zoom
+
+- **Desktop, portrait galleries (USA Camp workbook):** pages show as an open booklet: the cover alone on the right, then 2–3, 4–5 … side by side, the last page alone. Arrows, swipe and arrow keys turn a whole spread; the counter reads "2–3 / 18"; both pages are highlighted in the strip; the caption names both. Pages turn in from the spine (fade, slight 3-D turn, focus pull). The halftone shadow sits under the whole spread. Landscape decks are unchanged (one slide at a time).
+- **Phones:** tap the page to open it full screen on a dark ground; tap again to zoom to 230% at the point you tapped and pan around; previous / next and the page count along the bottom; × or Escape closes and returns focus to the page. New strings in both languages ("Tap the page to zoom in or out" / "페이지를 탭하면 확대합니다"; "Close full-screen view" / "확대 보기 닫기"), checked against the Korean font subset.
+- Fixed on the way: the gallery shadow ignored its measured position in some layouts (an `inset: auto !important` override).
+- Arrows, swipe and keys now share one stepping function in `app.js`.
+
 ## 17 Nov 2026 — Fifth pass
 
 - **Desktop language switch** is lime (aubergine on hover), matching the phone Contact button.

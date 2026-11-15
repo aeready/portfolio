@@ -158,8 +158,26 @@
     $$('.gallery-tabs button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.gallery === activeGallery)));
   }
   let slideLoadTimer = 0, slideLoadSequence = 0;
+  // Booklet spreads (desktop, portrait galleries): the cover alone on the right,
+  // then pages side by side (2–3, 4–5 …), like an open booklet.
+  function isSpread() {
+    if (!activeProject || typeof window.matchMedia !== 'function' || !window.matchMedia('(min-width: 1001px)').matches) return false;
+    const first = variants[currentSlides()[0][0]];
+    return !!first && first.height > first.width * 1.15;
+  }
+  const spreadStart = i => i === 0 ? 0 : (i % 2 ? i : i - 1);
+  function stepSlide(direction) {
+    const last = currentSlides().length - 1;
+    if (!isSpread()) slideIndex = Math.max(0, Math.min(last, slideIndex + direction));
+    else {
+      const start = spreadStart(slideIndex);
+      slideIndex = direction > 0 ? Math.min(last, start === 0 ? 1 : start + 2) : (start <= 1 ? 0 : start - 2);
+    }
+    renderSlide();
+  }
   function renderSlide() {
     if (!activeProject) return;
+    if (isSpread()) slideIndex = spreadStart(slideIndex);
     const slides = currentSlides();
     const [src, caption, source] = slides[slideIndex];
     const img = $('#gallery-image');
@@ -188,14 +206,29 @@
       void img.offsetWidth;
       img.classList.add('slide-enter');
     }
-    $('#gallery-caption').textContent = caption;
+    // Second page of a spread (or a blank left page beside the cover).
+    const spread = isSpread();
+    const pair = spread && slideIndex > 0 && slides[slideIndex + 1] ? slides[slideIndex + 1] : null;
+    let partner = typeof stage.querySelector === 'function' ? stage.querySelector('#gallery-image-b') : null;
+    if (spread && typeof document.createElement === 'function') {
+      if (!partner) { partner = document.createElement('img'); partner.id = 'gallery-image-b'; partner.decoding = 'async'; img.after(partner); }
+      partner.classList.toggle('is-blank', !pair);
+      partner.src = pair ? pair[0] : src; partner.alt = pair ? pair[1] : '';
+      if (!pair) partner.setAttribute('aria-hidden', 'true'); else partner.removeAttribute('aria-hidden');
+      if (changed) { partner.classList.remove('slide-enter'); void partner.offsetWidth; partner.classList.add('slide-enter'); }
+    } else if (partner) partner.replaceWith();
+    stage.classList?.toggle('is-spread', spread);
+    stage.classList?.toggle('is-cover', spread && slideIndex === 0);
+    const lastShown = pair ? slideIndex + 1 : slideIndex;
+    const label = pair ? `${slideIndex + 1}–${slideIndex + 2}` : `${slideIndex + 1}`;
+    $('#gallery-caption').textContent = pair ? `${caption} / ${pair[1]}` : caption;
     const count = $('#slide-count');
-    count.textContent = `${slideIndex + 1} / ${slides.length} · ${source}`;
-    if (typeof count.insertAdjacentHTML === 'function') count.innerHTML = `<b class="count-now">${slideIndex + 1}</b> / ${slides.length}<span class="count-source">${escape(source)}</span>`;
+    count.textContent = `${label} / ${slides.length} · ${source}`;
+    if (typeof count.insertAdjacentHTML === 'function') count.innerHTML = `<b class="count-now">${label}</b> / ${slides.length}<span class="count-source">${escape(source)}</span>`;
     $('#previous-slide').disabled = slideIndex === 0;
-    $('#next-slide').disabled = slideIndex === slides.length - 1;
+    $('#next-slide').disabled = lastShown >= slides.length - 1;
     $('#open-image').href = src;
-    $$('.gallery-thumbnails button').forEach((button, i) => button.setAttribute('aria-pressed', String(i === slideIndex)));
+    $$('.gallery-thumbnails button').forEach((button, i) => button.setAttribute('aria-pressed', String(i === slideIndex || i === lastShown)));
   }
   function renderDownloadState() {
     if (!activeProject) return;
@@ -323,8 +356,8 @@
     if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeProject(); return; }
     const tab = event.target.closest('[data-gallery]'); if (tab && activeProject?.bookSlides) { activeGallery = tab.dataset.gallery; slideIndex = 0; renderThumbnails(); renderSlide(); return; }
     const thumb = event.target.closest('[data-slide]'); if (thumb) { slideIndex = Number(thumb.dataset.slide); renderSlide(); return; }
-    if (event.target.closest('#previous-slide')) { slideIndex = Math.max(0, slideIndex - 1); renderSlide(); return; }
-    if (event.target.closest('#next-slide')) { slideIndex = Math.min(currentSlides().length - 1, slideIndex + 1); renderSlide(); return; }
+    if (event.target.closest('#previous-slide')) { stepSlide(-1); return; }
+    if (event.target.closest('#next-slide')) { stepSlide(1); return; }
     const download = event.target.closest('[data-original]');
     if (download) { const id = download.dataset.original; window.PortfolioDownloads.download(id, () => { if (activeProject?.original === id) renderDownloadState(); }, t('powerpointType')); return; }
     const neighbor = event.target.closest('[data-neighbor]');
@@ -337,12 +370,11 @@
     const delta = (event.changedTouches[0]?.screenX ?? touchStartX) - touchStartX;
     touchStartX = null;
     if (Math.abs(delta) < 45) return;
-    slideIndex = Math.max(0, Math.min(currentSlides().length - 1, slideIndex + (delta < 0 ? 1 : -1)));
-    renderSlide();
+    stepSlide(delta < 0 ? 1 : -1);
   }, {passive:true});
   dialog.addEventListener('keydown', event => {
     if (!event.target.closest('.gallery') || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
-    event.preventDefault(); slideIndex = Math.max(0, Math.min(currentSlides().length - 1, slideIndex + (event.key === 'ArrowRight' ? 1 : -1))); renderSlide();
+    event.preventDefault(); stepSlide(event.key === 'ArrowRight' ? 1 : -1);
   });
   dialog.addEventListener('close', () => {
     document.body.classList.remove('modal-open'); activeProject = null;

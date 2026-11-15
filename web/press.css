@@ -1552,3 +1552,37 @@ html { overflow-x: clip; }
     to   { opacity: 1; transform: none; filter: none; }
   }
 }
+
+/* ---------- Booklet spread (desktop, portrait galleries) ----------------- */
+#project-dialog .gallery-stage.is-spread { display: flex !important; justify-content: center; align-items: center; gap: 0; }
+#project-dialog .gallery-stage.is-spread > img { max-width: 50% !important; border-width: clamp(4px, .5vw, 8px); }
+#project-dialog .gallery-stage.is-spread > #gallery-image-b { position: relative; z-index: 1; display: block; width: auto; height: auto;
+  max-height: var(--stage-h, min(70vh, 760px)); border: clamp(4px, .5vw, 8px) solid var(--paper); border-left-width: 0; background: var(--paper); }
+#project-dialog .gallery-stage.is-spread > #gallery-image { border-right-width: 1px; border-right-color: rgb(73 43 81 / .25); }
+/* Cover: alone on the right-hand side, like a closed booklet's front. */
+#project-dialog .gallery-stage.is-cover > #gallery-image-b { order: -1; visibility: hidden; }
+#project-dialog .gallery-stage.is-cover > #gallery-image { border-right-width: clamp(4px, .5vw, 8px); border-right-color: var(--paper); }
+/* Page turn: the two pages dissolve in from the spine. */
+@media (prefers-reduced-motion: no-preference) {
+  #project-dialog .gallery-stage.is-spread > #gallery-image.slide-enter { animation: turn-left 520ms cubic-bezier(.2,.7,.1,1) both !important; transform-origin: right center; }
+  #project-dialog .gallery-stage.is-spread > #gallery-image-b.slide-enter { animation: turn-right 520ms cubic-bezier(.2,.7,.1,1) 60ms both !important; transform-origin: left center; }
+  @keyframes turn-left  { from { opacity: 0; transform: perspective(1400px) rotateY(10deg); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes turn-right { from { opacity: 0; transform: perspective(1400px) rotateY(-10deg); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+}
+
+/* ---------- Tap to zoom (phones) ----------------------------------------- */
+.zoom-view { position: fixed; inset: 0; z-index: 100; display: grid; grid-template-rows: auto 1fr auto; background: rgb(28 16 32 / .97); color: var(--paper); }
+.zoom-view[hidden] { display: none; }
+.zoom-view .zv-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; }
+.zoom-view .zv-hint { font: 400 .8125rem/1.4 var(--read); opacity: .8; }
+.zoom-view .zv-close { min-width: 48px; min-height: 48px; border: 1.5px solid var(--paper); background: transparent; color: var(--paper); font-size: 1.25rem; }
+.zoom-view .zv-scroll { overflow: auto; display: grid; place-items: center; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y pinch-zoom; }
+.zoom-view .zv-scroll img { display: block; width: 100%; height: auto; max-width: none; transition: width 260ms cubic-bezier(.2,.7,.1,1); cursor: zoom-in; }
+.zoom-view.is-zoomed .zv-scroll { place-items: start; }
+.zoom-view.is-zoomed .zv-scroll img { width: 230%; cursor: zoom-out; }
+.zoom-view .zv-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 10px 16px 16px; }
+.zoom-view .zv-nav button { min-height: 52px; border: 1.5px solid var(--paper); background: transparent; color: var(--paper); font-size: 1.25rem; }
+.zoom-view .zv-nav button:disabled { opacity: .3; }
+.zoom-view .zv-count { font: 700 .875rem/1 var(--label); letter-spacing: .04em; text-align: center; }
+@media (prefers-reduced-motion: no-preference) { .zoom-view:not([hidden]) { animation: v2-fade-in 220ms ease both; } @keyframes v2-fade-in { from { opacity: 0; } to { opacity: 1; } } }
+#project-dialog .gallery-stage::before { left: var(--sx, 0) !important; top: var(--sy, 0) !important; width: var(--sw, 0) !important; height: var(--sh, 0) !important; right: auto !important; bottom: auto !important; }

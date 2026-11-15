@@ -118,17 +118,19 @@
   const fitShadow = img => {
     const stage = img?.parentElement;
     if (!stage || !img.isConnected) return;
-    const a = img.getBoundingClientRect(), b = stage.getBoundingClientRect();
-    if (!a.width || !a.height) return;
+    const b = stage.getBoundingClientRect();
+    const pages = [...stage.querySelectorAll('img')].filter(i => !i.classList.contains('is-blank') && getComputedStyle(i).visibility !== 'hidden').map(i => i.getBoundingClientRect()).filter(r => r.width);
+    if (!pages.length) return;
+    const a = {left: Math.min(...pages.map(r => r.left)), top: Math.min(...pages.map(r => r.top)), width: Math.max(...pages.map(r => r.right)) - Math.min(...pages.map(r => r.left)), height: Math.max(...pages.map(r => r.bottom)) - Math.min(...pages.map(r => r.top))};
     stage.style.setProperty('--sx', `${a.left - b.left}px`); stage.style.setProperty('--sy', `${a.top - b.top}px`);
     stage.style.setProperty('--sw', `${a.width}px`); stage.style.setProperty('--sh', `${a.height}px`);
   };
   const sizeWatch = 'ResizeObserver' in window ? new ResizeObserver(entries => entries.forEach(e => fitShadow(e.target))) : null;
   document.addEventListener('load', event => {
     const img = event.target;
-    if (img?.id !== 'gallery-image') return;
+    if (img?.id !== 'gallery-image' && img?.id !== 'gallery-image-b') return;
     sizeWatch?.observe(img);
-    requestAnimationFrame(() => requestAnimationFrame(() => fitShadow(img)));
+    requestAnimationFrame(() => requestAnimationFrame(() => fitShadow(document.getElementById('gallery-image'))));
   }, true);
 
   /* ---------- Gallery height fitted to the project's tallest slide -------- */
@@ -139,13 +141,66 @@
     if (!stage || !ratios.length) return;
     const tallest = Math.max(...ratios);
     const cap = window.innerHeight * (window.innerWidth <= 760 ? .52 : .56);
-    const h = Math.min(cap, 760, stage.getBoundingClientRect().width * tallest);
+    const spread = window.innerWidth > 1000 && tallest > 1.15;
+    const h = Math.min(cap, 760, stage.getBoundingClientRect().width * tallest / (spread ? 2 : 1));
     if (h > 0) stage.style.setProperty('--stage-h', `${Math.round(h)}px`);
   };
   const galleryHost = document.querySelector('#project-detail');
-  if (galleryHost) new MutationObserver(() => requestAnimationFrame(fitStage)).observe(galleryHost, {childList: true, subtree: true});
+  if (galleryHost) {
+    new MutationObserver(() => requestAnimationFrame(fitStage)).observe(galleryHost, {childList: true, subtree: true});
+    new MutationObserver(() => { const go = () => fitShadow(document.getElementById('gallery-image')); requestAnimationFrame(go); clearTimeout(window.__fitT); window.__fitT = setTimeout(go, 650); }).observe(galleryHost, {subtree: true, attributes: true, attributeFilter: ['class', 'src']});
+  }
   window.addEventListener('resize', fitStage, {passive: true});
   document.addEventListener('load', e => { if (e.target?.closest?.('#project-dialog .gallery-thumbnails')) fitStage(); }, true);
+
+  /* ---------- Phones: tap the page to view it full screen and zoom -------- */
+  const dlg = document.querySelector('#project-dialog');
+  if (dlg && window.matchMedia) {
+    const phone = window.matchMedia('(max-width: 760px)');
+    const ui = () => window.PORTFOLIO_LOCALES?.[root.lang === 'ko' ? 'ko' : 'en']?.ui || {};
+    const view = document.createElement('div');
+    view.className = 'zoom-view'; view.hidden = true;
+    view.setAttribute('role', 'dialog'); view.setAttribute('aria-modal', 'true');
+    view.innerHTML = '<div class="zv-bar"><span class="zv-hint"></span><button type="button" class="zv-close">×</button></div><div class="zv-scroll"><img alt=""></div><div class="zv-nav"><button type="button" class="zv-prev">←</button><span class="zv-count"></span><button type="button" class="zv-next">→</button></div>';
+    dlg.append(view);
+    const big = view.querySelector('img');
+    const sync = () => {
+      const src = document.getElementById('gallery-image');
+      if (!src) return;
+      big.src = src.currentSrc || src.src; big.alt = src.alt;
+      view.querySelector('.zv-count').textContent = ((document.getElementById('slide-count')?.textContent || '').match(/^\s*[\d–]+\s*\/\s*\d+/) || [''])[0];
+      view.querySelector('.zv-prev').disabled = !!document.getElementById('previous-slide')?.disabled;
+      view.querySelector('.zv-next').disabled = !!document.getElementById('next-slide')?.disabled;
+      view.querySelector('.zv-hint').textContent = ui().zoomHint || '';
+      view.querySelector('.zv-close').setAttribute('aria-label', ui().zoomClose || 'Close');
+      view.querySelector('.zv-prev').setAttribute('aria-label', ui().previousSample || 'Previous');
+      view.querySelector('.zv-next').setAttribute('aria-label', ui().nextSample || 'Next');
+      view.classList.remove('is-zoomed');
+    };
+    let opener = null;
+    const close = () => { view.hidden = true; opener?.focus({preventScroll: true}); };
+    dlg.addEventListener('click', event => {
+      const stage = event.target.closest('#open-image');
+      if (!stage || !phone.matches) return;
+      event.preventDefault(); opener = stage; sync(); view.hidden = false; view.querySelector('.zv-close').focus();
+    }, true);
+    view.querySelector('.zv-close').addEventListener('click', close);
+    view.querySelector('.zv-prev').addEventListener('click', () => { document.getElementById('previous-slide')?.click(); requestAnimationFrame(sync); });
+    view.querySelector('.zv-next').addEventListener('click', () => { document.getElementById('next-slide')?.click(); requestAnimationFrame(sync); });
+    big.addEventListener('click', event => {
+      const scroller = view.querySelector('.zv-scroll');
+      const fx = event.offsetX / big.clientWidth, fy = event.offsetY / big.clientHeight;
+      view.classList.toggle('is-zoomed');
+      requestAnimationFrame(() => { scroller.scrollLeft = fx * big.clientWidth - scroller.clientWidth / 2; scroller.scrollTop = fy * big.clientHeight - scroller.clientHeight / 2; });
+    });
+    dlg.addEventListener('keydown', event => {
+      if (view.hidden) return;
+      if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close(); }
+      if (event.key === 'Tab') { const f = [...view.querySelectorAll('button:not(:disabled)')]; const i = f.indexOf(document.activeElement); if (event.shiftKey ? i <= 0 : i === f.length - 1) { event.preventDefault(); f[event.shiftKey ? f.length - 1 : 0].focus(); } }
+    }, true);
+    dlg.addEventListener('cancel', event => { if (!view.hidden) { event.preventDefault(); close(); } });
+    dlg.addEventListener('close', () => { view.hidden = true; });
+  }
 
   /* ---------- Motion v2: print each element once when it arrives ---------- */
   if (!reduceMotion && 'IntersectionObserver' in window) {
