@@ -1300,3 +1300,118 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
     .project-collection > .project-card[data-project="usa-camp-workbook"]:is(:hover, :focus-visible) .artifact-arrangement::after { translate: -8% 0; rotate: -6deg; }
   }
 }
+
+/* ---------- Skills as a notebook page (owner's moodboard, 18 Nov) ----------
+   A ruled sheet with punched holes and a lime margin, set slightly askew.
+   English and Korean mixed: heading "SKILLS 역량" / "역량 Skills", each tool
+   shows its name in the other language, strengths are bilingual chips.
+   Tools: logo tile + name bar (lime / aubergine / cream) + one line.
+   Undo: delete this block; remove .skills-notebook, .skill-alt spans and
+   the strengths list from index.html and the skills.*.alt / strengths strings. */
+#background .qualifications > .skills-notebook {
+  --nb-line: rgb(73 43 81 / .13); position: relative; display: grid !important; grid-template-columns: minmax(0, .8fr) minmax(0, 2fr); grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 4vw, 56px); row-gap: 14px; align-items: start;
+  padding: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 44px) clamp(28px, 3vw, 44px) clamp(76px, 7vw, 104px) !important; margin-top: 12px !important;
+  background: linear-gradient(90deg, transparent calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 18px), transparent calc(clamp(76px, 7vw, 104px) - 18px)),
+              repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important;
+  border: 1.5px solid var(--ink) !important; box-shadow: 8px 8px 0 var(--ink); rotate: -.6deg;
+}
+/* Punched holes down the left edge. */
+#background .qualifications > .skills-notebook::before {
+  content: ''; position: absolute; left: 18px; top: 24px; bottom: 24px; width: 22px; pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, var(--paper-deep, #eadfcb) 0 8px, var(--ink) 8px 9.5px, transparent 10px) 0 0 / 22px 88px repeat-y;
+}
+/* A strip of tape over the top edge. */
+#background .qualifications > .skills-notebook::after {
+  content: ''; position: absolute; top: -14px; left: 46%; width: 120px; height: 30px; rotate: 3deg; pointer-events: none;
+  background: rgb(214 223 102 / .75); border-left: 2px dashed rgb(73 43 81 / .25); border-right: 2px dashed rgb(73 43 81 / .25);
+}
+#background .skills-notebook > h3 { grid-column: 1; grid-row: 1; margin: 0 !important; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+#background .skills-notebook > h3::after { content: '역량'; font: 700 1.5rem/1 var(--read); color: var(--ink); background: var(--acid); padding: 4px 10px; rotate: -4deg; }
+html[lang="ko"] #background .skills-notebook > h3::after { content: 'Skills'; font: 700 1.75rem/1 var(--display); text-transform: uppercase; }
+#background .skills-notebook > .lang-list { grid-column: 1; grid-row: 2; flex-direction: column !important; gap: 8px !important; margin: 0 !important; }
+#background .skills-notebook > .lang-list > span { display: flex !important; align-items: baseline; gap: 10px; }
+#background .skills-notebook > .lang-list strong { display: inline-block; min-width: 4.6em; }
+#background .skills-notebook > .strengths-title { grid-column: 1; grid-row: 3; align-self: start; margin: 18px 0 0 !important; font: 700 1.375rem/1 var(--display) !important; text-transform: uppercase; color: var(--ink); }
+html[lang="ko"] #background .skills-notebook > .strengths-title { font: 700 1.125rem/1.2 var(--read) !important; text-transform: none; }
+#background .skills-notebook > .strengths-title span, html[lang="ko"] #background .skills-notebook > .strengths-title span { font: 400 1rem/1 var(--read); text-transform: none; margin-left: 6px; opacity: .8; }
+html[lang="ko"] #background .skills-notebook > .strengths-title span { font-family: var(--display); text-transform: uppercase; }
+#background .strength-chips { grid-column: 1; grid-row: 3; margin: 56px 0 0 !important; padding: 0 !important; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+#background .strength-chips li {
+  display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--paper);
+  font: 600 .9375rem/1.2 var(--read); color: var(--ink); rotate: -1deg;
+}
+#background .strength-chips li:nth-child(even) { rotate: 1.2deg; background: var(--acid); }
+#background .strength-chips li:nth-child(3n) { background: var(--ink); color: var(--paper); }
+#background .strength-chips li span { font-weight: 400; opacity: .8; font-size: .875rem; }
+html[lang="ko"] #background .strength-chips li span { order: -1; font-weight: 600; opacity: 1; font-size: .9375rem; }
+html[lang="ko"] #background .strength-chips li { font-weight: 400; }
+
+/* Tools: two columns of rows on the right page. */
+#background .skills-notebook > .software-skills,
+#background .skills-notebook > .software-skills:is(*) {
+  grid-column: 2 !important; grid-row: 1 / 4 !important; display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 18px 22px !important; margin: 0 !important; padding: 0 !important;
+}
+#background .skills-notebook .software-skills li,
+#background .skills-notebook .software-skills li:nth-child(n) {
+  display: grid !important; grid-template-columns: 76px minmax(0, 1fr) !important; grid-template-rows: auto auto 1fr !important; grid-template-areas: 'tile name' 'tile alt' 'tile desc'; column-gap: 14px !important; row-gap: 0 !important;
+  padding: 0 !important; min-height: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; color: var(--ink) !important; text-align: left !important; translate: none !important;
+}
+#background .skills-notebook .software-skills li .skill-logo,
+#background .skills-notebook .software-skills li:nth-child(n) .skill-logo {
+  grid-area: tile !important; grid-row: 1 / 4 !important; grid-column: 1 !important; width: 76px !important; height: 76px !important; aspect-ratio: auto; margin: 0 !important; padding: 10px !important;
+  display: flex !important; align-items: center; justify-content: center; background: #fff !important; border: 1.5px solid var(--ink) !important; box-shadow: 3px 3px 0 var(--ink); rotate: -3deg;
+}
+#background .skills-notebook .software-skills li:nth-child(even) .skill-logo { rotate: 2.5deg; }
+#background .skills-notebook .software-skills li .skill-logo img,
+#background .skills-notebook .software-skills li .skill-logo img:is(.square-logo, [src*="hancom"], [src*="adobe"]) { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 34px !important; rotate: none; translate: none; }
+#background .skills-notebook .software-skills li .skill-logo img.square-logo { max-height: 40px !important; }
+#background .skills-notebook .software-skills li > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) {
+  grid-area: name !important; grid-row: 1 !important; grid-column: 2 !important; justify-self: stretch; align-self: start !important; display: block; padding: 6px 10px !important; margin: 0 !important;
+  font: 700 1.25rem/1.05 var(--display) !important; text-transform: uppercase !important; text-align: left !important; background: var(--acid); border: 1.5px solid var(--ink);
+}
+#background .skills-notebook .software-skills li:nth-child(3n+2) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background: var(--ink); color: var(--paper); }
+#background .skills-notebook .software-skills li:nth-child(3n) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background: var(--paper-deep, #eadfcb); }
+html[lang="ko"] #background .skills-notebook .software-skills li > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { font: 700 1rem/1.3 var(--read) !important; text-transform: none !important; }
+#background .skills-notebook .software-skills li .skill-alt { grid-area: alt; grid-row: 2; grid-column: 2; padding: 4px 10px 0; font: 600 .8125rem/1.2 var(--read); opacity: .75; }
+html[lang="ko"] #background .skills-notebook .software-skills li .skill-alt { font: 700 .9375rem/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; }
+#background .skills-notebook .software-skills li .skill-desc { grid-area: desc !important; grid-row: 3 !important; grid-column: 2 !important; padding: 4px 10px 0 !important; max-width: none !important; font: 400 .9375rem/1.4 var(--read) !important; opacity: .9; text-align: left !important; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #background .skills-notebook .software-skills li .skill-logo { transition: rotate 260ms var(--ease-press), translate 260ms var(--ease-press); }
+  #background .skills-notebook .software-skills li:hover .skill-logo { rotate: 0deg; translate: 0 -3px; }
+  #background .skills-notebook .software-skills li:hover { translate: none !important; box-shadow: none !important; }
+}
+@media (max-width: 1000px) {
+  #background .qualifications > .skills-notebook { grid-template-columns: minmax(0, 1fr); padding-left: 64px !important; rotate: -.4deg;
+    background: linear-gradient(90deg, transparent 44px, var(--acid) 44px 48px, transparent 48px), repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important; }
+  #background .qualifications > .skills-notebook::before { left: 12px; width: 20px; background-size: 20px 80px; }
+  #background .skills-notebook > :is(h3, .lang-list, .strengths-title, .strength-chips, .software-skills) { grid-column: 1 !important; grid-row: auto !important; }
+  #background .skills-notebook > .software-skills { margin: 10px 0 !important; }
+  #background .skills-notebook > .strengths-title { margin-top: 8px !important; }
+  #background .strength-chips { margin-top: 0 !important; }
+}
+@media (max-width: 640px) {
+  #background .qualifications > .skills-notebook { padding: 24px 16px 24px 52px !important; box-shadow: 5px 5px 0 var(--ink); margin-right: 6px !important;
+    background: linear-gradient(90deg, transparent 36px, var(--acid) 36px 39px, transparent 39px), repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important; }
+  #background .qualifications > .skills-notebook::before { left: 8px; width: 18px; background-size: 18px 72px;
+    background-image: radial-gradient(circle at 50% 50%, var(--paper-deep, #eadfcb) 0 7px, var(--ink) 7px 8.5px, transparent 9px); }
+  #background .skills-notebook > .software-skills { grid-template-columns: minmax(0, 1fr) !important; gap: 16px !important; }
+  #background .skills-notebook .software-skills li, #background .skills-notebook .software-skills li:nth-child(n) { grid-template-columns: 64px minmax(0, 1fr) !important; grid-column: auto !important; }
+  #background .skills-notebook .software-skills li .skill-logo, #background .skills-notebook .software-skills li:nth-child(n) .skill-logo { width: 64px !important; height: 64px !important; padding: 8px !important; }
+}
+/* Notebook fixes: the other-language name is its own line under the bar
+   (older span rules caught it); chips keep to one line; languages tidy. */
+#background .skills-notebook .software-skills li > span.skill-alt {
+  grid-area: alt !important; grid-row: 2 !important; grid-column: 2 !important; align-self: start !important; justify-self: start !important; display: block !important;
+  margin: 0 !important; padding: 5px 10px 0 !important; background: none !important; border: 0 !important; color: var(--ink) !important;
+  font: 600 .875rem/1.2 var(--read) !important; text-transform: none !important; opacity: .75;
+}
+html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-alt { font: 700 .9375rem/1.1 var(--display) !important; text-transform: uppercase !important; letter-spacing: .02em; }
+#background .strength-chips li { flex: 0 0 auto; width: auto !important; white-space: nowrap; }
+#background .skills-notebook > .lang-list > span { gap: 8px !important; }
+#background .skills-notebook > .lang-list strong { min-width: 0; }
+@media (max-width: 1000px) { #background .skills-notebook > .lang-list > span { display: block !important; } #background .skills-notebook > .lang-list strong { margin-right: 8px; } }
+/* Suwon: a little house, "SUWON (HOME!)". */
+.work-map .map-home .map-house { fill: var(--paper); stroke: var(--ink); stroke-width: 1.8; stroke-linejoin: round; }
+.work-map .map-home .map-house-door { fill: var(--acid); stroke: var(--ink); stroke-width: 1.4; }
+.work-map .map-home-body { scale: 1.45 !important; }
+.work-map .map-label[data-key="suwon"] { font-weight: 700 !important; opacity: 1; }

@@ -3,6 +3,13 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Owner's review (4d): skills notebook, map tweaks
+
+- **Skills:** a notebook page (ruled lines, punched holes, lime margin, tape, slight tilt, hard shadow). Heading mixes the languages ("SKILLS 역량" / "역량 SKILLS"). Each tool: logo tile, name bar (lime / aubergine / cream), its name in the other language, one line on use. "Strengths · 강점" chips, bilingual in both versions (drawn from the site's own copy: teacher training, curriculum design, materials design, speaking assessment, market research).
+- **Map:** Seoul and Seongnam pulled a little apart (not to scale) so the pins don't overlap; Suwon is a little house labelled "SUWON (HOME!)" / "수원 (우리 집!)".
+- Korean font rebuilt.
+- **Undo:** delete the "Skills as a notebook page" and "Notebook fixes" blocks in `web/edition.css`; remove `.skills-notebook`, the `.skill-alt` spans and the strengths list from `index.html` and the `skills.*.alt` / `skills.strengths*` strings.
+
 ## 18 Nov 2026 — Owner's review (4c): motion
 
 - **Background (desktop):** the wavy line draws left to right as you scroll; each job card rises and settles as the line reaches it, and its badge pops. Map pins drop in one by one in the order I worked there (Pyeongchang, Gangneung, Seongnam, Seoul), then home and the route appear. Reduced motion: all still and visible.
