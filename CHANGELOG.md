@@ -3,6 +3,19 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 (evening) — Audit round 2
+
+- Project bands size to their content (no forced full-screen height); empty strip before Background gone.
+- One space before every arrow (↗ ↓ ↑). Labels hug their words; smaller on phones.
+- "Selected projects" no longer runs off the right edge on phones; band riso marks small, top-right, behind text on phones.
+- Phone timeline: thin line with dots. Footer cross moved inside the page; Skills ruled lines stop at the content.
+- Contact: all three links are the same numbered lines; footer "Email me" removed.
+- Only the hero name keeps a text shadow.
+- Header (desktop): 한국어 (cream) then CONTACT (lime) together on the right, like phones.
+- Typefaces: monospace only for tiny index labels; tags and dates use the reading face in bold caps.
+- Kept on purpose (owner likes them): dotted frames, riso decorations, cloudy texture.
+- Undo: delete the "Audit round 2" block and everything after it at the end of `web/edition.css`.
+
 ## 17 Nov 2026 (later) — Site-wide: no outlines, no hard shadows, no tilt
 
 - Rule applied everywhere (header buttons, project bands, project pages, file cabinet, file cards, Previous/Next, gallery buttons, zoom/sheet buttons): no purple outlines, no hard offset shadows, nothing tilted except NOW / IN PROGRESS. Things are told apart by fill colour; preview images lose the cream frame and get one soft shadow.

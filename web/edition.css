@@ -1699,3 +1699,82 @@ html body #project-dialog #gallery-image { border-width: 0 !important; }
   html body #project-dialog .detail-footer button:not(.ed-next-button) { background: transparent !important; }
 }
 #project-dialog .document-actions { flex-wrap: wrap !important; row-gap: 12px; column-gap: 24px; }
+
+/* ---------- Audit round 2 (owner, 17 Nov) ----------
+   Undo: delete this block. */
+/* 1–2. Project bands size to their content (no forced full-screen height),
+   which also removes the empty strip before Background. */
+html body .project-collection > .project-card.project-card { min-height: 0 !important; padding-block: clamp(56px, 7vw, 104px) !important; }
+#background { padding-top: clamp(56px, 6vw, 88px) !important; }
+
+/* 3. One space before every arrow. */
+:is(a, button):not(.project-action):not(.button) > span[aria-hidden="true"]:is(:last-child, :has(+ .sr-only)) { margin-left: .3em; }
+#project-dialog .document-actions a { white-space: nowrap; }
+
+/* 4. Labels hug their words and stay on one line where they can on phones. */
+.hero-art-note, .project-card .project-meta { width: fit-content !important; max-width: 100%; }
+@media (max-width: 600px) {
+  .hero-art-note, .project-card .project-meta { font-size: .6875rem !important; letter-spacing: .04em !important; }
+}
+
+/* 5. "Selected projects" no longer hangs off the right edge on phones. */
+@media (max-width: 600px) {
+  #work .section-heading h2 { text-indent: 0 !important; padding-left: 0 !important; font-size: clamp(2.75rem, 15vw, 4rem) !important; }
+}
+
+/* 6. Band riso mark: small, top-right, behind the text on phones. */
+@media (max-width: 1000px) {
+  html body .project-collection > .project-card.project-card[data-tone]::after,
+  html body .project-collection > .project-card.project-card[data-tone]:nth-child(n)::after {
+    top: 16px !important; right: 4px !important; left: auto !important; width: 64px !important; z-index: 0; opacity: .9;
+  }
+  .project-collection > .project-card > :not(.flourish) { position: relative; z-index: 1; }
+}
+
+/* 7. Phone timeline: one thin line with dots, like desktop. */
+@media (max-width: 1000px) {
+  #background .tl-track { width: 2px !important; background: var(--ink-15) !important; }
+  #background .tl-fill { background: var(--ink) !important; box-shadow: none !important; }
+  #background .timeline article { overflow: visible !important; }
+  #background .timeline article::before, #background .timeline article:nth-of-type(n)::before { left: -35px !important; }
+  #background .timeline article.is-current::before, #background .timeline article.is-current:nth-of-type(n)::before { left: -37px !important; }
+}
+
+/* 8. Stray marks: footer cross sits inside the page; Skills ruled lines stop at the content. */
+.site-footer { position: relative; }
+html body .site-footer .flourish--footer-cross { right: 16px !important; top: 16px !important; left: auto !important; }
+#background .qualifications > .skills-notebook { background-clip: content-box, padding-box !important; background-origin: content-box, padding-box !important; }
+
+/* 9. Contact: all three links are the same numbered lines; footer no longer repeats "Email me". */
+html body .contact-section .contact-actions > .button.primary {
+  background: transparent !important; color: var(--ink) !important; box-shadow: none !important; border: 0 !important;
+  border-bottom: 1.5px solid var(--ink) !important; padding-inline: 0 !important; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem) !important;
+}
+html body .contact-section .contact-actions > .button.primary:hover { translate: none; box-shadow: none !important; background: var(--ink) !important; color: var(--acid) !important; padding-inline: 20px !important; }
+.site-footer a[href="#contact"] { display: none !important; }
+
+/* 10. Only the hero name keeps a shadow. */
+:is(#work, #background) h2, #work .section-heading h2, .contact-section h2, #background h2 { text-shadow: none !important; }
+
+/* Opinion items accepted: Contact sits beside 한국어 on desktop; dates in the reading face. */
+@media (min-width: 1001px) {
+  .site-header .nav-contact { display: none !important; }
+  .site-header .header-contact { display: inline-flex !important; }
+}
+#background .timeline-date { font: 700 .8125rem/1.2 var(--read) !important; letter-spacing: .04em !important; text-transform: uppercase; }
+/* Typefaces (owner chose fewer monospace uses): mono stays only for tiny
+   index labels (menu, FORMAT/AUDIENCE, counters). Tags and dates use the
+   reading face in bold caps. */
+.hero-art-note, .project-card .project-meta, #background .timeline-date, #background .degree .degree-note,
+#project-dialog .detail-head .project-meta, #project-dialog [class*="tag"] {
+  font-family: var(--read) !important; font-weight: 700 !important; letter-spacing: .04em !important;
+}
+@media (min-width: 1001px) {
+  html body .site-header .header-contact {
+    align-items: center; justify-content: center; min-height: 44px; padding: 0 16px !important; order: 1;
+    font: 600 .8125rem/1 var(--mono, "Zine Mono", monospace) !important; letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  }
+  html body .site-header .header-contact:hover { background: var(--ink) !important; color: var(--acid) !important; }
+  .site-header .header-tools { gap: 10px; }
+}
+html body .site-header .language-toggle.language-toggle { background: var(--paper-deep) !important; color: var(--ink) !important; }
