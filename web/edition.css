@@ -1020,3 +1020,153 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
   .project-collection > .project-card.project-card[data-tone] .artifact-fixed.artifact-tertiary { grid-column: 2 !important; }
   .project-collection > .project-card.project-card[data-tone] .artifact-main-frame img { height: auto !important; }
 }
+
+/* ---------- Education + skills, rebuilt (owner, 18 Nov, review 4) ----------
+   Education: each degree is one card (seal, degree in the title face,
+   university, a lime tag for status) with a hard lime shadow, no separate
+   label bar. Skills: languages as two labelled lines; software as short
+   cards (logo tile on top, name, what it's for) on desktop, compact rows
+   on phones. No big initials. Undo: delete this block, unwrap .degree in
+   index.html and restore the plain locale strings (see CHANGELOG). */
+#background .qualifications { row-gap: clamp(40px, 5vw, 64px) !important; }
+#background .qualifications h3 { margin: 0 0 20px !important; }
+#background .qualifications > div:first-child { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 20px 24px !important; }
+#background .qualifications > div:first-child > h3 { grid-column: 1 / -1 !important; grid-row: auto !important; margin-bottom: 0 !important; }
+#background .degree {
+  display: grid !important; grid-template-columns: 76px minmax(0, 1fr); grid-template-areas: 'seal title' 'seal body'; align-items: center; column-gap: 20px; row-gap: 6px;
+  padding: 22px 24px !important; margin: 0 !important; background: var(--paper) var(--grain-ink) 0 0 / 320px; border: 1.5px solid var(--ink); box-shadow: 6px 6px 0 var(--acid);
+  max-width: none !important;
+}
+#background .degree > h4 {
+  grid-area: title; align-self: end; display: block !important; background: none !important; padding: 0 !important; margin: 0 !important;
+  font: 700 clamp(1.5rem, 1.1rem + .9vw, 2rem)/1 var(--display) !important; text-transform: uppercase !important; letter-spacing: 0 !important; color: var(--ink) !important;
+}
+html[lang="ko"] #background .degree > h4 { font: 700 1.25rem/1.3 var(--read) !important; text-transform: none !important; }
+#background .degree .university-lockup { display: contents !important; }
+#background .degree .university-logo { grid-area: seal; width: 76px !important; height: 76px !important; object-fit: contain; padding: 6px; background: #fff; border: 1.5px solid var(--ink); border-radius: 50%; margin: 0 !important; }
+#background .degree .university-lockup p { grid-area: body; align-self: start; margin: 0 !important; font: 600 1rem/1.45 var(--read) !important; color: var(--ink) !important; max-width: none !important; }
+#background .degree .degree-note { display: inline-block; margin-top: 8px; padding: 3px 8px; background: var(--acid); font-weight: 400; font-size: .875rem; }
+#background .qualifications > div:last-child { display: block !important; }
+#background .lang-list { display: flex !important; flex-wrap: wrap; gap: 10px 32px; margin: 0 0 22px !important; max-width: none !important; }
+#background .lang-list > span { display: inline-flex; align-items: baseline; gap: 10px; }
+#background .lang-list strong { font: 700 1.375rem/1 var(--display); text-transform: uppercase; }
+html[lang="ko"] #background .lang-list strong { font: 700 1.0625rem/1.3 var(--read); }
+#background .software-skills { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 14px !important; align-items: stretch !important; margin: 0 !important; }
+#background .software-skills li {
+  display: grid !important; grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: auto auto 1fr !important; align-content: start; gap: 8px !important;
+  min-height: 0 !important; padding: 16px 16px 20px !important; text-align: left !important;
+}
+#background .software-skills li::before { content: none !important; display: none !important; }
+#background .software-skills li .skill-logo {
+  grid-row: 1 !important; grid-column: 1 !important; justify-self: stretch !important; align-self: start !important; width: auto !important; height: 64px !important;
+  display: flex !important; align-items: center; justify-content: center; margin: 0 0 6px !important; padding: 12px !important; background: var(--paper) !important; border: 1.5px solid var(--ink);
+}
+#background .software-skills li .skill-logo img { height: 36px !important; width: auto !important; max-width: 100% !important; object-fit: contain; transform: none !important; }
+#background .software-skills li .skill-logo img.square-logo { height: 34px !important; }
+#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) {
+  grid-row: 2 !important; grid-column: 1 !important; margin: 0 !important; padding: 0 !important; align-self: start;
+  font: 700 1.5rem/1 var(--display) !important; text-transform: uppercase !important;
+}
+html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { font: 700 1.0625rem/1.35 var(--read) !important; text-transform: none !important; }
+#background .software-skills li .skill-desc { grid-row: 3 !important; grid-column: 1 !important; max-width: none !important; font: 400 .9375rem/1.45 var(--read) !important; text-transform: none !important; }
+@media (max-width: 1100px) {
+  #background .software-skills { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  #background .software-skills li { grid-template-columns: 96px minmax(0, 1fr) !important; grid-template-rows: auto 1fr !important; column-gap: 16px !important; row-gap: 4px !important; padding: 14px !important; }
+  #background .software-skills li .skill-logo { grid-row: 1 / 3 !important; height: 64px !important; margin: 0 !important; padding: 10px !important; align-self: center !important; }
+  #background .software-skills li .skill-logo img { height: 28px !important; }
+  #background .software-skills li .skill-logo img.square-logo { height: 30px !important; }
+  #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { grid-column: 2 !important; grid-row: 1 !important; align-self: end; }
+  #background .software-skills li .skill-desc { grid-column: 2 !important; grid-row: 2 !important; }
+  #background .software-skills li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  #background .qualifications > div:first-child { grid-template-columns: minmax(0, 1fr) !important; }
+  #background .degree { grid-template-columns: 56px minmax(0, 1fr); column-gap: 14px; padding: 16px !important; box-shadow: 4px 4px 0 var(--acid); margin-right: 4px !important; }
+  #background .degree .university-logo { width: 56px !important; height: 56px !important; padding: 4px; }
+  #background .degree > h4 { font-size: 1.375rem !important; }
+  #background .degree .university-lockup p { font-size: .9375rem !important; }
+  #background .software-skills { grid-template-columns: minmax(0, 1fr) !important; gap: 10px !important; }
+  #background .software-skills li { grid-template-columns: 76px minmax(0, 1fr) !important; column-gap: 14px !important; padding: 12px !important; }
+  #background .software-skills li .skill-logo { height: 52px !important; padding: 8px !important; }
+  #background .software-skills li .skill-logo img { height: 22px !important; }
+  #background .software-skills li .skill-logo img.square-logo { height: 26px !important; }
+  #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { font-size: 1.25rem !important; }
+  #background .lang-list { flex-direction: column; gap: 6px; }
+  #background .lang-list > span { display: block; }
+  #background .lang-list strong { margin-right: 8px; }
+}
+
+/* Contact: the registration grid takes the torn circle's place on the seam;
+   the torn circle is gone. Undo: delete these lines. */
+#contact::after { content: none !important; display: none !important; }
+#contact::before {
+  inset: -40px calc(var(--edge, 24px) + 34%) auto auto !important; width: min(22vw, 220px) !important; rotate: 3deg !important; opacity: 1 !important; z-index: 2 !important;
+}
+@media (max-width: 760px) { #contact::before { inset: -28px 16px auto auto !important; width: 40vw !important; } }
+/* Logo tiles: even visual weight (square marks larger, wide wordmarks capped). */
+#background .software-skills li .skill-logo img { height: 30px !important; max-width: min(100%, 132px) !important; }
+#background .software-skills li .skill-logo img.square-logo { height: 40px !important; }
+#background .software-skills li .skill-logo img[src*="hancom"] { max-width: min(100%, 120px) !important; height: auto !important; }
+#background .software-skills li .skill-logo img[src*="adobe"] { height: 40px !important; }
+#background .lang-list > span { font-size: 1rem; }
+@media (max-width: 1100px) {
+  #background .software-skills li .skill-logo img { height: 24px !important; max-width: 100% !important; }
+  #background .software-skills li .skill-logo img.square-logo, #background .software-skills li .skill-logo img[src*="adobe"] { height: 30px !important; }
+  #background .software-skills li .skill-logo img[src*="hancom"] { height: auto !important; }
+}
+@media (max-width: 760px) {
+  #background .degree { align-items: start; }
+  #background .degree .university-logo { grid-row: 1 / 3; align-self: start; }
+}
+
+/* ---------- Software as stickers (owner's moodboard, 18 Nov) ----------------
+   Each tool is a die-cut sticker in the two inks (flower, burst, stamp, tag,
+   star; shapes in assets/stickers/) with the logo on a paper disc, the name
+   and one line underneath. Slightly tilted, straighten on hover.
+   Undo: delete this block and assets/stickers/. */
+#background .software-skills { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 28px 20px !important; padding: 8px 0 0 !important; }
+#background .software-skills li,
+#background .software-skills li:nth-child(n) {
+  display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 6px !important;
+  padding: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; color: var(--ink) !important; min-height: 0 !important;
+}
+#background .software-skills li .skill-logo,
+#background .software-skills li:nth-child(n) .skill-logo {
+  width: min(100%, 168px) !important; height: auto !important; aspect-ratio: 1; margin: 0 0 8px !important; padding: 0 !important;
+  border: 0 !important; background: center / contain no-repeat !important; display: flex !important; align-items: center; justify-content: center;
+  rotate: var(--tilt, -4deg); transition: rotate 320ms var(--ease-press), scale 320ms var(--ease-press);
+}
+#background .software-skills li:nth-child(1) { --tilt: -6deg; } #background .software-skills li:nth-child(1) .skill-logo { background-image: url('assets/stickers/flower--5ada2d460ae0.svg') !important; }
+#background .software-skills li:nth-child(2) { --tilt: 5deg; }  #background .software-skills li:nth-child(2) .skill-logo { background-image: url('assets/stickers/burst--3626dcc3d5f4.svg') !important; }
+#background .software-skills li:nth-child(3) { --tilt: -3deg; } #background .software-skills li:nth-child(3) .skill-logo { background-image: url('assets/stickers/stamp--cd845c688d28.svg') !important; }
+#background .software-skills li:nth-child(4) { --tilt: 4deg; }  #background .software-skills li:nth-child(4) .skill-logo { background-image: url('assets/stickers/tag--b81ed58b4c1f.svg') !important; }
+#background .software-skills li:nth-child(5) { --tilt: -5deg; } #background .software-skills li:nth-child(5) .skill-logo { background-image: url('assets/stickers/star--ffffa9844df5.svg') !important; }
+#background .software-skills li .skill-logo img,
+#background .software-skills li .skill-logo img.square-logo,
+#background .software-skills li .skill-logo img[src*="hancom"],
+#background .software-skills li .skill-logo img[src*="adobe"] { height: auto !important; max-width: none !important; width: 38% !important; rotate: calc(-1 * var(--tilt, 0deg)); }
+#background .software-skills li .skill-logo img.square-logo { width: 26% !important; }
+#background .software-skills li .skill-logo img[src*="hancom"] { width: 54% !important; translate: 4% 0; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #background .software-skills li:hover { translate: none !important; box-shadow: none !important; }
+  #background .software-skills li:hover .skill-logo { rotate: 0deg; scale: 1.06; }
+}
+#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { align-self: center !important; text-align: center; font-size: 1.375rem !important; }
+html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { font-size: 1.0625rem !important; }
+#background .software-skills li .skill-desc { max-width: 22ch !important; opacity: .85; }
+@media (max-width: 1100px) {
+  #background .software-skills { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+  #background .software-skills li { grid-column: span 2 !important; }
+  #background .software-skills li:nth-child(4) { grid-column: 2 / span 2 !important; }
+  #background .software-skills li:nth-child(5) { grid-column: 4 / span 2 !important; }
+}
+@media (max-width: 760px) {
+  #background .software-skills { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 24px 12px !important; }
+  #background .software-skills li, #background .software-skills li:nth-child(4) { grid-column: span 2 !important; }
+  #background .software-skills li:nth-child(5) { grid-column: 2 / span 2 !important; }
+  #background .software-skills li .skill-logo { width: min(100%, 128px) !important; }
+  #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { font-size: 1.1875rem !important; }
+  #background .software-skills li .skill-desc { font-size: .875rem !important; }
+}
+#background .software-skills li, #background .software-skills li:nth-child(n) { justify-content: flex-start !important; }
+#background .software-skills li .skill-logo img[src*="hancom"] { width: 46% !important; translate: 9% 0; }
