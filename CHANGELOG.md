@@ -3,6 +3,10 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Phone filter bar
+
+- The closed "Filter · All work 7" bar on phones is set in the title face, upper case, matching the options in the list (Korean: reading face). Undo: last block of `edition.css`.
+
 ## 18 Nov 2026 — Background as a moving timeline
 
 - **New job:** "Dec 2026–Present · ELT Teacher Training & Market Research Specialist · Compass Publishing / 웅진컴퍼스", described in one sentence from the job description (training teachers, distributors and sales teams at home and abroad; adapting training per market; following ELT and EdTech trends through research, advisory meetings and school visits). Both languages; Korean font rebuilt (듀 웅 퍼).

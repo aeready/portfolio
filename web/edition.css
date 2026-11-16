@@ -738,3 +738,12 @@ html[lang="ko"] #background .software-skills li > span:last-child { font: 700 1r
   #background .timeline article { rotate: -.5deg; } #background .timeline article:nth-of-type(even) { rotate: .5deg; }
   #background .tl-year { bottom: -.12em; }
 }
+
+/* Phone filter control: the closed bar is set like the options below it
+   (title face, upper case), not a mix of mono label and sans value. */
+.filter-toggle :is(.ft-label, .ft-value) {
+  font-family: var(--display) !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: .005em !important;
+}
+.filter-toggle .ft-label { font-size: 1.125rem !important; opacity: .65; }
+.filter-toggle .ft-value { font-size: 1.125rem !important; }
+html[lang="ko"] .filter-toggle :is(.ft-label, .ft-value) { font-family: var(--read) !important; text-transform: none !important; letter-spacing: 0 !important; font-size: 1rem !important; }
