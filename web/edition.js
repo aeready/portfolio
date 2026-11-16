@@ -296,6 +296,40 @@
   fit(); new MutationObserver(fit).observe(grid, {childList: true});
 })();
 
+/* ---------- Background: parallax and the timeline line ------------------
+   Position-driven (not a timed animation), so nothing can stop half-done;
+   reduced motion turns it off and draws the line in full. */
+(() => {
+  const section = document.getElementById('background');
+  if (!section || !window.matchMedia) return;
+  const timeline = section.querySelector('.timeline');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const items = [...section.querySelectorAll('[data-par]')];
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    const vh = innerHeight;
+    if (timeline) {
+      const r = timeline.getBoundingClientRect();
+      const p = still.matches ? 1 : Math.max(0, Math.min(1, (vh * .6 - r.top) / r.height));
+      timeline.style.setProperty('--tl-p', p.toFixed(3));
+    }
+    if (still.matches) { items.forEach(el => { el.style.translate = ''; }); return; }
+    const narrow = innerWidth < 1001;
+    items.forEach(el => {
+      if (narrow && el.classList.contains('tl-year')) { el.style.translate = ''; return; }
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      const offset = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.par || 0);
+      el.style.translate = `0 ${offset.toFixed(1)}px`;
+    });
+  };
+  const ask = () => { if (!frame) frame = requestAnimationFrame(update); };
+  addEventListener('scroll', ask, {passive: true}); addEventListener('resize', ask);
+  still.addEventListener?.('change', ask);
+  update();
+})();
+
 /* ---------- Group 5 · Motion ------------------------------------------------ */
 (() => {
   'use strict';

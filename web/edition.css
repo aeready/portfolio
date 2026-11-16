@@ -647,3 +647,94 @@ html[lang="ko"] .ed-file-title { font-family: var(--read); text-transform: none;
   .ed-file:not(.is-open) .ed-file-tab { padding-inline: 0; align-items: center; }
   .ed-file:not(.is-open) .ed-file-title { font-size: clamp(1.375rem, 1rem + .8vw, 1.875rem); }
 }
+
+/* ---------- Background: a moving timeline (owner, 18 Nov) ------------------
+   Jobs are coloured cards on either side of an ink line that fills with
+   lime as you scroll through it. Big outlined years drift behind the cards;
+   skills are tiles that drift slightly at different speeds (edition.js,
+   [data-par]). Reduced motion: everything still, line fully drawn. */
+#background .background-layout { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: none !important; gap: var(--s5, 48px) !important; }
+#background .background-layout > * { grid-column: 1 !important; grid-row: auto !important; }
+#background .background-details { max-width: none !important; width: 100%; }
+#background .timeline { position: relative; display: grid !important; grid-template-columns: 1fr 1fr; column-gap: clamp(56px, 7vw, 120px); row-gap: 0; padding: 24px 0 40px !important; border: 0 !important; }
+#background .tl-track { position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; translate: -50% 0; background: var(--ink); }
+#background .tl-fill { position: absolute; inset: 0 0 auto; height: calc(var(--tl-p, 1) * 100%); background: var(--acid); box-shadow: 0 0 0 1.5px var(--ink); }
+#background .timeline article {
+  --c-bg: var(--paper-deep, #ece2d0); --c-ink: var(--ink); --c-text: var(--ink-text, #37243c); --c-tag-bg: var(--acid); --c-tag-ink: var(--ink);
+  position: relative; display: block !important; grid-column: 1; margin: 0 0 clamp(40px, 5vw, 72px) !important; padding: clamp(24px, 2.4vw, 36px) !important;
+  background: var(--c-bg) var(--grain-ink) 0 0 / 320px !important; color: var(--c-text); border: 1.5px solid var(--ink) !important; rotate: -1deg;
+  transition: rotate 360ms var(--ease-press), translate 360ms var(--ease-press);
+}
+#background .timeline article:nth-of-type(even) { grid-column: 2; margin-top: clamp(80px, 9vw, 140px) !important; rotate: 1deg; }
+#background .timeline article:nth-of-type(3n+1) { --c-bg: var(--acid); --c-tag-bg: var(--ink); --c-tag-ink: var(--acid); }
+#background .timeline article:nth-of-type(3n+2) { --c-bg: var(--ink); --c-ink: var(--paper); --c-text: var(--paper); background-image: var(--grain-paper) !important; }
+@media (hover: hover) { #background .timeline article:hover { rotate: 0deg; translate: 0 -4px; } }
+#background .timeline article > :not(.tl-year):not(.timeline-now) { position: relative; z-index: 1; }
+#background .timeline article h3 { color: var(--c-ink) !important; font: 700 clamp(1.625rem, 1.1rem + 1.2vw, 2.375rem)/1 var(--display) !important; text-transform: uppercase; margin: 14px 0 0 !important; text-shadow: none !important; }
+html[lang="ko"] #background .timeline article h3 { font: 700 clamp(1.375rem, 1rem + .8vw, 1.75rem)/1.3 var(--read) !important; text-transform: none; }
+#background .timeline article .institution { color: var(--c-ink) !important; font-weight: 700; margin-top: 10px !important; }
+#background .timeline article p { color: var(--c-text) !important; }
+#background .timeline-date { display: inline-block; background: var(--c-tag-bg) !important; color: var(--c-tag-ink) !important; padding: 5px 9px !important; margin: 0 !important; }
+/* The dot on the line, level with each card's date. */
+#background .timeline article::before {
+  content: '' !important; display: block !important; position: absolute; top: 34px; right: calc(-1 * clamp(56px, 7vw, 120px) / 2 - 11px); left: auto;
+  width: 18px; height: 18px; border-radius: 50%; background: var(--paper); border: 4px solid var(--ink); rotate: 1deg; z-index: 2;
+}
+#background .timeline article:nth-of-type(even)::before { right: auto; left: calc(-1 * clamp(56px, 7vw, 120px) / 2 - 11px); }
+#background .timeline article.is-current::before { background: var(--acid); }
+/* Big outlined year behind the card, drifting (parallax). */
+#background .tl-year {
+  position: absolute; z-index: 0; right: -6%; bottom: -34%; pointer-events: none;
+  font: 700 clamp(5rem, 3rem + 7vw, 10rem)/1 var(--display); color: transparent; -webkit-text-stroke: 1.5px var(--c-ink); opacity: .35; letter-spacing: -.01em;
+}
+#background .timeline article:nth-of-type(even) .tl-year { right: auto; left: -6%; }
+/* "Now" sticker on the current job. */
+#background .timeline-now {
+  position: absolute; top: -16px; right: 18px; z-index: 3; padding: 6px 12px; rotate: 5deg;
+  background: var(--ink); color: var(--acid); font: 700 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
+}
+html[lang="ko"] #background .timeline-now { font-family: var(--read); font-size: 1rem; }
+@media (prefers-reduced-motion: no-preference) {
+  #background .timeline-now { animation: ed-now 2.4s ease-in-out infinite; }
+  @keyframes ed-now { 0%, 100% { rotate: 5deg; } 50% { rotate: -2deg; } }
+}
+/* Education and skills: two columns of tiles under the timeline. */
+#background .qualifications { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(32px, 4vw, 64px) !important; border-top: 0 !important; padding: 0 !important; }
+#background .qualifications > div { margin: 0 !important; padding: 0 !important; border: 0 !important; }
+#background .qualifications h3 { font: 700 clamp(2.25rem, 1.4rem + 2vw, 3.5rem)/1 var(--display) !important; text-transform: uppercase; }
+#background .university-lockup { background: var(--paper); border: 1.5px solid var(--ink) !important; padding: 16px 18px !important; margin: 8px 0 18px !important; }
+#background .qualifications h4 { display: inline-block; background: var(--acid); padding: 4px 8px; margin: 0 !important; }
+#background .software-skills { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px !important; margin-top: 18px !important; padding: 0 !important; list-style: none; }
+#background .software-skills li {
+  display: flex !important; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 18px; min-height: 112px;
+  padding: 14px 16px !important; border: 1.5px solid var(--ink) !important; background: var(--paper);
+}
+#background .software-skills li:nth-child(3n+1) { background: var(--acid); }
+#background .software-skills li:nth-child(3n+2) { background: var(--ink); color: var(--paper); }
+#background .software-skills li:nth-child(3n+2) .skill-logo { background: var(--paper); padding: 6px 8px; }
+#background .software-skills li > span:last-child { font: 700 1.25rem/1 var(--display); text-transform: uppercase; }
+html[lang="ko"] #background .software-skills li > span:last-child { font: 700 1rem/1.3 var(--read); text-transform: none; }
+#background .skill-logo { width: auto !important; height: 30px; display: flex; align-items: center; }
+#background .skill-logo img { height: 24px !important; width: auto !important; max-width: 110px; }
+#background .flourish--graph { display: none !important; }
+@media (max-width: 1000px) {
+  #background .timeline { grid-template-columns: minmax(0, 1fr); padding-left: 40px !important; }
+  #background .tl-track { left: 12px; }
+  #background .timeline article, #background .timeline article:nth-of-type(even) { grid-column: 1; margin-top: 0 !important; }
+  #background .timeline article::before, #background .timeline article:nth-of-type(even)::before { left: -39px; right: auto; }
+  #background .qualifications { grid-template-columns: minmax(0, 1fr); }
+  #background .tl-year { bottom: -18%; }
+}
+@media (max-width: 520px) { #background .software-skills { grid-template-columns: 1fr 1fr; } }
+[data-par] { will-change: translate; }
+#background .timeline article { overflow: hidden; }
+#background .tl-year { right: 14px !important; left: auto !important; bottom: -.18em; opacity: .28; font-size: clamp(4.5rem, 2.5rem + 5vw, 8rem); }
+#background .timeline-now { top: 16px; right: 16px; }
+#background .software-skills { gap: 18px !important; align-items: start; }
+#background .software-skills li { min-height: 104px; }
+#background .timeline article { padding-bottom: clamp(72px, 4rem + 2vw, 104px) !important; }
+#background .tl-year { bottom: -.22em; font-size: clamp(4rem, 2.6rem + 3.6vw, 6.5rem); opacity: .32; }
+@media (max-width: 1000px) {
+  #background .timeline article { rotate: -.5deg; } #background .timeline article:nth-of-type(even) { rotate: .5deg; }
+  #background .tl-year { bottom: -.12em; }
+}

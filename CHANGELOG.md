@@ -3,6 +3,15 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Background as a moving timeline
+
+- **New job:** "Dec 2026–Present · ELT Teacher Training & Market Research Specialist · Compass Publishing / 웅진컴퍼스", described in one sentence from the job description (training teachers, distributors and sales teams at home and abroad; adapting training per market; following ELT and EdTech trends through research, advisory meetings and school visits). Both languages; Korean font rebuilt (듀 웅 퍼).
+- **Teacher Trainer** now reads Mar 2026–Dec 2026. **Gangneung English Club removed.**
+- **Timeline:** jobs are coloured cards (lime, aubergine, cream) on alternating sides of an ink line that fills with lime as you scroll through it; the current job has a "Now / 현재" sticker that sways; big outlined start years sit in each card and drift slightly (parallax, desktop). Phones: one column, line on the left.
+- **Education and Skills** sit side by side under the timeline: degree tags with bordered cards; software as coloured tiles in the title face that drift at slightly different speeds.
+- Parallax is driven by scroll position (not a timed animation), so it never stops half-way; reduced motion turns it off and draws the line in full.
+- Undo: the "Background: a moving timeline" blocks in `edition.css` / `edition.js`; the timeline markup in `index.html`.
+
 ## 18 Nov 2026 — Owner's review round
 
 - **Cursor:** the registration-mark cursor and the lime ring that followed it are removed; ordinary arrow and hand everywhere.

@@ -134,7 +134,7 @@ assert(!app.includes('annaready@live.com'));
 assert(!html.includes('mailto:'));
 assert(html.includes('© 2026 Anna Ready'));
 assert(!html.includes('experience-note'));
-assert(html.includes('강릉영어회화모임'));
+assert(html.includes('웅진컴퍼스'));
 await byId('contact-email').emit('click');
 assert(!byId('email-details').hidden);
 assert.equal(byId('contact-email').getAttribute('aria-expanded'),'true');
