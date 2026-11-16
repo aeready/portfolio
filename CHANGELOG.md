@@ -3,6 +3,24 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 (later) — Site-wide: no outlines, no hard shadows, no tilt
+
+- Rule applied everywhere (header buttons, project bands, project pages, file cabinet, file cards, Previous/Next, gallery buttons, zoom/sheet buttons): no purple outlines, no hard offset shadows, nothing tilted except NOW / IN PROGRESS. Things are told apart by fill colour; preview images lose the cream frame and get one soft shadow.
+- "Tested on Monday morning." ribbon hidden; the running "ANNA READY · PORTFOLIO" bottom bar hidden.
+- Phones: cabinet titles smaller so "+" stays inside; file-card links wrap instead of running off the card.
+- Undo: delete the "Site-wide rule (owner, 17 Nov)" block and the lines after it at the end of `web/edition.css`.
+
+## 17 Nov 2026 (late) — Crisp pass below the hero
+
+- **Skills:** straight, no outlines, holes, tape, halftone or offset shadows; faint ruled lines kept as a hint of the notebook. Colours kept (lime / aubergine / cream name bars and chips), borderless. Logos on small white rounded tiles, top-aligned; Korean captions one small muted style; all text on one left edge.
+- **Experience cards:** colours kept, outlines and tilt removed. Desktop hover: card lifts forward with a soft shadow, date tag nudges right (mouse tilt removed).
+- **Timeline line (desktop):** looping lime "comet" removed; the line only draws in on scroll.
+- **Education:** no outline or lime offset shadow; seal unoutlined; note tag hugs its text.
+- **Map:** pins drop slower and further apart, radar rings and route flow slowed.
+- **MSc status:** "In progress / 재학 중" moved into a corner badge like NOW (locales + index.html `degree-badge`); tag now reads "Expected 2028 / 2028년 졸업 예정".
+- **Timeline dots (desktop):** small solid ink dots with a paper halo; current job a lime dot ringed in ink; no pulse; thinner stems.
+- Undo: delete the two "crisp pass (owner, 17 Nov)" blocks and the lines after them at the end of `web/edition.css`.
+
 ## 18 Nov 2026 — Owner's review (4e): live timeline, texture, AI skills, shorter Compass text
 
 - **Timeline (desktop):** the wavy line is fitted to the card centres; a lime light runs along it from the oldest job to the newest, on a loop; the current job's dot pulses; cards tilt slightly toward the mouse.

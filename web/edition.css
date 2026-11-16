@@ -1495,3 +1495,207 @@ html[lang="ko"] #background .skills-notebook > .lang-list > span { grid-template
   #background .skills-notebook .software-skills li .skill-logo--ai { font-size: 1.5rem !important; }
   #background .skills-notebook > .lang-list > span { grid-template-columns: 4.6em minmax(0, 1fr) !important; display: grid !important; }
 }
+
+/* ---------- Skills: crisp pass (owner, 17 Nov) ----------
+   Match the hero: no tilt, holes, tape, outlines, offset shadows or halftone.
+   Keeps only faint ruled lines as a hint of the notebook. One treatment for
+   every tool name; Korean captions are always small, muted reading face.
+   Type scale here: 2.5rem title / 1.25rem item / .9375rem body / .8125rem caption.
+   Undo: delete this block. */
+#background .qualifications > .skills-notebook {
+  rotate: none !important; border: 0 !important; box-shadow: none !important; margin-right: 0 !important;
+  padding: clamp(24px, 3.2vw, 48px) !important;
+  background: repeating-linear-gradient(transparent 0 31px, rgb(73 43 81 / .08) 31px 32px) 0 clamp(24px, 3.2vw, 48px), #fbf6ec !important;
+}
+#background .qualifications > .skills-notebook::before,
+#background .qualifications > .skills-notebook::after,
+#background .skills-notebook .software-skills::before { content: none !important; display: none !important; }
+
+/* Headings: Korean as a quiet caption, never a lime tag. */
+#background .skills-notebook > h3::after,
+html[lang="ko"] #background .skills-notebook > h3::after {
+  rotate: none; background: none; padding: 0; font: 600 1rem/1 var(--read); text-transform: none; color: var(--ink-70);
+}
+#background .skills-notebook > .strengths-title span,
+html[lang="ko"] #background .skills-notebook > .strengths-title span { font: 600 .8125rem/1 var(--read) !important; text-transform: none !important; color: var(--ink-70); opacity: 1; }
+
+/* Tools: borderless logo, plain name, caption, line — all on one left edge. */
+#background .skills-notebook .software-skills li,
+#background .skills-notebook .software-skills li:nth-child(n) { grid-template-columns: 48px minmax(0, 1fr) !important; column-gap: 16px !important; align-items: start; }
+#background .skills-notebook .software-skills li .skill-logo,
+#background .skills-notebook .software-skills li:nth-child(n) .skill-logo {
+  width: 48px !important; height: 48px !important; padding: 8px !important; grid-row: 1 / 4 !important; grid-column: 1 !important;
+  background: #fff !important; border: 0 !important; border-radius: 10px; box-shadow: 0 1px 2px rgb(73 43 81 / .12); align-self: start !important; rotate: none !important; translate: none !important;
+}
+#background .skills-notebook .software-skills li .skill-logo img { max-height: 28px !important; }
+#background .skills-notebook .software-skills li .skill-logo--ai { font-size: 1.25rem !important; background: var(--acid) !important; }
+#background .skills-notebook .software-skills li > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt),
+#background .skills-notebook .software-skills li:nth-child(n) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) {
+  background: none !important; background-image: none !important; color: var(--ink) !important; border: 0 !important; padding: 2px 0 0 !important; font-size: 1.25rem !important; align-self: start !important;
+}
+#background .skills-notebook .software-skills li > span.skill-alt,
+html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-alt,
+#background .skills-notebook .software-skills li .skill-desc {
+  grid-column: 2 !important; padding: 2px 0 0 !important;
+}
+#background .skills-notebook .software-skills li > span.skill-alt,
+html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-alt { font: 600 .8125rem/1.3 var(--read) !important; text-transform: none !important; letter-spacing: 0; color: var(--ink-70); opacity: 1; }
+#background .skills-notebook .software-skills li .skill-desc { font-size: .9375rem !important; color: var(--ink-text); opacity: 1; }
+
+/* Strengths: one quiet chip style, straight. */
+#background .strength-chips li,
+#background .strength-chips li:nth-child(n) {
+  rotate: none !important; background: rgb(255 255 255 / .6) !important; background-image: none !important; color: var(--ink) !important;
+  border: 1px solid var(--ink-15) !important; padding: 7px 14px;
+}
+#background .strength-chips li span { color: var(--ink-70); opacity: 1; font-size: .8125rem; }
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  #background .skills-notebook .software-skills li:hover .skill-logo { rotate: none; translate: 0 -2px !important; }
+}
+/* Colours back (owner liked them), still borderless and straight. */
+#background .skills-notebook .software-skills li:nth-child(n) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { justify-self: start !important; padding: 4px 10px !important; background: var(--acid) !important; }
+#background .skills-notebook .software-skills li:nth-child(3n+2) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background: var(--ink) !important; color: var(--paper) !important; }
+#background .skills-notebook .software-skills li:nth-child(3n) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background: var(--paper-deep) !important; }
+#background .skills-notebook .software-skills li > span.skill-alt, #background .skills-notebook .software-skills li .skill-desc { padding-top: 4px !important; }
+#background .strength-chips li:nth-child(n) { border: 0 !important; background: var(--paper-deep) !important; }
+#background .strength-chips li:nth-child(even) { background: var(--acid) !important; }
+#background .strength-chips li:nth-child(3n) { background: var(--ink) !important; color: var(--paper) !important; }
+#background .strength-chips li:nth-child(3n) span { color: var(--paper); opacity: .8; }
+
+/* ---------- Experience, Education, map, timeline: crisp pass (owner, 17 Nov) ----------
+   Cards keep their colours but lose outlines, tilt and offset shadows.
+   Desktop hover: card lifts forward with a soft shadow (no mouse tilt).
+   Timeline: the looping "comet" on the wavy line is gone; it just draws in on scroll.
+   Map: pins drop, rings pulse and the route flows more slowly. Undo: delete this block. */
+#background .timeline article,
+#background .timeline article:nth-of-type(n) { border: 0 !important; rotate: none !important; box-shadow: 0 1px 2px rgb(73 43 81 / .08); }
+#background .degree { border: 0 !important; box-shadow: none !important; background: var(--paper-deep) !important; }
+#background .degree .university-logo { border: 0 !important; box-shadow: 0 1px 2px rgb(73 43 81 / .12); }
+@media (max-width: 1000px) { #background .degree { box-shadow: none !important; margin-right: 0 !important; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @media (min-width: 1001px) {
+    #background .tl-wave-comet, #background .tl-wave-comet-ink { animation: none !important; opacity: 0 !important; }
+    #background.tl-motion .timeline article:not(.tl-on) { rotate: none !important; translate: 0 32px !important; }
+    #background.tl-motion .timeline article.tl-on,
+    #background.tl-motion .timeline article.tl-on:nth-of-type(n) {
+      transform: none !important; rotate: none !important;
+      transition: opacity 600ms ease, translate 260ms cubic-bezier(.2, .8, .2, 1), scale 260ms cubic-bezier(.2, .8, .2, 1), box-shadow 260ms ease !important;
+    }
+    #background.tl-motion .timeline article.tl-on:is(:hover, :focus-within) {
+      translate: 0 -8px !important; scale: 1.015; rotate: none !important; z-index: 3;
+      box-shadow: 0 18px 40px -16px rgb(73 43 81 / .45), 0 2px 6px rgb(73 43 81 / .12);
+    }
+    #background .timeline article .timeline-date { transition: translate 260ms cubic-bezier(.2, .8, .2, 1); }
+    #background.tl-motion .timeline article.tl-on:is(:hover, :focus-within) .timeline-date { translate: 3px 0; }
+  }
+  #background.tl-motion .work-map :is(.map-pin-body, .map-home-body) {
+    transition: opacity 450ms ease calc(var(--i, 0) * 280ms), translate 950ms cubic-bezier(.3, 1.35, .5, 1) calc(var(--i, 0) * 280ms), scale 300ms var(--ease-press);
+  }
+  #background.tl-motion .work-map .map-route { transition: opacity 1400ms ease 1300ms; }
+  .work-map.map-on .map-ring { animation-duration: 3.6s; }
+  .work-map.map-on .map-route { animation-duration: 2.6s; }
+}
+#background .degree .degree-note { display: inline-block !important; width: fit-content !important; max-width: 100%; padding: 2px 8px !important; font-size: .8125rem !important; white-space: nowrap; }
+
+/* ---------- "In progress" badge + new timeline dots (owner, 17 Nov) ----------
+   The MSc's status sits in a corner badge like Compass's NOW, so it can't be
+   read as a finished degree. Timeline dots: small solid dots with a paper halo
+   instead of big outlined rings; the current job is lime. Undo: delete this
+   block and the degree-badge spans in index.html / locales.js. */
+#background .degree { position: relative; }
+#background .degree .degree-badge {
+  position: absolute; top: -14px; right: 16px; z-index: 3; padding: 6px 12px; rotate: 5deg;
+  background: var(--ink); color: var(--acid); font: 700 1.125rem/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
+}
+html[lang="ko"] #background .degree .degree-badge { font: 700 .9375rem/1 var(--read); text-transform: none; }
+
+#background .timeline article::before,
+#background .timeline article:nth-of-type(n)::before {
+  width: 16px !important; height: 16px !important; border: 0 !important; border-radius: 50%;
+  background: var(--ink) !important; box-shadow: 0 0 0 5px var(--paper) !important; animation: none !important;
+}
+#background .timeline article.is-current::before,
+#background .timeline article.is-current:nth-of-type(n)::before {
+  width: 20px !important; height: 20px !important; background: var(--acid) !important;
+  box-shadow: 0 0 0 3px var(--ink), 0 0 0 8px var(--paper) !important;
+}
+@media (min-width: 1001px) {
+  #background .timeline article::after { width: 2px !important; opacity: .5; }
+}
+@media (max-width: 1000px) {
+  #background .timeline article::before,
+  #background .timeline article:nth-of-type(n)::before { left: -36px !important; top: 36px !important; }
+  #background .timeline article.is-current::before,
+  #background .timeline article.is-current:nth-of-type(n)::before { left: -38px !important; }
+}
+@media (max-width: 1000px) {
+  #background .degree:has(.degree-badge) { padding-top: 34px !important; }
+  #background .timeline article.is-current { padding-top: 44px !important; }
+}
+
+/* ---------- Site-wide rule (owner, 17 Nov): no purple outlines, no hard
+   offset shadows, nothing tilted except NOW / IN PROGRESS. Things are told
+   apart by fill colour and spacing; at most one soft shadow.
+   Also: "Tested on Monday morning." ribbon removed; running folio bar removed.
+   Undo: delete this block. */
+.section-ribbon { display: none !important; }
+.ed-folio { display: none !important; }
+
+/* Header + dialog buttons: filled, no outline. */
+.language-toggle, .menu-toggle, .filter-toggle, .close-button, .header-contact, .nav-contact,
+#project-dialog .language-toggle, #project-dialog .close-button { border-color: transparent !important; box-shadow: none !important; }
+.language-toggle, #project-dialog .language-toggle, .close-button, #project-dialog .close-button, .filter-toggle { background: var(--paper-deep) !important; color: var(--ink) !important; }
+.menu-toggle { background: var(--ink) !important; color: var(--paper) !important; }
+.header-contact, .nav-contact { background: var(--acid) !important; color: var(--ink) !important; }
+
+/* Project bands: View has fill only; previews lose the hard frame, stack shadow and tilt. */
+.project-action { border-color: transparent !important; }
+.preview-image { border-width: 0 !important; border-radius: 2px; box-shadow: 0 1px 2px rgb(30 15 35 / .18), 0 10px 24px -12px rgb(30 15 35 / .35) !important; }
+.artifact-arrangement { box-shadow: none !important; }
+.preview-open.artifact-fixed, .preview-open.artifact-fixed:nth-child(n) { rotate: none !important; }
+
+/* Map labels on phones: straight. */
+.work-map .map-label { rotate: none !important; transform: none !important; }
+
+/* Project page. */
+#project-dialog .detail-head, #project-dialog .gallery, #project-dialog .gallery-stage img { box-shadow: none !important; }
+#project-dialog .gallery-stage img { border-width: 0 !important; }
+#project-dialog .gallery-controls button, #project-dialog .gallery-thumbnails button, #project-dialog .ed-sheet-open {
+  border-color: transparent !important; box-shadow: none !important; background-color: rgb(255 255 255 / .1) !important;
+}
+#project-dialog .gallery-controls button:disabled { opacity: .35; }
+#project-dialog .ed-file, #project-dialog .ed-file.is-open, #project-dialog .ed-file:nth-child(n) { border-color: transparent !important; box-shadow: none !important; }
+#project-dialog .ed-file-num { border-color: transparent !important; background: rgb(255 255 255 / .35); }
+#project-dialog .ed-file:is([data-tone="ink"], :nth-child(3n+2)) .ed-file-num { background: rgb(255 255 255 / .12); }
+#project-dialog .document-card, #project-dialog .document-card.outline { border-color: transparent !important; box-shadow: none !important; }
+#project-dialog .document-card.outline { background: var(--paper-deep) !important; }
+#project-dialog .detail-footer, #project-dialog .detail-footer button, #project-dialog .ed-next-button { border-color: transparent !important; box-shadow: none !important; }
+#project-dialog .detail-footer button:not(.ed-next-button) { background: var(--paper-deep) !important; }
+#project-dialog .ed-next-sheet { border-width: 0 !important; rotate: none !important; box-shadow: 0 8px 20px -10px rgb(30 15 35 / .5) !important; }
+.zv-close, .zv-prev, .zv-next, .ed-sheet-close { border-color: transparent !important; box-shadow: none !important; }
+
+/* Phone bugs: cabinet "+" stays inside its card; sticky Previous/Next bar
+   no longer covers the last content. */
+@media (max-width: 1000px) {
+  #project-dialog .ed-file-title { min-width: 0; overflow-wrap: anywhere; }
+  #project-dialog .ed-file-plus { flex: none; margin-left: 12px; }
+  #project-dialog .detail-footer { box-shadow: none !important; }
+  #project-dialog .detail-footer { margin-top: 24px; }
+  #project-dialog[open] { scroll-padding-bottom: 96px; }
+}
+/* Stronger overrides for older press.css layers. */
+html body .project-card .preview-image.preview-image, html body #project-dialog .preview-image.preview-image { border-width: 0 !important; }
+html body .project-collection > .project-card.project-card .artifact-fixed.artifact-fixed,
+html body .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-fixed.artifact-fixed { rotate: none !important; }
+html body .site-header .language-toggle.language-toggle { border-color: transparent !important; }
+html body .project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) img { border-width: 0 !important; }
+html body .project-collection > .project-card.project-card[data-tone] .artifact-arrangement { box-shadow: none !important; }
+html body #project-dialog #gallery-image { border-width: 0 !important; }
+#project-dialog .dialog-top a, #project-dialog .dialog-top button { border-color: transparent !important; box-shadow: none !important; }
+@media (max-width: 1000px) {
+  #project-dialog .ed-file-title { overflow-wrap: normal !important; font-size: clamp(1.125rem, 5vw, 1.625rem) !important; }
+  html body #project-dialog .detail-footer button:not(.ed-next-button) { background: transparent !important; }
+}
+#project-dialog .document-actions { flex-wrap: wrap !important; row-gap: 12px; column-gap: 24px; }
