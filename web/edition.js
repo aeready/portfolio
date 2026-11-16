@@ -31,9 +31,10 @@
     sheet.classList.toggle('is-portrait', !!portrait);
     grid.innerHTML = thumbs.map((b, i) => {
       const img = b.querySelector('img');
-      const src = img ? (img.currentSrc || img.src) : '';
+      const src = img ? img.getAttribute('src') : '';
+      const srcset = img?.getAttribute('srcset') || '';
       const current = b.getAttribute('aria-pressed') === 'true';
-      return `<li style="--i:${i}"><button type="button" data-go="${i}" aria-label="${esc(b.getAttribute('aria-label') || String(i + 1))}"${current ? ' aria-current="page"' : ''}><img src="${esc(src)}" alt="" loading="lazy" decoding="async"><span class="ed-sheet-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></button></li>`;
+      return `<li style="--i:${i}"><button type="button" data-go="${i}" aria-label="${esc(b.getAttribute('aria-label') || String(i + 1))}"${current ? ' aria-current="page"' : ''}><img src="${esc(src)}"${srcset ? ` srcset="${esc(srcset)}" sizes="(max-width: 760px) 45vw, 260px"` : ''} alt="" loading="lazy" decoding="async"><span class="ed-sheet-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></button></li>`;
     }).join('');
     sheet.querySelector('.ed-sheet-title').textContent = ui().sheetTitle || 'All pages';
     sheet.querySelector('.ed-sheet-close').setAttribute('aria-label', ui().sheetClose || 'Close');
