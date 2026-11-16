@@ -46,6 +46,13 @@ New work for this round is in `web/edition.css` and `web/edition.js` (loaded aft
 - USA Camp: the role's rule and the case facts' rules no longer sit 4 px apart.
 - New strings, both languages: All pages / 전체 페이지, Close all pages / 전체 페이지 닫기, the sheet title, the loupe hint, Sections on this page / 이 페이지의 항목, Portfolio / 포트폴리오, Next / 다음. Korean font rebuilt (됩).
 
+### Group 5 · Motion
+- **One curve family:** the near-duplicate "print" curve and the literal curves in older files now use the site's `--ease-press` (things arriving) and `--ease-plate` (plates); small hovers keep a plain ease.
+- **Navigation:** one lime bar with an ink edge slides under the main menu to the link you point at, and rests under the section you're reading (desktop). The current section's link is marked for assistive tech too.
+- **Hero figures** 250+ and 15+ count up once when they first appear, then the lime plate lands in register. Screen readers hear only the final figure. Not with reduced motion.
+- **Print piles** fan only if the pointer stays ~70 ms, so passing the cursor over a band no longer flickers it. Closing is immediate.
+- Checked and left as is: primary buttons already press into their offset shadow when clicked; closing a project returns to the card with no scroll jump (measured every frame); reduced motion stays fully static, as you decided earlier (no fade added).
+
 ## 17 Nov 2026 — Booklet spreads and tap-to-zoom
 
 - **Desktop, portrait galleries (USA Camp workbook):** pages show as an open booklet: the cover alone on the right, then 2–3, 4–5 … side by side, the last page alone. Arrows, swipe and arrow keys turn a whole spread; the counter reads "2–3 / 18"; both pages are highlighted in the strip; the caption names both. Pages turn in from the spine (fade, slight 3-D turn, focus pull). The halftone shadow sits under the whole spread. Landscape decks are unchanged (one slide at a time).

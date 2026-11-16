@@ -187,7 +187,7 @@ html[lang="ko"] .site-footer .footer-colophon { line-height: 1.7; }
   mix-blend-mode: multiply;
 }
 @media (prefers-reduced-motion: no-preference) {
-  #project-dialog .gallery-stage.is-spread:not(.is-cover):has(.slide-enter) .ed-spine { animation: ed-spine-turn 520ms cubic-bezier(.2, .7, .1, 1) both; }
+  #project-dialog .gallery-stage.is-spread:not(.is-cover):has(.slide-enter) .ed-spine { animation: ed-spine-turn 520ms var(--ease-press) both; }
   @keyframes ed-spine-turn { 0% { opacity: 1; width: 160px; } 100% { opacity: 1; width: 64px; } }
 }
 
@@ -240,7 +240,7 @@ html[lang="ko"] .ed-sheet-title { font-family: var(--read); letter-spacing: 0; t
 @media (hover: hover) { .ed-sheet-grid button:hover { translate: 0 -3px; box-shadow: 0 0 0 2px var(--paper), 6px 8px 0 rgb(0 0 0 / .35); } }
 @media (prefers-reduced-motion: no-preference) {
   .ed-sheet:not([hidden]) { animation: ed-fade 200ms ease both; }
-  .ed-sheet:not([hidden]) .ed-sheet-grid li { animation: ed-deal 360ms cubic-bezier(.2, .7, .1, 1) both; animation-delay: min(calc(var(--i, 0) * 18ms), 300ms); }
+  .ed-sheet:not([hidden]) .ed-sheet-grid li { animation: ed-deal 360ms var(--ease-press) both; animation-delay: min(calc(var(--i, 0) * 18ms), 300ms); }
   .ed-sheet-grid button { transition: translate 160ms ease, box-shadow 160ms ease; }
   @keyframes ed-fade { from { opacity: 0; } }
   @keyframes ed-deal { from { opacity: 0; translate: 0 10px; } }
@@ -268,7 +268,7 @@ html[lang="ko"] .ed-sheet-title { font-family: var(--read); letter-spacing: 0; t
   translate: 4px 0; transition: translate 200ms ease, background-color 200ms ease, color 200ms ease;
 }
 html[lang="ko"] .ed-index a { letter-spacing: 0; }
-.ed-index-label { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width 260ms cubic-bezier(.2, .7, .1, 1), opacity 200ms ease, margin 260ms ease; }
+.ed-index-label { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width 260ms var(--ease-press), opacity 200ms ease, margin 260ms ease; }
 html[lang="ko"] .ed-index-label { font-family: var(--read); text-transform: none; font-size: .8125rem; }
 .ed-index a:is(:hover, :focus-visible) { translate: 0 0; }
 .ed-index a:is(:hover, :focus-visible) .ed-index-label { max-width: 28ch; opacity: 1; margin-left: 12px; }
@@ -303,7 +303,7 @@ html[lang="ko"] .ed-folio { font-family: var(--read); letter-spacing: 0; text-tr
   #project-dialog .ed-next-sheet {
     display: block; width: min(320px, 34vw); height: 120px; margin-top: 16px; overflow: hidden; rotate: -2deg; translate: 0 36px;
     border: 6px solid var(--paper); border-bottom: 0; box-shadow: 0 -2px 0 1px rgb(73 43 81 / .15), -8px -6px 0 var(--acid);
-    transition: translate 320ms cubic-bezier(.2, .7, .1, 1), rotate 320ms cubic-bezier(.2, .7, .1, 1);
+    transition: translate 320ms var(--ease-press), rotate 320ms var(--ease-press);
   }
   #project-dialog .ed-next-sheet img { display: block; width: 100%; height: auto; }
   #project-dialog .ed-next-button:is(:hover, :focus-visible) .ed-next-sheet { translate: 0 8px; rotate: -1deg; }
@@ -337,4 +337,30 @@ html[lang="ko"] #project-dialog .gallery-controls .ed-sheet-open { font-size: .8
     animation-delay: calc(var(--i, 0) * 70ms + 120ms), calc(var(--i, 0) * 70ms + 260ms);
   }
   @keyframes ed-title-plate { from { text-shadow: .14em .1em 0 var(--misreg, var(--acid)); } }
+}
+:root { --ease-print: var(--ease-press); }
+
+/* ---------- Group 5 · Motion ---------------------------------------------- */
+/* One ink bar slides under the main navigation (desktop). */
+.site-header nav.has-bar { position: relative; }
+.site-header nav.has-bar a:not(.nav-contact) { background-size: 0 3px !important; }
+.ed-navbar {
+  position: absolute; left: 0; bottom: 6px; height: 3px; width: 0; opacity: 0; pointer-events: none; background: var(--acid);
+  box-shadow: 0 1px 0 var(--ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ed-navbar { transition: translate 320ms var(--ease-press), width 320ms var(--ease-press), opacity 160ms ease; }
+}
+.site-header nav a[aria-current="location"] { color: var(--ink); }
+
+/* Print piles fan only when the pointer stays a moment (no flicker when a
+   cursor just passes over a band). Closing is immediate. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-collection > .project-card:is(:hover, :focus-visible) :is(.artifact-main-frame, .artifact-fixed) { transition-delay: 70ms; }
+}
+
+/* Hero figures: the lime plate lands in register as the count finishes. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-proof strong.ed-counting { text-shadow: none !important; }
+  .hero-proof strong.ed-counted { animation: ed-title-plate 700ms var(--ease-press) both; }
 }

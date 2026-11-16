@@ -205,3 +205,71 @@
   dialog.addEventListener('close', () => { index.hidden = true; folio.hidden = true; watcher?.disconnect(); stopLoupe(); });
   if (dialog.open) decorate();
 })();
+
+/* ---------- Group 5 · Motion ------------------------------------------------ */
+(() => {
+  'use strict';
+  if (!window.matchMedia) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* One ink bar under the main navigation: it slides to the link you point
+     at and rests under the section you are reading (desktop). */
+  const nav = document.querySelector('.site-header nav');
+  const hover = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1001px)');
+  if (nav && hover.matches) {
+    const links = [...nav.querySelectorAll('a:not(.nav-contact)')];
+    if (links.length) {
+      const bar = document.createElement('span'); bar.className = 'ed-navbar'; bar.setAttribute('aria-hidden', 'true');
+      nav.append(bar); nav.classList.add('has-bar');
+      let resting = null;
+      const place = a => {
+        if (!a) { bar.style.opacity = '0'; return; }
+        const n = nav.getBoundingClientRect(), r = a.getBoundingClientRect();
+        bar.style.opacity = '1'; bar.style.translate = `${r.left - n.left}px 0`; bar.style.width = `${r.width}px`;
+      };
+      links.forEach(a => { a.addEventListener('pointerenter', () => place(a)); a.addEventListener('focus', () => place(a)); });
+      nav.addEventListener('pointerleave', () => place(resting));
+      nav.addEventListener('focusout', () => setTimeout(() => { if (!nav.contains(document.activeElement)) place(resting); }));
+      if ('IntersectionObserver' in window) {
+        const map = new Map(links.filter(a => /^#[\w-]+$/.test(a.getAttribute('href') || '')).map(a => [document.querySelector(a.getAttribute('href')), a]).filter(([t]) => t));
+        const seen = new Map();
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => seen.set(e.target, e.isIntersecting ? e.intersectionRatio : 0));
+          let best = null, ratio = 0;
+          map.forEach((a, t) => { const v = seen.get(t) || 0; if (v > ratio) { ratio = v; best = a; } });
+          links.forEach(a => a === best ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current'));
+          resting = best;
+          if (!nav.matches(':hover') && !nav.contains(document.activeElement)) place(resting);
+        }, {rootMargin: '-35% 0px -55% 0px', threshold: [0, .01, .5, 1]});
+        map.forEach((a, t) => io.observe(t));
+      }
+      window.addEventListener('resize', () => place(resting));
+      document.fonts?.ready.then(() => place(resting));
+    }
+  }
+
+  /* 250+ / 15+ count up once when the hero first shows; the lime plate
+     registers as the count lands. Screen readers get the final figure only. */
+  const figures = [...document.querySelectorAll('.hero-proof strong')];
+  if (figures.length && !reduced.matches && 'IntersectionObserver' in window) {
+    const run = strong => {
+      const final = strong.textContent; const m = final.match(/^(\D*)(\d+)(.*)$/);
+      if (!m || strong.dataset.counted) return;
+      strong.dataset.counted = '1';
+      const target = +m[2], sr = document.createElement('span');
+      sr.className = 'sr-only'; sr.textContent = final; strong.after(sr); strong.setAttribute('aria-hidden', 'true');
+      strong.classList.add('ed-counting');
+      const t0 = performance.now(), dur = 1100;
+      const tick = now => {
+        const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        strong.textContent = m[1] + Math.round(target * e) + (k === 1 ? m[3] : '');
+        if (k < 1) requestAnimationFrame(tick);
+        else { strong.textContent = final; strong.removeAttribute('aria-hidden'); sr.replaceWith(); strong.classList.remove('ed-counting'); strong.classList.add('ed-counted'); }
+      };
+      requestAnimationFrame(tick);
+    };
+    const intro = document.documentElement.classList.contains('press-intro') ? 1400 : 500;
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); setTimeout(() => run(e.target), intro); } }), {threshold: .6});
+    figures.forEach(f => io.observe(f));
+  }
+})();

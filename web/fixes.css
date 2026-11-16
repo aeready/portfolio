@@ -132,15 +132,15 @@ html[lang="ko"] .site-footer .footer-links a { letter-spacing: 0; font-family: v
   /* The outlined numeral fills with its band's ink when the card is pointed
      at or focused: clear feedback that reads as a second ink pass. */
   .project-collection .project-card .project-index {
-    transition: color 220ms cubic-bezier(.2, .7, .3, 1) !important;
+    transition: color 220ms var(--ease-press) !important;
   }
 
   /* Footer and 404 links: underline thickens instead of jumping. */
-  .site-footer .footer-links a { text-decoration-thickness: 1.5px; transition: text-decoration-thickness 150ms cubic-bezier(.2, .7, .3, 1); }
+  .site-footer .footer-links a { text-decoration-thickness: 1.5px; transition: text-decoration-thickness 150ms var(--ease-press); }
   .site-footer .footer-links a:hover { text-decoration-thickness: 4px; }
 
   /* Header Contact presses into place like every other control. */
-  .header-contact { transition: transform 90ms cubic-bezier(.2, .7, .3, 1); }
+  .header-contact { transition: transform 90ms var(--ease-press); }
 }
 @media (prefers-reduced-motion: reduce) {
   .project-collection .project-card .project-index,
