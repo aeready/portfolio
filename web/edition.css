@@ -1218,3 +1218,19 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
 .hero .location > span [lang="ko"] { font-family: var(--read) !important; font-size: 1.0625rem !important; text-transform: none !important; }
 html[lang="ko"] .hero .location > span { font: 700 1.0625rem/1.3 var(--read) !important; text-transform: none !important; letter-spacing: 0 !important; }
 .hero .location .icon { color: var(--ink); opacity: 1; }
+/* Map labels in the title face, each at its own slight angle. With a mouse
+   they stay hidden until you hover the map (or a job card: its places only). */
+.work-map .map-label { font: 700 18px/1 var(--display) !important; text-transform: uppercase; letter-spacing: .01em; transform-box: fill-box; transform-origin: center; transition: opacity 220ms ease, scale 260ms var(--ease-press); }
+html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; }
+.work-map .map-label[data-key="seoul"] { rotate: -7deg; }
+.work-map .map-label[data-key="seongnam"] { rotate: 5deg; }
+.work-map .map-label[data-key="suwon"] { rotate: -4deg; font-weight: 400 !important; opacity: .85; }
+.work-map .map-label[data-key="pyeongchang"] { rotate: 6deg; }
+.work-map .map-label[data-key="gangneung"] { rotate: -6deg; }
+@media (hover: hover) and (pointer: fine) {
+  .work-map .map-label { opacity: 0 !important; scale: .85; }
+  .work-map:hover .map-label,
+  .work-map[data-lit="compass"] .map-label[data-job="compass"],
+  .work-map[data-lit="gige"] .map-label[data-job="gige"],
+  .work-map[data-lit="teacher"] .map-label[data-job="teacher"] { opacity: 1 !important; scale: 1; }
+}
