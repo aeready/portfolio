@@ -3,6 +3,10 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Tagline
+
+- "Tested on Monday morning." / "월요일 아침에 검증된 자료." (owner's pick). Korean font rebuilt (증).
+
 ## 18 Nov 2026 — Owner's review (3)
 
 - **Timeline:** big background years removed. Flipped: Compass Publishing on the right, raised beside the section title; Teacher Trainer left; English Teacher right; the cards interlock so the section is much shorter.
