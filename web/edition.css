@@ -747,3 +747,53 @@ html[lang="ko"] #background .software-skills li > span:last-child { font: 700 1r
 .filter-toggle .ft-label { font-size: 1.125rem !important; opacity: .65; }
 .filter-toggle .ft-value { font-size: 1.125rem !important; }
 html[lang="ko"] .filter-toggle :is(.ft-label, .ft-value) { font-family: var(--read) !important; text-transform: none !important; letter-spacing: 0 !important; font-size: 1rem !important; }
+
+/* ---------- Phone project pages: more room for the work (owner, 18 Nov) ----
+   One-row page bar (← · 5/7 · Contact · 한국어 · ×), the gallery sized to
+   the current page (no empty box under landscape slides), a shorter strip,
+   counter + All pages + arrows on one row, and a slimmer project bar. */
+@media (max-width: 760px) {
+  #project-dialog .dialog-top {
+    display: flex !important; grid-template-areas: none !important; align-items: center !important; gap: 6px !important;
+    padding: 6px 12px !important; min-height: 0 !important;
+  }
+  #project-dialog .dialog-top > * { grid-area: auto !important; margin: 0 !important; }
+  #project-dialog .dialog-top .back-projects { min-width: 44px; min-height: 44px; padding: 0 6px !important; font-size: 1.25rem !important; justify-content: center; }
+  #project-dialog .dialog-top .back-projects [data-i18n="backProjects"] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  #project-dialog .dialog-top #project-position { margin-right: auto !important; padding: 4px 8px !important; font-size: .875rem !important; }
+  #project-dialog .dialog-top :is(.dialog-contact, .language-toggle, .close-button) { min-height: 44px !important; height: 44px; padding: 0 10px !important; font-size: .8125rem !important; min-width: 44px; }
+
+  #project-dialog .gallery { padding: 16px 0 12px !important; margin-top: calc(-1 * var(--s5, 48px)) !important; }
+  #project-dialog .gallery-stage { height: auto !important; }
+  #project-dialog #gallery-image { max-height: 48svh !important; }
+  #project-dialog .gallery-thumbnails { margin-top: 14px !important; padding: 18px 2px 6px !important; gap: 10px !important; }
+  #project-dialog .gallery-thumbnails button { height: 60px !important; }
+  #project-dialog .gallery-thumbnails button::before { top: -17px; font-size: .6875rem; }
+  #project-dialog .gallery-controls {
+    display: flex !important; flex-wrap: wrap; align-items: center !important; gap: 8px !important; margin-top: 10px !important;
+  }
+  #project-dialog #slide-count { margin-right: auto; }
+  #project-dialog #slide-count .count-now { font-size: 2.25rem !important; }
+  #project-dialog #slide-count .count-total { font-size: 1.125rem; }
+  #project-dialog #slide-count .count-source { display: none !important; }
+  #project-dialog .gallery-controls > div { order: 3; gap: 6px !important; }
+  #project-dialog .gallery-controls > div button { min-width: 44px !important; min-height: 44px !important; width: 44px !important; height: 44px !important; }
+  #project-dialog .gallery-controls .ed-sheet-open { order: 2; grid-row: auto; padding: 0 12px; min-height: 44px; }
+  #project-dialog .gallery-controls .ed-sheet-label { font-size: 0; }
+  #project-dialog .gallery-controls .ed-sheet-label::after { content: attr(data-n); font-size: 1rem; }
+  #project-dialog .gallery-caption { margin-top: 8px !important; font-size: .9375rem !important; line-height: 1.45 !important; }
+  #project-dialog .gallery-tabs { margin-bottom: 12px !important; }
+  #project-dialog .gallery-tabs button { min-height: 44px; padding: 8px 10px !important; }
+  #project-dialog .detail-footer button { min-height: 48px !important; font-size: 1.0625rem !important; }
+}
+@media (max-width: 760px) {
+  #project-dialog .dialog-top > * { flex: none; }
+  #project-dialog .dialog-top .back-projects { height: 44px; }
+  #project-dialog .dialog-top #project-position { white-space: nowrap; letter-spacing: 0 !important; font-size: .8125rem !important; }
+  #project-dialog .dialog-top .close-button { font-size: 0 !important; width: 44px; padding: 0 !important; justify-content: center; }
+  #project-dialog .dialog-top .close-button > [aria-hidden="true"] { font-size: 1.25rem; }
+  #project-dialog .dialog-top .dialog-contact { letter-spacing: .02em !important; }
+  #project-dialog .detail-role { padding-top: var(--s4, 32px) !important; }
+}
+@media (max-width: 359px) { #project-dialog .dialog-top .dialog-contact { display: none !important; } }
+@media (max-width: 760px) { #project-dialog .dialog-top .back-projects { min-height: 44px !important; max-height: 44px; box-sizing: border-box; border-width: 1.5px !important; } }

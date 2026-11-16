@@ -240,6 +240,7 @@
     const b = controls?.querySelector('.ed-sheet-open');
     const setText = (node, text) => { if (node && node.textContent !== text) node.textContent = text; };
     if (b) setText(b.querySelector('.ed-sheet-label'), `${ui().sheetOpen || 'All pages'} · ${thumbs}`);
+    if (b) { b.querySelector('.ed-sheet-label').dataset.n = String(thumbs); b.setAttribute('aria-label', `${ui().sheetOpen || 'All pages'} · ${thumbs}`); }
     const gallery = detail.querySelector('.gallery');
     if (gallery && finePointer.matches && !gallery.querySelector('.ed-loupe-hint')) {
       const hint = el('p', 'ed-loupe-hint'); (gallery.querySelector('.gallery-controls') || gallery).append(hint);

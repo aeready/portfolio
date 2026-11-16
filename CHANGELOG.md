@@ -3,6 +3,12 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Phone project pages: room for the work
+
+- Page bar is one row on phones (← · 5 of 7 · Contact · 한국어 · ×): 115 px → 57 px. "Back to projects" and "Close" keep their names for screen readers. Below 360 px wide, Contact drops out of the bar (it's still in the menu and the page).
+- The gallery fits the current page (no empty box under landscape slides); pages up to 48% of the screen height; shorter numbered strip; counter, "All pages" (icon + count) and arrows on one row; caption smaller; Previous / Next project bar 56 → 48 px.
+- Result on a 412 × 839 phone: the whole gallery (page, strip, controls, caption) is visible at once above the project bar.
+
 ## 18 Nov 2026 — Phone filter bar
 
 - The closed "Filter · All work 7" bar on phones is set in the title face, upper case, matching the options in the list (Korean: reading face). Undo: last block of `edition.css`.
