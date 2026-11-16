@@ -1274,3 +1274,29 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
     @keyframes fan-1 { from { translate: 0 8%; rotate: -2deg; scale: .94; } to { translate: 0 0; rotate: 0deg; scale: 1; } }
   }
 }
+
+/* USA Camp band (desktop): two more workbook pages on the free side of the
+   cover so the pile balances (landmarks p.4, school life p.8). Decoration
+   only (the gallery has every page). Undo: delete these lines. */
+@media (min-width: 1001px) {
+  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-arrangement::after,
+  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-main-frame::before {
+    content: '' !important; display: block !important; position: absolute; box-sizing: border-box; pointer-events: none;
+    width: 25%; aspect-ratio: 165 / 221; height: auto; border: 9px solid var(--paper); opacity: 1 !important;
+    background: var(--paper) center / cover no-repeat; background-size: cover !important; transition: translate 480ms var(--ease-press), rotate 480ms var(--ease-press);
+    translate: none; -webkit-mask-image: none !important; mask-image: none !important; filter: none !important; mix-blend-mode: normal !important;
+  }
+  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-arrangement::after {
+    background-image: url('assets/previews/usa-camp-booklet-04-480--586ddef5c4b5.webp') !important;
+    inset: -1% auto auto 0 !important; z-index: 1; rotate: -3deg;
+  }
+  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-main-frame::before {
+    background-image: url('assets/previews/usa-camp-booklet-08-480--7437e07f6f1c.webp') !important;
+    width: 59%; inset: 52% auto auto -57% !important; z-index: -1; rotate: 2.5deg;
+  }
+  .project-collection > .project-card[data-project="usa-camp-workbook"]:nth-child(even) .artifact-arrangement::after { inset: -1% 0 auto auto !important; rotate: 3deg; }
+  .project-collection > .project-card[data-project="usa-camp-workbook"]:nth-child(even) .artifact-main-frame::before { inset: 52% -57% auto auto !important; rotate: -2.5deg; }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .project-collection > .project-card[data-project="usa-camp-workbook"]:is(:hover, :focus-visible) .artifact-arrangement::after { translate: -8% 0; rotate: -6deg; }
+  }
+}

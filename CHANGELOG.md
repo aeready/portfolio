@@ -7,7 +7,8 @@ Each entry: what changed, the rule it serves, how to undo it. Nothing here is li
 
 - **Background (desktop):** the wavy line draws left to right as you scroll; each job card rises and settles as the line reaches it, and its badge pops. Map pins drop in one by one in the order I worked there (Pyeongchang, Gangneung, Seongnam, Seoul), then home and the route appear. Reduced motion: all still and visible.
 - **Project bands:** the big cover now moves with the two small samples: on hover it lifts and tips the opposite way (desktop); on phones it rises as the pile fans in.
-- **Undo:** delete the "Background motion" and "Project bands: the cover moves" blocks and the wavy-line clip lines in `web/edition.css`, and the motion block at the end of `web/edition.js`.
+- **USA Camp band (desktop):** two more workbook pages (landmarks, school life) on the free side of the cover, so the pile is balanced: two pages on each side. Decoration only, in CSS (the gallery already has every page).
+- **Undo:** delete the "USA Camp band" lines, the "Background motion" and "Project bands: the cover moves" blocks and the wavy-line clip lines in `web/edition.css`, and the motion block at the end of `web/edition.js`.
 
 ## 18 Nov 2026 — Owner's review (4b): map of where I worked, left-to-right timeline, hero tweaks
 
