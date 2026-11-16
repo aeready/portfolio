@@ -3,6 +3,14 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Owner's review (4b): map of where I worked, left-to-right timeline, hero tweaks
+
+- **Map:** an outline of South Korea (Natural Earth via `world-atlas`, simplified, inline SVG in `index.html`) with a pin for each place worked, coloured like that job's card: Seoul = Compass Publishing (lime), Seongnam = GIGE (aubergine), Pyeongchang then Gangneung = English teacher (cream). Suwon = home (asterisk, no job colour). A dashed route joins them in order. Pins carry place names only. Hovering or focusing a job card lights its pins. Phones and tablets show the northern part only, above the timeline.
+- **Timeline (desktop):** map on the left; the three jobs run left to right, oldest first, along a wavy line that draws in as you scroll, with a badge per job in its colour. Phones keep the vertical timeline.
+- **Hero:** "My background" now has the same hard shadow as "Explore work". The facts (Suwon, F-6 visa, US citizen, English & 한국어) are darker and in the title face.
+- Korean font rebuilt (남울창).
+- **Undo:** delete the "map + winding timeline" block and the lines after it in `web/edition.css`, the matching block at the end of `web/edition.js`, the `.work-map` figure in `index.html` and the `map.*` strings in `locales.js`; delete the "Hero buttons" and "Hero facts" lines in `edition.css`.
+
 ## 18 Nov 2026 — Owner's review (4): education, skills, contact ornament
 
 - **Education:** each degree is one card: seal in a circle, degree in the title face, university, status as a lime tag; hard lime shadow. The separate lime label bars are gone (`.degree` wrapper in `index.html`; `degree-note` span in the locale strings).

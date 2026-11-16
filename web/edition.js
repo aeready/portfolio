@@ -401,3 +401,39 @@
     figures.forEach(f => io.observe(f));
   }
 })();
+
+/* ---------- Background: winding line + map pins (owner, 18 Nov, review 4) --
+   Gives each job a data-job (matches the map pins' colours), draws a wavy
+   line through the timeline (desktop shows it left to right, oldest first;
+   it draws in as you scroll via --tl-p), and lights a job's pins while its
+   card is hovered or focused. Undo: delete this block. */
+(() => {
+  const section = document.getElementById('background');
+  const timeline = section?.querySelector('.timeline');
+  if (!timeline || !document.createElementNS) return;
+  const jobs = ['compass', 'gige', 'teacher'];
+  const cards = [...timeline.querySelectorAll(':scope > article')];
+  cards.forEach((card, i) => { if (jobs[i] && card.dataset.job !== jobs[i]) card.dataset.job = jobs[i]; });
+  if (!timeline.querySelector('.tl-wave')) {
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('class', 'tl-wave'); svg.setAttribute('viewBox', '0 0 300 40'); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('aria-hidden', 'true');
+    // Crosses the middle at x = 50, 150, 250: the centre of each column, where the badges sit.
+    const d = 'M0 20C12 -2 38 -2 50 20S88 42 100 20S138 -2 150 20S188 42 200 20S238 -2 250 20S288 42 300 20';
+    for (const cls of ['tl-wave-base', 'tl-wave-ink']) {
+      const path = document.createElementNS(ns, 'path');
+      path.setAttribute('class', cls); path.setAttribute('d', d); path.setAttribute('pathLength', '1'); path.setAttribute('vector-effect', 'non-scaling-stroke');
+      svg.appendChild(path);
+    }
+    timeline.prepend(svg);
+  }
+  const map = section.querySelector('.work-map');
+  if (!map) return;
+  const light = job => { if (map.dataset.lit !== (job || '')) map.dataset.lit = job || ''; };
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => light(card.dataset.job));
+    card.addEventListener('mouseleave', () => light(''));
+    card.addEventListener('focusin', () => light(card.dataset.job));
+    card.addEventListener('focusout', () => light(''));
+  });
+})();
