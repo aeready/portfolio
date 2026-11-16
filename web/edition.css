@@ -1415,3 +1415,83 @@ html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-al
 .work-map .map-home .map-house-door { fill: var(--acid); stroke: var(--ink); stroke-width: 1.4; }
 .work-map .map-home-body { scale: 1.45 !important; }
 .work-map .map-label[data-key="suwon"] { font-weight: 700 !important; opacity: 1; }
+
+/* ---------- Background: live layer (owner: futuristic, dynamic) ---------- */
+#background .tl-wave path { vector-effect: none !important; }
+#background .tl-wave-comet, #background .tl-wave-comet-ink { fill: none; stroke-linecap: round; stroke-dasharray: .07 .93; stroke-dashoffset: 1; opacity: 0; }
+#background .tl-wave-comet-ink { stroke: var(--ink); stroke-width: 10; }
+#background .tl-wave-comet { stroke: var(--acid); stroke-width: 5; }
+.work-map .map-ring { fill: none; stroke: var(--ink); stroke-width: 1.5; opacity: 0; transform-box: fill-box; transform-origin: center; pointer-events: none; }
+.work-map .map-ring[data-job="compass"] { stroke: #8e9a1f; stroke-width: 2; }
+@media (prefers-reduced-motion: no-preference) {
+  @media (min-width: 1001px) {
+    #background .tl-wave-comet, #background .tl-wave-comet-ink { opacity: 1; animation: tl-comet 4.8s cubic-bezier(.45, 0, .55, 1) infinite; }
+    @keyframes tl-comet { from { stroke-dashoffset: 1.07; } to { stroke-dashoffset: 0; } }
+    /* The current job's badge sends out a pulse. */
+    #background .timeline article.is-current.tl-on::before { animation: tl-pulse 2.2s ease-out infinite 1s; }
+    @keyframes tl-pulse { 0% { box-shadow: 0 0 0 5px var(--paper), 0 0 0 5px rgb(214 223 102 / .9); } 100% { box-shadow: 0 0 0 5px var(--paper), 0 0 0 26px rgb(214 223 102 / 0); } }
+    /* Cards tilt toward the mouse. */
+    #background .timeline { perspective: 1200px; }
+    #background.tl-motion .timeline article.tl-on { transform: rotateY(var(--tx, 0deg)) rotateX(var(--ty, 0deg)); transition: opacity 600ms ease, translate 800ms var(--ease-press), rotate 800ms var(--ease-press), transform 260ms ease-out !important; }
+  }
+  .work-map.map-on .map-ring { animation: map-radar 2.4s ease-out infinite var(--d, 0s); }
+  @keyframes map-radar { 0% { opacity: .7; scale: .4; } 100% { opacity: 0; scale: 2.6; } }
+  .work-map.map-on .map-route { animation: map-flow 1.2s linear infinite; }
+  @keyframes map-flow { to { stroke-dashoffset: -20; } }
+  .work-map[data-lit]:not([data-lit=""]) .map-ring:not([data-job]) { opacity: 0; }
+}
+
+/* ---------- Texture like the gallery bands (owner) -------------------------
+   Riso grain on the notebook, bars, chips and logo tiles; a halftone dot
+   field behind the tools and behind the map, like the bands' print dots. */
+#background .qualifications > .skills-notebook { background-blend-mode: normal; }
+#background .qualifications > .skills-notebook > * { position: relative; z-index: 1; }
+#background .skills-notebook .software-skills { isolation: isolate; }
+#background .skills-notebook .software-skills::before {
+  content: ''; position: absolute; z-index: -1; inset: 26px -14px -18px 46px; pointer-events: none;
+  background: radial-gradient(circle, rgb(73 43 81 / .55) 1.1px, transparent 1.4px) 0 0 / 6px 6px;
+  -webkit-mask-image: linear-gradient(135deg, transparent 10%, #000 55%); mask-image: linear-gradient(135deg, transparent 10%, #000 55%);
+}
+#background .skills-notebook .software-skills { position: relative; }
+#background .qualifications > .skills-notebook {
+  background: linear-gradient(90deg, transparent calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 18px), transparent calc(clamp(76px, 7vw, 104px) - 18px)),
+              var(--grain-ink) 0 0 / 320px,
+              repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important;
+}
+@media (max-width: 1000px) {
+  #background .qualifications > .skills-notebook { background: linear-gradient(90deg, transparent 44px, var(--acid) 44px 48px, transparent 48px), var(--grain-ink) 0 0 / 320px, repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important; }
+}
+@media (max-width: 640px) {
+  #background .qualifications > .skills-notebook { background: linear-gradient(90deg, transparent 36px, var(--acid) 36px 39px, transparent 39px), var(--grain-ink) 0 0 / 320px, repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important; }
+  #background .skills-notebook .software-skills::before { inset: 20px -8px -10px 30px; }
+}
+#background .skills-notebook .software-skills li > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background-image: var(--grain-ink) !important; background-size: 320px !important; }
+#background .skills-notebook .software-skills li:nth-child(3n+2) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background-image: var(--grain-paper) !important; }
+#background .strength-chips li { background-image: var(--grain-ink); background-size: 320px; }
+#background .strength-chips li:nth-child(3n) { background-image: var(--grain-paper); }
+#background .skills-notebook .software-skills li .skill-logo { background: #fff var(--grain-ink) 0 0 / 320px !important; }
+#background .qualifications > .skills-notebook > .skill-desc { background: none; }
+/* Map: lime print dots behind the country, offset like a misregistered print. */
+#background .work-map { position: relative; isolation: isolate; }
+#background .work-map::before {
+  content: ''; position: absolute; z-index: -1; inset: 12% -4% 8% 14%; pointer-events: none;
+  background: radial-gradient(circle, var(--acid) 1.3px, transparent 1.6px) 0 0 / 7px 7px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); mask-image: radial-gradient(closest-side, #000 55%, transparent);
+}
+.work-map .map-land { fill: var(--paper-deep, #eadfcb); }
+@media (max-width: 1000px) { #background .work-map::before { inset: 0 6% 0 10%; } }
+/* AI tools tile; languages line; quieter dots behind the tool text. */
+#background .skills-notebook .software-skills li .skill-logo--ai { font: 700 2.25rem/1 var(--display) !important; color: var(--ink); letter-spacing: .02em; background: var(--acid) var(--grain-ink) 0 0 / 320px !important; }
+#background .skills-notebook > .lang-list > span { display: grid !important; grid-template-columns: 5.2em minmax(0, 1fr); column-gap: 10px !important; align-items: baseline; }
+html[lang="ko"] #background .skills-notebook > .lang-list > span { grid-template-columns: 4em minmax(0, 1fr); }
+#background .skills-notebook .software-skills::before { inset: 46% -14px -18px 38% !important; background-image: radial-gradient(circle, rgb(73 43 81 / .35) 1px, transparent 1.3px) !important;
+  -webkit-mask-image: linear-gradient(135deg, transparent 20%, #000 75%) !important; mask-image: linear-gradient(135deg, transparent 20%, #000 75%) !important; }
+@media (max-width: 640px) {
+  #background .qualifications > .skills-notebook { padding: 22px 14px 22px 46px !important; }
+  #background .skills-notebook .software-skills li, #background .skills-notebook .software-skills li:nth-child(n) { grid-template-columns: 52px minmax(0, 1fr) !important; column-gap: 12px !important; }
+  #background .skills-notebook .software-skills li .skill-logo, #background .skills-notebook .software-skills li:nth-child(n) .skill-logo { width: 52px !important; height: 52px !important; padding: 6px !important; grid-row: 1 / 2 !important; }
+  #background .skills-notebook .software-skills li > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { align-self: center !important; font-size: 1.125rem !important; }
+  #background .skills-notebook .software-skills li > span.skill-alt, #background .skills-notebook .software-skills li .skill-desc { grid-column: 1 / -1 !important; padding-left: 0 !important; }
+  #background .skills-notebook .software-skills li .skill-logo--ai { font-size: 1.5rem !important; }
+  #background .skills-notebook > .lang-list > span { grid-template-columns: 4.6em minmax(0, 1fr) !important; display: grid !important; }
+}

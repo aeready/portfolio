@@ -3,6 +3,16 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Owner's review (4e): live timeline, texture, AI skills, shorter Compass text
+
+- **Timeline (desktop):** the wavy line is fitted to the card centres; a lime light runs along it from the oldest job to the newest, on a loop; the current job's dot pulses; cards tilt slightly toward the mouse.
+- **Map:** radar rings pulse out of the pins; the dashed route keeps flowing; lime print dots behind the country.
+- **Texture:** riso grain on the notebook, name bars, chips and logo tiles; halftone dots behind the tool list.
+- **Skills:** a sixth tool, "AI tools / AI 도구": Claude, ChatGPT, Gemini for images, prompting, vibe coding, research and data visualisation. Phones: logo beside the name bar, text full width under it.
+- **Compass Publishing** description shortened to match the others (EN + KO).
+- Korean font rebuilt. Reduced motion: no loops, no tilt.
+- **Undo:** delete the "live layer", "Texture like the gallery bands" and "AI tools tile" blocks in `web/edition.css`, the "live layer" block in `web/edition.js`, the AI `<li>` in `index.html` and `skills.ai*` strings; restore `career.4.body` from git.
+
 ## 18 Nov 2026 — Owner's review (4d): skills notebook, map tweaks
 
 - **Skills:** a notebook page (ruled lines, punched holes, lime margin, tape, slight tilt, hard shadow). Heading mixes the languages ("SKILLS 역량" / "역량 SKILLS"). Each tool: logo tile, name bar (lime / aubergine / cream), its name in the other language, one line on use. "Strengths · 강점" chips, bilingual in both versions (drawn from the site's own copy: teacher training, curriculum design, materials design, speaking assessment, market research).

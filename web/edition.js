@@ -475,3 +475,68 @@
   addEventListener('scroll', ask, {passive: true}); addEventListener('resize', ask);
   update();
 })();
+
+/* ---------- Background: live layer (owner: "more futuristic and dynamic") --
+   - The wavy line is rebuilt in real pixels (so dashes behave) and a lime
+     light travels along it, oldest job to newest, on a loop.
+   - Map: radar rings pulse out of each pin; the route keeps flowing.
+   - Cards tilt toward the mouse.
+   Reduced motion: the CSS turns all of it off. Undo: delete this block. */
+(() => {
+  const section = document.getElementById('background');
+  const timeline = section?.querySelector('.timeline');
+  const wave = timeline?.querySelector('.tl-wave');
+  if (!wave || !window.matchMedia) return;
+  const ns = 'http://www.w3.org/2000/svg';
+  ['tl-wave-comet-ink', 'tl-wave-comet'].forEach(cls => {
+    if (wave.querySelector('.' + cls)) return;
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('class', cls); path.setAttribute('pathLength', '1');
+    wave.appendChild(path);
+  });
+  const build = () => {
+    const w = Math.round(timeline.clientWidth);
+    if (!w) return;
+    const cards = [...timeline.querySelectorAll(':scope > article')];
+    const centres = cards.map(c => c.offsetLeft + c.offsetWidth / 2).sort((a, b) => a - b);
+    const xs = [0, ...centres, w], h = 48, mid = 24, amp = 20;
+    let d = `M0 ${mid}`;
+    for (let i = 1; i < xs.length; i++) {
+      const a = xs[i - 1], b = xs[i], dx = b - a, y = mid + (i % 2 ? -amp : amp) * 1.3;
+      d += `C${(a + dx * .25).toFixed(1)} ${y} ${(b - dx * .25).toFixed(1)} ${y} ${b} ${mid}`;
+    }
+    wave.setAttribute('viewBox', `0 0 ${w} ${h}`); wave.setAttribute('preserveAspectRatio', 'none');
+    wave.querySelectorAll('path').forEach(p => { p.setAttribute('d', d); p.removeAttribute('vector-effect'); });
+  };
+  build();
+  addEventListener('resize', () => requestAnimationFrame(build));
+  if (document.fonts?.ready) document.fonts.ready.then(build);
+
+  const map = section.querySelector('.work-map svg');
+  if (map && !map.querySelector('.map-ring')) {
+    const pins = [...map.querySelectorAll('.map-pin')];
+    pins.forEach((pin, i) => {
+      const m = /translate\(([-\d.]+)[ ,]+([-\d.]+)\)/.exec(pin.getAttribute('transform') || '');
+      if (!m) return;
+      for (let k = 0; k < 2; k++) {
+        const ring = document.createElementNS(ns, 'circle');
+        ring.setAttribute('class', 'map-ring'); ring.setAttribute('cx', m[1]); ring.setAttribute('cy', m[2]); ring.setAttribute('r', '10');
+        ring.dataset.job = pin.dataset.job;
+        ring.style.setProperty('--d', `${(i * .45 + k * 1.2).toFixed(2)}s`);
+        pin.parentNode.insertBefore(ring, map.querySelector('.map-route').nextSibling);
+      }
+    });
+  }
+
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  timeline.querySelectorAll(':scope > article').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      if (!fine.matches || still.matches || innerWidth < 1001) return;
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      card.style.setProperty('--tx', (x * 8).toFixed(2) + 'deg'); card.style.setProperty('--ty', (-y * 8).toFixed(2) + 'deg');
+    });
+    card.addEventListener('pointerleave', () => { card.style.removeProperty('--tx'); card.style.removeProperty('--ty'); });
+  });
+})();
