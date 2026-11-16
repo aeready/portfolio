@@ -3,6 +3,19 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Owner's review (3)
+
+- **Timeline:** big background years removed. Flipped: Compass Publishing on the right, raised beside the section title; Teacher Trainer left; English Teacher right; the cards interlock so the section is much shorter.
+- **Skills:** five tall coloured panels (moodboard): big initial, name, one line on what it's used for (both languages), logo at the foot; lift on hover. Education's two degrees side by side. The skill drift is removed.
+- **Project galleries (desktop):** counter, arrows, All pages and caption in a column left of the work; the work and its strip on the right; everything fits one screen.
+- **File cabinet:** "My role" is the first card; full width; Korean spines upright (were upside down); long spine titles wrap instead of being cut off.
+- **Project bands:** every sample fully visible: desktop shows the cover with the two other samples stacked beside it; phones show the cover, then the two samples side by side.
+- **Foot of project pages:** files card full width with its note under it; Previous / Next as two equal cards, Next in ink with the next project's cover.
+- **Notes under the files** no longer say "below" (they sit under the files): "These files may not include the complete editable source." etc., both languages.
+- **Phones:** less empty paper between the last project, Background and Contact.
+- **Registration grid** moved from the USA Camp band to the Contact section (lower left).
+- Korean font rebuilt (엑).
+
 ## 18 Nov 2026 — Phone project pages: room for the work
 
 - Page bar is one row on phones (← · 5 of 7 · Contact · 한국어 · ×): 115 px → 57 px. "Back to projects" and "Close" keep their names for screen readers. Below 360 px wide, Contact drops out of the bar (it's still in the menu and the page).

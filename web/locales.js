@@ -79,6 +79,11 @@ window.PORTFOLIO_LOCALES = {
       "skills.microsoft": "Microsoft Office",
       "skills.hancom": "Hancom Office",
       "skills.adobe": "Adobe creative tools",
+      "skills.canva.desc": "Design: slides, worksheets and booklets",
+      "skills.google.desc": "Docs, Slides, Sheets and Forms",
+      "skills.microsoft.desc": "Word, PowerPoint and Excel",
+      "skills.hancom.desc": "Hangul (HWP) documents for Korean schools",
+      "skills.adobe.desc": "Image and layout editing",
       "contact.tagline": "Interested in teacher development, ELT content, curriculum, and education-program roles.<br><span lang=\"ko\">한국어 가능</span>",
       "contact.resume": "View résumé <span aria-hidden=\"true\">↗</span><span class=\"sr-only\"> (PDF, new tab)</span>",
       "contact.linkedin": "<img class=\"linkedin-mark\" src=\"assets/linkedin-mark--5c40fb93330c.png\" alt=\"\" aria-hidden=\"true\" width=\"20\" height=\"20\">LinkedIn <span aria-hidden=\"true\">↗</span><span class=\"sr-only\"> (new tab)</span>",
@@ -171,7 +176,7 @@ window.PORTFOLIO_LOCALES = {
       "projectNavigation": "Project navigation",
       "sourceAvailable": "Original PPTX available",
       "noFullFile": "Only a small selection is available to view in the gallery; a complete file is not available here.",
-      "editableUnavailable": "Related files are available below; they may not include the complete editable source file."
+      "editableUnavailable": "These files may not include the complete editable source."
     }
   },
   "ko": {
@@ -254,6 +259,11 @@ window.PORTFOLIO_LOCALES = {
       "skills.microsoft": "Microsoft Office",
       "skills.hancom": "한컴오피스",
       "skills.adobe": "Adobe 크리에이티브 도구",
+      "skills.canva.desc": "디자인: 슬라이드, 활동지, 소책자",
+      "skills.google.desc": "문서, 프레젠테이션, 스프레드시트, 설문지",
+      "skills.microsoft.desc": "워드, 파워포인트, 엑셀",
+      "skills.hancom.desc": "학교용 한글(HWP) 문서",
+      "skills.adobe.desc": "이미지·레이아웃 편집",
       "contact.tagline": "교사 전문성 개발, ELT 콘텐츠, 교육과정 및 교육 프로그램 직무에 관심이 있습니다.<br>한국어 가능",
       "contact.resume": "이력서 보기 <span aria-hidden=\"true\">↗</span><span class=\"sr-only\"> (PDF, 새 탭)</span>",
       "contact.linkedin": "<img class=\"linkedin-mark\" src=\"assets/linkedin-mark--5c40fb93330c.png\" alt=\"\" aria-hidden=\"true\" width=\"20\" height=\"20\">LinkedIn <span aria-hidden=\"true\">↗</span><span class=\"sr-only\"> (새 탭)</span>",
@@ -346,7 +356,7 @@ window.PORTFOLIO_LOCALES = {
       "projectNavigation": "프로젝트 이동",
       "sourceAvailable": "원본 PPTX 제공",
       "noFullFile": "갤러리에서 일부 자료만 볼 수 있으며, 전체 파일은 이곳에서 제공하지 않습니다.",
-      "editableUnavailable": "아래에서 관련 자료를 이용할 수 있으며, 편집 가능한 전체 원본이 포함되지 않을 수 있습니다."
+      "editableUnavailable": "편집 가능한 전체 원본은 포함되지 않을 수 있습니다."
     }
   }
 };

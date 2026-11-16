@@ -140,7 +140,7 @@
       i.naturalWidth ? i.naturalHeight / i.naturalWidth : (+i.getAttribute('height') || 0) / (+i.getAttribute('width') || 1)).filter(r => r > 0);
     if (!stage || !ratios.length) return;
     const tallest = Math.max(...ratios);
-    const cap = window.innerHeight * (window.innerWidth <= 760 ? .52 : .56);
+    const cap = window.innerWidth > 1000 ? window.innerHeight - 330 : window.innerHeight * .52; // desktop: page + strip fit one screen
     const spread = window.innerWidth > 1000 && tallest > 1.15;
     const h = Math.min(cap, 760, stage.getBoundingClientRect().width * tallest / (spread ? 2 : 1));
     if (h > 0) stage.style.setProperty('--stage-h', `${Math.round(h)}px`);

@@ -147,6 +147,9 @@
     if (!story || story.querySelector('.ed-cabinet')) return;
     const items = [];
     const take = (node, title) => { if (node && title) items.push({title, nodes: [node]}); };
+    // "My role" opens the cabinet (owner, 18 Nov): it's the first file.
+    const role = detail.querySelector('.detail-role');
+    if (role) take(role, (role.querySelector(':scope > h3')?.textContent || '').trim());
     [...story.children].forEach(child => {
       if (child.classList.contains('case-study')) {
         const head = child.querySelector(':scope > h3');
@@ -171,7 +174,7 @@
       const head = el('button', 'ed-file-tab');
       head.type = 'button'; head.id = `ed-file-${id}-${i}`;
       head.setAttribute('aria-controls', `ed-body-${id}-${i}`);
-      head.innerHTML = `<span class="ed-file-num" aria-hidden="true">${i + 1}</span><span class="ed-file-title">${esc(item.title)}</span><span class="ed-file-plus" aria-hidden="true"></span>`;
+      head.innerHTML = `<span class="ed-file-num" aria-hidden="true">${i + 1}</span><span class="ed-file-title">${esc(root.lang === 'ko' ? item.title.replace(/ /g, '\u2009') : item.title)}</span><span class="ed-file-plus" aria-hidden="true"></span>`;
       const body = el('div', 'ed-file-body');
       body.id = `ed-body-${id}-${i}`; body.setAttribute('role', 'region'); body.setAttribute('aria-labelledby', head.id);
       item.nodes.forEach(n => { n.querySelectorAll(':scope > h3, :scope > h4').forEach(h => h.classList.add('ed-file-hidden-head')); body.append(n); });
@@ -266,7 +269,7 @@
     button.classList.add('ed-next-button');
     [...button.childNodes].forEach(n => { if (n.nodeType === 3 && n.textContent.trim()) { const w = el('span', 'ed-next-old'); n.replaceWith(w); w.append(n); } });
     button.dataset.band = String(position % 4);
-    button.insertAdjacentHTML('beforeend', `<span class="ed-next"><span class="ed-next-kicker" aria-hidden="true">${esc(ui().nextUp || 'Next')} · ${esc(number)}</span><span class="ed-next-title">${esc(title)}</span>${src ? `<span class="ed-next-sheet" aria-hidden="true"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"></span>` : ''}</span>`);
+    button.insertAdjacentHTML('beforeend', `<span class="ed-next"><span class="ed-next-text"><span class="ed-next-kicker" aria-hidden="true">${esc(ui().nextUp || 'Next')} · ${esc(number)}</span><span class="ed-next-title">${esc(title)}</span></span>${src ? `<span class="ed-next-sheet" aria-hidden="true"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"></span>` : ''}</span>`);
   };
 
   const decorate = () => {

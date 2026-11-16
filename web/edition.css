@@ -629,7 +629,7 @@ html[lang="ko"] .ed-file-title { font-family: var(--read); text-transform: none;
 /* Cabinet: shield it from the old rail rules (grid columns, 62ch measure,
    baseline alignment, row rules). */
 #project-dialog .detail-story > .ed-cabinet { align-items: stretch !important; max-width: none !important; width: 100% !important; }
-#project-dialog .ed-cabinet > .ed-file { max-width: none !important; grid-column: auto !important; padding: 0 !important; margin: 0 !important; display: flex !important; }
+#project-dialog .detail-story .ed-cabinet > .ed-file.ed-file { max-width: none !important; grid-column: auto !important; padding: 0 !important; margin: 0 !important; display: flex !important; }
 #project-dialog .ed-cabinet .ed-file-tab, #project-dialog .ed-cabinet .ed-file-body { max-width: none !important; grid-column: auto !important; }
 #project-dialog .ed-file-body > *, #project-dialog .ed-file-body .story-section, #project-dialog .ed-file-body .evidence-section { border: 0 !important; padding: 0 !important; }
 #project-dialog .ed-file-body > * + * { margin-top: 16px !important; }
@@ -797,3 +797,226 @@ html[lang="ko"] .filter-toggle :is(.ft-label, .ft-value) { font-family: var(--re
 }
 @media (max-width: 359px) { #project-dialog .dialog-top .dialog-contact { display: none !important; } }
 @media (max-width: 760px) { #project-dialog .dialog-top .back-projects { min-height: 44px !important; max-height: 44px; box-sizing: border-box; border-width: 1.5px !important; } }
+
+/* ---------- Owner, 18 Nov (2): timeline flipped and tucked up ------------
+   No big years. Current job on the right, raised beside the section title;
+   Teacher Trainer left; English Teacher right. */
+#background .tl-year { display: none !important; }
+#background .timeline article { padding-bottom: clamp(24px, 2.4vw, 36px) !important; }
+@media (min-width: 1001px) {
+  #background .background-layout { position: relative; }
+  #background .timeline { margin-top: calc(-1 * clamp(200px, 15vw, 260px)) !important; }
+  #background .timeline article:nth-of-type(odd) { grid-column: 2; margin-top: 0 !important; rotate: 1deg; }
+  #background .timeline article:nth-of-type(even) { grid-column: 1; margin-top: clamp(-120px, -6vw, -60px) !important; rotate: -1deg; }
+  #background .timeline article:nth-of-type(3) { margin-top: clamp(-120px, -6vw, -60px) !important; }
+  #background .timeline article { grid-row: auto; }
+  #background .timeline article:nth-of-type(1) { grid-row: 1; }
+  #background .timeline article:nth-of-type(2) { grid-row: 2; }
+  #background .timeline article:nth-of-type(3) { grid-row: 3; }
+  #background .timeline article:nth-of-type(odd)::before { left: calc(-1 * clamp(56px, 7vw, 120px) / 2 - 11px); right: auto; }
+  #background .timeline article:nth-of-type(even)::before { right: calc(-1 * clamp(56px, 7vw, 120px) / 2 - 11px); left: auto; }
+  #background .tl-track { top: clamp(200px, 15vw, 260px); }
+  #background .background-heading { position: relative; z-index: 2; max-width: 48%; }
+}
+
+/* File cabinet spines in Korean: Hangul stands upright in vertical text,
+   so it must not be turned 180° like the Latin spines. */
+html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { rotate: none !important; text-orientation: upright; letter-spacing: .05em; }
+
+/* ---------- Project gallery on desktop: everything visible at once ---------
+   Counter, arrows, All pages and caption sit in a column on the left; the
+   work and its page strip on the right, so nothing falls below the fold. */
+@media (min-width: 1001px) {
+  #project-dialog .gallery.gallery {
+    display: grid !important; grid-template-columns: minmax(220px, 3fr) minmax(0, 9fr) !important; column-gap: clamp(28px, 3vw, 56px) !important;
+    grid-template-rows: auto auto auto 1fr auto !important;
+    grid-template-areas: 'tabs stage' 'ctrl stage' 'cap stage' '. stage' '. strip' !important; align-items: start !important;
+  }
+  #project-dialog .gallery.gallery > .gallery-tabs { grid-area: tabs !important; grid-template-columns: 1fr !important; gap: 4px !important; margin-bottom: 20px !important; }
+  #project-dialog .gallery.gallery > .gallery-stage { grid-area: stage !important; justify-self: center !important; }
+  #project-dialog .gallery.gallery > .gallery-controls {
+    grid-area: ctrl !important; margin: 0 !important; display: flex !important; flex-wrap: wrap; align-items: center !important; gap: 12px !important;
+  }
+  #project-dialog .gallery.gallery > .gallery-controls #slide-count { flex-basis: 100%; }
+  #project-dialog .gallery.gallery > .gallery-controls > div { order: 2; }
+  #project-dialog .gallery.gallery > .gallery-controls .ed-sheet-open { order: 3; }
+  #project-dialog .gallery.gallery > .gallery-controls .ed-loupe-hint { order: 4; flex-basis: 100%; }
+  #project-dialog .gallery.gallery > .gallery-caption { grid-area: cap !important; margin: 18px 0 0 !important; font-size: 1.0625rem !important; line-height: 1.5 !important; }
+  #project-dialog .gallery.gallery > .gallery-thumbnails { grid-area: strip !important; margin-top: 18px !important; }
+}
+/* Cabinet: full width; long spine titles wrap into a second column instead
+   of being cut off; Korean spines without wide word gaps. */
+#project-dialog .detail-story, #project-dialog .detail-body > .detail-story { max-width: none !important; width: 100% !important; }
+#project-dialog .ed-cabinet { width: 100% !important; }
+.ed-file:not(.is-open) .ed-file-title { white-space: normal !important; max-height: 340px; line-height: 1 !important; text-align: start; }
+html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { word-spacing: -.45em; letter-spacing: 0; line-height: 1.05 !important; font-size: clamp(1.25rem, 1rem + .5vw, 1.5rem); }
+/* My role inside the cabinet: its lead line stays large. */
+#project-dialog .ed-file-body > .detail-role { display: block !important; border: 0 !important; }
+#project-dialog .ed-file-body > .detail-role > p:first-of-type strong { font-size: clamp(1.75rem, 1.1rem + 1.6vw, 2.75rem) !important; color: var(--f-ink) !important; max-width: 22ch; }
+#project-dialog .ed-file-body > .detail-role > p + p { margin-top: 16px !important; font-size: 1.0625rem !important; color: var(--f-text) !important; }
+
+/* ---------- Print piles: every page visible (owner, 18 Nov) ---------------
+   Cover on one side, the two other samples stacked beside it, each fully
+   readable; they overlap the cover's edge only a little. Mirrored on even
+   bands. Replaces the stacked pile where back prints hid behind the cover. */
+@media (min-width: 1001px) {
+  .project-collection > .project-card.project-card[data-tone] .artifact-arrangement {
+    display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, .42fr) !important; grid-template-rows: auto auto !important;
+    align-items: center !important; column-gap: 0 !important; row-gap: 14px !important; padding: 0 !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame {
+    grid-column: 1 !important; grid-row: 1 / 3 !important; justify-self: end; margin: 0 !important;
+    width: min(100%, calc(min(44vh, 420px) * var(--arn, 1.78))) !important; rotate: -1deg; z-index: 2;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed,
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed.artifact-tertiary {
+    position: relative !important; inset: auto !important; grid-column: 2 !important; width: 118% !important; margin: 0 0 0 -18% !important;
+    z-index: 1; align-self: end; rotate: 3deg;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed.artifact-tertiary { grid-row: 2 !important; align-self: start; rotate: -2.5deg; margin-left: -10% !important; }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed:not(.artifact-tertiary) { grid-row: 1 !important; }
+  /* Even bands: cover on the right, samples on the left. */
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-arrangement { grid-template-columns: minmax(0, .42fr) minmax(0, 1fr) !important; }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-main-frame { grid-column: 2 !important; justify-self: start; rotate: 1deg; }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even) :is(.artifact-fixed, .artifact-fixed.artifact-tertiary) { grid-column: 1 !important; margin: 0 -18% 0 0 !important; rotate: -3deg; }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-fixed.artifact-tertiary { margin-right: -10% !important; rotate: 2.5deg; }
+  /* Hover: the samples slide out a little further. */
+  .project-collection > .project-card.project-card[data-tone]:is(:hover, :focus-visible) :is(.artifact-main-frame, .artifact-fixed) { translate: none !important; }
+  .project-collection > .project-card.project-card[data-tone]:is(:hover, :focus-visible) .artifact-fixed { translate: 8% 0 !important; }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even):is(:hover, :focus-visible) .artifact-fixed { translate: -8% 0 !important; }
+}
+/* The registration grid leaves the USA band (too loud there) and moves to
+   the contact section, lower right. */
+.project-collection > .project-card.project-card:nth-child(7n+5) { --orn: none !important; }
+#contact::before {
+  content: '' !important; display: block !important; position: absolute; z-index: 0; pointer-events: none; right: var(--edge, 24px); bottom: 28px;
+  width: min(30vw, 300px); aspect-ratio: 437 / 203; background: url('assets/riso/lib/reg-grid--ee1a29799b16.webp') center / contain no-repeat; opacity: .9; rotate: -3deg;
+}
+@media (max-width: 760px) { #contact::before { width: 46vw; bottom: 12px; right: 12px; opacity: .6; } }
+#contact > * { position: relative; z-index: 1; }
+
+/* ---------- Skills as tall coloured panels (moodboard: "TAPER" cards) ------- */
+#background .qualifications { grid-template-columns: minmax(0, 1fr) !important; }
+#background .qualifications > div:first-child { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
+#background .qualifications > div:first-child > h3 { grid-column: 1 / -1; }
+#background .qualifications > div:first-child > h4:nth-of-type(1) { grid-column: 1; grid-row: 2; }
+#background .qualifications > div:first-child > .university-lockup:nth-of-type(1) { grid-column: 1; grid-row: 3; }
+#background .qualifications > div:first-child > h4:nth-of-type(2) { grid-column: 2; grid-row: 2; }
+#background .qualifications > div:first-child > .university-lockup:nth-of-type(2) { grid-column: 2; grid-row: 3; }
+#background .software-skills { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 12px !important; }
+#background .software-skills li {
+  position: relative; display: grid !important; grid-template-rows: auto auto 1fr auto; align-items: start; gap: 10px !important;
+  min-height: clamp(260px, 22vw, 320px) !important; padding: 18px 18px 20px !important; translate: none;
+}
+#background .software-skills li::before {
+  content: attr(data-initial); font: 700 clamp(3.5rem, 2rem + 3vw, 5rem)/.8 var(--display); color: inherit; grid-row: 1;
+}
+#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { grid-row: 1; align-self: end; justify-self: start; margin-left: clamp(52px, 3.6vw, 72px); padding-bottom: 4px; font-size: 1.125rem !important; }
+#background .software-skills li .skill-desc { grid-row: 2; font: 400 .9375rem/1.45 var(--read) !important; text-transform: none !important; opacity: .9; }
+#background .software-skills li .skill-logo { grid-row: 4; align-self: end; justify-self: start; height: 56px !important; background: var(--paper); padding: 10px 12px; border: 1.5px solid var(--ink); }
+#background .software-skills li .skill-logo img { height: 34px !important; max-width: 150px; }
+#background .software-skills li:nth-child(4n+1) { background: var(--acid) var(--grain-ink) 0 0 / 320px; color: var(--ink); }
+#background .software-skills li:nth-child(4n+2) { background: var(--ink) var(--grain-paper) 0 0 / 320px; color: var(--paper); }
+#background .software-skills li:nth-child(4n+3) { background: var(--paper) var(--grain-ink) 0 0 / 320px; color: var(--ink); }
+#background .software-skills li:nth-child(4n+4) { background: var(--paper-deep, #e7dccb) var(--grain-ink) 0 0 / 320px; color: var(--ink); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #background .software-skills li { transition: translate 260ms var(--ease-press), box-shadow 260ms var(--ease-press); }
+  #background .software-skills li:hover { translate: 0 -6px !important; box-shadow: 6px 6px 0 var(--ink); }
+}
+@media (max-width: 1000px) { #background .software-skills { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } #background .software-skills li { min-height: 220px !important; } }
+@media (max-width: 640px) { #background .qualifications > div:first-child { grid-template-columns: 1fr; } #background .qualifications > div:first-child > * { grid-column: 1 !important; grid-row: auto !important; } }
+@media (min-width: 1001px) {
+  .project-collection > .project-card.project-card[data-tone] .artifact-arrangement { column-gap: 16px !important; }
+  .project-collection > .project-card.project-card[data-tone] :is(.artifact-fixed, .artifact-fixed.artifact-tertiary),
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even) :is(.artifact-fixed, .artifact-fixed.artifact-tertiary) { width: 100% !important; margin: 0 !important; }
+  .project-collection > .project-card.project-card[data-tone] .artifact-arrangement { grid-template-columns: minmax(0, 1fr) minmax(0, .36fr) !important; }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-arrangement { grid-template-columns: minmax(0, .36fr) minmax(0, 1fr) !important; }
+}
+/* Skill panels: letter, then name, then line, logo at the foot. */
+#background .software-skills li { grid-template-rows: auto auto auto 1fr !important; }
+#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { grid-row: 2 !important; margin: 0 !important; align-self: start; padding: 0; font-size: 1.375rem !important; line-height: 1 !important; }
+#background .software-skills li .skill-desc { grid-row: 3 !important; }
+html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { font-size: 1.125rem !important; }
+/* Timeline: overlapping rows so the cards interlock (squished). */
+@media (min-width: 1001px) {
+  #background .timeline { grid-template-rows: repeat(4, auto); }
+  #background .timeline article:nth-of-type(1) { grid-row: 1 / 3 !important; }
+  #background .timeline article:nth-of-type(2) { grid-row: 2 / 4 !important; margin-top: 40px !important; }
+  #background .timeline article:nth-of-type(3) { grid-row: 3 / 5 !important; margin-top: 40px !important; }
+}
+#contact::before { inset: auto var(--edge, 24px) 40px auto !important; left: auto !important; top: auto !important; translate: none !important; }
+#background .software-skills { align-items: stretch !important; }
+#contact::before { inset: auto auto 40px var(--edge, 24px) !important; width: min(24vw, 240px) !important; z-index: 0 !important; }
+
+/* ---------- Foot of a project page: files + previous / next (owner) --------
+   One tight block: the files card full width with its label above; then
+   previous and next as two equal ruled cards, the next one with a small
+   cover beside its title. No big empty field. */
+@media (min-width: 761px) {
+  #project-dialog .project-materials { grid-template-columns: minmax(0, 1fr) !important; row-gap: 10px !important; padding-top: var(--s4, 32px) !important; }
+  #project-dialog .project-materials > * { grid-column: 1 !important; grid-row: auto !important; }
+  #project-dialog .project-materials > h3 { order: 0; }
+  #project-dialog .project-materials .file-scope { background: none !important; padding: 0 !important; font-weight: 400 !important; opacity: .8; }
+  #project-dialog .detail-footer {
+    display: grid !important; grid-template-columns: 1fr 1fr; gap: 16px !important; align-items: stretch !important;
+    margin: var(--s4, 32px) 0 var(--s5, 48px) !important; padding: 0 !important; border: 0 !important; overflow: visible !important;
+  }
+  #project-dialog .detail-footer > button {
+    display: grid !important; align-content: center; min-height: 132px !important; padding: 20px 24px !important;
+    border: 1.5px solid var(--ink) !important; background: var(--paper) !important; text-align: left !important;
+    font-size: 1.5rem !important; transition: background-color 200ms ease, translate 200ms var(--ease-press);
+  }
+  #project-dialog .detail-footer > button:hover { background: var(--acid) !important; translate: 0 -3px; }
+  #project-dialog .detail-footer .ed-next-button {
+    grid-template-columns: minmax(0, 1fr) 150px !important; grid-template-areas: 'text sheet'; justify-items: start !important; gap: 0 20px !important;
+    background: var(--ink) !important; color: var(--paper) !important; padding: 20px 24px !important;
+  }
+  #project-dialog .detail-footer .ed-next-button:hover { background: #3a2241 !important; }
+  #project-dialog .ed-next-button .ed-next { display: contents !important; }
+  #project-dialog .ed-next-kicker, #project-dialog .ed-next-title { grid-area: text; color: var(--paper) !important; text-align: left; justify-self: start; }
+  #project-dialog .ed-next-kicker { align-self: start; color: var(--acid) !important; opacity: 1; }
+  #project-dialog .ed-next-title { align-self: end; font-size: clamp(1.5rem, 1rem + 1.2vw, 2.25rem) !important; max-width: none; }
+  #project-dialog .ed-next-sheet {
+    grid-area: sheet; width: 150px !important; height: auto !important; margin: 0 !important; translate: none !important; rotate: 2deg;
+    border: 4px solid var(--paper) !important; box-shadow: 4px 4px 0 var(--acid) !important; align-self: center;
+  }
+  #project-dialog .ed-next-button:is(:hover, :focus-visible) .ed-next-sheet { rotate: -1deg; translate: none !important; }
+}
+@media (min-width: 761px) {
+  #project-dialog .detail-footer { width: 100% !important; max-width: none !important; margin-inline: 0 !important; grid-column: 1 / -1 !important; box-sizing: border-box; }
+  #project-dialog .detail-footer > button { width: 100% !important; max-width: none !important; }
+  #project-dialog .detail-footer .ed-next-button { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 24px !important; }
+  #project-dialog .ed-next-button .ed-next { display: flex !important; align-items: center; justify-content: space-between; gap: 24px; width: 100%; }
+  #project-dialog .ed-next-button .ed-next::before { content: none; }
+  #project-dialog .ed-next-kicker { display: block; margin-bottom: 8px; }
+  #project-dialog .ed-next-title { display: block; }
+  #project-dialog .ed-next-text { display: grid; justify-items: start; text-align: left; }
+  #project-dialog .ed-next-sheet { flex: none; }
+}
+@media (min-width: 761px) {
+  #project-dialog .detail-footer { margin-inline: auto !important; width: min(100%, var(--content-w, 1080px)) !important; max-width: calc(100% - 2 * var(--page-pad-in, 0px)) !important; }
+  #project-dialog .ed-next-kicker { position: static !important; translate: none !important; }
+}
+#project-dialog .ed-next-button .ed-next-text { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 8px; } #project-dialog .ed-next-button .ed-next-text > * { grid-area: auto !important; }
+/* Phones: less empty paper between Work, Background and the timeline. */
+@media (max-width: 760px) {
+  #work { padding-bottom: 0 !important; }
+  .project-collection > .project-card.project-card:last-child { padding-bottom: 40px !important; }
+  #background { padding-top: 40px !important; padding-bottom: 48px !important; }
+  #background .background-layout { gap: 20px !important; }
+  #background .timeline { padding-top: 8px !important; }
+  #background .background-heading h2 { margin-bottom: 0 !important; }
+  #contact { padding-top: 56px !important; }
+}
+@media (max-width: 1000px) {
+  .project-collection > .project-card.project-card[data-tone] .artifact-arrangement {
+    display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; padding: 0 !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame { grid-column: 1 / -1 !important; width: 100% !important; rotate: none; translate: none !important; }
+  .project-collection > .project-card.project-card[data-tone] :is(.artifact-fixed, .artifact-fixed.artifact-tertiary) {
+    position: relative !important; inset: auto !important; width: 100% !important; margin: 0 !important; rotate: none !important; translate: none !important; animation: none !important; grid-row: 2 !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed:not(.artifact-tertiary) { grid-column: 1 !important; }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed.artifact-tertiary { grid-column: 2 !important; }
+  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame img { height: auto !important; }
+}
