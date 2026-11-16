@@ -366,6 +366,10 @@ window.PORTFOLIO_PROJECTS = [
         "AI-assisted sample page"
       ]
     ],
+    "galleryLabels": [
+      "Training presentation",
+      "Sample reading materials"
+    ],
     "documents": [
       [
         "assets/reading-for-meaning.pdf",
@@ -568,6 +572,10 @@ window.PORTFOLIO_PROJECTS = [
           "AI 활용 예시 페이지"
         ]
       ],
+      "galleryLabels": [
+        "연수 발표 자료",
+        "예시 읽기 자료"
+      ],
       "documents": [
         [
           "연수 발표 자료",
@@ -647,17 +655,63 @@ window.PORTFOLIO_PROJECTS = [
         "assets/music-workshop/open-discussion--29aafa0a69a7.webp",
         "Discussion prompts about using music in English classes and anticipating challenges.",
         "Open discussion"
-      ],
-      [
-        "assets/epik-guide-3--7780b46582d7.webp",
-        "The companion course guide explains the micro-listening approach and possible uses within a lesson.",
-        "Course guide sample, page 3"
-      ],
-      [
-        "assets/epik-guide-7--a60714249f8b.webp",
-        "An activity table pairs objectives and instructions with ways to adapt a task.",
-        "Course guide sample, page 7"
       ]
+    ],
+    "bookSlides": [
+      [
+        "assets/music-workshop/course-guide-01--5b99b8a531a9.webp",
+        "Course guide page 1 of 10: Course introduction and why music belongs in English classes.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-02--5e50a183f8ae.webp",
+        "Course guide page 2 of 10: Curriculum alignment and vocabulary gains.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-03--38c1fb5c84c3.webp",
+        "Course guide page 3 of 10: Song research and micro-listening.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-04--e51bcf02bcb1.webp",
+        "Course guide page 4 of 10: Micro-listening technical guide: finding and adding a song clip.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-05--ff9d60bc8e79.webp",
+        "Course guide page 5 of 10: Technical guide: disabling autoplay and adding the lyrics.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-06--b6929dc1ac68.webp",
+        "Course guide page 6 of 10: Technical guide: animating the lyrics.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-07--c4fbd9730f93.webp",
+        "Course guide page 7 of 10: Ideas for music and lyrics tasks.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-08--ec073204af45.webp",
+        "Course guide page 8 of 10: More task ideas and the course materials QR code.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-09--d9584752b5a9.webp",
+        "Course guide page 9 of 10: Works cited.",
+        "Course guide page"
+      ],
+      [
+        "assets/music-workshop/course-guide-10--ebaada17e91e.webp",
+        "Course guide page 10 of 10: Works cited, continued.",
+        "Course guide page"
+      ]
+    ],
+    "galleryLabels": [
+      "Workshop slides",
+      "Course guide"
     ],
     "documents": [
       [
@@ -723,15 +777,53 @@ window.PORTFOLIO_PROJECTS = [
         [
           "영어 수업에서 음악을 활용하는 방법과 예상되는 어려움을 함께 논의합니다.",
           "열린 토론"
-        ],
-        [
-          "강의 원고에서 마이크로 리스닝의 취지와 수업에서의 활용 방법을 설명합니다.",
-          "강의 원고 예시 · 3쪽"
-        ],
-        [
-          "활동 목표와 진행 방법, 변형 방안을 함께 제시한 표입니다.",
-          "강의 원고 예시 · 7쪽"
         ]
+      ],
+      "bookSlides": [
+        [
+          "강의 원고 1/10쪽: 과정 소개와 영어 수업에 음악이 필요한 이유.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 2/10쪽: 교육과정 연계와 어휘 학습 효과.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 3/10쪽: 노래 활용 연구와 마이크로 리스닝.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 4/10쪽: 마이크로 리스닝 기술 안내: 노래 구간 찾기와 넣기.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 5/10쪽: 기술 안내: 자동 재생 끄기와 가사 넣기.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 6/10쪽: 기술 안내: 가사 애니메이션.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 7/10쪽: 음악·가사 활용 활동 아이디어.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 8/10쪽: 추가 활동 아이디어와 강의 자료 QR 코드.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 9/10쪽: 참고 문헌.",
+          "강의 원고 페이지"
+        ],
+        [
+          "강의 원고 10/10쪽: 참고 문헌(계속).",
+          "강의 원고 페이지"
+        ]
+      ],
+      "galleryLabels": [
+        "워크숍 슬라이드",
+        "강의 원고"
       ],
       "documents": [
         [

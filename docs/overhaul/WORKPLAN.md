@@ -40,7 +40,7 @@ R7 "Texture is the substrate" were added in this overhaul).
 ## Before publishing (owner does this; nothing is live yet)
 
 1. Review in a **private window** (opening sequence is once per session; phones cache old CSS).
-2. Upload to the Site bucket: `index.html`, `404.html`, `nf.css`, `nf.js`, `press.css`, `press.js`, `press-boot.js`, `edition.css`, `edition.js`, `fixes.css`, `style.css`, `refine.css`, the three new `assets/fonts/NotoSans-Korean-site*--*.woff2`, `app.js`, `locales.js`, `assets/riso/grain-*`, `assets/riso/mottle-*`, all of `assets/riso/lib/`, `assets/share-card--8c00ecbff6ae.jpg`.
+2. Upload to the Site bucket: `index.html`, `404.html`, `nf.css`, `nf.js`, `press.css`, `press.js`, `press-boot.js`, `edition.css`, `edition.js`, `fixes.css`, `style.css`, `refine.css`, the three current `assets/fonts/NotoSans-Korean-site*--*.woff2` (delete older ones), `preview-assets.js`, `projects.js`, all new files in `assets/previews/` and `assets/music-workshop/course-guide-*`, `app.js`, `locales.js`, `assets/riso/grain-*`, `assets/riso/mottle-*`, all of `assets/riso/lib/`, `assets/share-card--8c00ecbff6ae.jpg`.
 3. Delete from the bucket: the old Korean subsets (`NotoSans-Korean-site--56c063187bf8`, `-Bold--9555065860f6`, `-Black--3c9618a2894e`), removed library pieces (checker, target-cream, overprint, letter-u, hazard, corners-lime, op-waves, spiral, halftone-square, letter-crop, torn-layers, wave-band, halftone-fade), `assets/downloads/ordering-game-2025.pptx` and the ordering-game images (older to-do).
 4. `node scripts/build-worker.mjs`, publish the Worker, then check live Content-Type headers for the new CSS/JS/WebP/JPG.
 

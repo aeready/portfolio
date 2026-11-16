@@ -364,3 +364,24 @@ html[lang="ko"] #project-dialog .gallery-controls .ed-sheet-open { font-size: .8
   .hero-proof strong.ed-counting { text-shadow: none !important; }
   .hero-proof strong.ed-counted { animation: ed-title-plate 700ms var(--ease-press) both; }
 }
+
+/* Gallery tabs (Reading: presentation / sample booklet; Music: slides /
+   course guide). Phones: a compact two-column switch instead of two
+   wrapped, centred headings. Desktop: a row of two tabs. */
+#project-dialog .gallery-tabs { display: grid !important; grid-template-columns: repeat(2, max-content); gap: 0 28px; justify-content: start; }
+#project-dialog .gallery-tabs button {
+  font: 700 .8125rem/1.25 var(--label) !important; letter-spacing: .06em !important; text-transform: uppercase; text-align: left !important;
+  padding: 10px 0 !important; border-bottom: 2px solid transparent !important; opacity: .72;
+}
+html[lang="ko"] #project-dialog .gallery-tabs button { font-family: var(--read) !important; letter-spacing: 0 !important; font-size: .875rem !important; }
+#project-dialog .gallery-tabs button[aria-pressed="true"] { opacity: 1; border-bottom-color: var(--acid) !important; }
+@media (max-width: 760px) {
+  #project-dialog .gallery-tabs { grid-template-columns: 1fr 1fr; gap: 0; width: 100%; border: 1.5px solid color-mix(in srgb, var(--room-ink, #F3EBDD) 55%, transparent); }
+  #project-dialog .gallery-tabs button { padding: 10px 12px !important; min-height: 52px; border: 0 !important; display: flex; align-items: center; }
+  #project-dialog .gallery-tabs button + button { border-left: 1.5px solid color-mix(in srgb, var(--room-ink, #F3EBDD) 55%, transparent) !important; }
+  #project-dialog .gallery-tabs button[aria-pressed="true"] { background: var(--acid) !important; color: var(--ink) !important; }
+}
+@media (max-width: 760px) {
+  #project-dialog .gallery-tabs button { font: 700 .875rem/1.3 var(--read) !important; letter-spacing: 0 !important; text-transform: none !important; }
+}
+@media (max-width: 760px) { #project-dialog .gallery-tabs { padding: 0 !important; } }

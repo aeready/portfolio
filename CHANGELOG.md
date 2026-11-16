@@ -53,6 +53,14 @@ New work for this round is in `web/edition.css` and `web/edition.js` (loaded aft
 - **Print piles** fan only if the pointer stays ~70 ms, so passing the cursor over a band no longer flickers it. Closing is immediate.
 - Checked and left as is: primary buttons already press into their offset shadow when clicked; closing a project returns to the card with no scroll jump (measured every frame); reduced motion stays fully static, as you decided earlier (no fade added).
 
+### Group 6 · Images, and the two booklets you asked for
+- **Reading for Meaning sample booklet:** already set to show as a booklet (cover alone, then 2–3, 4–5, 6), and confirmed on desktop. Your phone screenshot was correct: phones show one page at a time (spreads are desktop-only, like USA Camp), with tap-to-zoom.
+- **Music in English Classes: the course guide is now its own booklet gallery.** The 10-page EPIK course guide you uploaded is byte-identical to the PDF already on the site (`assets/epik-course-guide.pdf`), so no new download was needed. Its 10 pages are now a second gallery tab ("Workshop slides · 8" / "Course guide · 10"; "워크숍 슬라이드" / "강의 원고"), shown as spreads on desktop, with captions in both languages. The two loose course-guide pages that were mixed into the workshop slides moved into the guide.
+- **Gallery tabs:** the counts were hard-coded ("· 32", "· 6"); they're now counted from each project. On phones the tabs are a compact two-part switch (the active one lime) in the reading face, instead of two wrapped all-caps headings.
+- **Smaller images:** every work image now has a 160 px copy for the gallery strip, and the 32 Reading for Meaning slides got 160 / 480 / 960 px copies (they had none, so phones loaded the full files). Phone first view: 2.15 MB → 1.97 MB; opening USA Camp on desktop: 1.23 MB → 0.60 MB. Script: `python3 scripts/build-previews.py` (originals untouched, colour profiles kept).
+- Looked at and left alone: the hero artwork renders wider than its file on every screen (1,541 px at 1440, 2,054 px at 1920), so a smaller copy would blur it.
+- Korean font rebuilt again for the new captions (끄 술 애).
+
 ## 17 Nov 2026 — Booklet spreads and tap-to-zoom
 
 - **Desktop, portrait galleries (USA Camp workbook):** pages show as an open booklet: the cover alone on the right, then 2–3, 4–5 … side by side, the last page alone. Arrows, swipe and arrow keys turn a whole spread; the counter reads "2–3 / 18"; both pages are highlighted in the strip; the caption names both. Pages turn in from the spine (fade, slight 3-D turn, focus pull). The halftone shadow sits under the whole spread. Landscape decks are unchanged (one slide at a time).
