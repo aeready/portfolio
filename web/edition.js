@@ -437,3 +437,41 @@
     card.addEventListener('focusout', () => light(''));
   });
 })();
+
+/* ---------- Background: motion for the map and the left-to-right timeline --
+   Cards rise in as the wavy line reaches them (oldest first); pins drop in
+   the order I worked there. Position-driven, so it never stops half-done;
+   reduced motion: everything shown at once (CSS). */
+(() => {
+  const section = document.getElementById('background');
+  const timeline = section?.querySelector('.timeline');
+  const map = section?.querySelector('.work-map');
+  if (!timeline || !window.matchMedia || !window.requestAnimationFrame) return;
+  section.classList.add('tl-motion');
+  const order = ['teacher', 'gige', 'compass'];
+  const keys = ['pyeongchang', 'gangneung', 'seongnam', 'seoul'];
+  if (map) {
+    [...map.querySelectorAll('.map-pin')].forEach(pin => {
+      const label = pin.nextElementSibling;
+      const i = keys.indexOf(label?.dataset?.key);
+      pin.style.setProperty('--i', String(i < 0 ? 4 : i));
+    });
+    map.querySelector('.map-home')?.style.setProperty('--i', '4');
+  }
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    const vh = innerHeight;
+    const r = timeline.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, (vh * .85 - r.top) / Math.max(1, r.height * .6)));
+    if (innerWidth > 1000 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) timeline.style.setProperty('--tl-p', p.toFixed(3));
+    timeline.querySelectorAll(':scope > article').forEach(card => {
+      const on = p > (order.indexOf(card.dataset.job) * 2 + 1) / 6 - .12;
+      if (card.classList.contains('tl-on') !== on && on) card.classList.add('tl-on');
+    });
+    if (map && !map.classList.contains('map-on') && map.getBoundingClientRect().top < vh * .8) map.classList.add('map-on');
+  };
+  const ask = () => { if (!frame) frame = requestAnimationFrame(update); };
+  addEventListener('scroll', ask, {passive: true}); addEventListener('resize', ask);
+  update();
+})();

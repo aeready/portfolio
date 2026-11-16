@@ -1234,3 +1234,43 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
   .work-map[data-lit="gige"] .map-label[data-job="gige"],
   .work-map[data-lit="teacher"] .map-label[data-job="teacher"] { opacity: 1 !important; scale: 1; }
 }
+
+/* ---------- Background motion (owner: "like the gallery above") ------------
+   Desktop: each card rises and settles as the line reaches it, its badge
+   pops; the map's pins drop one by one (oldest place first), then the route
+   and home fade in. Opacity only for hiding; reduced motion = all still. */
+@media (prefers-reduced-motion: no-preference) {
+  @media (min-width: 1001px) {
+    #background.tl-motion .timeline article:not(.tl-on) { opacity: 0 !important; translate: 0 48px !important; rotate: -2deg !important; }
+    #background.tl-motion .timeline article { transition: opacity 600ms ease, translate 800ms var(--ease-press), rotate 800ms var(--ease-press) !important; }
+    #background.tl-motion .timeline article:not(.tl-on)::before { scale: 0; }
+    #background.tl-motion .timeline article::before { transition: scale 520ms cubic-bezier(.34, 1.7, .5, 1) 200ms; }
+    #background.tl-motion .timeline article.tl-on:hover { translate: 0 -6px !important; rotate: -.6deg !important; }
+  }
+  #background.tl-motion .work-map:not(.map-on) :is(.map-pin-body, .map-home-body) { opacity: 0; translate: 0 -40px; }
+  #background.tl-motion .work-map :is(.map-pin-body, .map-home-body) {
+    transition: opacity 300ms ease calc(var(--i, 0) * 160ms), translate 620ms cubic-bezier(.34, 1.6, .5, 1) calc(var(--i, 0) * 160ms), scale 240ms var(--ease-press);
+  }
+  #background.tl-motion .work-map:not(.map-on) .map-route { opacity: 0; }
+  #background.tl-motion .work-map .map-route { transition: opacity 900ms ease 700ms; }
+  #background.tl-motion .work-map .map-pin:hover .map-pin-body { scale: 1.6; }
+}
+/* Wavy line draws left to right with a sliding clip (a dash-offset draw
+   breaks on a stretched, non-scaling stroke). */
+#background .tl-wave-ink { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; clip-path: inset(-10px calc((1 - var(--tl-p, 1)) * 100%) -10px 0); }
+
+/* Project bands: the cover moves with its samples (owner: not the two small
+   ones moving while the big one stands still). Hover lifts and tips the
+   cover the opposite way to the samples; phones: the cover rises as the
+   pile fans in. */
+@media (min-width: 1001px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame { transition: translate 480ms var(--ease-press), rotate 480ms var(--ease-press), box-shadow 480ms var(--ease-press) !important; }
+  .project-collection > .project-card.project-card[data-tone]:is(:hover, :focus-visible) .artifact-main-frame { translate: -2% -10px !important; rotate: -2deg !important; }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even):is(:hover, :focus-visible) .artifact-main-frame { translate: 2% -10px !important; rotate: 2deg !important; }
+}
+@supports (animation-timeline: view()) {
+  @media (hover: none) and (prefers-reduced-motion: no-preference) {
+    .project-collection > .project-card.project-card .artifact-main-frame { animation: fan-1 linear both; animation-timeline: view(); animation-range: entry 10% cover 45%; }
+    @keyframes fan-1 { from { translate: 0 8%; rotate: -2deg; scale: .94; } to { translate: 0 0; rotate: 0deg; scale: 1; } }
+  }
+}
