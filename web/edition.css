@@ -162,3 +162,179 @@ html[lang="ko"] .site-footer .footer-colophon { line-height: 1.7; }
 .site-footer .footer-colophon { text-transform: none !important; letter-spacing: 0 !important; }
 @media (max-width: 760px) { .site-footer .footer-links { order: 5; } }
 .site-footer .footer-licence a { white-space: nowrap; }
+
+/* ---------- Group 4 · Pages and the gallery ------------------------------ */
+
+/* Crop marks at the four corners of the work, as on a printer's proof.
+   Hairlines, outside the page, never over it. */
+#project-dialog .gallery-stage .ed-crop {
+  position: absolute; inset: -18px; pointer-events: none; z-index: 2;
+  --m: color-mix(in srgb, var(--room-ink, #F3EBDD) 70%, transparent); --l: 12px;
+  background:
+    linear-gradient(var(--m), var(--m)) 0 17px / var(--l) 1px, linear-gradient(var(--m), var(--m)) 17px 0 / 1px var(--l),
+    linear-gradient(var(--m), var(--m)) 100% 17px / var(--l) 1px, linear-gradient(var(--m), var(--m)) calc(100% - 17px) 0 / 1px var(--l),
+    linear-gradient(var(--m), var(--m)) 0 calc(100% - 17px) / var(--l) 1px, linear-gradient(var(--m), var(--m)) 17px 100% / 1px var(--l),
+    linear-gradient(var(--m), var(--m)) 100% calc(100% - 17px) / var(--l) 1px, linear-gradient(var(--m), var(--m)) calc(100% - 17px) 100% / 1px var(--l);
+  background-repeat: no-repeat;
+}
+@media (max-width: 760px) { #project-dialog .gallery-stage .ed-crop { inset: -10px; --l: 8px; } }
+
+/* Spine: in a booklet spread, the gutter darkens toward the fold. */
+#project-dialog .gallery-stage .ed-spine { display: none; }
+#project-dialog .gallery-stage.is-spread:not(.is-cover) .ed-spine {
+  display: block; position: absolute; top: 0; bottom: 0; left: 50%; width: 64px; translate: -50% 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(30 16 34 / .14) 42%, rgb(30 16 34 / .26) 50%, rgb(30 16 34 / .14) 58%, transparent);
+  mix-blend-mode: multiply;
+}
+@media (prefers-reduced-motion: no-preference) {
+  #project-dialog .gallery-stage.is-spread:not(.is-cover):has(.slide-enter) .ed-spine { animation: ed-spine-turn 520ms cubic-bezier(.2, .7, .1, 1) both; }
+  @keyframes ed-spine-turn { 0% { opacity: 1; width: 160px; } 100% { opacity: 1; width: 64px; } }
+}
+
+/* Light table: on desktop, the page catches a little light from below. */
+@media (hover: hover) and (pointer: fine) {
+  #project-dialog .gallery-stage { transition: box-shadow 320ms ease; }
+  #project-dialog .gallery-stage:hover { box-shadow: 0 0 90px 10px rgb(243 235 221 / .10); }
+}
+
+/* "All pages" control beside the counter. */
+#project-dialog .gallery-controls { grid-template-columns: minmax(0, 1fr) auto auto !important; column-gap: 24px !important; }
+#project-dialog .ed-sheet-open {
+  align-self: end; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 18px;
+  border: 1.5px solid color-mix(in srgb, var(--room-ink, #F3EBDD) 70%, transparent); background: transparent; color: var(--room-ink, #F3EBDD);
+  font: 700 .8125rem/1 var(--label); letter-spacing: .06em; text-transform: uppercase; cursor: pointer;
+}
+html[lang="ko"] #project-dialog .ed-sheet-open { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .875rem; }
+#project-dialog .ed-sheet-open:hover { background: var(--acid); color: var(--ink); border-color: var(--acid); }
+#project-dialog .ed-sheet-icon { width: 14px; height: 14px; background:
+  linear-gradient(currentColor, currentColor) 0 0 / 6px 6px, linear-gradient(currentColor, currentColor) 100% 0 / 6px 6px,
+  linear-gradient(currentColor, currentColor) 0 100% / 6px 6px, linear-gradient(currentColor, currentColor) 100% 100% / 6px 6px; background-repeat: no-repeat; }
+#project-dialog .gallery-controls > div { order: 3; }
+@media (max-width: 760px) {
+  #project-dialog .gallery-controls { grid-template-columns: minmax(0, 1fr) auto !important; row-gap: 12px; }
+  #project-dialog .ed-sheet-open { grid-column: 1 / -1; grid-row: 2; justify-self: start; min-height: 44px; }
+}
+
+/* Contact sheet: every page on the dark ground, numbered like a proof sheet. */
+.ed-sheet { position: fixed; inset: 0; z-index: 90; display: grid; grid-template-rows: auto 1fr; background: rgb(28 16 32 / .97); color: var(--paper); }
+.ed-sheet[hidden] { display: none; }
+.ed-sheet-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px var(--edge, 24px); border-bottom: 1px solid rgb(243 235 221 / .2); }
+.ed-sheet-title { margin: 0; font: 700 .8125rem/1.4 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--paper); }
+html[lang="ko"] .ed-sheet-title { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .9375rem; }
+.ed-sheet-close { min-width: 48px; min-height: 48px; border: 1.5px solid var(--paper); background: transparent; color: var(--paper); font-size: 1.25rem; cursor: pointer; }
+.ed-sheet-close:hover { background: var(--acid); color: var(--ink); border-color: var(--acid); }
+.ed-sheet-grid {
+  list-style: none; margin: 0; overflow: auto; overscroll-behavior: contain;
+  padding: clamp(20px, 3vw, 48px) var(--edge, 24px) 64px;
+  display: grid; gap: clamp(20px, 2.4vw, 36px) clamp(14px, 2vw, 28px); grid-template-columns: repeat(auto-fill, minmax(min(240px, 42vw), 1fr)); align-content: start;
+}
+.ed-sheet.is-portrait .ed-sheet-grid { grid-template-columns: repeat(auto-fill, minmax(min(160px, 40vw), 1fr)); }
+.ed-sheet-grid button {
+  position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--paper); cursor: pointer;
+  outline-offset: 6px; box-shadow: 4px 4px 0 rgb(0 0 0 / .35);
+}
+.ed-sheet-grid img { display: block; width: 100%; height: auto; }
+.ed-sheet-num { position: absolute; left: 0; top: calc(100% + 6px); font: 700 .75rem/1 var(--label); letter-spacing: .06em; color: rgb(243 235 221 / .8); }
+.ed-sheet-grid button[aria-current] { box-shadow: 0 0 0 3px var(--acid), 6px 6px 0 rgb(0 0 0 / .35); }
+.ed-sheet-grid button[aria-current] .ed-sheet-num { color: var(--acid); }
+@media (hover: hover) { .ed-sheet-grid button:hover { translate: 0 -3px; box-shadow: 0 0 0 2px var(--paper), 6px 8px 0 rgb(0 0 0 / .35); } }
+@media (prefers-reduced-motion: no-preference) {
+  .ed-sheet:not([hidden]) { animation: ed-fade 200ms ease both; }
+  .ed-sheet:not([hidden]) .ed-sheet-grid li { animation: ed-deal 360ms cubic-bezier(.2, .7, .1, 1) both; animation-delay: min(calc(var(--i, 0) * 18ms), 300ms); }
+  .ed-sheet-grid button { transition: translate 160ms ease, box-shadow 160ms ease; }
+  @keyframes ed-fade { from { opacity: 0; } }
+  @keyframes ed-deal { from { opacity: 0; translate: 0 10px; } }
+}
+
+/* Loupe: a round magnifier that follows the pointer while the page is held. */
+.ed-loupe {
+  position: fixed; left: 0; top: 0; z-index: 95; width: 240px; height: 240px; border-radius: 50%; pointer-events: none;
+  border: 2px solid var(--paper); box-shadow: 0 0 0 1px var(--ink), 0 14px 40px rgb(0 0 0 / .45); background: #fff no-repeat;
+}
+.ed-loupe[hidden] { display: none; }
+#project-dialog.is-louping .gallery-stage { cursor: none; }
+.ed-loupe-hint { grid-column: 1 / -1 !important; margin: 10px 0 0 !important; font: 400 .8125rem/1.4 var(--read); color: var(--room-ink, #F3EBDD); opacity: .7; }
+@media (hover: none), (pointer: coarse) { .ed-loupe-hint { display: none; } }
+
+/* Thumb index: numbered tabs on the page edge, like a dictionary's cut
+   tabs. The label slides out on hover / focus; the current section is inked. */
+.ed-index { position: fixed; right: 0; top: 50%; translate: 0 -50%; z-index: 30; }
+.ed-index[hidden] { display: none; }
+.ed-index ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.ed-index a {
+  display: flex; align-items: center; justify-content: flex-end; min-height: 44px; min-width: 44px; padding: 0 10px; text-decoration: none;
+  background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); border-right: 0;
+  font: 700 .75rem/1 var(--label); letter-spacing: .06em; text-transform: uppercase;
+  translate: 4px 0; transition: translate 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+html[lang="ko"] .ed-index a { letter-spacing: 0; }
+.ed-index-label { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width 260ms cubic-bezier(.2, .7, .1, 1), opacity 200ms ease, margin 260ms ease; }
+html[lang="ko"] .ed-index-label { font-family: var(--read); text-transform: none; font-size: .8125rem; }
+.ed-index a:is(:hover, :focus-visible) { translate: 0 0; }
+.ed-index a:is(:hover, :focus-visible) .ed-index-label { max-width: 28ch; opacity: 1; margin-left: 12px; }
+.ed-index a { flex-direction: row; } .ed-index-label { order: 2; }
+.ed-index a[aria-current] { background: var(--ink); color: var(--paper); translate: 0 0; }
+.ed-index a[aria-current] .ed-index-num { color: var(--acid); }
+
+/* Folio: a running foot on wide screens, set like a magazine's page line. */
+.ed-folio {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; margin: 0; display: flex; justify-content: space-between; gap: 24px;
+  padding: 7px var(--edge, 24px); pointer-events: none;
+  font: 700 .75rem/1.2 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 92%, transparent); border-top: 1px solid rgb(73 43 81 / .2);
+}
+.ed-folio[hidden] { display: none; }
+html[lang="ko"] .ed-folio { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .75rem; }
+.ed-folio span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (min-width: 1100px) { #project-detail { padding-bottom: 40px; } }
+
+/* Next project: the next band's cover rises from the foot of the page. */
+.ed-next { display: none; }
+@media (min-width: 761px) {
+  #project-dialog .detail-footer { align-items: end; overflow: hidden; }
+  #project-dialog .detail-footer .ed-next-button {
+    position: relative; display: grid !important; justify-items: end; gap: 6px; text-align: right !important;
+    padding: 20px 0 0 !important; min-height: 0; white-space: normal;
+  }
+  #project-dialog .ed-next-button .ed-next { display: grid; justify-items: end; gap: 4px; }
+  #project-dialog .ed-next-kicker { font: 700 .75rem/1 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); opacity: .7; }
+  #project-dialog .ed-next-title { font: 700 clamp(1.75rem, 1rem + 2vw, 3rem)/.95 var(--display); text-transform: uppercase; color: var(--ink); max-width: 16ch; text-wrap: balance; }
+  html[lang="ko"] #project-dialog .ed-next-title { line-height: 1.15; word-break: keep-all; }
+  #project-dialog .ed-next-sheet {
+    display: block; width: min(320px, 34vw); height: 120px; margin-top: 16px; overflow: hidden; rotate: -2deg; translate: 0 36px;
+    border: 6px solid var(--paper); border-bottom: 0; box-shadow: 0 -2px 0 1px rgb(73 43 81 / .15), -8px -6px 0 var(--acid);
+    transition: translate 320ms cubic-bezier(.2, .7, .1, 1), rotate 320ms cubic-bezier(.2, .7, .1, 1);
+  }
+  #project-dialog .ed-next-sheet img { display: block; width: 100%; height: auto; }
+  #project-dialog .ed-next-button:is(:hover, :focus-visible) .ed-next-sheet { translate: 0 8px; rotate: -1deg; }
+  /* The old "Next project →" text: visually hidden, kept in the accessible name. */
+  #project-dialog .ed-next-button .ed-next-old { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) { #project-dialog .ed-next-sheet { transition: none; } }
+/* Crop marks and spine follow the measured page box (same as the shadow). */
+#project-dialog .gallery-stage .ed-crop {
+  inset: auto !important; left: calc(var(--sx, 0px) - 18px); top: calc(var(--sy, 0px) - 18px);
+  width: calc(var(--sw, 100%) + 36px); height: calc(var(--sh, 100%) + 36px);
+}
+@media (max-width: 760px) { #project-dialog .gallery-stage .ed-crop { left: calc(var(--sx, 0px) - 10px); top: calc(var(--sy, 0px) - 10px); width: calc(var(--sw, 100%) + 20px); height: calc(var(--sh, 100%) + 20px); } }
+#project-dialog .gallery-stage.is-spread:not(.is-cover) .ed-spine { left: calc(var(--sx, 0px) + var(--sw, 100%) / 2); top: var(--sy, 0px); bottom: auto; height: var(--sh, 100%); }
+.ed-index a[aria-current] { box-shadow: -4px 0 0 var(--acid); }
+/* USA Camp: the role's rule and the case facts' own rules sat 4 px apart. */
+#project-dialog .detail-role:has(+ .detail-story > .case-study:first-child) { border-bottom: 0 !important; }
+/* Varnish sheen only over the page(s), never the empty stage around a spread. */
+#project-dialog .gallery-stage::after { inset: auto !important; left: var(--sx, 0px) !important; top: var(--sy, 0px) !important; width: var(--sw, 100%) !important; height: var(--sh, 100%) !important; }
+#project-dialog.is-louping .gallery-stage::after { opacity: 0 !important; }
+/* "All pages" is a text button, not one of the 48 px arrow squares. */
+#project-dialog .gallery-controls .ed-sheet-open { width: auto !important; height: auto !important; font-size: .8125rem !important; white-space: nowrap; }
+html[lang="ko"] #project-dialog .gallery-controls .ed-sheet-open { font-size: .875rem !important; }
+#project-dialog .gallery-controls .ed-loupe-hint { grid-column: 1 / -1 !important; grid-row: 2; margin: 4px 0 0 !important; }
+
+/* Band titles print in two plates: the lime plate lands wide, then slides
+   into register under the ink (same motion as the outlined numeral). */
+@media (prefers-reduced-motion: no-preference) {
+  html.rv-on .project-card.rv.is-in .project-title {
+    animation: v2-rise 700ms var(--ease-press) both, ed-title-plate 900ms var(--ease-press) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 120ms), calc(var(--i, 0) * 70ms + 260ms);
+  }
+  @keyframes ed-title-plate { from { text-shadow: .14em .1em 0 var(--misreg, var(--acid)); } }
+}

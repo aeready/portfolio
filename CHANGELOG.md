@@ -33,6 +33,19 @@ New work for this round is in `web/edition.css` and `web/edition.js` (loaded aft
 - New script `scripts/build-korean-font.py` rebuilds the Korean subsets whenever new Korean text is added (it fetched 쇄 and 잉 for the colophon). Fonts renamed again: upload the three current `NotoSans-Korean-site*--*.woff2`.
 - Looked at and left alone: rule weights (already two weights: 1.5 px ink for section breaks, 1 px at 15% for rows) and the band ornaments (already pinned to band corners).
 
+### Group 4 · Pages and the gallery
+- **All pages (contact sheet):** a new "All pages · N" button beside the gallery counter lays every page out on the dark ground, numbered like a proof sheet (portrait pages in narrower columns). Choose one to open it (spreads open at the right pair). Escape or × closes it and returns focus; arrow keys don't turn pages behind it. Phones get it too.
+- **Crop marks:** fine printer's crop marks at the four corners of the page(s), outside the work, never over it.
+- **Spine:** in booklet spreads the fold darkens slightly; during a page turn the shadow sweeps in from wide to narrow.
+- **Light table:** on desktop, the page catches a faint glow when the pointer is over it.
+- **Loupe:** on desktop, press and hold a page to get a round 2.6× magnifier that follows the pointer; let go to put it away. A quick click still opens the full-size image; a hold never does. A one-line hint sits under the counter ("Press and hold the page to magnify it" / "페이지를 길게 누르면 확대됩니다"). Fixed on the way: the varnish sheen covered the empty stage beside spreads; it now covers only the pages.
+- **Thumb index:** on wide screens (1100 px+), numbered tabs on the right edge of a project page, like a dictionary's cut tabs: hover or focus to slide out the section name, click to jump; the section you're reading is inked.
+- **Folio:** on wide screens, a running foot on project pages: "Anna Ready · Portfolio" left, the project's number and title right.
+- **Next project:** at the foot of each project (tablet and desktop), the next band's number and title in the display face, with its cover rising from the bottom edge; it lifts on hover. Phones keep the sticky Previous / Next bar.
+- **Band titles print in two plates:** the lime plate lands wide and slides into register, like the outlined numerals (not with reduced motion).
+- USA Camp: the role's rule and the case facts' rules no longer sit 4 px apart.
+- New strings, both languages: All pages / 전체 페이지, Close all pages / 전체 페이지 닫기, the sheet title, the loupe hint, Sections on this page / 이 페이지의 항목, Portfolio / 포트폴리오, Next / 다음. Korean font rebuilt (됩).
+
 ## 17 Nov 2026 — Booklet spreads and tap-to-zoom
 
 - **Desktop, portrait galleries (USA Camp workbook):** pages show as an open booklet: the cover alone on the right, then 2–3, 4–5 … side by side, the last page alone. Arrows, swipe and arrow keys turn a whole spread; the counter reads "2–3 / 18"; both pages are highlighted in the strip; the caption names both. Pages turn in from the spine (fade, slight 3-D turn, focus pull). The halftone shadow sits under the whole spread. Landscape decks are unchanged (one slide at a time).
