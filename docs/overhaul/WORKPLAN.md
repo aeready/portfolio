@@ -1,6 +1,6 @@
 # Work plan — "press run" overhaul (Nov 2026)
 
-Status as of 17 Nov 2026. Branch: `ccr-099385b1-ewrh8h` (pushed; not merged; **not live**).
+Status: see `CLAUDE.md` (kept current). This file is the Nov 2026 overhaul background.
 Full history with "how to undo" for every change: `CHANGELOG.md` (newest first).
 
 ## The idea in one line
