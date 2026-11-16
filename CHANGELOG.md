@@ -3,12 +3,12 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
-## 18 Nov 2026 — Owner's review (4): education, skills as stickers, contact ornament
+## 18 Nov 2026 — Owner's review (4): education, skills, contact ornament
 
 - **Education:** each degree is one card: seal in a circle, degree in the title face, university, status as a lime tag; hard lime shadow. The separate lime label bars are gone (`.degree` wrapper in `index.html`; `degree-note` span in the locale strings).
-- **Skills:** languages as two labelled lines (ENGLISH native · KOREAN professional working proficiency). Software tools are die-cut stickers in the two inks (owner's moodboard): flower, burst, stamp, tag and star (`web/assets/stickers/*.svg`), logo on a paper disc, name and one line underneath, slightly tilted (straighten on hover). 5 across on desktop, 3+2 on tablets, 2+2+1 on phones. Big initials removed.
+- **Skills:** languages as two labelled lines (ENGLISH native · KOREAN professional working proficiency). Software tools are short coloured cards: logo tile on top, name in the title face, one line on what it's for (5 across on desktop, 2 columns of rows on tablets, 1 column of rows on phones). Big initials removed. (A sticker version was tried and dropped at the owner's request.)
 - **Contact:** the registration grid now sits on the seam where the torn paper circle was; the torn circle is removed.
-- **Undo:** delete the three blocks "Education + skills, rebuilt", "Software as stickers" and the contact lines at the end of `web/edition.css`; remove `web/assets/stickers/`; unwrap `.degree` in `index.html`; restore the plain `education.*Detail` and `skills.languages` strings in `locales.js`.
+- **Undo:** delete the "Education + skills, rebuilt" block, the logo-tile lines after it and the contact lines at the end of `web/edition.css`; unwrap `.degree` in `index.html`; restore the plain `education.*Detail` and `skills.languages` strings in `locales.js`.
 
 ## 18 Nov 2026 — Tagline
 
