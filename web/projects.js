@@ -1,151 +1,5 @@
 window.PORTFOLIO_PROJECTS = [
   {
-    "id": "adult-communication",
-    "number": "01",
-    "title": "Clearer global communication",
-    "label": "Teacher training",
-    "categories": [
-      "training"
-    ],
-    "audiences": [
-      "educators"
-    ],
-    "audienceLabel": "Gyeonggi education staff, including teachers and administrators",
-    "format": "Educator professional-development slides & applied tasks",
-    "context": "Global Skills Enhancement program for Gyeonggi education staff",
-    "summary": "A workplace communication module where education staff revise messages for audience, tone, clarity, and purpose.",
-    "intro": "A Global Skills Enhancement module for Gyeonggi education staff. Topic 3 focuses on editing, implementation, and feedback.",
-    "role": "Educator training materials development & activity design",
-    "contribution": "I developed the examples, C.L.E.A.R. framework, editing practice, and feedback sequence.",
-    "decisions": [
-      "Use realistic education-workplace writing tasks.",
-      "Compare how audience and purpose change tone and information needs."
-    ],
-    "note": "",
-    "cover": "assets/gse-new-title-optimized--19f081e564a3.webp",
-    "color": "sky",
-    "slides": [
-      [
-        "assets/gse-new-title-optimized--19f081e564a3.webp",
-        "Editing Skills, Implementation and Feedback introduces Topic 3 of the Global Skills Enhancement program.",
-        "Training slide"
-      ],
-      [
-        "assets/gse-new-context-optimized--3935cf794d60.webp",
-        "Context-appropriate writing starts with tone, audience, and purpose.",
-        "Training slide"
-      ],
-      [
-        "assets/gse-new-tone-optimized--b0ecae81330d.webp",
-        "Word choice, sentence length, greetings, punctuation, and directness change tone.",
-        "Training slide"
-      ],
-      [
-        "assets/gse-new-clear-optimized--5a90d5399d6b.webp",
-        "The C.L.E.A.R. method prompts context, language, expectations, assumptions, and respect.",
-        "Training slide"
-      ],
-      [
-        "assets/gse-new-audience-optimized--769b0009c340.webp",
-        "Different audiences—including foreign visitors, teachers, and public officials—need different information and tone.",
-        "Training slide"
-      ],
-      [
-        "assets/gse-new-worked-example-optimized--975edf4052a7.webp",
-        "A draft message is examined for unclear references, timing, idioms, and assumptions.",
-        "Training slide"
-      ],
-      [
-        "assets/gse-new-ai-tools-optimized--87d58db1471c.webp",
-        "A five-step prompt guide for reviewing AI-assisted translation and writing revisions.",
-        "Training slide"
-      ]
-    ],
-    "documents": [
-      [
-        "assets/downloads/editing-skills.pdf",
-        "Editing Skills PDF",
-        "PDF"
-      ]
-    ],
-    "materialsNote": "Selected slides are shown; the editable deck is not included.",
-    "source": "Slides from the revised Global Skills Enhancement module.",
-    "coverAlt": "Editing Skills, Implementation and Feedback introduces Topic 3 of the Global Skills Enhancement program.",
-    "previewSecondary": "assets/gse-new-context-optimized--3935cf794d60.webp",
-    "original": "adult-communication",
-    "ko": {
-      "title": "명확한 국제적 소통",
-      "label": "교사 연수",
-      "audienceLabel": "교사·행정 담당자 등 경기도교육청 교육 관계자",
-      "format": "교육 관계자 전문성 개발 슬라이드 및 실습",
-      "context": "경기도교육청 교육 관계자를 위한 글로벌 역량 강화 프로그램",
-      "summary": "교육 관계자가 독자, 어조, 명확성과 목적에 맞춰 업무 메시지를 수정하는 연수입니다.",
-      "intro": "경기도 교육 관계자를 위한 글로벌 역량 강화 프로그램입니다. Topic 3에서 편집, 실습, 피드백을 다룹니다.",
-      "role": "교육 관계자 연수 자료 개발 및 활동 설계",
-      "contribution": "예시, C.L.E.A.R. 방법, 글 수정 연습과 피드백 순서를 개발했습니다.",
-      "decisions": [
-        "교육 현장의 실제 업무 글쓰기를 활용했습니다.",
-        "독자와 목적에 따라 어조와 필요한 정보가 어떻게 달라지는지 비교했습니다."
-      ],
-      "note": "",
-      "materialsNote": "선정한 슬라이드를 제공합니다. 편집 가능한 전체 자료는 포함하지 않았습니다.",
-      "source": "개정된 글로벌 역량 강화 프로그램의 슬라이드입니다.",
-      "coverAlt": "글로벌 역량 강화 프로그램 Topic 3의 편집, 실습, 피드백을 소개하는 표지.",
-      "previewCaption": "교육 관계자를 위한 업무 소통 연수",
-      "slides": [
-        [
-          "글로벌 역량 강화 프로그램 Topic 3의 편집, 실습, 피드백을 소개하는 표지.",
-          "연수 슬라이드"
-        ],
-        [
-          "상황에 맞는 글쓰기를 어조, 독자, 목적의 세 가지 요소로 시작합니다.",
-          "연수 슬라이드"
-        ],
-        [
-          "단어 선택, 문장 길이, 인사말, 문장부호, 직접성이 어조에 미치는 영향을 보여 줍니다.",
-          "연수 슬라이드"
-        ],
-        [
-          "C.L.E.A.R. 방법으로 맥락, 언어, 기대, 전제, 존중을 확인합니다.",
-          "연수 슬라이드"
-        ],
-        [
-          "외국인 방문객, 교사, 공무원 등 독자에 따라 필요한 정보와 어조가 달라집니다.",
-          "연수 슬라이드"
-        ],
-        [
-          "초안의 불명확한 지시어, 일정, 관용어, 전제를 살펴보는 사례.",
-          "연수 슬라이드"
-        ],
-        [
-          "AI 번역·글쓰기 수정안을 검토하기 위한 다섯 단계 프롬프트 안내.",
-          "연수 슬라이드"
-        ]
-      ],
-      "documents": [
-        [
-          "Editing Skills PDF",
-          "PDF"
-        ]
-      ],
-      "previewTertiaryAlt": "단어 선택, 문장 길이, 인사말, 문장부호, 직접성이 어조에 미치는 영향을 보여 줍니다.",
-      "displayTitle": "명확한 국제적 소통",
-      "displayLabel": "교사 연수 · 성인 자료",
-      "evidence": "수정 사례에서 불명확한 지시어, 일정, 관용어, 전제를 찾습니다."
-    },
-    "previewCaption": "Educator training in workplace communication",
-    "previewTertiary": "assets/gse-new-tone-optimized--b0ecae81330d.webp",
-    "previewTertiaryAlt": "Word choice, sentence length, greetings, punctuation, and directness change tone.",
-    "displayTitle": "Clearer global communication",
-    "displayLabel": "Teacher training · Adult materials",
-    "previewIndices": [
-      0,
-      1,
-      2
-    ],
-    "evidence": "The worked revision identifies unclear references, timing, idioms, and assumptions."
-  },
-  {
     "id": "reading-for-meaning",
     "original": "reading-for-meaning",
     "number": "02",
@@ -857,6 +711,152 @@ window.PORTFOLIO_PROJECTS = [
     "evidence": "Teachers turn a textbook topic into a short listening task and share a slide they created."
   },
   {
+    "id": "adult-communication",
+    "number": "01",
+    "title": "Clearer global communication",
+    "label": "Teacher training",
+    "categories": [
+      "training"
+    ],
+    "audiences": [
+      "educators"
+    ],
+    "audienceLabel": "Gyeonggi education staff, including teachers and administrators",
+    "format": "Educator professional-development slides & applied tasks",
+    "context": "Global Skills Enhancement program for Gyeonggi education staff",
+    "summary": "A workplace communication module where education staff revise messages for audience, tone, clarity, and purpose.",
+    "intro": "A Global Skills Enhancement module for Gyeonggi education staff. Topic 3 focuses on editing, implementation, and feedback.",
+    "role": "Educator training materials development & activity design",
+    "contribution": "I developed the examples, C.L.E.A.R. framework, editing practice, and feedback sequence.",
+    "decisions": [
+      "Use realistic education-workplace writing tasks.",
+      "Compare how audience and purpose change tone and information needs."
+    ],
+    "note": "",
+    "cover": "assets/gse-new-title-optimized--19f081e564a3.webp",
+    "color": "sky",
+    "slides": [
+      [
+        "assets/gse-new-title-optimized--19f081e564a3.webp",
+        "Editing Skills, Implementation and Feedback introduces Topic 3 of the Global Skills Enhancement program.",
+        "Training slide"
+      ],
+      [
+        "assets/gse-new-context-optimized--3935cf794d60.webp",
+        "Context-appropriate writing starts with tone, audience, and purpose.",
+        "Training slide"
+      ],
+      [
+        "assets/gse-new-tone-optimized--b0ecae81330d.webp",
+        "Word choice, sentence length, greetings, punctuation, and directness change tone.",
+        "Training slide"
+      ],
+      [
+        "assets/gse-new-clear-optimized--5a90d5399d6b.webp",
+        "The C.L.E.A.R. method prompts context, language, expectations, assumptions, and respect.",
+        "Training slide"
+      ],
+      [
+        "assets/gse-new-audience-optimized--769b0009c340.webp",
+        "Different audiences—including foreign visitors, teachers, and public officials—need different information and tone.",
+        "Training slide"
+      ],
+      [
+        "assets/gse-new-worked-example-optimized--975edf4052a7.webp",
+        "A draft message is examined for unclear references, timing, idioms, and assumptions.",
+        "Training slide"
+      ],
+      [
+        "assets/gse-new-ai-tools-optimized--87d58db1471c.webp",
+        "A five-step prompt guide for reviewing AI-assisted translation and writing revisions.",
+        "Training slide"
+      ]
+    ],
+    "documents": [
+      [
+        "assets/downloads/editing-skills.pdf",
+        "Editing Skills PDF",
+        "PDF"
+      ]
+    ],
+    "materialsNote": "Selected slides are shown; the editable deck is not included.",
+    "source": "Slides from the revised Global Skills Enhancement module.",
+    "coverAlt": "Editing Skills, Implementation and Feedback introduces Topic 3 of the Global Skills Enhancement program.",
+    "previewSecondary": "assets/gse-new-context-optimized--3935cf794d60.webp",
+    "original": "adult-communication",
+    "ko": {
+      "title": "명확한 국제적 소통",
+      "label": "교사 연수",
+      "audienceLabel": "교사·행정 담당자 등 경기도교육청 교육 관계자",
+      "format": "교육 관계자 전문성 개발 슬라이드 및 실습",
+      "context": "경기도교육청 교육 관계자를 위한 글로벌 역량 강화 프로그램",
+      "summary": "교육 관계자가 독자, 어조, 명확성과 목적에 맞춰 업무 메시지를 수정하는 연수입니다.",
+      "intro": "경기도 교육 관계자를 위한 글로벌 역량 강화 프로그램입니다. Topic 3에서 편집, 실습, 피드백을 다룹니다.",
+      "role": "교육 관계자 연수 자료 개발 및 활동 설계",
+      "contribution": "예시, C.L.E.A.R. 방법, 글 수정 연습과 피드백 순서를 개발했습니다.",
+      "decisions": [
+        "교육 현장의 실제 업무 글쓰기를 활용했습니다.",
+        "독자와 목적에 따라 어조와 필요한 정보가 어떻게 달라지는지 비교했습니다."
+      ],
+      "note": "",
+      "materialsNote": "선정한 슬라이드를 제공합니다. 편집 가능한 전체 자료는 포함하지 않았습니다.",
+      "source": "개정된 글로벌 역량 강화 프로그램의 슬라이드입니다.",
+      "coverAlt": "글로벌 역량 강화 프로그램 Topic 3의 편집, 실습, 피드백을 소개하는 표지.",
+      "previewCaption": "교육 관계자를 위한 업무 소통 연수",
+      "slides": [
+        [
+          "글로벌 역량 강화 프로그램 Topic 3의 편집, 실습, 피드백을 소개하는 표지.",
+          "연수 슬라이드"
+        ],
+        [
+          "상황에 맞는 글쓰기를 어조, 독자, 목적의 세 가지 요소로 시작합니다.",
+          "연수 슬라이드"
+        ],
+        [
+          "단어 선택, 문장 길이, 인사말, 문장부호, 직접성이 어조에 미치는 영향을 보여 줍니다.",
+          "연수 슬라이드"
+        ],
+        [
+          "C.L.E.A.R. 방법으로 맥락, 언어, 기대, 전제, 존중을 확인합니다.",
+          "연수 슬라이드"
+        ],
+        [
+          "외국인 방문객, 교사, 공무원 등 독자에 따라 필요한 정보와 어조가 달라집니다.",
+          "연수 슬라이드"
+        ],
+        [
+          "초안의 불명확한 지시어, 일정, 관용어, 전제를 살펴보는 사례.",
+          "연수 슬라이드"
+        ],
+        [
+          "AI 번역·글쓰기 수정안을 검토하기 위한 다섯 단계 프롬프트 안내.",
+          "연수 슬라이드"
+        ]
+      ],
+      "documents": [
+        [
+          "Editing Skills PDF",
+          "PDF"
+        ]
+      ],
+      "previewTertiaryAlt": "단어 선택, 문장 길이, 인사말, 문장부호, 직접성이 어조에 미치는 영향을 보여 줍니다.",
+      "displayTitle": "명확한 국제적 소통",
+      "displayLabel": "교사 연수 · 성인 자료",
+      "evidence": "수정 사례에서 불명확한 지시어, 일정, 관용어, 전제를 찾습니다."
+    },
+    "previewCaption": "Educator training in workplace communication",
+    "previewTertiary": "assets/gse-new-tone-optimized--b0ecae81330d.webp",
+    "previewTertiaryAlt": "Word choice, sentence length, greetings, punctuation, and directness change tone.",
+    "displayTitle": "Clearer global communication",
+    "displayLabel": "Teacher training · Adult materials",
+    "previewIndices": [
+      0,
+      1,
+      2
+    ],
+    "evidence": "The worked revision identifies unclear references, timing, idioms, and assumptions."
+  },
+  {
     "id": "teacher-development",
     "number": "04",
     "title": "Beyond teacher induction",
@@ -1188,18 +1188,18 @@ window.PORTFOLIO_PROJECTS = [
         "Booklet page 9 of 18"
       ],
       [
-        "assets/usa-camp-booklet-10--6791401b2953.webp",
-        "USA Camp workbook, page 10: School subjects.",
+        "assets/usa-camp-booklet-12--8e05c2e834c4.webp",
+        "USA Camp workbook, page 10: My school schedule.",
         "Booklet page 10 of 18"
       ],
       [
         "assets/usa-camp-booklet-11--5992375c827f.webp",
-        "USA Camp workbook, page 11: School M.A.S.H..",
+        "USA Camp workbook, page 11: School M.A.S.H.",
         "Booklet page 11 of 18"
       ],
       [
-        "assets/usa-camp-booklet-12--8e05c2e834c4.webp",
-        "USA Camp workbook, page 12: My school schedule.",
+        "assets/usa-camp-booklet-10--6791401b2953.webp",
+        "USA Camp workbook, page 12: School subjects.",
         "Booklet page 12 of 18"
       ],
       [
@@ -1327,15 +1327,15 @@ window.PORTFOLIO_PROJECTS = [
           "워크북 9/18쪽"
         ],
         [
-          "USA Camp 워크북 10쪽: 학교 과목.",
+          "USA Camp 워크북 10쪽: 나의 학교 시간표.",
           "워크북 10/18쪽"
         ],
         [
-          "USA Camp 워크북 11쪽: 학교 M.A.S.H..",
+          "USA Camp 워크북 11쪽: 학교 M.A.S.H.",
           "워크북 11/18쪽"
         ],
         [
-          "USA Camp 워크북 12쪽: 나의 학교 시간표.",
+          "USA Camp 워크북 12쪽: 학교 과목.",
           "워크북 12/18쪽"
         ],
         [

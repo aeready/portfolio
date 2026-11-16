@@ -134,7 +134,81 @@
       sections.forEach(([sec]) => watcher.observe(sec));
     }
   };
-  wide.addEventListener?.('change', () => { if (dialog.open) buildIndex(); });
+
+  /* ---------- File cabinet: the project's sections as coloured cards ----
+     Owner's request (18 Nov): instead of a long rail, the sections stand
+     side by side like files in a cabinet (desktop) or drawers (phones).
+     One is open at a time; the rest show their number and title. The
+     existing section nodes are moved, not copied, so app.js stays the
+     source of truth and a language switch rebuilds everything. */
+  let cabinetSeq = 0;
+  const buildCabinet = () => {
+    const story = detail.querySelector('.detail-story');
+    if (!story || story.querySelector('.ed-cabinet')) return;
+    const items = [];
+    const take = (node, title) => { if (node && title) items.push({title, nodes: [node]}); };
+    [...story.children].forEach(child => {
+      if (child.classList.contains('case-study')) {
+        const head = child.querySelector(':scope > h3');
+        const facts = child.querySelector(':scope > .case-facts');
+        if (facts) take(facts, (head?.textContent || '').trim());
+        child.querySelectorAll(':scope > .case-block').forEach(b => take(b, (b.querySelector(':scope > h4')?.textContent || '').trim()));
+        return;
+      }
+      if (child.classList.contains('detail-callout')) { (items.at(-1)?.nodes || []).push(child); return; }
+      take(child, (child.querySelector(':scope > h3, :scope > h4')?.textContent || '').trim());
+    });
+    if (items.length < 2) return;
+    const tones = ['lime', 'ink', 'cream'];
+    const id = ++cabinetSeq;
+    const cab = el('div', 'ed-cabinet');
+    cab.setAttribute('role', 'group');
+    cab.setAttribute('aria-label', (detail.querySelector('#project-title')?.textContent || '').trim());
+    items.forEach((item, i) => {
+      const card = el('section', 'ed-file');
+      card.dataset.tone = tones[i % 3];
+      card.style.setProperty('--i', i);
+      const head = el('button', 'ed-file-tab');
+      head.type = 'button'; head.id = `ed-file-${id}-${i}`;
+      head.setAttribute('aria-controls', `ed-body-${id}-${i}`);
+      head.innerHTML = `<span class="ed-file-num" aria-hidden="true">${i + 1}</span><span class="ed-file-title">${esc(item.title)}</span><span class="ed-file-plus" aria-hidden="true"></span>`;
+      const body = el('div', 'ed-file-body');
+      body.id = `ed-body-${id}-${i}`; body.setAttribute('role', 'region'); body.setAttribute('aria-labelledby', head.id);
+      item.nodes.forEach(n => { n.querySelectorAll(':scope > h3, :scope > h4').forEach(h => h.classList.add('ed-file-hidden-head')); body.append(n); });
+      card.append(head, body);
+      cab.append(card);
+    });
+    story.prepend(cab);
+    [...story.children].forEach(c => { if (c !== cab && !c.children.length && !c.textContent.trim()) c.remove(); });
+    story.querySelectorAll(':scope > .case-study').forEach(c => { if (!c.querySelector('.case-facts, .case-block')) c.remove(); });
+    const open = idx => cab.querySelectorAll('.ed-file').forEach((card, i) => {
+      const on = i === idx;
+      card.classList.toggle('is-open', on);
+      card.querySelector('.ed-file-tab').setAttribute('aria-expanded', String(on));
+      card.querySelector('.ed-file-body').hidden = !on;
+    });
+    open(0);
+    cab.addEventListener('click', event => {
+      const tab = event.target.closest('.ed-file-tab'); if (!tab) return;
+      const cards = [...cab.querySelectorAll('.ed-file')];
+      const i = cards.indexOf(tab.closest('.ed-file'));
+      if (cards[i].classList.contains('is-open') && !desktop.matches) { cards[i].classList.remove('is-open'); tab.setAttribute('aria-expanded', 'false'); cards[i].querySelector('.ed-file-body').hidden = true; return; }
+      open(i);
+      if (!desktop.matches) requestAnimationFrame(() => { const top = tab.getBoundingClientRect().top - dialog.getBoundingClientRect().top + dialog.scrollTop - (dialog.querySelector('.dialog-top')?.offsetHeight || 72) - 8; dialog.scrollTo({top, behavior: reduced.matches ? 'auto' : 'smooth'}); });
+    });
+    cab.addEventListener('keydown', event => {
+      if (!/^Arrow(Left|Right|Up|Down)$/.test(event.key) || !event.target.closest('.ed-file-tab')) return;
+      event.preventDefault(); event.stopPropagation();
+      const tabs = [...cab.querySelectorAll('.ed-file-tab')]; const i = tabs.indexOf(event.target.closest('.ed-file-tab'));
+      tabs[(i + (/Right|Down/.test(event.key) ? 1 : -1) + tabs.length) % tabs.length].focus();
+    });
+    // Deal the cards in once, when the cabinet comes into view.
+    if (!reduced.matches && 'IntersectionObserver' in window) {
+      cab.classList.add('is-waiting');
+      const io = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { cab.classList.remove('is-waiting'); cab.classList.add('is-dealt'); io.disconnect(); } }, {root: dialog, threshold: .15});
+      io.observe(cab);
+    }
+  };
 
   /* ---------- Folio: running foot, like the page line of a magazine ------ */
   const folio = el('p', 'ed-folio'); folio.setAttribute('aria-hidden', 'true'); folio.hidden = true;
@@ -196,15 +270,30 @@
 
   const decorate = () => {
     if (!detail.querySelector('.gallery')) return;
-    decorateGallery(); decorateNext(); buildIndex(); buildFolio();
+    decorateGallery(); decorateNext(); buildCabinet(); buildFolio();
   };
   new MutationObserver(records => { if (records.some(r => [...r.addedNodes].some(n => n.nodeType === 1 && (n.classList?.contains('detail-body') || n.classList?.contains('detail-head'))))) requestAnimationFrame(decorate); }).observe(detail, {childList: true});
   // Thumbnails are re-rendered when the gallery tab changes.
   const thumbHost = () => detail.querySelector('#gallery-thumbnails');
-  new MutationObserver(() => { if (thumbHost()) decorateGallery(); }).observe(detail, {childList: true, subtree: true});
+  let pending = 0;
+  new MutationObserver(() => {
+    if (thumbHost()) decorateGallery();
+    if (detail.querySelector('.detail-story') && !detail.querySelector('.ed-cabinet') && !pending) pending = requestAnimationFrame(() => { pending = 0; decorate(); });
+  }).observe(detail, {childList: true, subtree: true});
   new MutationObserver(() => { if (dialog.open) requestAnimationFrame(decorate); }).observe(root, {attributes: true, attributeFilter: ['lang']});
   dialog.addEventListener('close', () => { index.hidden = true; folio.hidden = true; watcher?.disconnect(); stopLoupe(); });
   if (dialog.open) decorate();
+})();
+
+/* Card covers keep their own proportions before they load (CSS sets the height). */
+(() => {
+  const grid = document.querySelector('.project-collection');
+  if (!grid) return;
+  const fit = () => grid.querySelectorAll('.artifact-main-frame img[width][height]').forEach(img => {
+    const w = +img.getAttribute('width'), h = +img.getAttribute('height');
+    img.style.setProperty('--ar', `${w} / ${h}`); img.closest('.artifact-main-frame')?.style.setProperty('--arn', String(w / h));
+  });
+  fit(); new MutationObserver(fit).observe(grid, {childList: true});
 })();
 
 /* ---------- Group 5 · Motion ------------------------------------------------ */

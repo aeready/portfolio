@@ -3,6 +3,19 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Owner's review round
+
+- **Cursor:** the registration-mark cursor and the lime ring that followed it are removed; ordinary arrow and hand everywhere.
+- **Project order and colours:** Reading for Meaning, Music in English Classes, Clearer Global Communication, then the rest in their old order. Bands run lime → aubergine → cream and repeat, counted from whatever is showing, so filtered lists keep the same rhythm. The project page takes its band's colour.
+- **One band layout:** every project band now has the same composition (work on one side, number, title, facts, summary and View on the other, alternating sides), fits one screen so View is visible without scrolling, and every cover sits at the same size (landscape covers the same width, portrait covers the same height).
+- **Buttons like the phone menu:** button links outside the top bars are set in the title face (Korean: the reading face). Contact is now a numbered list like the phone menu, the email row a solid block. "View" only moves when the pointer is on it, not anywhere on the band.
+- **Booklets:** USA Camp pages 10 and 12 swapped (captions renumbered in both languages). The last page no longer appears twice: the facing page is a lime "The end!" / "끝!" in the title face, on all three booklets. (Note: the downloadable PDF is in the Site bucket and wasn't checked here.)
+- **Project pages as a file cabinet:** the sections (brief, choices, evidence, details, source; USA Camp's case study parts) are coloured files side by side: the open one wide, the rest as spines with a number and title. Click a spine to open it. On phones they're stacked drawers with a +. The files deal in once when they come into view. Arrow keys move between tabs.
+- **Contact me:** the title is smaller and on one line on desktop.
+- **Footer:** the fonts-and-inks line is removed.
+- **Tagline:** "Good materials get better with use." → "Made in classrooms, for classrooms." / "교실에서, 교실을 위해 만든 자료."
+- Undo: the "Owner's review round" blocks at the end of `edition.css`; `projects.js` order; `app.js` (data-tone, projectOrder, The end page).
+
 ## 18 Nov 2026 — Editorial edition (owner said yes to the full list)
 
 New work for this round is in `web/edition.css` and `web/edition.js` (loaded after `press.css` / `press.js`). **Undo the whole round:** remove those two tags from `index.html` (and the two names from `scripts/build-worker.mjs`).

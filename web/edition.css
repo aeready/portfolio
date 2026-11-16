@@ -132,27 +132,6 @@ html[lang="ko"] #project-dialog .detail-story :is(p, li) { line-height: 1.8 !imp
   padding-left: var(--edge) !important; padding-right: var(--edge) !important;
 }
 
-/* Lead project: an opening spread. The first band gives the work most of
-   the width and sets the title larger, so the order of the list reads in
-   the layout (it was the same weight as every other band). Desktop only;
-   follows whatever card leads the current filter. */
-@media (min-width: 1001px) {
-  .project-collection > .project-card:first-child {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important;
-    padding-block: clamp(96px, 9vw, 144px) !important; align-items: center !important;
-  }
-  .project-collection > .project-card:first-child .artifact-arrangement { align-self: center !important; }
-  .project-collection > .project-card:first-child .artifact-main-frame { width: 90% !important; }
-  .project-collection > .project-card:first-child .project-heading { container-type: inline-size; }
-  .project-collection > .project-card:first-child .project-title {
-    font-size: min(4.5rem, 14cqi) !important; line-height: .9 !important; max-width: none !important; /* longest word fits the column */
-  }
-  .project-collection > .project-card:first-child .project-index { font-size: calc(var(--fs-numeral) * 1.25) !important; }
-}
-@media (min-width: 1001px) {
-  html[lang="ko"] .project-collection > .project-card:first-child .project-title { line-height: 1.12 !important; }
-}
-
 /* Colophon: what the page is set in and printed with, under the licence. */
 .site-footer .footer-colophon {
   grid-column: 1; max-width: 62ch; margin: 0;
@@ -385,3 +364,286 @@ html[lang="ko"] #project-dialog .gallery-tabs button { font-family: var(--read) 
   #project-dialog .gallery-tabs button { font: 700 .875rem/1.3 var(--read) !important; letter-spacing: 0 !important; text-transform: none !important; }
 }
 @media (max-width: 760px) { #project-dialog .gallery-tabs { padding: 0 !important; } }
+
+/* ==========================================================================
+   Owner's review round (18 Nov 2026)
+   ========================================================================== */
+/* No special cursor anywhere: the ordinary arrow, and a hand on links. */
+@media (hover: hover) and (pointer: fine) {
+  .hero, .project-collection, .section-ribbon, #work .section-heading, .project-card { cursor: auto !important; }
+  .project-card, .project-card * { cursor: pointer !important; }
+}
+.press-plate-cursor { display: none !important; }
+
+/* Booklets: the blank facing page is never a copy of the last page. */
+#project-dialog .gallery-stage > #gallery-image-b.is-blank { display: none !important; }
+/* "The end!": a lime facing page, set in the title face, a little cheeky. */
+#project-dialog .gallery-stage .gallery-end {
+  position: relative; z-index: 1; display: grid; place-items: center; align-self: stretch; height: auto; width: auto;
+  background: var(--acid) var(--grain-ink) 0 0 / 320px; border: clamp(4px, .5vw, 8px) solid var(--paper); border-left-width: 0;
+  box-shadow: inset 1px 0 0 rgb(73 43 81 / .25); overflow: hidden;
+}
+#project-dialog .gallery-stage .gallery-end[hidden] { display: none; }
+#project-dialog .gallery-end-text {
+  font: 700 clamp(2.5rem, 1rem + 3.4vw, 4.75rem)/.9 var(--display); text-transform: uppercase; color: var(--ink);
+  rotate: -6deg; text-shadow: .06em .05em 0 var(--paper);
+}
+html[lang="ko"] #project-dialog .gallery-end-text { line-height: 1.1; }
+@media (prefers-reduced-motion: no-preference) {
+  #project-dialog .gallery-end.slide-enter { animation: turn-right 520ms var(--ease-press) 60ms both; transform-origin: left center; }
+  #project-dialog .gallery-end.slide-enter .gallery-end-text { animation: ed-stamp 420ms var(--ease-press) 420ms both; }
+  @keyframes ed-stamp { from { opacity: 0; scale: 1.35; rotate: -14deg; } }
+}
+
+/* ---------- Band colours: lime, aubergine, cream, repeating ----------------
+   Owner's order (18 Nov): the first card shown is lime, then aubergine, then
+   cream, and so on. Set by position in the list as rendered, so it holds
+   when filtering too. app.js writes data-tone; these rules outrank the older
+   four-band nth-child rules in refine.css / press.css. */
+.project-collection > .project-card.project-card[data-tone] {
+  --band: var(--paper-deep); --band-ink: var(--ink); --band-text: var(--ink-text);
+  --tag-bg: var(--acid); --tag-ink: var(--ink); --frame-shadow: var(--ink);
+  --tex: var(--grain-ink), var(--mottle-ink);
+  --view-bg: var(--ink); --view-ink: var(--paper); --dot-ink: rgb(73 43 81 / .9);
+  --btn-bg: var(--ink); --btn-fg: var(--paper); --btn-shadow: var(--acid);
+  --mark: url('assets/riso/bars-crosshairs.webp'); --mark-w: 120px; --mark-ratio: 353 / 357;
+}
+.project-collection > .project-card.project-card[data-tone="lime"] {
+  --band: var(--acid); --tag-bg: var(--ink); --tag-ink: var(--acid);
+  --view-bg: var(--ink); --view-ink: var(--acid); --dot-ink: var(--ink);
+  --btn-bg: var(--ink); --btn-fg: var(--acid); --btn-shadow: var(--paper);
+  --mark: url('assets/riso/target-plum.webp'); --mark-w: 112px; --mark-ratio: 248 / 256;
+}
+.project-collection > .project-card.project-card[data-tone="ink"] {
+  --band: var(--ink); --band-ink: var(--paper); --band-text: var(--paper); --frame-shadow: var(--acid);
+  --tex: var(--grain-paper), var(--mottle-light);
+  --view-bg: var(--acid); --view-ink: var(--ink); --dot-ink: var(--acid);
+  --btn-bg: var(--acid); --btn-fg: var(--ink); --btn-shadow: var(--paper);
+  --mark: url('assets/riso/crosshair-acid.webp'); --mark-w: 112px; --mark-ratio: 226 / 194;
+}
+.project-collection > .project-card.project-card[data-tone] .project-index { --misreg: var(--acid); }
+.project-collection > .project-card.project-card[data-tone="lime"] .project-index { --misreg: var(--paper); }
+.project-collection > .project-card.project-card[data-tone="lime"].is-returning .return-sweep { background: var(--ink); }
+.project-collection > .project-card.project-card[data-tone]:not([data-tone="lime"]).is-returning .return-sweep { background: var(--acid); }
+.project-collection > .project-card.project-card[data-tone] .artifact-arrangement { box-shadow: 10px 10px 0 var(--frame-shadow); }
+.project-collection > .project-card.project-card[data-tone="lime"] .artifact-arrangement { box-shadow: 10px 10px 0 var(--ink); }
+.project-collection > .project-card.project-card[data-tone]:not([data-tone="ink"]) .artifact-arrangement {
+  box-shadow: 0 1px 1px rgb(40 22 45 / .10), 0 10px 18px -10px rgb(40 22 45 / .35), 0 34px 60px -30px rgb(40 22 45 / .40) !important;
+}
+.project-collection > .project-card.project-card[data-tone="ink"] .artifact-arrangement {
+  box-shadow: 0 1px 1px rgb(0 0 0 / .2), 0 14px 26px -12px rgb(0 0 0 / .55), 0 40px 70px -30px rgb(0 0 0 / .55) !important;
+}
+html[lang="ko"] .project-collection > .project-card[data-tone]:not([data-tone="cream"]) .project-title { max-width: 15ch; }
+
+/* ---------- Buttons set like the phone menu --------------------------------
+   Every button link outside the top bars uses the title face: condensed,
+   bold, upper case (Korean: the reading face, as in the menu). The main
+   action is a solid block; the rest are ruled rows or outlined boxes.
+   Nothing moves unless the pointer is on that button. */
+:is(.hero-actions > a, .contact-actions > .button, .empty-state .button, .project-card .project-action,
+    .filter-group button, #project-dialog .detail-footer button, #project-dialog .document-actions a,
+    #project-dialog .ed-sheet-open, #project-dialog .gallery-tabs button, .site-footer .footer-links a, #download-original) {
+  font-family: var(--display) !important; font-weight: 700 !important; text-transform: uppercase !important;
+  letter-spacing: .005em !important; line-height: 1 !important;
+}
+html[lang="ko"] :is(.hero-actions > a, .contact-actions > .button, .empty-state .button, .project-card .project-action,
+    .filter-group button, #project-dialog .detail-footer button, #project-dialog .document-actions a,
+    #project-dialog .ed-sheet-open, #project-dialog .gallery-tabs button, .site-footer .footer-links a, #download-original) {
+  font-family: var(--read) !important; text-transform: none !important; letter-spacing: 0 !important;
+}
+/* Sizes: big enough to read as type, like the menu. */
+.hero .hero-actions > a { font-size: 1.375rem !important; min-height: 56px !important; }
+.project-collection .project-card .project-action { font-size: 1.375rem !important; }
+.filter-group button { font-size: 1.125rem !important; }
+#project-dialog .detail-footer button { font-size: 1.25rem !important; }
+#project-dialog .document-actions a, #download-original { font-size: 1.0625rem !important; }
+#project-dialog .ed-sheet-open, #project-dialog .gallery-tabs button { font-size: 1.0625rem !important; }
+.site-footer .footer-links a { font-size: 1.0625rem !important; }
+html[lang="ko"] :is(.hero .hero-actions > a, .project-collection .project-card .project-action) { font-size: 1.0625rem !important; }
+
+/* Hero: "Explore work" is the lime block from the menu; "My background" an outlined box. */
+.hero .hero-actions > .button.primary { background: var(--acid) !important; color: var(--ink) !important; border-color: var(--ink) !important; box-shadow: 4px 4px 0 var(--ink) !important; }
+@media (hover: hover) {
+  .hero .hero-actions > .button.primary:hover { background: var(--acid) !important; translate: -2px -2px; box-shadow: 6px 6px 0 var(--ink) !important; }
+  .hero .hero-actions > .text-link:hover { translate: -2px -2px; }
+}
+
+/* Contact: a numbered list like the menu. Rows ruled in ink on the lime;
+   the email row is the solid block. */
+.contact-section .contact-actions { counter-reset: act; display: grid !important; gap: 0 !important; }
+.contact-section .contact-actions > .button {
+  counter-increment: act; display: flex !important; align-items: baseline !important; justify-content: flex-start !important; gap: 14px !important;
+  min-height: 72px !important; padding: 14px 0 !important; border: 0 !important; border-bottom: 1.5px solid var(--ink) !important;
+  background: transparent !important; color: var(--ink) !important; box-shadow: none !important;
+  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem) !important; text-align: left;
+}
+.contact-section .contact-actions > .button::before { content: counter(act, decimal-leading-zero); font: 700 .75rem/1 var(--label); letter-spacing: .06em; transform: translateY(-.9em); flex: none; }
+.contact-section .contact-actions > .button > [aria-hidden="true"] { margin-left: auto; font-family: var(--read); font-size: .7em; }
+.contact-section .contact-actions > .button .linkedin-mark { width: .8em !important; height: auto; align-self: center; }
+.contact-section .contact-actions > .button.primary {
+  background: var(--ink) !important; color: var(--acid) !important; padding-inline: 20px !important; border-bottom: 0 !important; margin-bottom: 12px;
+}
+html[lang="ko"] .contact-section .contact-actions > .button { font-size: clamp(1.375rem, 1rem + 1.2vw, 1.875rem) !important; }
+@media (hover: hover) {
+  .contact-section .contact-actions > .button.outline:hover { background: var(--ink) !important; color: var(--acid) !important; padding-inline: 20px !important; }
+  .contact-section .contact-actions > .button.primary:hover { translate: -2px -2px; box-shadow: 5px 5px 0 var(--paper) !important; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .contact-section .contact-actions > .button { transition: background-color 200ms ease, color 200ms ease, padding 260ms var(--ease-press), translate 200ms var(--ease-press) !important; }
+}
+
+/* View: still with the card; it inverts and lifts only under the pointer. */
+.project-collection > .project-card.project-card:is(:hover, :focus-visible) .project-action:not(:hover) {
+  background: var(--view-bg, var(--ink)) !important; color: var(--view-ink, var(--paper)) !important;
+  border-color: var(--view-bg, var(--ink)) !important; transform: none !important; translate: none !important; padding-inline: 22px !important;
+}
+@media (hover: hover) {
+  .project-collection > .project-card.project-card .project-action:hover {
+    background: var(--view-ink) !important; color: var(--view-bg) !important; border-color: var(--view-bg) !important;
+    transform: none !important; translate: -2px -2px; box-shadow: 4px 4px 0 var(--view-bg) !important;
+  }
+}
+.project-collection > .project-card.project-card:focus-visible .project-action { outline: 3px solid var(--view-bg); outline-offset: 3px; }
+.project-collection > .project-card .project-action { transition: background-color 180ms ease, color 180ms ease, translate 200ms var(--ease-press), box-shadow 200ms var(--ease-press) !important; }
+
+/* Contact title: smaller, so the heading and the list balance. */
+.contact-section h2 { font-size: clamp(3.25rem, 1.5rem + 4.6vw, 6.5rem) !important; }
+html[lang="ko"] .contact-section h2 { font-size: clamp(2.5rem, 1.2rem + 3.4vw, 4.5rem) !important; }
+.contact-section .contact-actions > .button .linkedin-mark { margin: 0 !important; position: static !important; order: 0; }
+.contact-section .contact-actions > .button.primary { font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem) !important; }
+@media (min-width: 761px) {
+  .contact-section h2 { font-size: clamp(3rem, 1.2rem + 3.4vw, 5rem) !important; white-space: nowrap; text-align: left !important; }
+  .contact-section h2 * { display: inline !important; }
+}
+
+/* ---------- One band layout (owner, 18 Nov) --------------------------------
+   Every project band has the same composition on desktop: the work on one
+   side, number / title / facts / summary / View on the other, alternating
+   sides. Each band fits one screen, so View is visible without scrolling,
+   and the cover sits in the same size box on every band. Replaces the seven
+   compositions in press.css (and the lead-project spread). */
+@media (min-width: 1001px) {
+  .project-collection > .project-card.project-card[data-tone] {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important;
+    grid-template-rows: auto auto !important;
+    grid-template-areas: 'media head' 'media copy' !important;
+    align-items: center !important; align-content: center !important; row-gap: 20px !important;
+    min-height: calc(100svh - var(--header-h, 72px)); padding-block: clamp(40px, 6vh, 72px) !important;
+  }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) !important;
+    grid-template-areas: 'head media' 'copy media' !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .project-heading {
+    flex-direction: column !important; align-items: flex-start !important; align-self: end !important; gap: 10px !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .project-copy { align-self: start !important; }
+  .project-collection > .project-card.project-card[data-tone] .project-index { font-size: clamp(3.5rem, 1.5rem + 3.4vw, 5.5rem) !important; }
+  .project-collection > .project-card.project-card[data-tone] .project-title {
+    font-size: clamp(2.25rem, 1rem + 2.4vw, 3.75rem) !important; line-height: .95 !important; max-width: 14ch !important;
+  }
+  html[lang="ko"] .project-collection > .project-card.project-card[data-tone] .project-title { font-size: clamp(1.75rem, 1rem + 1.6vw, 2.75rem) !important; line-height: 1.2 !important; }
+  .project-collection > .project-card.project-card[data-tone] .project-copy > p { margin-block: 14px 18px !important; font-size: 1.0625rem !important; }
+  /* The work: one box size on every band. */
+  .project-collection > .project-card.project-card[data-tone] .artifact-arrangement {
+    display: block !important; grid-template-columns: none !important; padding: 0 0 7% !important; gap: 0 !important;
+    width: 100% !important; justify-self: stretch !important; rotate: none !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame {
+    width: min(82%, calc(min(44vh, 420px) * var(--arn, 1.78))) !important; max-width: none !important; box-sizing: content-box;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame img {
+    width: 100% !important; height: auto !important; aspect-ratio: var(--ar, 16 / 9) !important; object-fit: contain !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed {
+    position: absolute !important; width: 42% !important; right: 0 !important; left: auto !important; top: 6% !important; bottom: auto !important;
+  }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed.artifact-tertiary { top: auto !important; bottom: 0 !important; right: 8% !important; width: 38% !important; }
+  .project-collection > .project-card.project-card[data-tone] .artifact-fixed img { height: auto !important; }
+  .project-collection > .project-card.project-card[data-tone]::after { left: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; right: auto !important; top: 24px !important; bottom: auto !important; }
+  .project-collection > .project-card.project-card[data-tone]:nth-child(even)::after { left: auto !important; right: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; }
+}
+
+/* ---------- File cabinet (project pages) ----------------------------------
+   The sections stand side by side like coloured files: the open one is
+   wide, the rest are slim spines with their number and title. Phones:
+   stacked drawers. Two inks and paper only. */
+.ed-cabinet { display: flex; gap: 10px; align-items: stretch; min-height: 440px; margin: 8px 0 var(--s5, 48px); }
+.ed-file {
+  --f-bg: var(--paper-deep, #ece2d0); --f-ink: var(--ink); --f-text: var(--ink-text, #37243c); --f-num: var(--ink);
+  position: relative; display: flex; flex-direction: column; min-width: 0; flex: 0 0 92px;
+  background: var(--f-bg) var(--grain-ink) 0 0 / 320px; color: var(--f-text); border: 1.5px solid var(--ink);
+  transition: flex-basis 520ms var(--ease-press), flex-grow 520ms var(--ease-press);
+}
+.ed-file[data-tone="lime"] { --f-bg: var(--acid); }
+.ed-file[data-tone="ink"] { --f-bg: var(--ink); --f-ink: var(--paper); --f-text: var(--paper); --f-num: var(--acid); background-image: var(--grain-paper); border-color: var(--ink); }
+.ed-file.is-open { flex: 1 1 auto; }
+.ed-file-tab {
+  all: unset; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column; gap: 18px; padding: 18px 16px; color: var(--f-ink); min-height: 44px;
+}
+.ed-file-tab:focus-visible { outline: 3px solid var(--f-ink); outline-offset: -6px; }
+.ed-file-num {
+  display: grid; place-items: center; width: 40px; height: 40px; flex: none; border: 1.5px solid currentColor; border-radius: 50%;
+  font: 700 1rem/1 var(--label); color: var(--f-num); border-color: var(--f-num);
+}
+.ed-file-title { font: 700 clamp(1.5rem, 1rem + 1vw, 2.125rem)/.95 var(--display); text-transform: uppercase; letter-spacing: .005em; }
+html[lang="ko"] .ed-file-title { font-family: var(--read); text-transform: none; line-height: 1.25; font-size: clamp(1.25rem, 1rem + .6vw, 1.625rem); }
+.ed-file:not(.is-open) .ed-file-title { writing-mode: vertical-rl; rotate: 180deg; white-space: nowrap; align-self: center; }
+.ed-file-plus { display: none; }
+.ed-file:not(.is-open):hover { flex-basis: 108px; }
+.ed-file:not(.is-open):hover .ed-file-tab { background: color-mix(in srgb, var(--f-ink) 8%, transparent); }
+.ed-file-body { padding: 0 clamp(20px, 2.4vw, 36px) 28px; overflow: auto; }
+.ed-file-body[hidden] { display: none; }
+.ed-file-body > * { display: block !important; padding: 0 !important; margin: 0 !important; border: 0 !important; max-width: 62ch !important; grid-template-columns: none !important; }
+.ed-file-body > * > * { grid-column: auto !important; max-width: 62ch !important; }
+.ed-file-body .ed-file-hidden-head { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+#project-dialog .ed-file-body :is(p, li, dd, div) { color: var(--f-text) !important; }
+#project-dialog .ed-file-body :is(strong, li::before) { color: var(--f-ink) !important; }
+#project-dialog .ed-file[data-tone="ink"] .ed-file-body ul > li::before { color: var(--acid) !important; }
+#project-dialog .ed-file-body .detail-facts { grid-template-columns: 1fr !important; gap: 14px !important; max-width: 62ch !important; }
+#project-dialog .ed-file-body .detail-facts > div { border-top-color: var(--f-ink) !important; }
+#project-dialog .ed-file-body .detail-facts strong { color: var(--f-ink) !important; }
+#project-dialog .ed-file-body .case-facts { display: grid !important; grid-template-columns: 1fr !important; gap: 0 !important; list-style: none; }
+#project-dialog .ed-file-body .case-facts li { border-top: 1.5px solid var(--f-ink) !important; padding: 12px 0 !important; color: var(--f-text) !important; }
+#project-dialog .ed-file-body .detail-callout { margin-top: 18px !important; }
+#project-dialog .ed-file-body ul:not(.case-facts) { padding-left: 1.2em !important; }
+#project-dialog .ed-file-body ul:not(.case-facts) > li::before { right: auto !important; left: -1.2em; }
+#project-dialog .detail-story > .ed-cabinet { display: flex !important; padding: 0 !important; border: 0 !important; grid-template-columns: none !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .ed-cabinet.is-waiting .ed-file { opacity: 0; translate: 0 40px; }
+  .ed-cabinet.is-dealt .ed-file { animation: ed-file-in 620ms var(--ease-press) both; animation-delay: calc(var(--i, 0) * 80ms); }
+  @keyframes ed-file-in { from { opacity: 0; translate: 0 48px; } }
+  .ed-file.is-open .ed-file-body { animation: ed-fade 360ms ease 120ms both; }
+}
+@media (prefers-reduced-motion: reduce) { .ed-file { transition: none; } }
+/* Phones / tablets: drawers stacked, the open one shows its contents. */
+@media (max-width: 900px) {
+  .ed-cabinet { flex-direction: column; min-height: 0; gap: 6px; }
+  .ed-file, .ed-file.is-open, .ed-file:not(.is-open):hover { flex: none; }
+  .ed-file-tab { flex-direction: row; align-items: center; gap: 14px; padding: 14px 16px; min-height: 64px; }
+  .ed-file:not(.is-open) .ed-file-title { writing-mode: horizontal-tb; rotate: none; white-space: normal; align-self: auto; }
+  .ed-file-plus { display: block; margin-left: auto; width: 16px; height: 16px; flex: none; background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat; transition: rotate 260ms var(--ease-press); }
+  .ed-file.is-open .ed-file-plus { rotate: 45deg; }
+  .ed-file-body { padding: 0 16px 22px; }
+}
+/* Cabinet: shield it from the old rail rules (grid columns, 62ch measure,
+   baseline alignment, row rules). */
+#project-dialog .detail-story > .ed-cabinet { align-items: stretch !important; max-width: none !important; width: 100% !important; }
+#project-dialog .ed-cabinet > .ed-file { max-width: none !important; grid-column: auto !important; padding: 0 !important; margin: 0 !important; display: flex !important; }
+#project-dialog .ed-cabinet .ed-file-tab, #project-dialog .ed-cabinet .ed-file-body { max-width: none !important; grid-column: auto !important; }
+#project-dialog .ed-file-body > *, #project-dialog .ed-file-body .story-section, #project-dialog .ed-file-body .evidence-section { border: 0 !important; padding: 0 !important; }
+#project-dialog .ed-file-body > * + * { margin-top: 16px !important; }
+.ed-file-title { hyphens: none; overflow-wrap: normal; word-break: keep-all; }
+.ed-file.is-open .ed-file-title { font-size: clamp(1.75rem, 1rem + 1.6vw, 2.75rem); }
+@media (max-width: 900px) {
+  .ed-file-title, .ed-file.is-open .ed-file-title { font-size: clamp(1.25rem, 1rem + 2vw, 1.75rem); }
+  #project-dialog .ed-file-body :is(p, li) { font-size: 1rem !important; }
+}
+#project-dialog .detail-story > .ed-cabinet { gap: 8px !important; justify-content: flex-start !important; }
+@media (min-width: 901px) {
+  #project-dialog .ed-cabinet > .ed-file:not(.is-open) { flex: 0 0 76px !important; }
+  #project-dialog .ed-cabinet > .ed-file:not(.is-open):hover { flex-basis: 90px !important; }
+  #project-dialog .ed-cabinet > .ed-file.is-open { flex: 1 1 0 !important; }
+  .ed-file:not(.is-open) .ed-file-tab { padding-inline: 0; align-items: center; }
+  .ed-file:not(.is-open) .ed-file-title { font-size: clamp(1.375rem, 1rem + .8vw, 1.875rem); }
+}

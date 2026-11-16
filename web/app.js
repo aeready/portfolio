@@ -134,7 +134,7 @@
         const frame = `<span id="preview-${escape(p.id)}-${index}" class="preview-open ${name}" data-preview="${sample}" title="${escape(caption)}" aria-hidden="true">${previewImage(src, sizes)}</span>`;
         return index === 0 ? `<div class="artifact-main-frame">${frame}</div>` : frame;
       }).join('');
-      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div></div><div class="project-copy"><dl class="wall-label"><div><dt>${escape(t('format'))}</dt><dd>${escape(p.format)}</dd></div><div><dt>${escape(t('audience'))}</dt><dd>${escape(p.audienceLabel)}</dd></div></dl><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
+      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" data-tone="${['lime', 'ink', 'cream'][position % 3]}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div></div><div class="project-copy"><dl class="wall-label"><div><dt>${escape(t('format'))}</dt><dd>${escape(p.format)}</dd></div><div><dt>${escape(t('audience'))}</dt><dd>${escape(p.audienceLabel)}</dd></div></dl><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
     }).join('');
     wirePreviewImages(grid);
     grid.setAttribute('aria-busy', 'false');
@@ -217,6 +217,22 @@
       if (!pair) partner.setAttribute('aria-hidden', 'true'); else partner.removeAttribute('aria-hidden');
       if (changed) { partner.classList.remove('slide-enter'); void partner.offsetWidth; partner.classList.add('slide-enter'); }
     } else if (partner) partner.replaceWith();
+    // Last page of a booklet alone on the left: the facing page reads "The end!".
+    let endPage = typeof stage.querySelector === 'function' ? stage.querySelector('#gallery-end') : null;
+    const showEnd = spread && slideIndex > 0 && !pair;
+    if (showEnd && !endPage && typeof document.createElement === 'function') {
+      endPage = document.createElement('span'); endPage.id = 'gallery-end'; endPage.className = 'gallery-end';
+      endPage.innerHTML = '<span class="gallery-end-text"></span>';
+      stage.append(endPage);
+    }
+    if (endPage) {
+      endPage.hidden = !showEnd;
+      const dims = variants[src];
+      if (dims && endPage.style) endPage.style.aspectRatio = `${dims.width} / ${dims.height}`;
+      endPage.querySelector('.gallery-end-text').textContent = t('theEnd');
+      if (showEnd && changed) { endPage.classList.remove('slide-enter'); void endPage.offsetWidth; endPage.classList.add('slide-enter'); }
+    }
+    stage.classList?.toggle('is-end', showEnd);
     stage.classList?.toggle('is-spread', spread);
     stage.classList?.toggle('is-cover', spread && slideIndex === 0);
     const lastShown = pair ? slideIndex + 1 : slideIndex;
@@ -298,9 +314,9 @@
   function setLanguage(next, persist = true) {
     const oldId = activeProject?.id, oldSlide = slideIndex, oldGallery = activeGallery, scroll = dialog.scrollTop;
     const projectOrder = [
-      'adult-communication',
       'reading-for-meaning',
       'epik-music',
+      'adult-communication',
       'teacher-development',
       'usa-camp-workbook',
       'chuseok-thanksgiving-storybook',
