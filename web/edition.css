@@ -1660,7 +1660,8 @@ html[lang="ko"] #background .degree .degree-badge { font: 700 .9375rem/1 var(--r
 .work-map .map-label { rotate: none !important; transform: none !important; }
 
 /* Project page. */
-#project-dialog .detail-head, #project-dialog .gallery, #project-dialog .gallery-stage img { box-shadow: none !important; }
+/* .detail-head and .gallery keep their box-shadow: it is the full-width colour bleed, not a drop shadow. */
+#project-dialog .gallery-stage img { box-shadow: none !important; }
 #project-dialog .gallery-stage img { border-width: 0 !important; }
 #project-dialog .gallery-controls button, #project-dialog .gallery-thumbnails button, #project-dialog .ed-sheet-open {
   border-color: transparent !important; box-shadow: none !important; background-color: rgb(255 255 255 / .1) !important;
