@@ -8,10 +8,9 @@ Start here, in this order:
 4. **`docs/overhaul/WORKPLAN.md`**: the Nov 2026 "press run" overhaul background, file map, older decisions.
 5. Design rules: `docs/overhaul/MANIFESTO.md` (R1–R7), `DESIGN_DNA.md`, `PRESERVE.md`, `DECISIONS.md`, `STYLE_GUIDE.md`.
 
-## State (18 Nov 2026)
+## State (17 Nov 2026, evening)
 
-- Working branch: `ccr-099385b1-ewrh8h`. **`main` = the same commit (`f8e4f66`)**; the owner had
-  ChatGPT publish from `main`. Pushing to `main` needs the owner's explicit "push to main" each
+- Work goes straight to `main` (owner's choice); the owner has ChatGPT publish from `main`. Pushing to `main` needs the owner's explicit "push to main" each
   time (fast-forward only; an automatic safety check blocks it otherwise).
 - **Publishing is not ours.** The site is hosted on OpenAI Sites (`.openai/hosting.json`); files live
   in the Site R2 bucket. The owner/ChatGPT uploads changed files and publishes the Worker. We can't
@@ -39,14 +38,17 @@ Start here, in this order:
 - **Bands**: one layout for all (work one side, text other, alternating); each fits one screen with View visible; cover plus the two other samples **all fully visible** (no prints hidden behind the cover).
 - **Buttons**: title face (condensed caps; Korean: reading face), like the phone menu. View moves only when itself hovered. Contact links are a numbered list.
 - **No special cursor.** No "fonts and inks" colophon. Tagline ribbon ("Tested on Monday morning.") removed by owner 17 Nov.
-- **Project pages**: gallery + controls must be visible together (desktop: controls column left, work right; phones: one-row top bar, compact strip). Sections are a **file cabinet** (coloured cards; "My role" is card 1; Korean spines upright) with **four cards on every project**: My role, Project brief, Design choices, Evidence (owner, 17 Nov). Foot: files card, then Previous / Next cards (both with name and cover; no wrap-around; no sticky bar on phones). No Close button (Back only). Click the image to zoom.
+- **Project pages**: gallery + controls must be visible together (desktop: controls column left, work right; phones: one-row top bar, compact strip). Sections are a **file cabinet** (coloured cards; "My role" is card 1; Korean spines upright) with **four cards on every project**: My role, Project brief, Design choices, What it includes / 구성 (was "Evidence"; rename back when real outcomes are added). Foot: files card, then Previous / Next cards (both with name and cover; no wrap-around; no sticky bar on phones). No Close button (Back only). Click the image to zoom.
 - **Booklets** (USA Camp, Reading "Being a Bee", Music course guide): spreads on desktop, lime "The end!" / "끝!" facing the last page. USA pages 10 and 12 swapped (gallery only; the PDF in the bucket was not checked).
 - **Background**: map of South Korea with job-coloured pins (Seoul = Compass, Seongnam = GIGE, Pyeongchang → Gangneung = teacher; Suwon = home, she lives there). Desktop: map left, timeline left→right on a wavy line, oldest first. No big years. Compass Publishing (웅진컴퍼스) Dec 2026–Present on the right; Teacher Trainer Mar–Dec 2026 left; English Teacher right. Gangneung club removed. Education = one card per degree. Skills = clean panel with faint ruled lines only (no tilt, holes, tape, outlines; colours kept) (EN/KO mixed, tool rows, strengths chips); **owner rejected die-cut stickers**. Below the hero: no purple outlines, no tilt, no offset shadows; career cards lift on hover (no mouse tilt); no looping comet on the timeline line. Map: Suwon = house "SUWON (HOME!)"; Seoul/Seongnam deliberately pulled apart. Registration grid sits on the Contact seam (torn circle removed).
 - **Site-wide (17 Nov): no purple outlines, no hard offset shadows, nothing tilted except NOW / IN PROGRESS badges.** Tagline ribbon and folio bar hidden. Bands size to content; only the hero name has a text shadow; monospace only for tiny index labels; owner likes the dotted frames, riso decorations and cloudy texture (keep). MSc shows an IN PROGRESS corner badge.
-- Earlier (still standing): Noto Sans body, original favicon, two inks only, fine riso pieces only, reduced motion fully static.
+- Fonts: "Zine Condensed" = Open Sans Condensed Bold, "Zine Mono" = Noto Sans Mono. Favicon = AR outlines in that face (`favicon-ar-v3.svg` + PNGs).
+- Earlier (still standing): Noto Sans body, two inks only, fine riso pieces only, reduced motion fully static.
 
 ## Open items
 
+- Unreferenced old assets live in `archive/unused-assets/` (outside `web/`, never uploaded).
+- `npm` may be blocked in some sessions; then `build-korean-font.py` can't run — only use Korean syllables already in the subset (`check-korean-font.py` tells you).
 - USA Camp PDF page order (10/12) unverified. Korean job title is our translation (use the official one if given).
 - Owner's own to-dos: photos of printed materials, more project context, the textbook 첫 출근 했습니다!.
 

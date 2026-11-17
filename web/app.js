@@ -441,14 +441,12 @@
       if (!navigator.clipboard?.writeText) throw Error('Clipboard unavailable');
       await navigator.clipboard.writeText(address);
       status.textContent = t('copied'); status.classList.add('is-copied');
-      button.textContent = `${t('copied')} ✓`;
       button.classList.add('copied');
       copyStatusTimer = window.setTimeout(() => {
         status.classList.remove('is-copied');
         status.textContent = '';
-        button.innerHTML = window.PORTFOLIO_LOCALES[language].page['contact.email'];
         button.classList.remove('copied');
-      }, 2000);
+      }, 3000);
     } catch { status.textContent = t('copyFallback', {address}); status.classList.add('is-fallback'); }
   });
   function syncRoute() {

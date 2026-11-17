@@ -107,7 +107,7 @@ for(const p of projects){
 }
 await grid.emit('click',{target:new Element({'data-project':projects[0].id})});await byId('project-dialog').emit('click',{target:byId('next-slide')});const sample=byId('gallery-image').src;
 await byId('dialog-language-toggle').emit('click');assert.equal(document.documentElement.getAttribute('lang'),'en');assert.equal(byId('gallery-image').src,sample);assert.equal(byId('gallery-image').alt,projects[0].slides[1][1]);await byId('close-dialog').emit('click');
-history.pushState(null,'','#project/adult-communication');window.events.hashchange();assert(byId('project-dialog').open);assert(byId('project-detail').innerHTML.includes('Clearer global communication'));
+history.pushState(null,'','#project/adult-communication');window.events.hashchange();assert(byId('project-dialog').open);assert(byId('project-detail').innerHTML.includes('Clearer Global Communication'));
 await byId('project-dialog').emit('click',{target:new Element({'data-neighbor':'next'})});assert(location.hash.endsWith('teacher-development'));
 await byId('close-dialog').emit('click');
 
@@ -141,9 +141,9 @@ assert.equal(byId('contact-email').getAttribute('aria-expanded'),'true');
 assert.equal(byId('email-address').textContent,'annaready@live.com');
 assert.equal(byId('email-link').href,'mailto:annaready@live.com');
 assert.equal(clipboard,'annaready@live.com');assert.equal(byId('copy-status').textContent,'Copied!');
-assert.equal(window.lastTimer.ms,2000);window.lastTimer.fn();assert.equal(byId('copy-status').textContent,'');
+assert.equal(window.lastTimer.ms,3000);window.lastTimer.fn();assert.equal(byId('copy-status').textContent,'');
 context.navigator.clipboard.writeText=async()=>{throw Error('clipboard unavailable');};await byId('contact-email').emit('click');assert(byId('copy-status').textContent.includes('annaready@live.com'));
-await byId('language-toggle').emit('click');assert(byId('contact-email').innerHTML.includes('이메일 표시 및 복사'));
+await byId('language-toggle').emit('click');assert(byId('contact-email').innerHTML.includes('이메일 보내기'));
 context.navigator.clipboard.writeText=async v=>{clipboard=v;};await byId('contact-email').emit('click');assert.equal(byId('copy-status').textContent,'복사 완료!');
 await byId('language-toggle').emit('click');
 console.log(JSON.stringify({status:'passed',checks:['category filtering across English and Korean','7 project dialogs in both languages','language persistence and in-dialog switching','Korean captions, controls and contact states','all gallery samples and boundaries','deep links and next-project navigation','mobile menu focus, Escape, and outside dismissal','exact preview selection in both languages','native Back/Forward and explicit project Back controls','role and decisions before downloads','email reveal/hide, mail link, clipboard success and fallback','all internal anchors and referenced assets','two or three preview images per project, with no descriptor slips','distinct named sample actions and focus restoration','PDF-first materials and quiet unavailable originals'],projects:projects.length,assets:assetPaths.size,browserVisualQA:'not available'}));

@@ -3,6 +3,28 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 (late afternoon) — Audit phases 1–3: hero, project pages, contact, tablets, favicon, tidy-up
+
+From the read-only audit (`claude/full-audit-2026-11-17.md` in the Project). Owner chose: hero buttons follow the site-wide rule; "Evidence" renamed; straight to main; stylesheet merge last.
+- **Hero buttons (M1):** flat lime / cream fills, no outline, no hard shadow; hover swaps to ink. "250+" / "15+" lose the lime shadow. Project covers no longer tilt on hover or keyboard focus.
+- **First screen (H7):** desktop poster a little shorter and the buttons now sit straight under the role line, so both buttons are on the first screen of a 900 px-tall laptop (bottom at 841–881 px, was 948–1021 px).
+- **Hero intro (M10):** one size that grows with the screen (English 17–19 px, Korean about 6% larger).
+- **Project title band (M7):** summary moved into the empty right half; band about 100 px shorter. "My role" set at sub-heading size, not a display headline.
+- **Files block (M4):** now after the write-up in the page itself, so Tab and screen-reader order match the screen.
+- **Zoom view (M5):** opens fitted to the screen; paper-coloured controls; mouse users read "Click the page…" (Korean: 페이지를 누르면 확대합니다).
+- **Contact (M8):** "Email me" / "이메일 보내기", same size as the other two lines; "Copied!" shows once (status line) with a tick on the button for 3 s.
+- **"Evidence" card (M13):** renamed "What it includes" / "구성" until there are real outcomes to show.
+- **Tablets 761–1000 px (M6):** work beside the text, like desktop; page about 18% shorter at 820 px.
+- **Favicon (M9):** AR drawn as outlines from the site's title face (same letters on every device, in the opening sequence and the header); 32 px PNG and 180 px Apple touch icon added.
+- **Titles (L1):** Title Case for all project names; "US citizen".
+- **Repo (M12):** 78 files no page, script or style refers to (old hero versions, old favicons, duplicate images and PDFs, about 24 MB) moved to `archive/unused-assets/`. Previews and font sources left in place.
+- Found: "Zine Condensed" is Open Sans Condensed Bold; "Zine Mono" is Noto Sans Mono (both open-licence fonts).
+- Not done: the résumé PDF (H5, needs the source file); real per-project outcomes (M13, needs your facts); PDF metadata (L7, files are in the bucket).
+- Korean font: no new syllables; no font re-upload.
+- Upload: `web/index.html`, `web/404.html`, `web/edition.css`, `web/edition.js`, `web/app.js`, `web/press.js`, `web/locales.js`, `web/projects.js`, `web/assets/favicon-ar-v3.svg`, `web/assets/favicon-ar-32.png`, `web/assets/apple-touch-icon-ar.png`; publish the Worker.
+- Undo: delete the "audit phases 1–3" block and the lines after it at the end of `web/edition.css`; revert the other files from git (`git revert` this commit).
+- Checked: no overlap, clipping or sideways scroll at 20 widths (320–1920) in English and Korean; all seven project pages load with no missing files or script errors; phone emulation (Galaxy S9+); all validators and the Korean font check pass.
+
 ## 17 Nov 2026 (afternoon) — Audit phase 0: hero credentials, tablet Contact, Compass date, loops, contrast
 
 From the read-only audit (`claude/full-audit-2026-11-17.md` in the Project): H1–H4, M2, M3.
