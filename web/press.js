@@ -174,7 +174,7 @@
       view.querySelector('.zv-count').textContent = ((document.getElementById('slide-count')?.textContent || '').match(/^\s*[\d–]+\s*\/\s*\d+/) || [''])[0];
       view.querySelector('.zv-prev').disabled = !!document.getElementById('previous-slide')?.disabled;
       view.querySelector('.zv-next').disabled = !!document.getElementById('next-slide')?.disabled;
-      view.querySelector('.zv-hint').textContent = ((window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches && ui().zoomHintMouse) || ui().zoomHint || '');
+      view.querySelector('.zv-hint').textContent = ui().zoomHint || '';
       view.querySelector('.zv-close').setAttribute('aria-label', ui().zoomClose || 'Close');
       view.querySelector('.zv-prev').setAttribute('aria-label', ui().previousSample || 'Previous');
       view.querySelector('.zv-next').setAttribute('aria-label', ui().nextSample || 'Next');

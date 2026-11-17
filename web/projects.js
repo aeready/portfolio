@@ -447,7 +447,7 @@ window.PORTFOLIO_PROJECTS = [
   {
     "id": "epik-music",
     "number": "03",
-    "title": "Music in English Classes",
+    "title": "Music in English classes",
     "label": "Teacher training",
     "categories": [
       "training"
@@ -699,7 +699,7 @@ window.PORTFOLIO_PROJECTS = [
     "coverAlt": "Workshop title slide: Integrating Music into English Classes.",
     "previewTertiary": "assets/music-workshop/wanting-wishing--44b09d6a2c5b.webp",
     "previewTertiaryAlt": "Finding music windows through pop songs about wanting and wishing.",
-    "displayTitle": "Music in English Classes",
+    "displayTitle": "Music in English classes",
     "displayLabel": "Teacher training · EPIK",
     "previewSecondary": "assets/music-workshop/micro-listening--520af0aedaa7.webp",
     "previewIndices": [
@@ -713,7 +713,7 @@ window.PORTFOLIO_PROJECTS = [
   {
     "id": "adult-communication",
     "number": "01",
-    "title": "Clearer Global Communication",
+    "title": "Clearer global communication",
     "label": "Teacher training",
     "categories": [
       "training"
@@ -847,7 +847,7 @@ window.PORTFOLIO_PROJECTS = [
     "previewCaption": "Educator training in workplace communication",
     "previewTertiary": "assets/gse-new-tone-optimized--b0ecae81330d.webp",
     "previewTertiaryAlt": "Word choice, sentence length, greetings, punctuation, and directness change tone.",
-    "displayTitle": "Clearer Global Communication",
+    "displayTitle": "Clearer global communication",
     "displayLabel": "Teacher training · Adult materials",
     "previewIndices": [
       0,
@@ -859,7 +859,7 @@ window.PORTFOLIO_PROJECTS = [
   {
     "id": "teacher-development",
     "number": "04",
-    "title": "Beyond Teacher Induction",
+    "title": "Beyond teacher induction",
     "label": "Educational research",
     "categories": [
       "research"
@@ -1074,7 +1074,7 @@ window.PORTFOLIO_PROJECTS = [
     "coverAlt": "Title slide: From Orientation to Ongoing Professional Learning.",
     "previewTertiary": "assets/teacher-development/preview-recommendations--a1e4091e4dda.webp",
     "previewTertiaryAlt": "Recommendations address induction, sustained CPD, structured mentoring, practice-based learning, and equitable access.",
-    "displayTitle": "Beyond Teacher Induction",
+    "displayTitle": "Beyond teacher induction",
     "displayLabel": "Education research",
     "previewSecondary": "assets/teacher-development/preview-epik-limitations--fe3e79aae444.webp",
     "previewIndices": [
@@ -1384,7 +1384,7 @@ window.PORTFOLIO_PROJECTS = [
   {
     "id": "chuseok-thanksgiving-storybook",
     "number": "06",
-    "title": "How Does It Taste?",
+    "title": "How does it taste?",
     "label": "Curriculum design",
     "categories": [
       "students",
@@ -1461,7 +1461,7 @@ window.PORTFOLIO_PROJECTS = [
       ],
       [
         "assets/downloads/how-does-it-taste-complete.pdf",
-        "Complete How Does It Taste? materials",
+        "Complete How does it taste? materials",
         "PDF"
       ]
     ],
@@ -1538,7 +1538,7 @@ window.PORTFOLIO_PROJECTS = [
     },
     "previewTertiary": "assets/storybook-89--3a65d4784c82.webp",
     "previewTertiaryAlt": "A paired speaking task asks learners to choose a food, ask about taste, and switch roles.",
-    "displayTitle": "How Does It Taste?",
+    "displayTitle": "How does it taste?",
     "displayLabel": "Storybook & speaking activities · Elementary materials",
     "previewIndices": [
       0,

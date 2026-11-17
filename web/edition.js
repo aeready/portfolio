@@ -199,10 +199,6 @@
       cab.append(card);
     });
     story.prepend(cab);
-    // Audit M4: put the files after the cabinet in the page itself, so Tab and
-    // screen-reader order match what is on screen (CSS order already shows it there).
-    const mats = detail.querySelector('.detail-left > .project-materials');
-    if (mats && story.parentElement) story.after(mats);
     [...story.children].forEach(c => { if (c !== cab && !c.children.length && !c.textContent.trim()) c.remove(); });
     story.querySelectorAll(':scope > .case-study').forEach(c => { if (!c.querySelector('.case-facts, .case-block')) c.remove(); });
     const open = idx => cab.querySelectorAll('.ed-file').forEach((card, i) => {
