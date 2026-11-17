@@ -20,6 +20,10 @@ Start here, in this order:
 - The owner's screenshots are often of the live site, which may lag behind `main`: check the code
   before "fixing" something already fixed. They review on an Android phone (Galaxy, Chrome).
 
+## Stylesheet (review branch `review/one-stylesheet`)
+
+On this branch the home page loads one file, `web/site.css`: the six old sheets joined in their original order (same cascade, pixel-checked). **Edit `site.css`, not the old files** — `style/overhaul-v2/refine/press/fixes.css` stay only because `404.html` still loads them. Next step (not done): fold duplicate rules and `!important`s section by section, with before/after screenshots.
+
 ## Where the newest work lives
 
 | File | Role |

@@ -3,6 +3,13 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 (evening, review branch) — One stylesheet (H6, step 1)
+
+- The home page loads `site.css` (the six sheets joined in their original order) instead of six files: one download instead of six, same look. Pixel comparison at 390 / 820 / 1440 px, English and Korean, home and a project page: the only differences also appear between two runs of the same version (images still loading).
+- Not yet done: removing duplicate rules and `!important`s. That is the long part, best done section by section.
+- Upload (only if merged): `web/index.html`, `web/site.css`; publish the Worker.
+- Undo: put the six `<link>` lines back in `index.html` and delete `site.css`.
+
 ## 17 Nov 2026 (late afternoon) — Audit phases 1–3: hero, project pages, contact, tablets, favicon, tidy-up
 
 From the read-only audit (`claude/full-audit-2026-11-17.md` in the Project). Owner chose: hero buttons follow the site-wide rule; "Evidence" renamed; straight to main; stylesheet merge last.
