@@ -3,6 +3,19 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 (afternoon) — Audit phase 0: hero credentials, tablet Contact, Compass date, loops, contrast
+
+From the read-only audit (`claude/full-audit-2026-11-17.md` in the Project): H1–H4, M2, M3.
+- **Hero credentials (H1/H2):** the four facts (Suwon, F-6 visa, US citizen, English & 한국어) now flow and wrap inside their column. Before: they printed over "Schools visited for lessons" at 1024–1536 px and ran off the screen at 360–412 px (English).
+- **Tablet header (H3):** Contact was invisible at 761–1000 px (paper-coloured text, no background — the phone-menu style leaked). It now shows as the lime button; the paper style applies only while the phone menu is open.
+- **Compass (H4):** "Starting Dec 2026" with a NEXT badge (was "Dec 2026–Present" with NOW). Korean: 2026년 12월 입사 예정 / 다음 (needs a native check). Switch the date and badge back to "Dec 2026–Present" / "Now" ("2026년 12월–현재" / "현재") on the first day, and update the résumé the same day.
+- **Loops (M2):** map route, map rings and the badge pulse play three times, then rest.
+- **Contrast (M3):** `--ink-70` raised from 70% to 85% ink (footer line and Korean chip halves were 4.0–4.45:1; now 5.9:1 or better).
+- Korean font: no new syllables (all in the current subset); no font files to re-upload.
+- Upload: `web/edition.css`, `web/index.html`, `web/locales.js`.
+- Undo: delete the "audit phase 0" block at the end of `web/edition.css`, put the `#navigation.open .nav-contact` selector back to `#navigation .nav-contact` (rule "F13/U7/P1"), and restore the `career.4.date` / `career.now` strings in `locales.js` and `index.html`.
+- Checked: no overlap, clipping or sideways scroll at 20 widths (320–1920) in English and Korean; a 44 px lime Contact button at every width; no animation running after the loops finish; all validators pass.
+
 ## 17 Nov 2026 (night) — Full design audit applied
 
 From the audit doc (B = broken, F = flow, C = consistency, U/P = polish, S = second pass).
