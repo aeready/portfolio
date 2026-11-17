@@ -3,6 +3,20 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 17 Nov 2026 (night) — Full design audit applied
+
+From the audit doc (B = broken, F = flow, C = consistency, U/P = polish, S = second pass).
+- **Project pages:** colour and number now show on shared links too (B1); browser tab names the project (B2); header crosshair removed (B3); shorter header, no title shadow (F1); one way back: Close and "1 of 7" removed, Escape still closes (F2/P7); focus lands on the title (F3); quieter counter, no hold-to-zoom hint (F4/F6); click the image to open the large view on every screen (F5/S4); thumbnails at full strength (F7) and one Tab stop with arrow keys (S10).
+- **Write-up:** four cards on every project — My role, Project brief, Design choices, Evidence (F8). Sections were moved, not rewritten; merged ones keep their own sub-heading. "Evidence & implementation" is now "Evidence" / "근거". Cabinet numbers lose their circles (C6).
+- **Previous / Next:** both show number, name and cover; Previous hidden on the first project, Next on the last (F11/F12); phones: no sticky bar, full-width cards (B4).
+- **Header and menu:** 한국어 then Contact everywhere, title face on Back (C3/C4/P2); "Résumé" spelling (B7); phone menu Contact is a numbered line, list centred (F13/U7).
+- **Consistency:** tags in the reading face (C1/S6); gallery tabs text + underline on phones (C5/S5); file format tag under the title, note as small grey text (C7); hero buttons filled, no outline or shadow (B6/C8).
+- **Hover:** every link/button reacts — buttons swap colour, text links underline (S1/S2); View reacts when the mouse is anywhere on its section (S3).
+- **Polish:** AR mark in the title face (U1); LinkedIn mark in aubergine (U3); small labels at full ink (U5); Education cards hug their text (U6); registration grid straight (P8); file note copy ("PDF copies of the materials.") and shorter USA Camp note (P3/P4); duplicate tool names hidden (B5).
+- **Error page:** site rules applied (S8). A link to a missing project shows a short note (S9).
+- Not done: P5 (cabinet titles now short enough), P6 (per-project link previews need the host), P9 (page weight; test once live).
+- Undo: delete the "Full audit, applied" block at the end of `web/edition.css`, the "Audit round (17 Nov)" block at the end of `web/edition.js`, the cabinet/neighbour changes in `edition.js`, the two `press.js` changes, and the lines at the end of `web/nf.css`.
+
 ## 17 Nov 2026 (evening) — Audit round 2
 
 - Project bands size to their content (no forced full-screen height); empty strip before Background gone.

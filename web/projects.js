@@ -1240,7 +1240,7 @@ window.PORTFOLIO_PROJECTS = [
         "PDF"
       ]
     ],
-    "materialsNote": "The PDF above is the supplied file. The gallery is a later 18-page redesign; the taught camp used a separate 16-page booklet.",
+    "materialsNote": "The gallery is a later 18-page redesign; the taught camp used a separate 16-page booklet.",
     "source": "The gallery shows the later redesign; the sequence and credits describe the 2023 camp. Classroom slides are not shown.",
     "original": "usa-camp-workbook",
     "originalFormat": "pdf",
@@ -1285,7 +1285,7 @@ window.PORTFOLIO_PROJECTS = [
         "delivery": "학생들은 질문함을 통해 한국어를 포함한 익명 질문을 할 수 있었습니다. 미니북은 캠프 내용을 기록하는 중심 자료였고 팀 게임과 제작 활동으로 수업의 리듬을 바꿨습니다. 두 팀으로 진행하는 게임은 약 6~30명에게 조정할 수 있도록 계획했으며 실제 수업 인원은 14명이었습니다. 음식 만들기를 제외하면 종이와 테이프 중심의 버전을 2만 원 미만의 예상 예산으로 운영할 수 있습니다.",
         "credits": "전체 흐름과 워크북은 제가 구성했습니다. 일부 공유 자료는 변형해 사용했습니다: 원저자를 확인하지 못한 Korshare 아이스브레이커, thepatrickinator의 M.A.S.H., seayang의 학교생활 자료 일부, treesofgreen의 프롬 자료, aghowell의 뮤직비디오 게임, sara_k의 밈 게임. 명소 한 페이지는 영어권 문화 자료집을 수정했습니다."
       },
-      "materialsNote": "위 PDF는 제공받은 원본입니다. 갤러리는 이후 재구성한 18쪽 자료이며 실제 캠프에서는 별도의 16쪽 미니북을 사용했습니다.",
+      "materialsNote": "갤러리는 이후 재구성한 18쪽 자료이며 실제 캠프에서는 별도의 16쪽 미니북을 사용했습니다.",
       "source": "갤러리는 이후 재구성본입니다. 수업 구성과 출처는 2023년 캠프 기준이며, 수업 슬라이드는 게시하지 않았습니다.",
       "coverAlt": "미국 명소 콜라주와 USA Camp 제목이 있는 세로형 워크북 표지.",
       "previewCaption": "워크북 표지 + 바나나 포스터 읽기",

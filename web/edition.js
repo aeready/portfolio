@@ -145,22 +145,36 @@
   const buildCabinet = () => {
     const story = detail.querySelector('.detail-story');
     if (!story || story.querySelector('.ed-cabinet')) return;
-    const items = [];
-    const take = (node, title) => { if (node && title) items.push({title, nodes: [node]}); };
-    // "My role" opens the cabinet (owner, 18 Nov): it's the first file.
+    // Four files on every project (audit F8): My role, Brief, Design choices, Evidence.
+    // Sections are moved, not rewritten; merged ones keep their own sub-heading.
+    const L = ui();
+    const buckets = [
+      {title: '', nodes: []},
+      {title: L.caseBrief || 'Project brief', nodes: []},
+      {title: L.designChoices || 'Design choices', nodes: []},
+      {title: L.evidence || 'Evidence', nodes: []}
+    ];
+    const put = (b, node) => { if (node) buckets[b].nodes.push(node); };
     const role = detail.querySelector('.detail-role');
-    if (role) take(role, (role.querySelector(':scope > h3')?.textContent || '').trim());
+    if (role) { buckets[0].title = (role.querySelector(':scope > h3')?.textContent || '').trim(); put(0, role); }
+    const later = {details: null, source: null, callout: null, credit: null, evidence: null};
     [...story.children].forEach(child => {
       if (child.classList.contains('case-study')) {
-        const head = child.querySelector(':scope > h3');
-        const facts = child.querySelector(':scope > .case-facts');
-        if (facts) take(facts, (head?.textContent || '').trim());
-        child.querySelectorAll(':scope > .case-block').forEach(b => take(b, (b.querySelector(':scope > h4')?.textContent || '').trim()));
+        const blocks = [...child.querySelectorAll(':scope > .case-block')];
+        put(1, blocks[0]); put(1, child.querySelector(':scope > .case-facts'));
+        blocks.slice(1).forEach(b => { if (b.classList.contains('case-credit')) later.credit = b; else put(2, b); });
         return;
       }
-      if (child.classList.contains('detail-callout')) { (items.at(-1)?.nodes || []).push(child); return; }
-      take(child, (child.querySelector(':scope > h3, :scope > h4')?.textContent || '').trim());
+      if (child.classList.contains('project-brief')) return put(1, child);
+      if (child.classList.contains('detail-context')) { later.details = child; return; }
+      if (child.classList.contains('evidence-section')) { later.evidence = child; return; }
+      if (child.classList.contains('source-note')) { later.source = child; return; }
+      if (child.classList.contains('detail-callout')) { later.callout = child; return; }
+      if (child.classList.contains('story-section')) return put(2, child);
     });
+    put(1, later.details);
+    [later.evidence, later.callout, later.credit, later.source].forEach(n => put(3, n));
+    const items = buckets.filter(b => b.nodes.length && b.title);
     if (items.length < 2) return;
     const tones = ['lime', 'ink', 'cream'];
     const id = ++cabinetSeq;
@@ -177,7 +191,10 @@
       head.innerHTML = `<span class="ed-file-num" aria-hidden="true">${i + 1}</span><span class="ed-file-title">${esc(root.lang === 'ko' ? item.title.replace(/ /g, '\u2009') : item.title)}</span><span class="ed-file-plus" aria-hidden="true"></span>`;
       const body = el('div', 'ed-file-body');
       body.id = `ed-body-${id}-${i}`; body.setAttribute('role', 'region'); body.setAttribute('aria-labelledby', head.id);
-      item.nodes.forEach(n => { n.querySelectorAll(':scope > h3, :scope > h4').forEach(h => h.classList.add('ed-file-hidden-head')); body.append(n); });
+      item.nodes.forEach(n => {
+        n.querySelectorAll(':scope > h3, :scope > h4').forEach(h => h.classList.add(h.textContent.trim() === item.title ? 'ed-file-hidden-head' : 'ed-file-subhead'));
+        body.append(n);
+      });
       card.append(head, body);
       cab.append(card);
     });
@@ -254,22 +271,32 @@
 
   /* ---------- Next project: the next band's sheet rises at the foot ------ */
   const decorateNext = () => {
-    const button = detail.querySelector('[data-neighbor="next"]');
-    if (!button || button.querySelector('.ed-next')) return;
-    const cards = [...document.querySelectorAll('.project-collection > .project-card')];
+    // Previous and Next both show the neighbour's number, name and cover (audit F11);
+    // no wrap-around: Previous is hidden on the first project, Next on the last (F12).
+    const all = [...document.querySelectorAll('.project-collection > .project-card')];
     const currentId = history.state?.portfolioProject || (location.hash.startsWith('#project/') ? location.hash.slice(9) : '');
-    let i = cards.findIndex(c => c.dataset.projectCard === currentId);
-    let next = i >= 0 ? cards[(i + 1) % cards.length] : null;
-    if (!next) return;
-    const number = next.querySelector('.project-index')?.textContent.trim() || '';
-    const title = next.querySelector('.project-title')?.textContent.trim() || '';
-    const img = next.querySelector('.artifact-main-frame img');
-    const src = img ? (img.currentSrc || img.src) : '';
-    const position = cards.indexOf(next) % 7;
-    button.classList.add('ed-next-button');
-    [...button.childNodes].forEach(n => { if (n.nodeType === 3 && n.textContent.trim()) { const w = el('span', 'ed-next-old'); n.replaceWith(w); w.append(n); } });
-    button.dataset.band = String(position % 4);
-    button.insertAdjacentHTML('beforeend', `<span class="ed-next"><span class="ed-next-text"><span class="ed-next-kicker" aria-hidden="true">${esc(ui().nextUp || 'Next')} · ${esc(number)}</span><span class="ed-next-title">${esc(title)}</span></span>${src ? `<span class="ed-next-sheet" aria-hidden="true"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"></span>` : ''}</span>`);
+    let cards = all.filter(c => !c.hidden && getComputedStyle(c).display !== 'none');
+    if (!cards.some(c => c.dataset.projectCard === currentId)) cards = all;
+    const i = cards.findIndex(c => c.dataset.projectCard === currentId);
+    if (i < 0) return;
+    [['next', 1, ui().nextUp || 'Next'], ['previous', -1, ui().previousUp || 'Previous']].forEach(([dir, step, word]) => {
+      const button = detail.querySelector(`[data-neighbor="${dir}"]`);
+      if (!button) return;
+      const other = cards[i + step];
+      button.hidden = !other;
+      button.closest('.detail-footer')?.classList.toggle('is-single', !cards[i + 1] || !cards[i - 1]);
+      if (!other || button.querySelector('.ed-next')) return;
+      const number = other.querySelector('.project-index')?.textContent.trim() || '';
+      const title = other.querySelector('.project-title')?.textContent.trim() || '';
+      const img = other.querySelector('.artifact-main-frame img');
+      const src = img ? (img.currentSrc || img.src) : '';
+      button.classList.add('ed-next-button');
+      if (dir === 'previous') button.classList.add('ed-prev-button');
+      [...button.childNodes].forEach(n => { if (n.nodeType === 3 && n.textContent.trim()) { const w = el('span', 'ed-next-old'); n.replaceWith(w); w.append(n); } });
+      button.dataset.band = String((all.indexOf(other) % 7) % 4);
+      const kicker = dir === 'next' ? `${esc(word)} · ${esc(number)}` : `← ${esc(word)} · ${esc(number)}`;
+      button.insertAdjacentHTML('beforeend', `<span class="ed-next"><span class="ed-next-text"><span class="ed-next-kicker" aria-hidden="true">${kicker}</span><span class="ed-next-title">${esc(title)}</span></span>${src ? `<span class="ed-next-sheet" aria-hidden="true"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"></span>` : ''}</span>`);
+    });
   };
 
   const decorate = () => {
@@ -539,4 +566,86 @@
     });
     card.addEventListener('pointerleave', () => { card.style.removeProperty('--tx'); card.style.removeProperty('--ty'); });
   });
+})();
+
+/* ---------- Audit round (17 Nov): tab titles, focus, tool names, thumbnails,
+   missing projects. Undo: delete this block. */
+(() => {
+  const root = document.documentElement;
+  const ui = () => window.PORTFOLIO_LOCALES?.[root.lang === 'ko' ? 'ko' : 'en']?.ui || {};
+  const dialog = document.getElementById('project-dialog');
+  const detail = document.getElementById('project-detail');
+  const baseTitle = document.title;
+
+  // B2: the browser tab names the open project. F3: focus lands on the title, not Close.
+  const onProject = () => {
+    if (!dialog?.open) return;
+    const title = (detail?.querySelector('#project-title')?.textContent || '').trim();
+    const want = title ? `${title} — Anna Ready` : baseTitle;
+    if (document.title !== want) document.title = want;
+  };
+  if (dialog && detail) {
+    new MutationObserver(onProject).observe(detail, {childList: true});
+    new MutationObserver(() => {
+      if (!dialog.open) { document.title = baseTitle; return; }
+      onProject();
+      setTimeout(() => {
+        const h = detail.querySelector('#project-title');
+        if (!h || dialog.querySelector('.zoom-view:not([hidden])')) return;
+        const a = document.activeElement;
+        if (a && a !== dialog && a !== document.body && !a.closest('.dialog-top')) return;
+        h.setAttribute('tabindex', '-1'); h.focus({preventScroll: true});
+      }, 120);
+    }).observe(dialog, {attributes: true, attributeFilter: ['open']});
+    // Direct links open the page before this script runs: focus the title once loaded.
+    const focusTitle = () => { if (!dialog.open) return; onProject(); const h = detail.querySelector('#project-title'); const a = document.activeElement; if (h && (!a || a === document.body || a === dialog || a.closest('.dialog-top'))) { h.setAttribute('tabindex', '-1'); h.focus({preventScroll: true}); } };
+    if (document.readyState === 'complete') setTimeout(focusTitle, 150); else window.addEventListener('load', () => setTimeout(focusTitle, 150));
+  }
+
+  // B5: hide a tool's caption when it only repeats the name (e.g. "Canva" / "Canva").
+  const tidySkills = () => document.querySelectorAll('.software-skills li').forEach(li => {
+    const name = (li.querySelector('span[data-i18n^="skills."]:not(.skill-alt):not(.skill-desc)')?.textContent || '').trim().toLowerCase();
+    const alt = li.querySelector('.skill-alt'); if (!alt) return;
+    const a = alt.textContent.trim().toLowerCase();
+    const dup = !!a && name.startsWith(a);
+    if (alt.hidden !== dup) alt.hidden = dup;
+  });
+  tidySkills();
+  new MutationObserver(tidySkills).observe(root, {attributes: true, attributeFilter: ['lang']});
+  setTimeout(tidySkills, 300);
+
+  // S10: the thumbnail strip is one Tab stop; arrow keys move along it.
+  const rove = () => {
+    const strip = detail?.querySelector('#gallery-thumbnails'); if (!strip) return;
+    const btns = [...strip.querySelectorAll('button')]; if (!btns.length) return;
+    const cur = btns.find(b => b.getAttribute('aria-current') === 'true' || b.getAttribute('aria-pressed') === 'true' || b.classList.contains('active')) || btns[0];
+    btns.forEach(b => { const t = b === cur ? '0' : '-1'; if (b.getAttribute('tabindex') !== t) b.setAttribute('tabindex', t); });
+    if (!strip.dataset.roving) {
+      strip.dataset.roving = '1';
+      strip.addEventListener('keydown', e => {
+        if (!/^Arrow(Left|Right)$/.test(e.key)) return;
+        const list = [...strip.querySelectorAll('button')]; const i = list.indexOf(document.activeElement); if (i < 0) return;
+        e.preventDefault(); e.stopPropagation();
+        const n = list[Math.max(0, Math.min(list.length - 1, i + (e.key === 'ArrowRight' ? 1 : -1)))];
+        n.click(); requestAnimationFrame(() => { (strip.querySelectorAll('button')[list.indexOf(n)] || n).focus(); });
+      });
+    }
+  };
+  if (detail) new MutationObserver(rove).observe(detail, {childList: true, subtree: true, attributes: true, attributeFilter: ['aria-current', 'aria-pressed', 'class']});
+
+  // S9: a link to a project that doesn't exist says so instead of failing silently.
+  const missing = () => {
+    if (!location.hash.startsWith('#project/')) return;
+    const id = decodeURIComponent(location.hash.slice(9));
+    if ((window.PORTFOLIO_PROJECTS || []).some(p => p.id === id)) return;
+    const note = document.createElement('p');
+    note.className = 'ed-missing'; note.setAttribute('role', 'status');
+    note.textContent = ui().projectMissing || 'That project isn’t here.';
+    document.body.append(note);
+    setTimeout(() => note.classList.add('is-out'), 5200);
+    setTimeout(() => note.remove(), 6000);
+    const work = document.getElementById('work');
+    if (work) setTimeout(() => work.scrollIntoView({block: 'start'}), 50);
+  };
+  if (document.readyState === 'complete') missing(); else window.addEventListener('load', missing);
 })();

@@ -46,6 +46,9 @@
   if (dialog && detail && grid) {
     new MutationObserver(decorate).observe(detail, {childList: true});
     new MutationObserver(() => { if (dialog.open) decorate(); }).observe(dialog, {attributes: true, attributeFilter: ['open']});
+    // Direct links open the page before the bands exist: decorate again once they do (audit B1).
+    new MutationObserver(() => { if (dialog.open) decorate(); }).observe(grid, {childList: true});
+    window.addEventListener('load', () => { if (dialog.open) decorate(); });
 
     /* Contact from a project page: close the page, then land on Contact. */
     dialog.querySelector('.dialog-contact')?.addEventListener('click', event => {
@@ -181,7 +184,7 @@
     const close = () => { view.hidden = true; opener?.focus({preventScroll: true}); };
     dlg.addEventListener('click', event => {
       const stage = event.target.closest('#open-image');
-      if (!stage || !phone.matches) return;
+      if (!stage) return; // click opens the large view on every screen (audit F5)
       event.preventDefault(); opener = stage; sync(); view.hidden = false; view.querySelector('.zv-close').focus();
     }, true);
     view.querySelector('.zv-close').addEventListener('click', close);

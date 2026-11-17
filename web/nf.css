@@ -38,3 +38,11 @@ body.nf { min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; 
   @keyframes nf-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 }
 @media (prefers-reduced-motion: reduce) { .nf-plate { transition: none; } }
+
+/* Site rules (owner, 17 Nov): no outlines, no hard shadows, no heading shadows.
+   Undo: delete these lines. */
+.nf-copy h1, .nf-copy .nf-ko-h { text-shadow: none !important; }
+.nf-actions a { border: 0 !important; box-shadow: none !important; }
+.nf-primary { background: var(--acid) !important; color: var(--ink) !important; }
+.nf-actions a:not(.nf-primary) { background: #eadfcb !important; color: var(--ink) !important; }
+.nf-actions a:hover { background: var(--ink) !important; color: var(--acid) !important; }

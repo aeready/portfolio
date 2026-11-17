@@ -8,7 +8,7 @@ window.PORTFOLIO_LOCALES = {
       "nav.work": "Selected projects",
       "nav.background": "Background",
       "nav.contact": "Contact",
-      "nav.resume": "Resume <span aria-hidden=\"true\">↗</span>",
+      "nav.resume": "Résumé <span aria-hidden=\"true\">↗</span>",
       "nav.label": "Main navigation",
       "home.role": "Teacher trainer &<br>curriculum designer",
       "home.intro": "Seven years in Korean public schools taught me what classrooms need. I use that experience to create practical teacher training and English learning materials.",
@@ -135,6 +135,8 @@ window.PORTFOLIO_LOCALES = {
       "pageIndex": "Sections on this page",
       "portfolio": "Portfolio",
       "nextUp": "Next",
+      "previousUp": "Previous",
+      "projectMissing": "That project isn’t here. Here is the full list.",
       "exploreAria": "View {title}",
       "myContribution": "My role",
       "explore": "View",
@@ -156,7 +158,7 @@ window.PORTFOLIO_LOCALES = {
       "caseSequence": "The 12-period sequence",
       "caseDelivery": "Delivery & constraints",
       "caseCredits": "Adaptation & credits",
-      "evidence": "Evidence & implementation",
+      "evidence": "Evidence",
       "materials": "Project files",
       "viewInNewTab": "View in new tab",
       "downloadFile": "Download",
@@ -192,7 +194,7 @@ window.PORTFOLIO_LOCALES = {
       "projectNavigation": "Project navigation",
       "sourceAvailable": "Original PPTX available",
       "noFullFile": "Only a small selection is available to view in the gallery; a complete file is not available here.",
-      "editableUnavailable": "These files may not include the complete editable source."
+      "editableUnavailable": "PDF copies of the materials."
     }
   },
   "ko": {
@@ -331,6 +333,8 @@ window.PORTFOLIO_LOCALES = {
       "pageIndex": "이 페이지의 항목",
       "portfolio": "포트폴리오",
       "nextUp": "다음",
+      "previousUp": "이전",
+      "projectMissing": "프로젝트를 찾을 수 없습니다.",
       "exploreAria": "{title} 프로젝트 보기",
       "myContribution": "담당 역할",
       "explore": "보기",
@@ -352,7 +356,7 @@ window.PORTFOLIO_LOCALES = {
       "caseSequence": "12차시 수업 구성",
       "caseDelivery": "운영 방식과 제약",
       "caseCredits": "자료 변형 및 출처",
-      "evidence": "근거 및 실제 적용",
+      "evidence": "근거",
       "materials": "프로젝트 파일",
       "viewInNewTab": "새 탭에서 보기",
       "downloadFile": "다운로드",
@@ -388,7 +392,7 @@ window.PORTFOLIO_LOCALES = {
       "projectNavigation": "프로젝트 이동",
       "sourceAvailable": "원본 PPTX 제공",
       "noFullFile": "갤러리에서 일부 자료만 볼 수 있으며, 전체 파일은 이곳에서 제공하지 않습니다.",
-      "editableUnavailable": "편집 가능한 전체 원본은 포함되지 않을 수 있습니다."
+      "editableUnavailable": "PDF 파일로 제공합니다."
     }
   }
 };

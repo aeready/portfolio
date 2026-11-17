@@ -1779,3 +1779,163 @@ html body .contact-section .contact-actions > .button.primary:hover { translate:
   .site-header .header-tools { gap: 10px; }
 }
 html body .site-header .language-toggle.language-toggle { background: var(--paper-deep) !important; color: var(--ink) !important; }
+
+/* ---------- Full audit, applied (owner, 17 Nov) ----------
+   Items refer to the audit doc (B = broken, F = flow, C = consistency,
+   U/P = polish, S = second pass). Undo: delete this block and the
+   "Audit round (17 Nov)" block at the end of edition.js. */
+
+/* B3/S7: no crosshair in the project header (it was clipped and sat on the number). */
+#project-dialog .detail-head::after { content: none !important; display: none !important; }
+
+/* B4: the phone Previous/Next bar is no longer stuck to the bottom. */
+@media (max-width: 1000px) {
+  html body #project-dialog .detail-footer { position: static !important; box-shadow: none !important; background: none !important; margin: 48px 0 0 !important; gap: 12px !important; grid-template-columns: 1fr !important; }
+}
+#project-dialog [data-neighbor][hidden] { display: none !important; }
+#project-dialog .detail-footer.is-single { grid-template-columns: 1fr !important; }
+
+/* B6/C8: hero buttons filled like every other button. */
+html body .hero .hero-actions > a, html body #home .hero-actions > a.text-link {
+  border: 0 !important; box-shadow: none !important; translate: none !important;
+}
+html body .hero .hero-actions > a.button.primary { background: var(--acid) !important; color: var(--ink) !important; }
+html body .hero .hero-actions > a.text-link { background: var(--paper-deep) !important; color: var(--ink) !important; }
+html body .hero .hero-actions > a:hover { background: var(--ink) !important; color: var(--acid) !important; translate: none !important; box-shadow: none !important; }
+
+/* F1: a shorter project header so the gallery shows on the first screen. */
+html body #project-dialog .detail-head { padding: clamp(28px, 3vw, 44px) 0 clamp(24px, 2.4vw, 36px) !important; }
+html body #project-dialog .detail-head .detail-number { font-size: clamp(3.5rem, 2rem + 4vw, 6rem) !important; margin-bottom: 8px; }
+html body #project-dialog #project-title { font-size: clamp(2.25rem, 1.4rem + 2.6vw, 4rem) !important; text-shadow: none !important; margin: 10px 0 12px !important; }
+#project-dialog #project-title:focus { outline: none; }
+
+/* F2/P7: one way back. Close and the "1 of 7" tag go; Back stays (Escape still closes). */
+#project-dialog .dialog-top #close-dialog, #project-dialog .dialog-top #project-position { display: none !important; }
+
+/* C3/C4/P2: top bar matches the main header — title face, 한국어 then Contact, on phones too. */
+#project-dialog .dialog-top .back-projects { font: 700 .9375rem/1 var(--display) !important; text-transform: uppercase; letter-spacing: .02em; background: none !important; }
+html[lang="ko"] #project-dialog .dialog-top .back-projects { font: 700 .9375rem/1 var(--read) !important; text-transform: none; }
+#project-dialog .dialog-top .back-projects:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+#project-dialog .dialog-top .language-toggle { order: 3; margin-left: auto; }
+#project-dialog .dialog-top .dialog-contact { order: 4; display: inline-flex !important; }
+
+/* C1/S6: project header tag in the reading face, same as the home sections. */
+html body #project-dialog .detail-head .eyebrow { font: 700 .8125rem/1.2 var(--read) !important; letter-spacing: .04em !important; text-transform: uppercase; padding: 4px 8px; }
+
+/* F4/F6: quieter gallery controls — label-size counter, no hint line. */
+html body #project-dialog #slide-count .count-now { font: 700 1.25rem/1 var(--display) !important; text-shadow: none !important; }
+html body #project-dialog #slide-count .count-total { font: 700 1.25rem/1 var(--display) !important; }
+#project-dialog .ed-loupe-hint { display: none !important; }
+
+/* F7: thumbnails at full strength; the current one carries the lime bar. */
+html body #project-dialog .gallery-thumbnails button, html body #project-dialog .gallery-thumbnails button img { opacity: 1 !important; filter: none !important; }
+#project-dialog .gallery-thumbnails button:hover { box-shadow: 0 4px 0 color-mix(in srgb, var(--acid) 60%, transparent); }
+
+/* C5/S5: gallery tabs are text with an underline on phones too, one per line. */
+@media (max-width: 1000px) {
+  html body #project-dialog .gallery-tabs { grid-template-columns: 1fr !important; border: 0 !important; gap: 4px !important; }
+  html body #project-dialog .gallery-tabs button { background: none !important; color: var(--room-ink) !important; border: 0 !important; border-bottom: 2px solid transparent !important; text-align: left !important; padding: 8px 0 !important; white-space: nowrap; width: fit-content; }
+  html body #project-dialog .gallery-tabs button[aria-pressed="true"] { border-bottom-color: var(--acid) !important; }
+}
+
+/* C6/F9: cabinet numbers without circles; the open file is as tall as its text. */
+html body #project-dialog .ed-file-num { background: none !important; border: 0 !important; width: auto !important; height: auto !important; font: 700 .875rem/1 var(--label) !important; }
+html body #project-dialog .ed-file.is-open { min-height: 0 !important; }
+#project-dialog .ed-file-subhead { display: block; margin: 28px 0 8px !important; font: 700 1rem/1.2 var(--display) !important; text-transform: uppercase; letter-spacing: .02em; }
+html[lang="ko"] #project-dialog .ed-file-subhead { font-family: var(--read) !important; text-transform: none; }
+#project-dialog .ed-file-body > :first-child > .ed-file-subhead:first-child { margin-top: 0 !important; }
+
+/* C7: file cards — format tag under the title; the note is small grey text everywhere. */
+html body #project-dialog .document-card .document-format { display: block !important; width: fit-content; margin: 8px 0 0 !important; }
+html body #project-dialog .file-scope { background: none !important; padding: 0 !important; font: 400 .8125rem/1.5 var(--read) !important; color: var(--ink-70) !important; }
+
+/* F11: Previous matches Next (cream card with the neighbour's name and cover). */
+html body #project-dialog .ed-prev-button { background: var(--paper-deep) !important; color: var(--ink) !important; }
+html body #project-dialog .ed-prev-button .ed-next-kicker { color: var(--ink-70) !important; }
+html body #project-dialog .ed-prev-button .ed-next-title { color: var(--ink) !important; }
+
+/* F13/U7/P1: phone menu — Contact is a line like the others; the list sits centred. */
+@media (max-width: 1000px) {
+  html body #navigation.open { justify-content: center !important; }
+  html body #navigation .nav-contact { background: none !important; color: var(--paper) !important; justify-content: flex-start !important; text-align: left !important; }
+  html body #navigation a { justify-content: flex-start !important; gap: .3em !important; }
+}
+
+/* S1/S2/S3: hover — buttons swap colour, text links underline, cards lift. */
+@media (hover: hover) {
+  .site-header nav a:not(.nav-contact):hover, .site-footer a:hover, .footer-licence a:hover,
+  #project-dialog .document-actions a:hover, #project-dialog .materials-original a:hover {
+    text-decoration: underline !important; text-decoration-thickness: 2px !important; text-underline-offset: 4px;
+  }
+  #project-dialog .document-actions a:hover { text-decoration-thickness: 3px !important; }
+  .site-header .language-toggle:hover, #project-dialog .language-toggle:hover { background: var(--ink) !important; color: var(--acid) !important; }
+  #project-dialog .gallery-tabs button:hover { border-bottom-color: color-mix(in srgb, var(--acid) 60%, transparent) !important; }
+  html body .contact-section .contact-actions > .button:hover { background: var(--ink) !important; color: var(--acid) !important; padding-inline: 20px !important; }
+  html body .project-collection > .project-card.project-card .project-action:hover,
+  html body .project-collection > .project-card.project-card:hover .project-action { translate: none !important; transform: none !important; background: var(--paper) !important; color: var(--ink) !important; }
+}
+
+/* U1: the AR mark in the site's title face. */
+.site-header .identity img { opacity: 0; }
+.site-header .identity { position: relative; }
+.site-header .identity::before {
+  content: 'AR'; position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
+  width: 48px; height: 48px; background: var(--ink); color: var(--acid); font: 700 1.75rem/1 var(--display); letter-spacing: 0;
+}
+
+/* U3: LinkedIn mark in the site's aubergine. */
+.contact-section .linkedin-mark { filter: grayscale(1) brightness(.55) sepia(1) hue-rotate(235deg) saturate(2.2) brightness(.7); }
+
+/* U5: small labels at full ink so they read on lime and cream. */
+.project-card dt, .project-card dl dt, .site-footer small, #project-dialog .gallery-thumbnails::before { opacity: 1 !important; color: inherit !important; }
+.project-card dl dt { color: var(--band-ink, var(--ink)) !important; }
+
+/* U6: education cards only as wide as their text. */
+@media (min-width: 1001px) {
+  html body #background .qualifications > div:first-child { display: grid !important; grid-template-columns: repeat(2, auto) !important; justify-content: start !important; column-gap: 24px !important; }
+  html body #background .qualifications > div:first-child > h3 { grid-column: 1 / -1; }
+  html body #background .degree { padding-right: 40px !important; }
+}
+
+/* P8: registration grid straight, like everything else. */
+#contact::before { rotate: none !important; }
+
+/* S9: note for a link to a project that doesn't exist. */
+.ed-missing {
+  position: fixed; left: 50%; top: 88px; z-index: 200; translate: -50% 0; margin: 0; padding: 12px 18px;
+  background: var(--ink); color: var(--paper); font: 600 .9375rem/1.3 var(--read); transition: opacity .6s ease;
+}
+.ed-missing.is-out { opacity: 0; }
+html body #project-dialog .detail-footer .ed-next-button.ed-prev-button { background: var(--paper-deep) !important; color: var(--ink) !important; }
+html body #project-dialog .detail-footer .ed-next-button.ed-prev-button:hover { background: #e2d5bd !important; }
+html body #project-dialog .detail-footer .ed-next-button.ed-prev-button .ed-next-kicker { color: var(--ink-70) !important; }
+html body #project-dialog .detail-footer .ed-next-button.ed-prev-button .ed-next-title { color: var(--ink) !important; }
+#project-dialog .ed-next-button .ed-next-old { display: none !important; }
+html body #project-dialog .detail-footer .ed-next-button .ed-next-sheet { width: auto !important; max-width: 150px; }
+html body #project-dialog .detail-footer .ed-next-button .ed-next-sheet img { width: auto !important; max-width: 150px; max-height: 96px; }
+html body #project-dialog .ed-file.is-open .ed-file-num { align-self: flex-start; }
+@media (max-width: 1000px) { html body #project-dialog .ed-file-plus { margin-left: auto !important; } }
+#project-dialog .dialog-top .back-projects:focus:not(:focus-visible) { outline: none !important; }
+/* Phones: Previous/Next as full cards (name + small cover), stacked. */
+@media (max-width: 760px) {
+  html body #project-dialog .detail-footer { grid-template-columns: 1fr !important; }
+  html body #project-dialog .detail-footer .ed-next-button { display: block !important; width: 100% !important; min-height: 0 !important; padding: 16px 18px !important; text-align: left !important; background: var(--ink) !important; color: var(--paper) !important; }
+  html body #project-dialog .detail-footer .ed-next-button.ed-prev-button { background: var(--paper-deep) !important; color: var(--ink) !important; }
+  html body #project-dialog .detail-footer .ed-next-button .ed-next { display: flex !important; align-items: center; justify-content: space-between; gap: 14px; width: 100%; }
+  html body #project-dialog .detail-footer .ed-next-button .ed-next-text { display: flex !important; flex-direction: column; gap: 6px; min-width: 0; }
+  html body #project-dialog .detail-footer .ed-next-kicker { font: 700 .75rem/1 var(--label) !important; letter-spacing: .06em; }
+  html body #project-dialog .detail-footer .ed-next-title { font: 700 1.25rem/1.05 var(--display) !important; text-transform: uppercase; white-space: normal; }
+  html[lang="ko"] body #project-dialog .detail-footer .ed-next-title { font-family: var(--read) !important; text-transform: none; }
+  html body #project-dialog .detail-footer .ed-next-sheet { display: block !important; flex: none; }
+  html body #project-dialog .detail-footer .ed-next-sheet img { display: block; max-width: 72px !important; max-height: 72px !important; width: auto !important; height: auto !important; }
+}
+@media (max-width: 760px) {
+  html body #project-dialog .detail-footer { width: 100% !important; justify-items: stretch !important; }
+  html body #project-dialog .detail-footer > button.ed-next-button { width: 100% !important; max-width: none !important; justify-self: stretch !important; grid-column: 1 / -1 !important; }
+  html body #project-dialog .detail-footer .ed-next-sheet { position: static !important; inset: auto !important; translate: none !important; width: auto !important; height: auto !important; margin: 0 !important; }
+}
+@media (max-width: 1000px) {
+  html body #navigation.open .nav-contact::before { color: var(--acid) !important; }
+  html body #navigation.open .nav-contact { padding-left: 0 !important; }
+  html body #project-dialog .gallery .gallery-tabs button[aria-pressed] { background: none !important; color: var(--room-ink) !important; }
+}
