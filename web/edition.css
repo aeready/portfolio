@@ -40,7 +40,7 @@ html[lang="ko"] #project-dialog .detail-facts strong { font-family: var(--read);
 #project-dialog .document-card .document-format { margin: 0 !important; }
 #project-dialog .document-card .document-actions { flex-direction: row !important; align-items: center !important; gap: 4px 28px !important; font-size: .875rem !important; }
 @media (max-width: 520px) {
-  #project-dialog .document-card { flex-direction: column; align-items: flex-start !important; gap: 4px; }
+  #project-dialog .document-card { flex-direction: column; align-items: flex-start !important; }
   #project-dialog .document-card .document-actions { gap: 0 24px !important; }
 }
 #project-dialog .original-material[hidden] { display: none !important; }
@@ -133,12 +133,6 @@ html[lang="ko"] #project-dialog .detail-story :is(p, li) { line-height: 1.8 !imp
 }
 
 /* Colophon: what the page is set in and printed with, under the licence. */
-.site-footer .footer-colophon {
-  grid-column: 1; max-width: 62ch; margin: 0;
-  font: 400 .8125rem/1.55 var(--read); color: var(--ink-text, #37243c); opacity: .78;
-}
-html[lang="ko"] .site-footer .footer-colophon { line-height: 1.7; }
-.site-footer .footer-colophon { text-transform: none !important; letter-spacing: 0 !important; }
 @media (max-width: 760px) { .site-footer .footer-links { order: 5; } }
 .site-footer .footer-licence a { white-space: nowrap; }
 
@@ -147,7 +141,7 @@ html[lang="ko"] .site-footer .footer-colophon { line-height: 1.7; }
 /* Crop marks at the four corners of the work, as on a printer's proof.
    Hairlines, outside the page, never over it. */
 #project-dialog .gallery-stage .ed-crop {
-  position: absolute; inset: -18px; pointer-events: none; z-index: 2;
+  position: absolute; pointer-events: none; z-index: 2;
   --m: color-mix(in srgb, var(--room-ink, #F3EBDD) 70%, transparent); --l: 12px;
   background:
     linear-gradient(var(--m), var(--m)) 0 17px / var(--l) 1px, linear-gradient(var(--m), var(--m)) 17px 0 / 1px var(--l),
@@ -161,7 +155,7 @@ html[lang="ko"] .site-footer .footer-colophon { line-height: 1.7; }
 /* Spine: in a booklet spread, the gutter darkens toward the fold. */
 #project-dialog .gallery-stage .ed-spine { display: none; }
 #project-dialog .gallery-stage.is-spread:not(.is-cover) .ed-spine {
-  display: block; position: absolute; top: 0; bottom: 0; left: 50%; width: 64px; translate: -50% 0; z-index: 2; pointer-events: none;
+  display: block; position: absolute; width: 64px; translate: -50% 0; z-index: 2; pointer-events: none;
   background: linear-gradient(90deg, transparent, rgb(30 16 34 / .14) 42%, rgb(30 16 34 / .26) 50%, rgb(30 16 34 / .14) 58%, transparent);
   mix-blend-mode: multiply;
 }
@@ -257,7 +251,7 @@ html[lang="ko"] .ed-index-label { font-family: var(--read); text-transform: none
 
 /* Folio: a running foot on wide screens, set like a magazine's page line. */
 .ed-folio {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; margin: 0; display: flex; justify-content: space-between; gap: 24px;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; margin: 0; justify-content: space-between; gap: 24px;
   padding: 7px var(--edge, 24px); pointer-events: none;
   font: 700 .75rem/1.2 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
   background: color-mix(in srgb, var(--paper) 92%, transparent); border-top: 1px solid rgb(73 43 81 / .2);
@@ -270,22 +264,18 @@ html[lang="ko"] .ed-folio { font-family: var(--read); letter-spacing: 0; text-tr
 /* Next project: the next band's cover rises from the foot of the page. */
 .ed-next { display: none; }
 @media (min-width: 761px) {
-  #project-dialog .detail-footer { align-items: end; overflow: hidden; }
   #project-dialog .detail-footer .ed-next-button {
-    position: relative; display: grid !important; justify-items: end; gap: 6px; text-align: right !important;
-    padding: 20px 0 0 !important; min-height: 0; white-space: normal;
+    position: relative; text-align: right !important; min-height: 0; white-space: normal;
   }
-  #project-dialog .ed-next-button .ed-next { display: grid; justify-items: end; gap: 4px; }
-  #project-dialog .ed-next-kicker { font: 700 .75rem/1 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); opacity: .7; }
-  #project-dialog .ed-next-title { font: 700 clamp(1.75rem, 1rem + 2vw, 3rem)/.95 var(--display); text-transform: uppercase; color: var(--ink); max-width: 16ch; text-wrap: balance; }
+  #project-dialog .ed-next-button .ed-next { justify-items: end; }
+  #project-dialog .ed-next-kicker { font: 700 .75rem/1 var(--label); letter-spacing: .08em; text-transform: uppercase; }
+  #project-dialog .ed-next-title { font: 700 clamp(1.75rem, 1rem + 2vw, 3rem)/.95 var(--display); text-transform: uppercase; color: var(--ink); text-wrap: balance; }
   html[lang="ko"] #project-dialog .ed-next-title { line-height: 1.15; word-break: keep-all; }
   #project-dialog .ed-next-sheet {
-    display: block; width: min(320px, 34vw); height: 120px; margin-top: 16px; overflow: hidden; rotate: -2deg; translate: 0 36px;
-    border: 6px solid var(--paper); border-bottom: 0; box-shadow: 0 -2px 0 1px rgb(73 43 81 / .15), -8px -6px 0 var(--acid);
+    display: block; margin-top: 16px; overflow: hidden; border-bottom: 0;
     transition: translate 320ms var(--ease-press), rotate 320ms var(--ease-press);
   }
   #project-dialog .ed-next-sheet img { display: block; width: 100%; height: auto; }
-  #project-dialog .ed-next-button:is(:hover, :focus-visible) .ed-next-sheet { translate: 0 8px; rotate: -1deg; }
   /* The old "Next project →" text: visually hidden, kept in the accessible name. */
   #project-dialog .ed-next-button .ed-next-old { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
@@ -356,7 +346,7 @@ html[lang="ko"] #project-dialog .gallery-tabs button { font-family: var(--read) 
 #project-dialog .gallery-tabs button[aria-pressed="true"] { opacity: 1; border-bottom-color: var(--acid) !important; }
 @media (max-width: 760px) {
   #project-dialog .gallery-tabs { grid-template-columns: 1fr 1fr; gap: 0; width: 100%; border: 1.5px solid color-mix(in srgb, var(--room-ink, #F3EBDD) 55%, transparent); }
-  #project-dialog .gallery-tabs button { padding: 10px 12px !important; min-height: 52px; border: 0 !important; display: flex; align-items: center; }
+  #project-dialog .gallery-tabs button { border: 0 !important; display: flex; align-items: center; }
   #project-dialog .gallery-tabs button + button { border-left: 1.5px solid color-mix(in srgb, var(--room-ink, #F3EBDD) 55%, transparent) !important; }
   #project-dialog .gallery-tabs button[aria-pressed="true"] { background: var(--acid) !important; color: var(--ink) !important; }
 }
@@ -373,7 +363,6 @@ html[lang="ko"] #project-dialog .gallery-tabs button { font-family: var(--read) 
   .hero, .project-collection, .section-ribbon, #work .section-heading, .project-card { cursor: auto !important; }
   .project-card, .project-card * { cursor: pointer !important; }
 }
-.press-plate-cursor { display: none !important; }
 
 /* Booklets: the blank facing page is never a copy of the last page. */
 #project-dialog .gallery-stage > #gallery-image-b.is-blank { display: none !important; }
@@ -545,12 +534,10 @@ html[lang="ko"] .contact-section h2 { font-size: clamp(2.5rem, 1.2rem + 3.4vw, 4
   html[lang="ko"] .project-collection > .project-card.project-card[data-tone] .project-title { font-size: clamp(1.75rem, 1rem + 1.6vw, 2.75rem) !important; line-height: 1.2 !important; }
   .project-collection > .project-card.project-card[data-tone] .project-copy > p { margin-block: 14px 18px !important; font-size: 1.0625rem !important; }
   /* The work: one box size on every band. */
-  .project-collection > .project-card.project-card[data-tone] .artifact-arrangement {
-    display: block !important; grid-template-columns: none !important; padding: 0 0 7% !important; gap: 0 !important;
+  .project-collection > .project-card.project-card[data-tone] .artifact-arrangement { gap: 0 !important;
     width: 100% !important; justify-self: stretch !important; rotate: none !important;
   }
-  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame {
-    width: min(82%, calc(min(44vh, 420px) * var(--arn, 1.78))) !important; max-width: none !important; box-sizing: content-box;
+  .project-collection > .project-card.project-card[data-tone] .artifact-main-frame { max-width: none !important; box-sizing: content-box;
   }
   .project-collection > .project-card.project-card[data-tone] .artifact-main-frame img {
     width: 100% !important; height: auto !important; aspect-ratio: var(--ar, 16 / 9) !important; object-fit: contain !important;
@@ -588,7 +575,7 @@ html[lang="ko"] .contact-section h2 { font-size: clamp(2.5rem, 1.2rem + 3.4vw, 4
 }
 .ed-file-title { font: 700 clamp(1.5rem, 1rem + 1vw, 2.125rem)/.95 var(--display); text-transform: uppercase; letter-spacing: .005em; }
 html[lang="ko"] .ed-file-title { font-family: var(--read); text-transform: none; line-height: 1.25; font-size: clamp(1.25rem, 1rem + .6vw, 1.625rem); }
-.ed-file:not(.is-open) .ed-file-title { writing-mode: vertical-rl; rotate: 180deg; white-space: nowrap; align-self: center; }
+.ed-file:not(.is-open) .ed-file-title { writing-mode: vertical-rl; rotate: 180deg; align-self: center; }
 .ed-file-plus { display: none; }
 .ed-file:not(.is-open):hover { flex-basis: 108px; }
 .ed-file:not(.is-open):hover .ed-file-tab { background: color-mix(in srgb, var(--f-ink) 8%, transparent); }
@@ -684,13 +671,13 @@ html[lang="ko"] #background .timeline article h3 { font: 700 clamp(1.375rem, 1re
 #background .timeline article.is-current::before { background: var(--acid); }
 /* Big outlined year behind the card, drifting (parallax). */
 #background .tl-year {
-  position: absolute; z-index: 0; right: -6%; bottom: -34%; pointer-events: none;
-  font: 700 clamp(5rem, 3rem + 7vw, 10rem)/1 var(--display); color: transparent; -webkit-text-stroke: 1.5px var(--c-ink); opacity: .35; letter-spacing: -.01em;
+  position: absolute; z-index: 0; pointer-events: none;
+  font: 700 clamp(5rem, 3rem + 7vw, 10rem)/1 var(--display); color: transparent; -webkit-text-stroke: 1.5px var(--c-ink); letter-spacing: -.01em;
 }
 #background .timeline article:nth-of-type(even) .tl-year { right: auto; left: -6%; }
 /* "Now" sticker on the current job. */
 #background .timeline-now {
-  position: absolute; top: -16px; right: 18px; z-index: 3; padding: 6px 12px; rotate: 5deg;
+  position: absolute; z-index: 3; padding: 6px 12px; rotate: 5deg;
   background: var(--ink); color: var(--acid); font: 700 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: .02em;
 }
 html[lang="ko"] #background .timeline-now { font-family: var(--read); font-size: 1rem; }
@@ -699,15 +686,13 @@ html[lang="ko"] #background .timeline-now { font-family: var(--read); font-size:
   @keyframes ed-now { 0%, 100% { rotate: 5deg; } 50% { rotate: -2deg; } }
 }
 /* Education and skills: two columns of tiles under the timeline. */
-#background .qualifications { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(32px, 4vw, 64px) !important; border-top: 0 !important; padding: 0 !important; }
+#background .qualifications { display: grid !important; gap: clamp(32px, 4vw, 64px) !important; border-top: 0 !important; padding: 0 !important; }
 #background .qualifications > div { margin: 0 !important; padding: 0 !important; border: 0 !important; }
 #background .qualifications h3 { font: 700 clamp(2.25rem, 1.4rem + 2vw, 3.5rem)/1 var(--display) !important; text-transform: uppercase; }
 #background .university-lockup { background: var(--paper); border: 1.5px solid var(--ink) !important; padding: 16px 18px !important; margin: 8px 0 18px !important; }
 #background .qualifications h4 { display: inline-block; background: var(--acid); padding: 4px 8px; margin: 0 !important; }
-#background .software-skills { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px !important; margin-top: 18px !important; padding: 0 !important; list-style: none; }
-#background .software-skills li {
-  display: flex !important; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 18px; min-height: 112px;
-  padding: 14px 16px !important; border: 1.5px solid var(--ink) !important; background: var(--paper);
+#background .software-skills { margin-top: 18px !important; padding: 0 !important; list-style: none; }
+#background .software-skills li { flex-direction: column; justify-content: space-between; border: 1.5px solid var(--ink) !important; background: var(--paper);
 }
 #background .software-skills li:nth-child(3n+1) { background: var(--acid); }
 #background .software-skills li:nth-child(3n+2) { background: var(--ink); color: var(--paper); }
@@ -723,16 +708,12 @@ html[lang="ko"] #background .software-skills li > span:last-child { font: 700 1r
   #background .timeline article, #background .timeline article:nth-of-type(even) { grid-column: 1; margin-top: 0 !important; }
   #background .timeline article::before, #background .timeline article:nth-of-type(even)::before { left: -39px; right: auto; }
   #background .qualifications { grid-template-columns: minmax(0, 1fr); }
-  #background .tl-year { bottom: -18%; }
 }
 @media (max-width: 520px) { #background .software-skills { grid-template-columns: 1fr 1fr; } }
 [data-par] { will-change: translate; }
 #background .timeline article { overflow: hidden; }
-#background .tl-year { right: 14px !important; left: auto !important; bottom: -.18em; opacity: .28; font-size: clamp(4.5rem, 2.5rem + 5vw, 8rem); }
+#background .tl-year { right: 14px !important; left: auto !important; }
 #background .timeline-now { top: 16px; right: 16px; }
-#background .software-skills { gap: 18px !important; align-items: start; }
-#background .software-skills li { min-height: 104px; }
-#background .timeline article { padding-bottom: clamp(72px, 4rem + 2vw, 104px) !important; }
 #background .tl-year { bottom: -.22em; font-size: clamp(4rem, 2.6rem + 3.6vw, 6.5rem); opacity: .32; }
 @media (max-width: 1000px) {
   #background .timeline article { rotate: -.5deg; } #background .timeline article:nth-of-type(even) { rotate: .5deg; }
@@ -758,9 +739,9 @@ html[lang="ko"] .filter-toggle :is(.ft-label, .ft-value) { font-family: var(--re
     padding: 6px 12px !important; min-height: 0 !important;
   }
   #project-dialog .dialog-top > * { grid-area: auto !important; margin: 0 !important; }
-  #project-dialog .dialog-top .back-projects { min-width: 44px; min-height: 44px; padding: 0 6px !important; font-size: 1.25rem !important; justify-content: center; }
+  #project-dialog .dialog-top .back-projects { min-width: 44px; padding: 0 6px !important; font-size: 1.25rem !important; justify-content: center; }
   #project-dialog .dialog-top .back-projects [data-i18n="backProjects"] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  #project-dialog .dialog-top #project-position { margin-right: auto !important; padding: 4px 8px !important; font-size: .875rem !important; }
+  #project-dialog .dialog-top #project-position { margin-right: auto !important; padding: 4px 8px !important; }
   #project-dialog .dialog-top :is(.dialog-contact, .language-toggle, .close-button) { min-height: 44px !important; height: 44px; padding: 0 10px !important; font-size: .8125rem !important; min-width: 44px; }
 
   #project-dialog .gallery { padding: 16px 0 12px !important; margin-top: calc(-1 * var(--s5, 48px)) !important; }
@@ -808,20 +789,16 @@ html[lang="ko"] .filter-toggle :is(.ft-label, .ft-value) { font-family: var(--re
   #background .timeline { margin-top: calc(-1 * clamp(200px, 15vw, 260px)) !important; }
   #background .timeline article:nth-of-type(odd) { grid-column: 2; margin-top: 0 !important; rotate: 1deg; }
   #background .timeline article:nth-of-type(even) { grid-column: 1; margin-top: clamp(-120px, -6vw, -60px) !important; rotate: -1deg; }
-  #background .timeline article:nth-of-type(3) { margin-top: clamp(-120px, -6vw, -60px) !important; }
   #background .timeline article { grid-row: auto; }
-  #background .timeline article:nth-of-type(1) { grid-row: 1; }
-  #background .timeline article:nth-of-type(2) { grid-row: 2; }
-  #background .timeline article:nth-of-type(3) { grid-row: 3; }
   #background .timeline article:nth-of-type(odd)::before { left: calc(-1 * clamp(56px, 7vw, 120px) / 2 - 11px); right: auto; }
   #background .timeline article:nth-of-type(even)::before { right: calc(-1 * clamp(56px, 7vw, 120px) / 2 - 11px); left: auto; }
   #background .tl-track { top: clamp(200px, 15vw, 260px); }
-  #background .background-heading { position: relative; z-index: 2; max-width: 48%; }
+  #background .background-heading { position: relative; z-index: 2; }
 }
 
 /* File cabinet spines in Korean: Hangul stands upright in vertical text,
    so it must not be turned 180° like the Latin spines. */
-html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { rotate: none !important; text-orientation: upright; letter-spacing: .05em; }
+html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { rotate: none !important; text-orientation: upright; }
 
 /* ---------- Project gallery on desktop: everything visible at once ---------
    Counter, arrows, All pages and caption sit in a column on the left; the
@@ -861,8 +838,8 @@ html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { word-spacing: -.45em; le
    bands. Replaces the stacked pile where back prints hid behind the cover. */
 @media (min-width: 1001px) {
   .project-collection > .project-card.project-card[data-tone] .artifact-arrangement {
-    display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, .42fr) !important; grid-template-rows: auto auto !important;
-    align-items: center !important; column-gap: 0 !important; row-gap: 14px !important; padding: 0 !important;
+    display: grid !important; grid-template-rows: auto auto !important;
+    align-items: center !important; row-gap: 14px !important; padding: 0 !important;
   }
   .project-collection > .project-card.project-card[data-tone] .artifact-main-frame {
     grid-column: 1 !important; grid-row: 1 / 3 !important; justify-self: end; margin: 0 !important;
@@ -876,7 +853,6 @@ html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { word-spacing: -.45em; le
   .project-collection > .project-card.project-card[data-tone] .artifact-fixed.artifact-tertiary { grid-row: 2 !important; align-self: start; rotate: -2.5deg; margin-left: -10% !important; }
   .project-collection > .project-card.project-card[data-tone] .artifact-fixed:not(.artifact-tertiary) { grid-row: 1 !important; }
   /* Even bands: cover on the right, samples on the left. */
-  .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-arrangement { grid-template-columns: minmax(0, .42fr) minmax(0, 1fr) !important; }
   .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-main-frame { grid-column: 2 !important; justify-self: start; rotate: 1deg; }
   .project-collection > .project-card.project-card[data-tone]:nth-child(even) :is(.artifact-fixed, .artifact-fixed.artifact-tertiary) { grid-column: 1 !important; margin: 0 -18% 0 0 !important; rotate: -3deg; }
   .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-fixed.artifact-tertiary { margin-right: -10% !important; rotate: 2.5deg; }
@@ -889,32 +865,25 @@ html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { word-spacing: -.45em; le
    the contact section, lower right. */
 .project-collection > .project-card.project-card:nth-child(7n+5) { --orn: none !important; }
 #contact::before {
-  content: '' !important; display: block !important; position: absolute; z-index: 0; pointer-events: none; right: var(--edge, 24px); bottom: 28px;
-  width: min(30vw, 300px); aspect-ratio: 437 / 203; background: url('assets/riso/lib/reg-grid--ee1a29799b16.webp') center / contain no-repeat; opacity: .9; rotate: -3deg;
+  content: '' !important; display: block !important; position: absolute; pointer-events: none; right: var(--edge, 24px); bottom: 28px; aspect-ratio: 437 / 203; background: url('assets/riso/lib/reg-grid--ee1a29799b16.webp') center / contain no-repeat;
 }
-@media (max-width: 760px) { #contact::before { width: 46vw; bottom: 12px; right: 12px; opacity: .6; } }
+@media (max-width: 760px) { #contact::before { bottom: 12px; right: 12px; opacity: .6; } }
 #contact > * { position: relative; z-index: 1; }
 
 /* ---------- Skills as tall coloured panels (moodboard: "TAPER" cards) ------- */
 #background .qualifications { grid-template-columns: minmax(0, 1fr) !important; }
-#background .qualifications > div:first-child { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
-#background .qualifications > div:first-child > h3 { grid-column: 1 / -1; }
+#background .qualifications > div:first-child { column-gap: 24px; align-items: start; }
 #background .qualifications > div:first-child > h4:nth-of-type(1) { grid-column: 1; grid-row: 2; }
 #background .qualifications > div:first-child > .university-lockup:nth-of-type(1) { grid-column: 1; grid-row: 3; }
 #background .qualifications > div:first-child > h4:nth-of-type(2) { grid-column: 2; grid-row: 2; }
 #background .qualifications > div:first-child > .university-lockup:nth-of-type(2) { grid-column: 2; grid-row: 3; }
-#background .software-skills { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 12px !important; }
 #background .software-skills li {
-  position: relative; display: grid !important; grid-template-rows: auto auto 1fr auto; align-items: start; gap: 10px !important;
-  min-height: clamp(260px, 22vw, 320px) !important; padding: 18px 18px 20px !important; translate: none;
+  position: relative; align-items: start; translate: none;
 }
-#background .software-skills li::before {
-  content: attr(data-initial); font: 700 clamp(3.5rem, 2rem + 3vw, 5rem)/.8 var(--display); color: inherit; grid-row: 1;
+#background .software-skills li::before { font: 700 clamp(3.5rem, 2rem + 3vw, 5rem)/.8 var(--display); color: inherit; grid-row: 1;
 }
-#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { grid-row: 1; align-self: end; justify-self: start; margin-left: clamp(52px, 3.6vw, 72px); padding-bottom: 4px; font-size: 1.125rem !important; }
-#background .software-skills li .skill-desc { grid-row: 2; font: 400 .9375rem/1.45 var(--read) !important; text-transform: none !important; opacity: .9; }
-#background .software-skills li .skill-logo { grid-row: 4; align-self: end; justify-self: start; height: 56px !important; background: var(--paper); padding: 10px 12px; border: 1.5px solid var(--ink); }
-#background .software-skills li .skill-logo img { height: 34px !important; max-width: 150px; }
+#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { justify-self: start; margin-left: clamp(52px, 3.6vw, 72px); padding-bottom: 4px; }
+#background .software-skills li .skill-desc { opacity: .9; }
 #background .software-skills li:nth-child(4n+1) { background: var(--acid) var(--grain-ink) 0 0 / 320px; color: var(--ink); }
 #background .software-skills li:nth-child(4n+2) { background: var(--ink) var(--grain-paper) 0 0 / 320px; color: var(--paper); }
 #background .software-skills li:nth-child(4n+3) { background: var(--paper) var(--grain-ink) 0 0 / 320px; color: var(--ink); }
@@ -933,20 +902,15 @@ html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { word-spacing: -.45em; le
   .project-collection > .project-card.project-card[data-tone]:nth-child(even) .artifact-arrangement { grid-template-columns: minmax(0, .36fr) minmax(0, 1fr) !important; }
 }
 /* Skill panels: letter, then name, then line, logo at the foot. */
-#background .software-skills li { grid-template-rows: auto auto auto 1fr !important; }
-#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { grid-row: 2 !important; margin: 0 !important; align-self: start; padding: 0; font-size: 1.375rem !important; line-height: 1 !important; }
-#background .software-skills li .skill-desc { grid-row: 3 !important; }
+#background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { font-size: 1.375rem !important; line-height: 1 !important; }
 html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { font-size: 1.125rem !important; }
 /* Timeline: overlapping rows so the cards interlock (squished). */
 @media (min-width: 1001px) {
-  #background .timeline { grid-template-rows: repeat(4, auto); }
   #background .timeline article:nth-of-type(1) { grid-row: 1 / 3 !important; }
   #background .timeline article:nth-of-type(2) { grid-row: 2 / 4 !important; margin-top: 40px !important; }
   #background .timeline article:nth-of-type(3) { grid-row: 3 / 5 !important; margin-top: 40px !important; }
 }
-#contact::before { inset: auto var(--edge, 24px) 40px auto !important; left: auto !important; top: auto !important; translate: none !important; }
-#background .software-skills { align-items: stretch !important; }
-#contact::before { inset: auto auto 40px var(--edge, 24px) !important; width: min(24vw, 240px) !important; z-index: 0 !important; }
+#contact::before { left: auto !important; top: auto !important; translate: none !important; }
 
 /* ---------- Foot of a project page: files + previous / next (owner) --------
    One tight block: the files card full width with its label above; then
@@ -968,11 +932,10 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
   }
   #project-dialog .detail-footer > button:hover { background: var(--acid) !important; translate: 0 -3px; }
   #project-dialog .detail-footer .ed-next-button {
-    grid-template-columns: minmax(0, 1fr) 150px !important; grid-template-areas: 'text sheet'; justify-items: start !important; gap: 0 20px !important;
+    grid-template-columns: minmax(0, 1fr) 150px !important; grid-template-areas: 'text sheet'; justify-items: start !important;
     background: var(--ink) !important; color: var(--paper) !important; padding: 20px 24px !important;
   }
   #project-dialog .detail-footer .ed-next-button:hover { background: #3a2241 !important; }
-  #project-dialog .ed-next-button .ed-next { display: contents !important; }
   #project-dialog .ed-next-kicker, #project-dialog .ed-next-title { grid-area: text; color: var(--paper) !important; text-align: left; justify-self: start; }
   #project-dialog .ed-next-kicker { align-self: start; color: var(--acid) !important; opacity: 1; }
   #project-dialog .ed-next-title { align-self: end; font-size: clamp(1.5rem, 1rem + 1.2vw, 2.25rem) !important; max-width: none; }
@@ -983,7 +946,7 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
   #project-dialog .ed-next-button:is(:hover, :focus-visible) .ed-next-sheet { rotate: -1deg; translate: none !important; }
 }
 @media (min-width: 761px) {
-  #project-dialog .detail-footer { width: 100% !important; max-width: none !important; margin-inline: 0 !important; grid-column: 1 / -1 !important; box-sizing: border-box; }
+  #project-dialog .detail-footer { grid-column: 1 / -1 !important; box-sizing: border-box; }
   #project-dialog .detail-footer > button { width: 100% !important; max-width: none !important; }
   #project-dialog .detail-footer .ed-next-button { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 24px !important; }
   #project-dialog .ed-next-button .ed-next { display: flex !important; align-items: center; justify-content: space-between; gap: 24px; width: 100%; }
@@ -1034,7 +997,7 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
 #background .qualifications > div:first-child > h3 { grid-column: 1 / -1 !important; grid-row: auto !important; margin-bottom: 0 !important; }
 #background .degree {
   display: grid !important; grid-template-columns: 76px minmax(0, 1fr); grid-template-areas: 'seal title' 'seal body'; align-items: center; column-gap: 20px; row-gap: 6px;
-  padding: 22px 24px !important; margin: 0 !important; background: var(--paper) var(--grain-ink) 0 0 / 320px; border: 1.5px solid var(--ink); box-shadow: 6px 6px 0 var(--acid);
+  padding: 22px 24px !important; margin: 0 !important;
   max-width: none !important;
 }
 #background .degree > h4 {
@@ -1043,9 +1006,9 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
 }
 html[lang="ko"] #background .degree > h4 { font: 700 1.25rem/1.3 var(--read) !important; text-transform: none !important; }
 #background .degree .university-lockup { display: contents !important; }
-#background .degree .university-logo { grid-area: seal; width: 76px !important; height: 76px !important; object-fit: contain; padding: 6px; background: #fff; border: 1.5px solid var(--ink); border-radius: 50%; margin: 0 !important; }
+#background .degree .university-logo { grid-area: seal; width: 76px !important; height: 76px !important; object-fit: contain; padding: 6px; background: #fff; border-radius: 50%; margin: 0 !important; }
 #background .degree .university-lockup p { grid-area: body; align-self: start; margin: 0 !important; font: 600 1rem/1.45 var(--read) !important; color: var(--ink) !important; max-width: none !important; }
-#background .degree .degree-note { display: inline-block; margin-top: 8px; padding: 3px 8px; background: var(--acid); font-weight: 400; font-size: .875rem; }
+#background .degree .degree-note { margin-top: 8px; background: var(--acid); font-weight: 400; }
 #background .qualifications > div:last-child { display: block !important; }
 #background .lang-list { display: flex !important; flex-wrap: wrap; gap: 10px 32px; margin: 0 0 22px !important; max-width: none !important; }
 #background .lang-list > span { display: inline-flex; align-items: baseline; gap: 10px; }
@@ -1061,8 +1024,7 @@ html[lang="ko"] #background .lang-list strong { font: 700 1.0625rem/1.3 var(--re
   grid-row: 1 !important; grid-column: 1 !important; justify-self: stretch !important; align-self: start !important; width: auto !important; height: 64px !important;
   display: flex !important; align-items: center; justify-content: center; margin: 0 0 6px !important; padding: 12px !important; background: var(--paper) !important; border: 1.5px solid var(--ink);
 }
-#background .software-skills li .skill-logo img { height: 36px !important; width: auto !important; max-width: 100% !important; object-fit: contain; transform: none !important; }
-#background .software-skills li .skill-logo img.square-logo { height: 34px !important; }
+#background .software-skills li .skill-logo img { width: auto !important; object-fit: contain; transform: none !important; }
 #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) {
   grid-row: 2 !important; grid-column: 1 !important; margin: 0 !important; padding: 0 !important; align-self: start;
   font: 700 1.5rem/1 var(--display) !important; text-transform: uppercase !important;
@@ -1073,7 +1035,6 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
   #background .software-skills { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   #background .software-skills li { grid-template-columns: 96px minmax(0, 1fr) !important; grid-template-rows: auto 1fr !important; column-gap: 16px !important; row-gap: 4px !important; padding: 14px !important; }
   #background .software-skills li .skill-logo { grid-row: 1 / 3 !important; height: 64px !important; margin: 0 !important; padding: 10px !important; align-self: center !important; }
-  #background .software-skills li .skill-logo img { height: 28px !important; }
   #background .software-skills li .skill-logo img.square-logo { height: 30px !important; }
   #background .software-skills li > span[data-i18n^="skills."]:not(.skill-desc) { grid-column: 2 !important; grid-row: 1 !important; align-self: end; }
   #background .software-skills li .skill-desc { grid-column: 2 !important; grid-row: 2 !important; }
@@ -1100,7 +1061,7 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
    the torn circle is gone. Undo: delete these lines. */
 #contact::after { content: none !important; display: none !important; }
 #contact::before {
-  inset: -40px calc(var(--edge, 24px) + 34%) auto auto !important; width: min(22vw, 220px) !important; rotate: 3deg !important; opacity: 1 !important; z-index: 2 !important;
+  inset: -40px calc(var(--edge, 24px) + 34%) auto auto !important; width: min(22vw, 220px) !important; opacity: 1 !important; z-index: 2 !important;
 }
 @media (max-width: 760px) { #contact::before { inset: -28px 16px auto auto !important; width: 40vw !important; } }
 /* Logo tiles: even visual weight (square marks larger, wide wordmarks capped). */
@@ -1131,7 +1092,7 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
    figure in index.html and the map.* strings in locales.js. */
 .work-map { margin: 0; }
 .work-map svg { display: block; width: 100%; height: auto; overflow: visible; }
-.work-map .map-land { fill: var(--paper-deep, #eadfcb); stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
+.work-map .map-land { stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
 .work-map .map-route { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-dasharray: 5 5; stroke-linecap: round; }
 .work-map .map-pin { transition: opacity 240ms ease; }
 .work-map .map-pin-body { transform-box: fill-box; transform-origin: 50% 100%; transition: scale 240ms var(--ease-press); }
@@ -1142,14 +1103,14 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
 .work-map .map-pin[data-job="gige"] .map-pin-hole { stroke: var(--paper); }
 .work-map .map-home circle { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; }
 .work-map .map-home path { stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; fill: none; }
-.work-map .map-label { font: 700 15px/1 var(--read); fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round; transition: opacity 240ms ease; }
+.work-map .map-label { fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 4px; stroke-linejoin: round; }
 .work-map .map-label--home { font-weight: 400; }
 .work-map[data-lit]:not([data-lit=""]) :is(.map-pin, .map-label[data-job]) { opacity: .3; }
 .work-map[data-lit="compass"] [data-job="compass"], .work-map[data-lit="gige"] [data-job="gige"], .work-map[data-lit="teacher"] [data-job="teacher"] { opacity: 1 !important; }
 #background .tl-wave { display: none; }
 
 @media (min-width: 1001px) {
-  #background .background-layout { grid-template-columns: minmax(240px, 300px) minmax(0, 1fr) !important; column-gap: clamp(32px, 4vw, 64px) !important; row-gap: 24px !important; align-items: start; }
+  #background .background-layout { column-gap: clamp(32px, 4vw, 64px) !important; row-gap: 24px !important; align-items: start; }
   #background .background-intro { display: contents !important; }
   #background .background-intro > .flourish { display: none !important; }
   #background .background-heading { grid-column: 1 / -1 !important; grid-row: 1 !important; max-width: none !important; }
@@ -1177,14 +1138,13 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
     top: -52px !important; left: 50% !important; right: auto !important; translate: -50% -50%; rotate: none !important;
     width: 30px !important; height: 30px !important; border: 3px solid var(--ink) !important; border-radius: 50%; background: var(--c-bg, var(--paper)) !important; box-shadow: 0 0 0 5px var(--paper);
   }
-  #background .timeline article::after { content: ''; position: absolute; left: 50%; top: -37px; width: 3px; height: 37px; translate: -50% 0; background: var(--ink); }
+  #background .timeline article::after { content: ''; position: absolute; left: 50%; top: -37px; height: 37px; translate: -50% 0; background: var(--ink); }
   #background .timeline article h3 { font-size: clamp(1.375rem, 1rem + .7vw, 1.75rem) !important; }
   #background .timeline article p:not(.institution) { font-size: .9375rem !important; line-height: 1.5 !important; }
   #background .timeline-now { top: -14px !important; right: 12px !important; }
   @media (hover: hover) { #background .timeline article:hover { translate: 0 -4px; } }
 }
 @media (max-width: 1000px) {
-  #background .work-map { width: min(72%, 300px); margin: 0 auto 8px; }
   #background .background-heading { max-width: none !important; }
 }
 @media (min-width: 1001px) {
@@ -1195,7 +1155,7 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
 .work-map .map-pin-body { scale: 1.35; }
 .work-map[data-lit="compass"] .map-pin[data-job="compass"] .map-pin-body, .work-map[data-lit="gige"] .map-pin[data-job="gige"] .map-pin-body, .work-map[data-lit="teacher"] .map-pin[data-job="teacher"] .map-pin-body { scale: 1.75; }
 .work-map .map-label { font-size: 15.5px; }
-.work-map .map-home-body { scale: 1.3; transform-box: fill-box; transform-origin: center; }
+.work-map .map-home-body { transform-box: fill-box; transform-origin: center; }
 /* Map on phones and tablets: only the northern part, where the pins are,
    fading out at the bottom (the whole country made the page very long). */
 @media (max-width: 1000px) {
@@ -1224,7 +1184,7 @@ html[lang="ko"] .hero .location > span { font: 700 1.0625rem/1.3 var(--read) !im
 html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; }
 .work-map .map-label[data-key="seoul"] { rotate: -7deg; }
 .work-map .map-label[data-key="seongnam"] { rotate: 5deg; }
-.work-map .map-label[data-key="suwon"] { rotate: -4deg; font-weight: 400 !important; opacity: .85; }
+.work-map .map-label[data-key="suwon"] { rotate: -4deg; }
 .work-map .map-label[data-key="pyeongchang"] { rotate: 6deg; }
 .work-map .map-label[data-key="gangneung"] { rotate: -6deg; }
 @media (hover: hover) and (pointer: fine) {
@@ -1241,18 +1201,14 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
    and home fade in. Opacity only for hiding; reduced motion = all still. */
 @media (prefers-reduced-motion: no-preference) {
   @media (min-width: 1001px) {
-    #background.tl-motion .timeline article:not(.tl-on) { opacity: 0 !important; translate: 0 48px !important; rotate: -2deg !important; }
+    #background.tl-motion .timeline article:not(.tl-on) { opacity: 0 !important; }
     #background.tl-motion .timeline article { transition: opacity 600ms ease, translate 800ms var(--ease-press), rotate 800ms var(--ease-press) !important; }
     #background.tl-motion .timeline article:not(.tl-on)::before { scale: 0; }
     #background.tl-motion .timeline article::before { transition: scale 520ms cubic-bezier(.34, 1.7, .5, 1) 200ms; }
     #background.tl-motion .timeline article.tl-on:hover { translate: 0 -6px !important; rotate: -.6deg !important; }
   }
   #background.tl-motion .work-map:not(.map-on) :is(.map-pin-body, .map-home-body) { opacity: 0; translate: 0 -40px; }
-  #background.tl-motion .work-map :is(.map-pin-body, .map-home-body) {
-    transition: opacity 300ms ease calc(var(--i, 0) * 160ms), translate 620ms cubic-bezier(.34, 1.6, .5, 1) calc(var(--i, 0) * 160ms), scale 240ms var(--ease-press);
-  }
   #background.tl-motion .work-map:not(.map-on) .map-route { opacity: 0; }
-  #background.tl-motion .work-map .map-route { transition: opacity 900ms ease 700ms; }
   #background.tl-motion .work-map .map-pin:hover .map-pin-body { scale: 1.6; }
 }
 /* Wavy line draws left to right with a sliding clip (a dash-offset draw
@@ -1309,11 +1265,7 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
    Undo: delete this block; remove .skills-notebook, .skill-alt spans and
    the strengths list from index.html and the skills.*.alt / strengths strings. */
 #background .qualifications > .skills-notebook {
-  --nb-line: rgb(73 43 81 / .13); position: relative; display: grid !important; grid-template-columns: minmax(0, .8fr) minmax(0, 2fr); grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 4vw, 56px); row-gap: 14px; align-items: start;
-  padding: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 44px) clamp(28px, 3vw, 44px) clamp(76px, 7vw, 104px) !important; margin-top: 12px !important;
-  background: linear-gradient(90deg, transparent calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 18px), transparent calc(clamp(76px, 7vw, 104px) - 18px)),
-              repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important;
-  border: 1.5px solid var(--ink) !important; box-shadow: 8px 8px 0 var(--ink); rotate: -.6deg;
+  --nb-line: rgb(73 43 81 / .13); position: relative; display: grid !important; grid-template-columns: minmax(0, .8fr) minmax(0, 2fr); grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 4vw, 56px); row-gap: 14px; align-items: start; margin-top: 12px !important;
 }
 /* Punched holes down the left edge. */
 #background .qualifications > .skills-notebook::before {
@@ -1329,20 +1281,18 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
 #background .skills-notebook > h3::after { content: '역량'; font: 700 1.5rem/1 var(--read); color: var(--ink); background: var(--acid); padding: 4px 10px; rotate: -4deg; }
 html[lang="ko"] #background .skills-notebook > h3::after { content: 'Skills'; font: 700 1.75rem/1 var(--display); text-transform: uppercase; }
 #background .skills-notebook > .lang-list { grid-column: 1; grid-row: 2; flex-direction: column !important; gap: 8px !important; margin: 0 !important; }
-#background .skills-notebook > .lang-list > span { display: flex !important; align-items: baseline; gap: 10px; }
-#background .skills-notebook > .lang-list strong { display: inline-block; min-width: 4.6em; }
+#background .skills-notebook > .lang-list strong { display: inline-block; }
 #background .skills-notebook > .strengths-title { grid-column: 1; grid-row: 3; align-self: start; margin: 18px 0 0 !important; font: 700 1.375rem/1 var(--display) !important; text-transform: uppercase; color: var(--ink); }
 html[lang="ko"] #background .skills-notebook > .strengths-title { font: 700 1.125rem/1.2 var(--read) !important; text-transform: none; }
-#background .skills-notebook > .strengths-title span, html[lang="ko"] #background .skills-notebook > .strengths-title span { font: 400 1rem/1 var(--read); text-transform: none; margin-left: 6px; opacity: .8; }
+#background .skills-notebook > .strengths-title span, html[lang="ko"] #background .skills-notebook > .strengths-title span { margin-left: 6px; }
 html[lang="ko"] #background .skills-notebook > .strengths-title span { font-family: var(--display); text-transform: uppercase; }
 #background .strength-chips { grid-column: 1; grid-row: 3; margin: 56px 0 0 !important; padding: 0 !important; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
 #background .strength-chips li {
   display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--paper);
   font: 600 .9375rem/1.2 var(--read); color: var(--ink); rotate: -1deg;
 }
-#background .strength-chips li:nth-child(even) { rotate: 1.2deg; background: var(--acid); }
-#background .strength-chips li:nth-child(3n) { background: var(--ink); color: var(--paper); }
-#background .strength-chips li span { font-weight: 400; opacity: .8; font-size: .875rem; }
+#background .strength-chips li:nth-child(even) { rotate: 1.2deg; }
+#background .strength-chips li span { font-weight: 400; }
 html[lang="ko"] #background .strength-chips li span { order: -1; font-weight: 600; opacity: 1; font-size: .9375rem; }
 html[lang="ko"] #background .strength-chips li { font-weight: 400; }
 
@@ -1353,13 +1303,13 @@ html[lang="ko"] #background .strength-chips li { font-weight: 400; }
 }
 #background .skills-notebook .software-skills li,
 #background .skills-notebook .software-skills li:nth-child(n) {
-  display: grid !important; grid-template-columns: 76px minmax(0, 1fr) !important; grid-template-rows: auto auto 1fr !important; grid-template-areas: 'tile name' 'tile alt' 'tile desc'; column-gap: 14px !important; row-gap: 0 !important;
+  display: grid !important; grid-template-rows: auto auto 1fr !important; grid-template-areas: 'tile name' 'tile alt' 'tile desc'; row-gap: 0 !important;
   padding: 0 !important; min-height: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; color: var(--ink) !important; text-align: left !important; translate: none !important;
 }
 #background .skills-notebook .software-skills li .skill-logo,
 #background .skills-notebook .software-skills li:nth-child(n) .skill-logo {
-  grid-area: tile !important; grid-row: 1 / 4 !important; grid-column: 1 !important; width: 76px !important; height: 76px !important; aspect-ratio: auto; margin: 0 !important; padding: 10px !important;
-  display: flex !important; align-items: center; justify-content: center; background: #fff !important; border: 1.5px solid var(--ink) !important; box-shadow: 3px 3px 0 var(--ink); rotate: -3deg;
+  grid-area: tile !important; aspect-ratio: auto; margin: 0 !important;
+  display: flex !important; align-items: center; justify-content: center;
 }
 #background .skills-notebook .software-skills li:nth-child(even) .skill-logo { rotate: 2.5deg; }
 #background .skills-notebook .software-skills li .skill-logo img,
@@ -1369,20 +1319,17 @@ html[lang="ko"] #background .strength-chips li { font-weight: 400; }
   grid-area: name !important; grid-row: 1 !important; grid-column: 2 !important; justify-self: stretch; align-self: start !important; display: block; padding: 6px 10px !important; margin: 0 !important;
   font: 700 1.25rem/1.05 var(--display) !important; text-transform: uppercase !important; text-align: left !important; background: var(--acid); border: 1.5px solid var(--ink);
 }
-#background .skills-notebook .software-skills li:nth-child(3n+2) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background: var(--ink); color: var(--paper); }
-#background .skills-notebook .software-skills li:nth-child(3n) > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { background: var(--paper-deep, #eadfcb); }
 html[lang="ko"] #background .skills-notebook .software-skills li > span[data-i18n^="skills."]:not(.skill-desc):not(.skill-alt) { font: 700 1rem/1.3 var(--read) !important; text-transform: none !important; }
 #background .skills-notebook .software-skills li .skill-alt { grid-area: alt; grid-row: 2; grid-column: 2; padding: 4px 10px 0; font: 600 .8125rem/1.2 var(--read); opacity: .75; }
 html[lang="ko"] #background .skills-notebook .software-skills li .skill-alt { font: 700 .9375rem/1.1 var(--display); text-transform: uppercase; letter-spacing: .02em; }
-#background .skills-notebook .software-skills li .skill-desc { grid-area: desc !important; grid-row: 3 !important; grid-column: 2 !important; padding: 4px 10px 0 !important; max-width: none !important; font: 400 .9375rem/1.4 var(--read) !important; opacity: .9; text-align: left !important; }
+#background .skills-notebook .software-skills li .skill-desc { grid-area: desc !important; grid-row: 3 !important; grid-column: 2 !important; padding: 4px 10px 0 !important; max-width: none !important; font: 400 .9375rem/1.4 var(--read) !important; text-align: left !important; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   #background .skills-notebook .software-skills li .skill-logo { transition: rotate 260ms var(--ease-press), translate 260ms var(--ease-press); }
   #background .skills-notebook .software-skills li:hover .skill-logo { rotate: 0deg; translate: 0 -3px; }
   #background .skills-notebook .software-skills li:hover { translate: none !important; box-shadow: none !important; }
 }
 @media (max-width: 1000px) {
-  #background .qualifications > .skills-notebook { grid-template-columns: minmax(0, 1fr); padding-left: 64px !important; rotate: -.4deg;
-    background: linear-gradient(90deg, transparent 44px, var(--acid) 44px 48px, transparent 48px), repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important; }
+  #background .qualifications > .skills-notebook { grid-template-columns: minmax(0, 1fr); padding-left: 64px !important; rotate: -.4deg; }
   #background .qualifications > .skills-notebook::before { left: 12px; width: 20px; background-size: 20px 80px; }
   #background .skills-notebook > :is(h3, .lang-list, .strengths-title, .strength-chips, .software-skills) { grid-column: 1 !important; grid-row: auto !important; }
   #background .skills-notebook > .software-skills { margin: 10px 0 !important; }
@@ -1390,13 +1337,11 @@ html[lang="ko"] #background .skills-notebook .software-skills li .skill-alt { fo
   #background .strength-chips { margin-top: 0 !important; }
 }
 @media (max-width: 640px) {
-  #background .qualifications > .skills-notebook { padding: 24px 16px 24px 52px !important; box-shadow: 5px 5px 0 var(--ink); margin-right: 6px !important;
-    background: linear-gradient(90deg, transparent 36px, var(--acid) 36px 39px, transparent 39px), repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important; }
+  #background .qualifications > .skills-notebook { box-shadow: 5px 5px 0 var(--ink); margin-right: 6px !important; }
   #background .qualifications > .skills-notebook::before { left: 8px; width: 18px; background-size: 18px 72px;
     background-image: radial-gradient(circle at 50% 50%, var(--paper-deep, #eadfcb) 0 7px, var(--ink) 7px 8.5px, transparent 9px); }
   #background .skills-notebook > .software-skills { grid-template-columns: minmax(0, 1fr) !important; gap: 16px !important; }
-  #background .skills-notebook .software-skills li, #background .skills-notebook .software-skills li:nth-child(n) { grid-template-columns: 64px minmax(0, 1fr) !important; grid-column: auto !important; }
-  #background .skills-notebook .software-skills li .skill-logo, #background .skills-notebook .software-skills li:nth-child(n) .skill-logo { width: 64px !important; height: 64px !important; padding: 8px !important; }
+  #background .skills-notebook .software-skills li, #background .skills-notebook .software-skills li:nth-child(n) { grid-column: auto !important; }
 }
 /* Notebook fixes: the other-language name is its own line under the bar
    (older span rules caught it); chips keep to one line; languages tidy. */
@@ -1425,7 +1370,6 @@ html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-al
 .work-map .map-ring[data-job="compass"] { stroke: #8e9a1f; stroke-width: 2; }
 @media (prefers-reduced-motion: no-preference) {
   @media (min-width: 1001px) {
-    #background .tl-wave-comet, #background .tl-wave-comet-ink { opacity: 1; animation: tl-comet 4.8s cubic-bezier(.45, 0, .55, 1) infinite; }
     @keyframes tl-comet { from { stroke-dashoffset: 1.07; } to { stroke-dashoffset: 0; } }
     /* The current job's badge sends out a pulse. */
     #background .timeline article.is-current.tl-on::before { animation: tl-pulse 2.2s ease-out infinite 1s; }
@@ -1448,16 +1392,10 @@ html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-al
 #background .qualifications > .skills-notebook > * { position: relative; z-index: 1; }
 #background .skills-notebook .software-skills { isolation: isolate; }
 #background .skills-notebook .software-skills::before {
-  content: ''; position: absolute; z-index: -1; inset: 26px -14px -18px 46px; pointer-events: none;
+  content: ''; position: absolute; z-index: -1; pointer-events: none;
   background: radial-gradient(circle, rgb(73 43 81 / .55) 1.1px, transparent 1.4px) 0 0 / 6px 6px;
-  -webkit-mask-image: linear-gradient(135deg, transparent 10%, #000 55%); mask-image: linear-gradient(135deg, transparent 10%, #000 55%);
 }
 #background .skills-notebook .software-skills { position: relative; }
-#background .qualifications > .skills-notebook {
-  background: linear-gradient(90deg, transparent calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 22px), var(--acid) calc(clamp(76px, 7vw, 104px) - 18px), transparent calc(clamp(76px, 7vw, 104px) - 18px)),
-              var(--grain-ink) 0 0 / 320px,
-              repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important;
-}
 @media (max-width: 1000px) {
   #background .qualifications > .skills-notebook { background: linear-gradient(90deg, transparent 44px, var(--acid) 44px 48px, transparent 48px), var(--grain-ink) 0 0 / 320px, repeating-linear-gradient(transparent 0 31px, var(--nb-line) 31px 32px), #fbf6ec !important; }
 }
@@ -1481,7 +1419,7 @@ html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-al
 .work-map .map-land { fill: var(--paper-deep, #eadfcb); }
 @media (max-width: 1000px) { #background .work-map::before { inset: 0 6% 0 10%; } }
 /* AI tools tile; languages line; quieter dots behind the tool text. */
-#background .skills-notebook .software-skills li .skill-logo--ai { font: 700 2.25rem/1 var(--display) !important; color: var(--ink); letter-spacing: .02em; background: var(--acid) var(--grain-ink) 0 0 / 320px !important; }
+#background .skills-notebook .software-skills li .skill-logo--ai { font: 700 2.25rem/1 var(--display) !important; color: var(--ink); letter-spacing: .02em; }
 #background .skills-notebook > .lang-list > span { display: grid !important; grid-template-columns: 5.2em minmax(0, 1fr); column-gap: 10px !important; align-items: baseline; }
 html[lang="ko"] #background .skills-notebook > .lang-list > span { grid-template-columns: 4em minmax(0, 1fr); }
 #background .skills-notebook .software-skills::before { inset: 46% -14px -18px 38% !important; background-image: radial-gradient(circle, rgb(73 43 81 / .35) 1px, transparent 1.3px) !important;
@@ -1626,9 +1564,7 @@ html[lang="ko"] #background .degree .degree-badge { font: 700 .9375rem/1 var(--r
 }
 @media (max-width: 1000px) {
   #background .timeline article::before,
-  #background .timeline article:nth-of-type(n)::before { left: -36px !important; top: 36px !important; }
-  #background .timeline article.is-current::before,
-  #background .timeline article.is-current:nth-of-type(n)::before { left: -38px !important; }
+  #background .timeline article:nth-of-type(n)::before { top: 36px !important; }
 }
 @media (max-width: 1000px) {
   #background .degree:has(.degree-badge) { padding-top: 34px !important; }
@@ -1680,7 +1616,7 @@ html[lang="ko"] #background .degree .degree-badge { font: 700 .9375rem/1 var(--r
 /* Phone bugs: cabinet "+" stays inside its card; sticky Previous/Next bar
    no longer covers the last content. */
 @media (max-width: 1000px) {
-  #project-dialog .ed-file-title { min-width: 0; overflow-wrap: anywhere; }
+  #project-dialog .ed-file-title { min-width: 0; }
   #project-dialog .ed-file-plus { flex: none; margin-left: 12px; }
   #project-dialog .detail-footer { box-shadow: none !important; }
   #project-dialog .detail-footer { margin-top: 24px; }
@@ -1742,7 +1678,6 @@ html body .project-collection > .project-card.project-card { min-height: 0 !impo
 }
 
 /* 8. Stray marks: footer cross sits inside the page; Skills ruled lines stop at the content. */
-.site-footer { position: relative; }
 html body .site-footer .flourish--footer-cross { right: 16px !important; top: 16px !important; left: auto !important; }
 #background .qualifications > .skills-notebook { background-clip: content-box, padding-box !important; background-origin: content-box, padding-box !important; }
 
@@ -1863,8 +1798,7 @@ html body #project-dialog .ed-prev-button .ed-next-title { color: var(--ink) !im
 
 /* S1/S2/S3: hover — buttons swap colour, text links underline, cards lift. */
 @media (hover: hover) {
-  .site-header nav a:not(.nav-contact):hover, .site-footer a:hover, .footer-licence a:hover,
-  #project-dialog .document-actions a:hover, #project-dialog .materials-original a:hover {
+  .site-header nav a:not(.nav-contact):hover, .site-footer a:hover, .footer-licence a:hover, #project-dialog .document-actions a:hover {
     text-decoration: underline !important; text-decoration-thickness: 2px !important; text-underline-offset: 4px;
   }
   #project-dialog .document-actions a:hover { text-decoration-thickness: 3px !important; }

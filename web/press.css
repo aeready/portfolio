@@ -76,13 +76,10 @@ body,
 
 /* ---------- One oversized riso piece per band, cropped by the band edge --- */
 .project-collection > .project-card:nth-child(n) { --orn: none; --orn-w: 300px; --orn-ratio: 1; }
-.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/reg-circle--4a30f4ec4cba.webp');     --orn-ratio: 346 / 343; --orn-w: 340px; }
 .project-collection > .project-card:nth-child(7n+2) { --orn: none; }
-.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/moon-overprint--7871739a814c.webp');       --orn-ratio: 357 / 350; --orn-w: 330px; }
 .project-collection > .project-card:nth-child(7n+4) { --orn: none; }
 .project-collection > .project-card:nth-child(7n+5) { --orn: url('assets/riso/lib/reg-grid--ee1a29799b16.webp'); --orn-ratio: 437 / 203; --orn-w: 420px; }
 .project-collection > .project-card:nth-child(7n+6) { --orn: none; }
-.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/quarter-target--0d756a39498b.webp');  --orn-ratio: 368 / 374; --orn-w: 340px; }
 
 .project-collection > .project-card:nth-child(n)::after {
   content: '' !important;
@@ -98,10 +95,7 @@ body,
 .project-collection > .project-card:nth-child(even)::after { right: calc(-1 * min(110px, var(--edge, 72px) - 8px)) !important; left: auto !important; }
 
 @media (max-width: 1000px) {
-  .project-collection > .project-card:nth-child(n) { --orn-w: 176px; }
-  .project-collection > .project-card:nth-child(n)::after {
-    top: calc(var(--orn-w) / var(--orn-ratio) * -.42) !important;
-    right: -56px !important; left: auto !important;
+  .project-collection > .project-card:nth-child(n)::after { left: auto !important;
   }
 }
 
@@ -124,8 +118,7 @@ body,
   background-repeat: no-repeat;
   opacity: .8;
 }
-.project-card .artifact-arrangement::after {
-  content: ''; position: absolute; top: -18px; left: 50%; z-index: 3; pointer-events: none;
+.project-card .artifact-arrangement::after { position: absolute; top: -18px; left: 50%; z-index: 3; pointer-events: none;
   width: 120px; aspect-ratio: 420 / 162; translate: -50% 0; rotate: -4deg;
   background: url('assets/riso/tape-stack.webp') center / contain no-repeat;
 }
@@ -397,14 +390,6 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
 
   /* The second plate: a lime ring that follows the mark a beat late
      (press.js), so the cursor is out of register while it moves. */
-  .press-plate-cursor {
-    position: fixed; left: 0; top: 0; z-index: 1500; pointer-events: none;
-    width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
-    border: 3px solid var(--acid); mix-blend-mode: multiply;
-    opacity: 0; transition: opacity 160ms var(--ease-press), scale 200ms var(--ease-press);
-  }
-  .press-plate-cursor.is-on { opacity: 1; }
-  .press-plate-cursor.is-card { scale: 1.6; }
 }
 
 
@@ -414,8 +399,8 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
 .flourish--hero-dots { display: none !important; }
 #home::after {
   content: ''; position: absolute; z-index: 0; pointer-events: none;
-  left: calc(var(--gutter, 32px) - 64px); bottom: 8px; width: 260px; aspect-ratio: 438 / 207;
-  background: url('assets/riso/lib/halftone-disc--2be18b346bb8.webp') center / contain no-repeat; rotate: -4deg;
+  left: calc(var(--gutter, 32px) - 64px); bottom: 8px;
+  background: url('assets/riso/lib/halftone-disc--2be18b346bb8.webp') center / contain no-repeat;
 }
 #home > * { position: relative; z-index: 1; }
 @media (max-width: 760px) { #home::after { width: 170px; left: -40px; bottom: 4px; } }
@@ -427,27 +412,24 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
   #background::after {
     content: ''; position: absolute; z-index: 0; pointer-events: none;
     right: calc(-1 * 260px + (100vw - min(100vw, var(--measure))) / 2 - 40px); top: 22%;
-    width: 420px; aspect-ratio: 416 / 389;
     background: url('assets/riso/lib/grid-torn--10837020f74d.webp') center / contain no-repeat;
   }
 }
 
 /* How I work: op-art wave band laid across the seam between two sheets. */
-#trainer::after {
-  content: ''; position: absolute; z-index: 3; pointer-events: none;
+#trainer::after { position: absolute; z-index: 3; pointer-events: none;
   right: var(--edge, 24px); top: -58px; width: min(46vw, 440px); aspect-ratio: 889 / 265;
   background: none center / contain no-repeat; rotate: -2.5deg;
 }
 @media (max-width: 760px) { #trainer::after { top: -34px; width: 62vw; right: 12px; } }
 
 /* Contact: a torn sheet with an ink circle, taped across the seam. */
-#contact::after {
-  content: ''; position: absolute; z-index: 1; pointer-events: none;
+#contact::after { position: absolute; z-index: 1; pointer-events: none;
   right: calc(var(--edge, 24px) + 34%); top: -46px; width: min(36vw, 320px); aspect-ratio: 491 / 225;
   background: url('assets/riso/lib/torn-circle--d0066dab040e.webp') center / contain no-repeat; rotate: 3deg;
 }
 #contact { overflow: visible !important; }
-@media (max-width: 760px) { #contact::after { right: 16px; top: -30px; width: 52vw; } }
+@media (max-width: 760px) { #contact::after { top: -30px; width: 52vw; } }
 
 /* Opening sequence: quarter-target registration marks at the sheet corners. */
 .press-tick { border: 0 !important; width: 56px !important; height: 44px !important; background: url('assets/riso/lib/quarter-target--0d756a39498b.webp') center / contain no-repeat; }
@@ -473,7 +455,7 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
   background: var(--paper) !important;
   background-image: var(--grain-ink), var(--mottle-ink) !important;
   background-size: 320px 320px, 512px 512px !important;
-  overflow-y: auto; overflow-x: clip; overscroll-behavior: contain;
+  overflow-y: auto; overscroll-behavior: contain;
 }
 #project-dialog::backdrop { background: var(--paper) !important; }
 
@@ -494,14 +476,11 @@ html[lang="ko"] .project-card .wall-label > div { grid-template-columns: 7em 1fr
 }
 html[lang="ko"] #project-dialog .dialog-contact { font-family: var(--read); letter-spacing: 0; font-size: .875rem; }
 @media (max-width: 760px) {
-  #project-dialog .dialog-top {
-    display: grid !important; grid-template-columns: 1fr auto auto; gap: 6px 8px;
-    grid-template-areas: 'back lang close' 'pos contact contact' !important;
-    min-height: 0; padding: 8px 16px !important;
+  #project-dialog .dialog-top { grid-template-columns: 1fr auto auto;
   }
   #project-dialog .dialog-top .back-projects { grid-area: back; }
   #project-dialog .dialog-top #project-position { grid-area: pos; justify-self: start; margin: 0 !important; }
-  #project-dialog .dialog-top .dialog-contact { grid-area: contact; justify-self: end; min-height: 40px; }
+  #project-dialog .dialog-top .dialog-contact { grid-area: contact; justify-self: end; }
   #project-dialog .dialog-top .language-toggle { grid-area: lang; }
   #project-dialog .dialog-top .close-button { grid-area: close; }
 }
@@ -515,8 +494,7 @@ html[lang="ko"] #project-dialog .dialog-contact { font-family: var(--read); lett
 #project-dialog[data-band="3"] { --band: var(--ink); --band-ink: var(--paper); --band-text: var(--paper); --misreg: var(--acid); }
 #project-dialog[data-band="4"] { --band: var(--paper); }
 #project-dialog .detail-head {
-  position: relative; isolation: isolate;
-  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s2, 16px);
+  position: relative; isolation: isolate; gap: var(--s2, 16px);
   margin: 0 0 var(--s6, 64px); padding: var(--s6, 64px) 0 var(--s5, 48px);
   background: var(--band); box-shadow: 0 0 0 100vmax var(--band); clip-path: inset(0 -100vmax);
   color: var(--band-text); border: 0 !important;
@@ -526,8 +504,7 @@ html[lang="ko"] #project-dialog .dialog-contact { font-family: var(--read); lett
   background: var(--grain-ink), var(--mottle-ink); background-size: 320px 320px, 512px 512px;
 }
 #project-dialog[data-band="3"] .detail-head::before { background-image: var(--grain-paper), var(--mottle-light); }
-#project-dialog .detail-head::after {
-  content: ''; position: absolute; z-index: -1; pointer-events: none;
+#project-dialog .detail-head::after { position: absolute; z-index: -1; pointer-events: none;
   right: calc(-1 * min(120px, var(--page-pad) - 8px)); top: -18%;
   width: clamp(200px, 30vw, 400px); aspect-ratio: 1;
   background: var(--orn, none) center / contain no-repeat;
@@ -549,95 +526,68 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 
 /* Body: gallery first and wide, then a clear reading column beside it. */
 #project-dialog .detail-body {
-  display: grid !important; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important;
-  grid-template-areas: 'left role' 'left story' !important; gap: var(--s4, 32px) clamp(32px, 5vw, 80px) !important;
+  display: grid !important; gap: var(--s4, 32px) clamp(32px, 5vw, 80px) !important;
   align-items: start;
 }
-#project-dialog .detail-left { grid-area: left; position: sticky; top: 96px; }
+#project-dialog .detail-left { grid-area: left; top: 96px; }
 #project-dialog .detail-role { grid-area: role; }
 #project-dialog .detail-story { grid-area: story; }
 @media (max-width: 1000px) {
-  #project-dialog .detail-body { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: 'left' 'role' 'story' !important; }
+  #project-dialog .detail-body { grid-template-areas: 'left' 'role' 'story' !important; }
   #project-dialog .detail-left { position: static; }
 }
 
 /* Gallery: the work on a mount with crop marks and X-tape, a large counter,
    and a filmstrip you can swipe or scroll. */
-#project-dialog .gallery { position: relative; padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; }
-#project-dialog .gallery::before {
-  content: ''; position: absolute; z-index: 4; pointer-events: none;
+#project-dialog .gallery { border: 0 !important; }
+#project-dialog .gallery::before { position: absolute; z-index: 4; pointer-events: none;
   left: -26px; top: -30px; width: 116px; aspect-ratio: 292 / 198;
   background: url('assets/riso/lib/tape-x--4361c7a31c87.webp') center / contain no-repeat; rotate: -8deg;
 }
 #project-dialog .gallery-stage {
-  position: relative; display: grid !important; place-items: center;
-  min-height: min(62vh, 640px); padding: clamp(12px, 2vw, 28px) !important;
-  background: var(--paper) !important; border: 1.5px solid var(--ink) !important;
-  box-shadow: 10px 10px 0 var(--ink) !important;
+  position: relative;
 }
 #project-dialog .gallery-stage::before {
-  --tick: var(--ink); --t: 18px; --w: 1.5px;
-  content: ''; position: absolute; inset: -16px; pointer-events: none;
-  background:
-    linear-gradient(var(--tick), var(--tick)) 0 0 / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 0 0 / var(--w) var(--t),
-    linear-gradient(var(--tick), var(--tick)) 100% 0 / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 100% 0 / var(--w) var(--t),
-    linear-gradient(var(--tick), var(--tick)) 0 100% / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 0 100% / var(--w) var(--t),
-    linear-gradient(var(--tick), var(--tick)) 100% 100% / var(--t) var(--w), linear-gradient(var(--tick), var(--tick)) 100% 100% / var(--w) var(--t);
+  --tick: var(--ink); --t: 18px; --w: 1.5px; pointer-events: none;
   background-repeat: no-repeat;
 }
-#project-dialog #gallery-image { width: auto !important; max-width: 100% !important; height: auto !important; max-height: min(58vh, 600px) !important; object-fit: contain; }
-#project-dialog .gallery-controls {
-  display: grid !important; grid-template-columns: 1fr auto; align-items: center; gap: 16px;
-  margin-top: var(--s4, 32px) !important; padding: 0 !important; border: 0 !important;
+#project-dialog #gallery-image { object-fit: contain; }
+#project-dialog .gallery-controls { gap: 16px; padding: 0 !important; border: 0 !important;
 }
-#project-dialog #slide-count { font: 700 .875rem/1.4 var(--label); letter-spacing: .04em; color: var(--ink); }
-#project-dialog .gallery-controls button {
-  min-width: 56px !important; min-height: 56px !important; border: 1.5px solid var(--ink) !important;
-  background: var(--paper) !important; color: var(--ink) !important; font-size: 1.25rem !important; box-shadow: 4px 4px 0 var(--ink) !important;
-}
-#project-dialog .gallery-controls button:not(:disabled):hover { background: var(--ink) !important; color: var(--paper) !important; }
-#project-dialog .gallery-controls button:disabled { opacity: .35; box-shadow: none !important; }
-#project-dialog .gallery-caption { margin-top: 12px !important; font-size: var(--fs-body) !important; max-width: 60ch; }
+#project-dialog .gallery-controls button:disabled { box-shadow: none !important; }
+#project-dialog .gallery-caption { margin-top: 12px !important; }
 #project-dialog .gallery-thumbnails {
-  display: flex !important; gap: 10px !important; margin-top: var(--s3, 24px) !important;
-  overflow-x: auto !important; overflow-y: hidden; scroll-snap-type: x proximity; padding: 4px 4px 14px !important;
-  scrollbar-color: var(--ink) transparent; scrollbar-width: thin;
+  display: flex !important;
+  overflow-x: auto !important; overflow-y: hidden; scroll-snap-type: x proximity; scrollbar-width: thin;
   -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
 }
 #project-dialog .gallery-thumbnails button {
-  flex: 0 0 auto !important; width: auto !important; height: 84px !important; min-width: 56px; padding: 0 !important;
-  scroll-snap-align: start; border: 1.5px solid var(--ink-45, rgba(73,43,81,.45)) !important; background: var(--paper) !important;
-  opacity: .72; transition: opacity 160ms var(--ease-press), transform 160ms var(--ease-press);
+  flex: 0 0 auto !important; width: auto !important; min-width: 56px;
+  scroll-snap-align: start; transition: opacity 160ms var(--ease-press), transform 160ms var(--ease-press);
 }
 #project-dialog .gallery-thumbnails button img { height: 100% !important; width: auto !important; max-width: none !important; object-fit: contain; }
-#project-dialog .gallery-thumbnails button:hover { opacity: 1; }
-#project-dialog .gallery-thumbnails button[aria-pressed="true"] { opacity: 1; border: 3px solid var(--ink) !important; box-shadow: 4px 4px 0 var(--acid) !important; transform: translateY(-2px); }
 
 /* Reading column: one rhythm, no boxed facts pretending to be buttons. */
 #project-dialog :is(.detail-role, .detail-story) h3,
 #project-dialog .case-study > h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem) !important; margin-bottom: 12px; }
-#project-dialog .case-facts { display: grid; gap: 0 !important; margin: 0 0 var(--s3) !important; padding: 0 !important; border-top: 1.5px solid var(--ink); }
+#project-dialog .case-facts { display: grid; margin: 0 0 var(--s3) !important; padding: 0 !important; }
 #project-dialog .case-facts li {
-  display: block; margin: 0 !important; padding: 12px 0 !important; border: 0 !important; border-bottom: 1px solid var(--ink-15, rgba(73,43,81,.15)) !important;
-  background: none !important; box-shadow: none !important; font-weight: 700; font-size: var(--fs-body) !important;
+  display: block; margin: 0 !important; padding: 12px 0 !important; border: 0 !important;
+  background: none !important; box-shadow: none !important; font-weight: 700;
 }
-#project-dialog .project-materials { margin-top: var(--s5, 48px); }
 
 /* Phones: previous / next is a sticky bar in thumb reach (R8). */
 @media (max-width: 760px) {
   #project-detail { padding-bottom: 0; }
   #project-dialog .detail-head { padding-top: var(--s5, 48px); }
   #project-dialog .gallery-stage { min-height: 0; }
-  #project-dialog .gallery-thumbnails button { height: 64px !important; }
   #project-dialog .detail-footer {
     position: sticky; bottom: 0; z-index: 20;
     display: grid !important; grid-template-columns: 1fr 1fr; gap: 0 !important;
     margin: var(--s5, 48px) calc(-1 * var(--page-pad)) 0 !important; padding: 0 !important; border: 0 !important;
     background: var(--ink); box-shadow: 0 -6px 0 var(--acid);
   }
-  #project-dialog .detail-footer button {
-    min-height: 56px; justify-content: center; color: var(--paper) !important; background: none !important; border: 0 !important;
-    font: 700 .8125rem/1 var(--label); letter-spacing: .06em; text-transform: uppercase;
+  #project-dialog .detail-footer button { justify-content: center; color: var(--paper) !important; background: none !important; border: 0 !important;
   }
   #project-dialog .detail-footer button + button { border-left: 1px solid color-mix(in srgb, var(--paper) 30%, transparent) !important; }
   html[lang="ko"] #project-dialog .detail-footer button { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .9375rem; }
@@ -691,7 +641,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 #project-dialog .detail-head { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: none !important; grid-auto-flow: row !important; text-align: left !important; }
 #project-dialog .detail-head > * { grid-column: 1 / -1 !important; grid-row: auto !important; margin-inline: 0 !important; }
 @media (max-width: 760px) {
-  #project-dialog .detail-footer button { display: block !important; text-align: center; padding: 0 12px !important; font-size: .75rem !important; letter-spacing: .04em !important; line-height: 1.25 !important; }
+  #project-dialog .detail-footer button { display: block !important; text-align: center; padding: 0 12px !important; line-height: 1.25 !important; }
 }
 
 /* ---------- Phase 5 — QA fixes ------------------------------------------ */
@@ -724,8 +674,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 
 /* Ornament budget: about half. Gone: the small stickers and frames that
    competed with text (measured overlaps on tablet, phone and Korean desktop). */
-.flourish--cross, .flourish--circles, .flourish--bg-circles, .flourish--graph,
-.flourish--bullseye, .flourish--tape, .flourish--moon { display: none !important; }
+.flourish--cross, .flourish--circles, .flourish--bg-circles, .flourish--graph, .flourish--moon { display: none !important; }
 .contact-actions::before { content: none !important; }
 #project-dialog .gallery::before { content: none !important; }          /* X-tape sat on the cover */
 .project-card .artifact-arrangement::after { content: none !important; } /* tape strips sat on every cover */
@@ -733,8 +682,6 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 /* Riso pieces on phones and tablets: mostly cropped by the band's top edge,
    so the visible part stays above the number row and never meets a title. */
 @media (max-width: 1000px) {
-  .project-collection > .project-card:nth-child(n) { --orn-w: 150px; }
-  .project-collection > .project-card:nth-child(7n+5) { --orn-w: 220px; }
   .project-collection > .project-card:nth-child(n)::after { top: calc(var(--orn-w) / var(--orn-ratio) * -.55) !important; right: -36px !important; }
 }
 
@@ -783,7 +730,6 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 #project-dialog :is(.detail-callout, .case-days li) { padding: 14px 0 !important; border-top: 1px solid var(--ink-15, rgb(73 43 81 / .15)) !important; }
 #project-dialog .detail-callout { border-top: 1.5px solid var(--ink) !important; font-style: italic; }
 #project-dialog .gallery-controls button { box-shadow: none !important; }
-#project-dialog .gallery-thumbnails button[aria-pressed="true"] { box-shadow: 0 4px 0 var(--acid) !important; }
 
 /* ==========================================================================
    Stage B — finish: spot-UV varnish. The print-world gloss: a clear coat on
@@ -839,8 +785,8 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 
 /* Proof in the first five seconds: the two numbers from the old "How I work"
    section, set large in the display face (R9 serial position). */
-.hero .hero-proof { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: var(--s3, 24px) 0 0; padding: var(--s2, 16px) 0 0; border-top: 1.5px solid var(--ink); }
-.hero .hero-proof p { display: grid; gap: 2px; margin: 0; max-width: 16ch; }
+.hero .hero-proof { flex-wrap: wrap; margin: var(--s3, 24px) 0 0; padding: var(--s2, 16px) 0 0; border-top: 1.5px solid var(--ink); }
+.hero .hero-proof p { display: grid; gap: 2px; margin: 0; }
 .hero .hero-proof strong {
   font: 700 clamp(2.5rem, 1.6rem + 2.6vw, 4rem)/.9 var(--display); color: var(--ink); letter-spacing: -.01em;
   text-shadow: .045em .04em 0 var(--acid);
@@ -867,7 +813,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 }
 #home.hero--poster .hero-art-note { top: var(--s4, 32px) !important; bottom: auto !important; left: var(--edge) !important; }
 #home.hero--poster .hero-copy {
-  display: grid !important; max-width: calc(var(--measure) - 2 * var(--gutter)) !important; margin: 0 auto !important;
+  display: grid !important; margin: 0 auto !important;
   padding: calc(clamp(4.25rem, 1.5rem + 12.5vw, 16rem) * .55 + var(--s4, 32px)) var(--gutter) 0 !important;
   grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); grid-template-areas: 'role intro proof' 'actions location proof';
   gap: var(--s3, 24px) clamp(24px, 4vw, 64px); align-items: start; text-align: left !important;
@@ -875,7 +821,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 #home.hero--poster .hero-copy > .role { grid-area: role; font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem) !important; }
 #home.hero--poster .hero-copy > .intro { grid-area: intro; margin: 0 !important; }
 #home.hero--poster .hero-copy > .location { grid-area: location; margin: 0 !important; }
-#home.hero--poster .hero-copy > .hero-proof { grid-area: proof; flex-direction: column; margin: 0; }
+#home.hero--poster .hero-copy > .hero-proof { grid-area: proof; margin: 0; }
 #home.hero--poster .hero-copy > .hero-actions { grid-area: actions; margin: 0 !important; }
 #home.hero--poster::after { left: auto; right: calc(var(--edge) - 40px); bottom: auto; top: calc(min(76vh, 780px) - 120px); z-index: 2; }
 @media (max-width: 1000px) {
@@ -902,7 +848,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
   #home.hero--poster .hero-art { animation-name: roller-poster !important; }
   @keyframes roller-poster { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 -10% -80% -10%); } }
 }
-#home.hero--poster .hero-copy { padding-left: 0 !important; padding-right: 0 !important; width: calc(100% - 2 * var(--edge) + 2 * var(--gutter)); }
+#home.hero--poster .hero-copy { width: calc(100% - 2 * var(--edge) + 2 * var(--gutter)); }
 @media (min-width: 1001px) { #home.hero--poster .hero-copy { width: auto; margin-inline: calc(var(--edge) - var(--gutter)) !important; max-width: none !important; } }
 
 /* ---------- Curated band variety (desktop) --------------------------------
@@ -937,9 +883,8 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     grid-template-areas: 'head copy' 'media media' !important; align-items: end !important;
   }
-  .project-collection > .project-card:nth-child(7n+5) .artifact-arrangement {
-    display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; grid-template-rows: auto !important;
-    gap: clamp(16px, 2vw, 32px) !important; padding: clamp(16px, 2vw, 28px) !important; align-items: start;
+  .project-collection > .project-card:nth-child(7n+5) .artifact-arrangement { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; grid-template-rows: auto !important;
+    gap: clamp(16px, 2vw, 32px) !important; align-items: start;
   }
   .project-collection > .project-card:nth-child(7n+5) :is(.artifact-main-frame, .artifact-fixed) {
     grid-column: auto !important; grid-row: auto !important; position: relative !important; inset: auto !important;
@@ -954,7 +899,6 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) !important;
     grid-template-areas: 'media head' 'media copy' !important;
   }
-  .project-collection > .project-card:nth-child(7n+6) .artifact-arrangement { rotate: -1.6deg; }
   .project-collection > .project-card:nth-child(7n+6) .project-title { font-size: clamp(2.75rem, 1.5rem + 3.4vw, 5rem) !important; max-width: 12ch !important; }
 
   /* 7 · Spread, title-led: work on the right, the riso piece follows it. */
@@ -979,11 +923,8 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
   padding: 0 0 9% 0 !important; background: none !important; border: 0 !important; box-shadow: none !important;
   rotate: none;
 }
-.project-collection > .project-card.project-card .artifact-arrangement::before { content: none !important; }
 .project-collection > .project-card .artifact-fixed { display: block !important; }
-.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) {
-  background: var(--paper) !important; padding: clamp(5px, .7vw, 9px) !important; border: 0 !important;
-  box-shadow: 0 1px 1px rgb(40 22 45 / .12), 0 12px 20px -10px rgb(40 22 45 / .38), 0 30px 50px -28px rgb(40 22 45 / .45) !important;
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) { border: 0 !important;
   transform: none !important; height: auto !important; aspect-ratio: auto !important;
   transition: translate 520ms var(--ease-press), rotate 520ms var(--ease-press) !important;
 }
@@ -998,15 +939,15 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 /* Cover on top, in flow. */
 .project-collection > .project-card.project-card .artifact-main-frame {
   position: relative !important; z-index: 3; width: 78% !important; margin: 0 !important; inset: auto !important;
-  translate: 0 0; rotate: -1deg;
+  translate: 0 0;
 }
 /* Second and third samples behind it. */
 .project-collection > .project-card.project-card .artifact-fixed {
   position: absolute !important; z-index: 2; width: 50% !important; inset: auto !important; right: 0 !important; top: 7% !important; left: auto !important; bottom: auto !important;
-  translate: 0 0; rotate: 4deg;
+  translate: 0 0;
 }
 .project-collection > .project-card.project-card .artifact-fixed.artifact-tertiary {
-  z-index: 1; width: 44% !important; top: auto !important; bottom: 0 !important; right: 9% !important; rotate: -5deg;
+  z-index: 1; width: 44% !important; top: auto !important; bottom: 0 !important; right: 9% !important;
 }
 /* Mirror on bands whose work sits on the right (desktop). */
 @media (min-width: 1001px) {
@@ -1018,12 +959,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 /* Fan open on hover / focus (desktop). */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-arrangement { transform: none !important; }
-  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-main-frame { translate: -3% -3%; rotate: -2.5deg; }
-  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-fixed { translate: 7% -7%; rotate: 8deg; }
-  .project-collection > .project-card.project-card:is(:hover, :focus-visible) .artifact-fixed.artifact-tertiary { translate: 2% 9%; rotate: -9deg; }
   .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-main-frame { translate: 3% -3%; rotate: 2.5deg; }
-  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-fixed { translate: -7% -7%; rotate: -8deg; }
-  .project-collection > .project-card:is(:nth-child(7n+4), :nth-child(7n+7)):is(:hover, :focus-visible) .artifact-fixed.artifact-tertiary { translate: -2% 9%; rotate: 9deg; }
 }
 /* Phones and tablets: the pile fans as it scrolls in. */
 @supports (animation-timeline: view()) {
@@ -1066,8 +1002,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 .project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed) img {
   border: clamp(5px, .7vw, 9px) solid var(--paper) !important; box-sizing: border-box; background: var(--paper);
 }
-.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed)::before {
-  content: '' !important; display: block !important; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+.project-collection > .project-card.project-card :is(.artifact-main-frame, .artifact-fixed)::before { display: block !important; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   translate: clamp(8px, 1.1vw, 16px) clamp(10px, 1.3vw, 18px);
   background: radial-gradient(circle, var(--dot-ink) 1.15px, transparent 1.45px) 0 0 / 5px 5px !important;
   -webkit-mask-image: linear-gradient(150deg, transparent 18%, #000 62%); mask-image: linear-gradient(150deg, transparent 18%, #000 62%);
@@ -1082,19 +1017,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 
 /* Project page gallery: the same halftone shadow as the print piles
    (replaces the soft blur and the crop marks). */
-#project-dialog .gallery-stage { box-shadow: none !important; isolation: isolate; }
-#project-dialog .gallery-stage::before {
-  inset: 0 !important; z-index: -1 !important; translate: 14px 16px;
-  background: radial-gradient(circle, rgb(73 43 81 / .9) 1.15px, transparent 1.45px) 0 0 / 5px 5px !important;
-  -webkit-mask-image: linear-gradient(150deg, transparent 18%, #000 62%); mask-image: linear-gradient(150deg, transparent 18%, #000 62%);
-}
-#project-dialog .gallery-stage::before {
-  translate: none !important; inset: 0 -14px -16px 0 !important;
-  clip-path: polygon(calc(100% - 14px) 16px, 100% 16px, 100% 100%, 14px 100%, 14px calc(100% - 16px), calc(100% - 14px) calc(100% - 16px));
-  -webkit-mask-image: none; mask-image: none;
-}
-#project-dialog .gallery-stage { overflow: visible !important; }
-#project-dialog .gallery-stage > img { position: relative; z-index: 1; }
+#project-dialog .gallery-stage { isolation: isolate; }
 
 /* ==========================================================================
    Project gallery, redesigned (16 Nov 2026): a viewing room.
@@ -1102,10 +1025,9 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
    ground, like prints pinned in a dark room; the work is as large as the
    screen allows; the counter is set as type; the strip is a contact sheet.
    ========================================================================== */
-#project-dialog .detail-body { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important; grid-template-areas: 'left left' 'role story' !important; }
 #project-dialog .detail-left { position: static !important; display: contents; }
 #project-dialog .gallery { grid-column: 1 / -1; grid-row: 1; }
-#project-dialog .project-materials { grid-column: 1 / -1; grid-row: 3; margin-top: var(--s5, 48px); }
+#project-dialog .project-materials { grid-column: 1 / -1; grid-row: 3; }
 #project-dialog .detail-role { grid-row: 2; grid-column: 1; }
 #project-dialog .detail-story { grid-row: 2; grid-column: 2; }
 @media (max-width: 1000px) {
@@ -1116,7 +1038,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 #project-dialog .gallery {
   --room: var(--ink); --room-ink: var(--paper); --room-dot: var(--acid);
   position: relative; isolation: isolate;
-  display: grid !important; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 'tabs tabs' 'stage stage' 'count arrows' 'caption caption' 'strip strip';
+  display: grid !important;
   gap: 0 24px; margin: calc(-1 * var(--s6, 64px)) 0 var(--s5, 48px) !important; padding: clamp(32px, 5vw, 72px) 0 clamp(24px, 3vw, 40px) !important;
   background: var(--room) !important; box-shadow: 0 0 0 100vmax var(--room) !important; clip-path: inset(0 -100vmax);
   color: var(--room-ink);
@@ -1127,17 +1049,14 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
   background: var(--grain-paper), var(--mottle-light); background-size: 320px 320px, 512px 512px;
 }
 #project-dialog .gallery-tabs { grid-area: tabs; margin: 0 0 var(--s3, 24px) !important; }
-#project-dialog .gallery-tabs button { color: var(--room-ink) !important; background: none !important; border: 0 !important; border-bottom: 2px solid transparent !important; box-shadow: none !important; min-height: 44px; }
-#project-dialog .gallery-tabs button[aria-pressed="true"] { border-bottom-color: var(--acid) !important; }
+#project-dialog .gallery-tabs button { color: var(--room-ink) !important; background: none !important; border: 0 !important; box-shadow: none !important; min-height: 44px; }
 
 /* The stage: no box. The page itself floats, with its halftone shadow. */
 #project-dialog .gallery-stage {
-  grid-area: stage; min-height: 0 !important; height: min(70vh, 760px); padding: 0 !important;
+  grid-area: stage; padding: 0 !important;
   background: none !important; border: 0 !important; box-shadow: none !important; cursor: zoom-in;
 }
-#project-dialog .gallery-stage::before { content: none !important; }
 #project-dialog #gallery-image {
-  max-height: 100% !important; max-width: 100% !important; width: auto !important; height: auto !important;
   border: clamp(4px, .5vw, 8px) solid var(--paper); background: var(--paper);
   filter: drop-shadow(14px 16px 0 transparent);
   box-shadow: 14px 16px 0 -1px transparent;
@@ -1146,21 +1065,16 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 #project-dialog .gallery-stage .image-enlarge { top: 12px !important; right: 12px !important; }
 
 /* Counter set as type: "03" huge, "/ 18" small, the slide's own label after. */
-#project-dialog .gallery-controls { grid-area: count / count / arrows / arrows; margin-top: var(--s4, 32px) !important; }
-#project-dialog #slide-count {
-  font: 700 clamp(2.5rem, 1.5rem + 3vw, 4.5rem)/.9 var(--display) !important; letter-spacing: -.01em !important;
-  color: var(--room-ink) !important; text-shadow: .05em .045em 0 var(--acid);
-}
+#project-dialog .gallery-controls { grid-area: count / count / arrows / arrows; }
 #project-dialog .gallery-controls button {
   min-width: 64px !important; min-height: 64px !important; border: 1.5px solid var(--room-ink) !important;
   background: transparent !important; color: var(--room-ink) !important; font-size: 1.5rem !important;
 }
 #project-dialog .gallery-controls button:not(:disabled):hover { background: var(--acid) !important; color: var(--ink) !important; border-color: var(--acid) !important; }
-#project-dialog .gallery-controls button:disabled { opacity: .25; }
 #project-dialog .gallery-caption { grid-area: caption; margin: 12px 0 0 !important; color: color-mix(in srgb, var(--room-ink) 88%, transparent) !important; font-size: var(--fs-lead) !important; max-width: 62ch; }
 
 /* Contact sheet: numbered frames on the dark ground; the current one is lit. */
-#project-dialog .gallery-thumbnails { grid-area: strip; counter-reset: frame; margin-top: var(--s4, 32px) !important; gap: 14px !important; padding: 22px 4px 10px !important; scrollbar-color: var(--acid) transparent; }
+#project-dialog .gallery-thumbnails { grid-area: strip; counter-reset: frame; gap: 14px !important; padding: 22px 4px 10px !important; scrollbar-color: var(--acid) transparent; }
 #project-dialog .gallery-thumbnails button {
   counter-increment: frame; position: relative; height: 92px !important;
   border: 0 !important; background: var(--paper) !important; padding: 3px !important; opacity: .5;
@@ -1175,27 +1089,19 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 
 /* Each new page is laid down: a quick wipe, like a sheet onto the table. */
 @media (prefers-reduced-motion: no-preference) {
-  #project-dialog #gallery-image.slide-enter { animation: sheet-down 340ms var(--ease-press) both !important; }
   @keyframes sheet-down { from { clip-path: inset(0 0 100% 0); transform: translateY(-10px); } to { clip-path: inset(0 0 0 0); transform: none; } }
 }
 @media (max-width: 760px) {
-  #project-dialog .gallery { margin-top: calc(-1 * var(--s6, 64px)) !important; padding: 28px 0 20px !important; }
-  #project-dialog .gallery-stage { height: auto; max-height: 64vh; }
-  #project-dialog #gallery-image { max-height: 60vh !important; }
+  #project-dialog .gallery-stage { max-height: 64vh; }
   #project-dialog .gallery-controls button { min-width: 52px !important; min-height: 52px !important; }
-  #project-dialog .gallery-thumbnails button { height: 68px !important; }
 }
 
 /* Gallery stage hugs the page so the halftone shadow sits on the print. */
-#project-dialog .gallery-stage { justify-self: center; width: fit-content !important; max-width: 100%; height: auto !important; display: block !important; }
-#project-dialog #gallery-image { display: block; max-height: min(70vh, 760px) !important; }
+#project-dialog .gallery-stage { max-width: 100%; }
+#project-dialog #gallery-image { display: block; }
 #project-dialog .gallery-stage::before {
-  content: '' !important; position: absolute; inset: 0 -16px -18px 0 !important; z-index: -1 !important; translate: none !important;
-  background: radial-gradient(circle, var(--acid) 1.15px, transparent 1.45px) 0 0 / 5px 5px !important;
-  clip-path: polygon(calc(100% - 16px) 18px, 100% 18px, 100% 100%, 16px 100%, 16px calc(100% - 18px), calc(100% - 16px) calc(100% - 18px));
   -webkit-mask-image: none !important; mask-image: none !important;
 }
-@media (max-width: 760px) { #project-dialog #gallery-image { max-height: 60vh !important; } }
 
 /* ---------- Reading: one eye line ----------------------------------------
    Gallery → role as a lead statement → the story on a left label rail →
@@ -1210,7 +1116,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
   display: grid; grid-template-columns: minmax(140px, 3fr) minmax(0, 9fr); gap: 12px clamp(24px, 4vw, 64px);
   padding: var(--s5, 48px) 0; border-bottom: 1.5px solid var(--ink);
 }
-#project-dialog .detail-role > h3 { grid-column: 1; grid-row: 1 / span 2; }
+#project-dialog .detail-role > h3 { grid-column: 1; }
 #project-dialog .detail-role > p { grid-column: 2; margin: 0; max-width: 46ch; }
 #project-dialog .detail-role > p:first-of-type strong {
   display: block; font: 700 clamp(1.75rem, 1.1rem + 2.2vw, 3.25rem)/1.05 var(--display); color: var(--ink);
@@ -1232,7 +1138,7 @@ html[lang="ko"] #project-dialog :is(.detail-role > h3, .detail-story h3, .detail
 }
 #project-dialog .detail-story > .case-study { display: block; padding: 0; border: 0; }
 #project-dialog .case-study > h3 { display: none; }
-#project-dialog .detail-story :is(section, div, .case-block) > :not(h3):not(h4) { grid-column: 2; max-width: 62ch; }
+#project-dialog .detail-story :is(section, div, .case-block) > :not(h3):not(h4) { grid-column: 2; }
 #project-dialog .detail-story :is(h3, h4) { grid-column: 1; }
 #project-dialog .case-facts { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important; gap: 0 24px !important; border-top: 0 !important; }
 #project-dialog .case-facts li { border-top: 1.5px solid var(--ink) !important; border-bottom: 0 !important; font-size: var(--fs-lead) !important; }
@@ -1246,7 +1152,7 @@ html[lang="ko"] #project-dialog :is(.detail-role > h3, .detail-story h3, .detail
 html[lang="ko"] #project-dialog details > summary { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .9375rem; }
 
 #project-dialog .project-materials { display: grid; grid-template-columns: minmax(140px, 3fr) minmax(0, 9fr); gap: 12px clamp(24px, 4vw, 64px); padding-top: var(--s5, 48px); }
-#project-dialog .project-materials > h3 { grid-column: 1; grid-row: 1 / span 3; }
+#project-dialog .project-materials > h3 { grid-column: 1; }
 #project-dialog .project-materials > :not(h3) { grid-column: 2; }
 
 @media (max-width: 760px) {
@@ -1269,7 +1175,7 @@ html[lang="ko"] #project-dialog details > summary { font-family: var(--read); le
 /* Gallery grid, explicit rows: tabs · stage · counter+arrows · caption · strip. */
 #project-dialog .gallery { grid-template-columns: minmax(0, 1fr) !important; grid-template-areas: none !important; }
 #project-dialog .gallery > * { grid-column: 1 !important; grid-row: auto !important; }
-#project-dialog .gallery-controls { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+#project-dialog .gallery-controls { display: grid !important; align-items: end; }
 #project-dialog #slide-count { font: 700 1rem/1 var(--label) !important; letter-spacing: .04em !important; text-shadow: none !important; color: var(--room-ink) !important; }
 #project-dialog #slide-count .count-now {
   font: 700 clamp(3rem, 2rem + 3vw, 5rem)/.8 var(--display); letter-spacing: -.01em; margin-right: .1em;
@@ -1282,9 +1188,8 @@ html[lang="ko"] #project-dialog details > summary { font-family: var(--read); le
 #project-dialog :is(.detail-story > *, .case-study > *:not(h3)) { max-width: none !important; width: 100%; }
 #project-dialog .case-block > :is(p, ol, ul) { max-width: 62ch !important; }
 #project-dialog .evidence-section { border: 0 !important; border-bottom: 1px solid var(--ink-15, rgb(73 43 81 / .15)) !important; padding: var(--s4, 32px) 0 !important; }
-#project-dialog .gallery-stage { aspect-ratio: auto !important; max-height: none !important; min-height: 0 !important; height: auto !important; overflow: visible !important; }
+#project-dialog .gallery-stage { aspect-ratio: auto !important; max-height: none !important; min-height: 0 !important; overflow: visible !important; }
 @media (max-width: 760px) { #project-dialog .close-button { font-size: 0 !important; } }
-#project-dialog .gallery-controls { margin-top: calc(var(--s4, 32px) + 22px) !important; }
 #project-dialog .detail-role > p:first-of-type { max-width: min(100%, 26ch * 2.2) !important; }
 #project-dialog .detail-role > p:first-of-type strong { max-width: 24ch; }
 
@@ -1304,14 +1209,12 @@ html { overflow-x: clip; }
 }
 .hero .hero-actions { display: grid !important; grid-template-columns: repeat(2, max-content); gap: 12px !important; align-items: stretch; width: auto !important; }
 .hero .hero-actions > a {
-  display: inline-flex !important; align-items: center; justify-content: center; min-height: 52px !important; padding: 0 26px !important;
+  display: inline-flex !important; align-items: center; justify-content: center; padding: 0 26px !important;
   border: 1.5px solid var(--ink) !important; font: 700 .9375rem/1 var(--read) !important; letter-spacing: 0 !important; text-transform: none !important;
   text-decoration: none !important; background-image: none !important; margin: 0 !important; width: auto !important;
 }
-.hero .hero-actions > .button.primary { background: var(--ink) !important; color: var(--paper) !important; box-shadow: 4px 4px 0 var(--acid) !important; }
 .hero .hero-actions > .text-link { background: transparent !important; color: var(--ink) !important; box-shadow: none !important; }
 @media (hover: hover) {
-  .hero .hero-actions > .button.primary:hover { background: #3a2241 !important; }
   .hero .hero-actions > .text-link:hover { background: var(--acid) !important; }
 }
 .button.primary:hover, .button.primary:active, .button.primary:focus { background-color: var(--ink) !important; }
@@ -1391,18 +1294,16 @@ html { overflow-x: clip; }
 #project-dialog :is(.detail-role, .detail-story > *, .case-study > *:not(h3), .project-materials),
 #project-dialog .detail-role > p:first-of-type strong { animation: none !important; opacity: 1 !important; transform: none !important; clip-path: none !important; }
 #project-dialog .gallery-stage {
-  width: 100% !important; height: min(70vh, 760px) !important; display: grid !important; place-items: center; justify-self: stretch;
+  width: 100% !important; display: grid !important; place-items: center; justify-self: stretch;
 }
-#project-dialog #gallery-image { max-width: 100% !important; max-height: 100% !important; width: auto !important; height: auto !important; }
+#project-dialog #gallery-image { max-width: 100% !important; width: auto !important; height: auto !important; }
 #project-dialog .gallery-stage::before {
   content: '' !important; position: absolute; z-index: 0 !important; clip-path: none !important;
-  inset: auto !important; left: var(--sx, 0); top: var(--sy, 0); width: var(--sw, 0); height: var(--sh, 0); translate: 16px 18px !important;
+  inset: auto !important; translate: 16px 18px !important;
   background: radial-gradient(circle, var(--acid) 1.2px, transparent 1.5px) 0 0 / 6px 6px !important;
 }
 #project-dialog .gallery-stage > img { position: relative; z-index: 1; }
-@media (max-width: 760px) { #project-dialog .gallery-stage { height: 58vh !important; } }
 @media (prefers-reduced-motion: no-preference) {
-  #project-dialog #gallery-image.slide-enter { animation: sheet-in 300ms var(--ease-press) both !important; }
   @keyframes sheet-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
 }
 
@@ -1491,8 +1392,6 @@ html { overflow-x: clip; }
 #home::after { background-image: url('assets/riso/lib/halftone-disc--2be18b346bb8.webp') !important; aspect-ratio: 271 / 213 !important; rotate: none !important; width: 200px !important; }
 @media (min-width: 1440px) { #background::after { background-image: url('assets/riso/lib/grid-torn--10837020f74d.webp') !important; aspect-ratio: 396 / 264 !important; width: 340px !important; } }
 #trainer::after { content: none !important; }
-#project-dialog #gallery-image { max-height: min(70vh, 760px) !important; }
-@media (max-width: 760px) { #project-dialog #gallery-image { max-height: 58vh !important; } }
 @media (max-width: 760px) { .work-tools.has-toggle.is-open #category-filters { width: 100% !important; box-sizing: border-box; } .work-tools.has-toggle { display: block !important; } }
 @media (max-width: 760px) { .work-tools.has-toggle { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; } }
 @media (max-width: 760px) { .work-tools.has-toggle, .work-tools.has-toggle #category-filters { -webkit-mask-image: none !important; mask-image: none !important; } .work-tools.has-toggle::after, .work-tools.has-toggle::before { content: none !important; } }
@@ -1523,8 +1422,6 @@ html { overflow-x: clip; }
 #project-dialog #gallery-image { max-height: var(--stage-h, min(70vh, 760px)) !important; }
 @media (max-width: 760px) {
   #project-dialog .gallery { padding-top: 20px !important; }
-  #project-dialog .gallery-stage { height: var(--stage-h, 58vh) !important; }
-  #project-dialog #gallery-image { max-height: var(--stage-h, 58vh) !important; }
 }
 .hero .hero-actions > a { white-space: nowrap; }
 @media (max-width: 380px) { .hero .hero-actions { grid-template-columns: 1fr !important; } }
