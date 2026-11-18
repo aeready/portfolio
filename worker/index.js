@@ -1,5 +1,8 @@
 const securityHeaders={'content-security-policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",'strict-transport-security':'max-age=31536000; includeSubDomains','referrer-policy':'strict-origin-when-cross-origin','permissions-policy':'camera=(), microphone=(), geolocation=()','x-content-type-options':'nosniff'};
 const secure=headers=>{for(const [k,v] of Object.entries(securityHeaders))headers.set(k,v);return headers};
+// Constant-time comparison for the upload key, so response timing cannot reveal how much of a guess was right.
+const safeEqual=(a,b)=>{const x=new TextEncoder().encode(String(a??'')),y=new TextEncoder().encode(String(b??''));let d=x.length^y.length;const n=Math.max(x.length,y.length);for(let i=0;i<n;i++)d|=(x[i]||0)^(y[i]||0);return d===0};
+const authorised=(request,env)=>Boolean(env.PORTFOLIO_UPLOAD_SECRET)&&safeEqual(request.headers.get('X-Portfolio-Upload-Key'),env.PORTFOLIO_UPLOAD_SECRET);
 const respond=(message,status)=>new Response(message,{status,headers:secure(new Headers({'content-type':'text/plain; charset=utf-8','cache-control':'no-store'}))});
 // Use the requested website file's extension rather than trusting object metadata.
 const SITE_OVERRIDES = new Map();
@@ -12,7 +15,7 @@ const siteContentType=key=>{
 export default {async fetch(request,env){
  const url=new URL(request.url);
  if(url.pathname==='/_portfolio-assemble'&&request.method==='POST'){
-  if(!env.PORTFOLIO_UPLOAD_SECRET||request.headers.get('X-Portfolio-Upload-Key')!==env.PORTFOLIO_UPLOAD_SECRET)return respond('Not found',404);
+  if(!authorised(request,env))return respond('Not found',404);
   const spec=await request.json();if(!/^originals\/[a-z0-9-]+\.pptx$/.test(spec.key)||!Array.isArray(spec.parts)||spec.parts.length>50)return respond('Invalid request',400);
   const upload=await env.BUCKET.createMultipartUpload(spec.key,{httpMetadata:{contentType:'application/vnd.openxmlformats-officedocument.presentationml.presentation'},customMetadata:{sha256:spec.sha256}});
   try {let bytes=0;const uploaded=[];
@@ -21,7 +24,7 @@ export default {async fetch(request,env){
   }catch(error){await upload.abort();return respond('Assembly failed',500);}
  }
  if(url.pathname==='/_portfolio-assemble-site'&&request.method==='POST'){
-  if(!env.PORTFOLIO_UPLOAD_SECRET||request.headers.get('X-Portfolio-Upload-Key')!==env.PORTFOLIO_UPLOAD_SECRET)return respond('Not found',404);
+  if(!authorised(request,env))return respond('Not found',404);
   const spec=await request.json();
   if(!/^site\/assets\/downloads\/[a-z0-9-]+\.(pdf|pptx|zip)$/.test(spec.key)||!Array.isArray(spec.parts)||spec.parts.length>20||!Number.isSafeInteger(spec.bytes)||! /^[a-f0-9]{64}$/.test(spec.sha256||''))return respond('Invalid request',400);
   const types={pdf:'application/pdf',pptx:'application/vnd.openxmlformats-officedocument.presentationml.presentation',zip:'application/zip'};
@@ -39,7 +42,7 @@ export default {async fetch(request,env){
   }catch(error){await upload.abort();return respond('Assembly failed',500);}
  }
  if(url.pathname.startsWith('/_portfolio-upload/')){
-  if(request.method!=='PUT'||!env.PORTFOLIO_UPLOAD_SECRET||request.headers.get('X-Portfolio-Upload-Key')!==env.PORTFOLIO_UPLOAD_SECRET)return respond('Not found',404);
+  if(request.method!=='PUT'||!authorised(request,env))return respond('Not found',404);
   const key=decodeURIComponent(url.pathname.slice('/_portfolio-upload/'.length));if(!/^(site|originals)\//.test(key)||key.includes('..'))return respond('Invalid path',400);
   const size=Number(request.headers.get('Content-Length'));if(!size||size>25*1024*1024)return respond('Invalid size',413);
   const hash=request.headers.get('X-Content-SHA256');if(!/^[a-f0-9]{64}$/.test(hash||''))return respond('Invalid checksum',400);

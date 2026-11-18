@@ -4,6 +4,7 @@
 (function () {
   try {
     var root = document.documentElement;
+    root.classList.add('js');
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (location.hash.indexOf('#project/') === 0) return;
     if (sessionStorage.getItem('press-intro-seen')) return;

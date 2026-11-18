@@ -152,5 +152,8 @@ html[lang="ko"] .site-footer .footer-links a { letter-spacing: 0; font-family: v
 /* Footer ornament keeps 16 px clear of text: it sits at the top-right corner. */
 .site-footer { position: relative; }
 .site-footer .flourish--footer-cross { top: 12px !important; right: 12px !important; bottom: auto !important; transform: none !important; }
-.site-footer .footer-links { padding-right: 40px; }
+@media (max-width: 1279px) { .site-footer .footer-links { padding-right: 40px; } }
 @media (max-width: 760px) { .site-footer .footer-links { padding-right: 0; } .site-footer .footer-licence { padding-right: 40px; } }
+
+/* No JavaScript: the project grid cannot fill, so do not show empty loading shells (the noscript note explains). */
+html:not(.js) .project-skeleton { display: none; }

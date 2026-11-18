@@ -3,6 +3,26 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 18 Nov 2026 — Audit fixes and code-quality pass (branch `polish/audit-fixes`, not on main)
+
+From the read-only audit of 17 Nov. Two commits: a **pure refactor** (no visual change) and the **fixes**.
+- **CSS cleanup (no visual change):** removed 1,635 declarations that can never apply (a later rule with the identical selector, at-rule and property wins) and 66 selectors whose classes appear nowhere in the HTML or JS. `!important` went from about 2,314 to 2,088. Verified: 39 screenshots (home EN/KO at 320/390/768/1024/1440, all 7 project pages EN/KO at 390 and 1440, the 404 page) are byte-identical before and after.
+- **One stylesheet:** `index.html` now loads `web/site.css`, built from the six sheets in the same order with comments and whitespace removed (395 KB to 321 KB, 7 requests to 1). The sources stay the files you edit; run `node scripts/build-css.mjs` after any CSS change. `node scripts/build-css.mjs --check` fails if it is stale. `404.html` still loads its own sheets.
+- **Labels (12 px rule):** project labels on phones and the gallery thumbnail numbers were 11 px; now 12 px. Your `audit-sizes.cjs` flagged them on main and is now clean.
+- **Hero credentials:** two aligned columns from 480 px up; phones keep the old wrapping (two columns do not fit under about 450 px).
+- **Education:** the two degree cards are the same width.
+- **Footer:** "Back to top" lines up with the column edge from 1280 px up (it keeps 40 px clear of the corner cross below that).
+- **Contact:** the three rows now have the same height and the same label start. The email row had a leftover 12 px margin and a smaller font; the LinkedIn mark moved next to the arrow so its label no longer sits further in. Numbered list and no filled button are unchanged.
+- **Phones:** the "Explore the teaching brief…" paragraph sits on the left gutter (it was pushed right by 56 px).
+- **Broken project links:** `#project/anything-wrong` now returns to the Projects section instead of leaving a dead address.
+- **No JavaScript:** the empty loading placeholders no longer show.
+- **Worker:** the upload key is compared in constant time (three endpoints). No behaviour change.
+- **New checks:** `scripts/lint-source.mjs` (`!important` can only go down, budget in `scripts/css-budget.json`; no inline script/style, no `console.log`, `target=_blank` needs `rel=noopener`, every image has `alt`) and `scripts/qa/visual-regression.cjs` (capture, then compare, 39 screenshots).
+- Not changed on purpose: the Korean hero role line (the trailing "·" mirrors the English "&"; needs a native speaker), the Contact list style (your 17 Nov decision), the repo visibility and the CV (your call), committed `.bak` and draft files (not deleted without your say-so).
+- Upload: `web/index.html`, `web/site.css`, `web/app.js`, `web/press-boot.js`, and for the 404 page `web/style.css`, `web/overhaul-v2.css`, `web/refine.css`, `web/press.css`, `web/fixes.css`; rebuild and publish the Worker (`worker/index.js`). `web/edition.css` is no longer loaded by any page.
+- Undo: `git revert` the two commits on `polish/audit-fixes`, or set `index.html` back to the six `<link>` tags.
+- Checked: all validators, the Korean font check, `audit-sizes`, `audit-decoration-overlap`, `phone-links`, `project-close-focus`, 0 text under 12 px and 0 overflow at 9 widths in both languages, bad and good deep links, no-JS.
+
 ## 17 Nov 2026 (late afternoon) — Audit phases 1–3: hero, project pages, contact, tablets, favicon, tidy-up
 
 From the read-only audit (`claude/full-audit-2026-11-17.md` in the Project). Owner chose: hero buttons follow the site-wide rule; "Evidence" renamed; straight to main; stylesheet merge last.

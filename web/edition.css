@@ -469,9 +469,6 @@ html[lang="ko"] :is(.hero .hero-actions > a, .project-collection .project-card .
 .contact-section .contact-actions > .button::before { content: counter(act, decimal-leading-zero); font: 700 .75rem/1 var(--label); letter-spacing: .06em; transform: translateY(-.9em); flex: none; }
 .contact-section .contact-actions > .button > [aria-hidden="true"] { margin-left: auto; font-family: var(--read); font-size: .7em; }
 .contact-section .contact-actions > .button .linkedin-mark { width: .8em !important; height: auto; align-self: center; }
-.contact-section .contact-actions > .button.primary {
-  background: var(--ink) !important; color: var(--acid) !important; padding-inline: 20px !important; border-bottom: 0 !important; margin-bottom: 12px;
-}
 html[lang="ko"] .contact-section .contact-actions > .button { font-size: clamp(1.375rem, 1rem + 1.2vw, 1.875rem) !important; }
 @media (hover: hover) {
   .contact-section .contact-actions > .button.outline:hover { background: var(--ink) !important; color: var(--acid) !important; padding-inline: 20px !important; }
@@ -498,8 +495,9 @@ html[lang="ko"] .contact-section .contact-actions > .button { font-size: clamp(1
 /* Contact title: smaller, so the heading and the list balance. */
 .contact-section h2 { font-size: clamp(3.25rem, 1.5rem + 4.6vw, 6.5rem) !important; }
 html[lang="ko"] .contact-section h2 { font-size: clamp(2.5rem, 1.2rem + 3.4vw, 4.5rem) !important; }
-.contact-section .contact-actions > .button .linkedin-mark { margin: 0 !important; position: static !important; order: 0; }
-.contact-section .contact-actions > .button.primary { font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem) !important; }
+/* The LinkedIn mark sits by the arrow so all three labels start on the same line. */
+.contact-section .contact-actions > .button .linkedin-mark { margin: 0 0 0 auto !important; position: static !important; order: 1; }
+.contact-section .contact-actions > .button:has(.linkedin-mark) > [aria-hidden="true"] { order: 2; margin-left: 12px; }
 @media (min-width: 761px) {
   .contact-section h2 { font-size: clamp(3rem, 1.2rem + 3.4vw, 5rem) !important; white-space: nowrap; text-align: left !important; }
   .contact-section h2 * { display: inline !important; }
@@ -749,7 +747,7 @@ html[lang="ko"] .filter-toggle :is(.ft-label, .ft-value) { font-family: var(--re
   #project-dialog #gallery-image { max-height: 48svh !important; }
   #project-dialog .gallery-thumbnails { margin-top: 14px !important; padding: 18px 2px 6px !important; gap: 10px !important; }
   #project-dialog .gallery-thumbnails button { height: 60px !important; }
-  #project-dialog .gallery-thumbnails button::before { top: -17px; font-size: .6875rem; }
+  #project-dialog .gallery-thumbnails button::before { top: -17px; font-size: .75rem; }
   #project-dialog .gallery-controls {
     display: flex !important; flex-wrap: wrap; align-items: center !important; gap: 8px !important; margin-top: 10px !important;
   }
@@ -1651,7 +1649,7 @@ html body .project-collection > .project-card.project-card { min-height: 0 !impo
 /* 4. Labels hug their words and stay on one line where they can on phones. */
 .hero-art-note, .project-card .project-meta { width: fit-content !important; max-width: 100%; }
 @media (max-width: 600px) {
-  .hero-art-note, .project-card .project-meta { font-size: .6875rem !important; letter-spacing: .04em !important; }
+  .hero-art-note, .project-card .project-meta { font-size: .75rem !important; letter-spacing: .03em !important; }
 }
 
 /* 5. "Selected projects" no longer hangs off the right edge on phones. */
@@ -1684,7 +1682,7 @@ html body .site-footer .flourish--footer-cross { right: 16px !important; top: 16
 /* 9. Contact: all three links are the same numbered lines; footer no longer repeats "Email me". */
 html body .contact-section .contact-actions > .button.primary {
   background: transparent !important; color: var(--ink) !important; box-shadow: none !important; border: 0 !important;
-  border-bottom: 1.5px solid var(--ink) !important; padding-inline: 0 !important; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2rem) !important;
+  border-bottom: 1.5px solid var(--ink) !important; padding-inline: 0 !important; margin-bottom: 0 !important;
 }
 html body .contact-section .contact-actions > .button.primary:hover { translate: none; box-shadow: none !important; background: var(--ink) !important; color: var(--acid) !important; padding-inline: 20px !important; }
 .site-footer a[href="#contact"] { display: none !important; }
@@ -1824,9 +1822,9 @@ html body #project-dialog .ed-prev-button .ed-next-title { color: var(--ink) !im
 .project-card dt, .project-card dl dt, .site-footer small, #project-dialog .gallery-thumbnails::before { opacity: 1 !important; color: inherit !important; }
 .project-card dl dt { color: var(--band-ink, var(--ink)) !important; }
 
-/* U6: education cards only as wide as their text. */
+/* U6: education cards: equal width, sized to the wider card's text. */
 @media (min-width: 1001px) {
-  html body #background .qualifications > div:first-child { display: grid !important; grid-template-columns: repeat(2, auto) !important; justify-content: start !important; column-gap: 24px !important; }
+  html body #background .qualifications > div:first-child { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; justify-content: start !important; width: fit-content; max-width: 100%; column-gap: 24px !important; }
   html body #background .qualifications > div:first-child > h3 { grid-column: 1 / -1; }
   html body #background .degree { padding-right: 40px !important; }
 }
@@ -1889,6 +1887,7 @@ html body #project-dialog .ed-file.is-open .ed-file-num { align-self: flex-start
    ---------------------------------------------------------------------- */
 :root { --ink-70: rgba(73, 43, 81, .85); }
 html body #home.hero .location { display: flex !important; flex-wrap: wrap !important; gap: 10px 28px !important; }
+@media (min-width: 480px) { html body #home.hero .location { display: grid !important; grid-template-columns: repeat(2, max-content) !important; } }
 html body #home.hero .location > span { min-width: 0; max-width: 100%; }
 @media (prefers-reduced-motion: no-preference) {
   #background .timeline-now,

@@ -10,7 +10,8 @@ Before any visual change: read `docs/overhaul/OWNER_DECISIONS.md` (owner's stand
 - Explain changes to the owner in plain language with before/after screenshots.
 
 ## Where things live
-- `web/edition.css` / `edition.js`: newest work, as dated blocks appended at the end (later overrides earlier; undo = delete block).
+- **Pages load `web/site.css`**, generated from the six sheets. Edit the sources, then run `node scripts/build-css.mjs` (also after `hash-assets.mjs` or a Korean font rebuild). `404.html` still loads its own sheets.
+- `web/edition.css` / `edition.js`: newest work. Prefer editing the rule that actually wins over appending another override; every new `!important` must be paid for by removing one (`scripts/lint-source.mjs`).
 - `web/press.css` / `press.js`: motion, bands, gallery sizing (`fitStage`), phone filter, tap-to-zoom.
 - `web/app.js`: projects, filters, gallery, booklet spreads, `data-tone`, `projectOrder`.
 - `web/projects.js`: project data (JSON in JS; edit via JSON round-trip, indent 2). `web/locales.js`: all EN + KO strings.
@@ -27,7 +28,9 @@ node scripts/validate.mjs && PORTFOLIO_TEST_DIRECT_ENTRY=1 node scripts/validate
 node scripts/validate-locales.mjs && node scripts/validate-downloads.mjs
 node scripts/build-worker.mjs && node scripts/validate-worker.mjs
 python3 scripts/check-korean-font.py
+node scripts/build-css.mjs --check && node scripts/lint-source.mjs
 node scripts/qa/audit-sizes.cjs   # other QA scripts: scripts/qa/README.md
+# CSS refactors: node scripts/qa/visual-regression.cjs capture .qa/before, change, capture .qa/after, compare (must be IDENTICAL)
 ```
 Test phones with Playwright devices (`Galaxy S9+`, `Pixel 7`), not just a narrow viewport.
 

@@ -177,9 +177,10 @@ body,
 }
 #work .section-heading > p {
   max-width: 30ch !important; padding-right: 0 !important;
-  margin: var(--s4) 0 0 auto !important;
+  margin: var(--s4) 0 0 !important;
   font-size: var(--fs-lead) !important;
 }
+@media (min-width: 601px) { #work .section-heading > p { margin-left: auto !important; } }
 @media (min-width: 1001px) {
   #work .section-heading { display: grid !important; grid-template-columns: minmax(0, 1fr) 28ch; align-items: end; column-gap: var(--s5); }
   #work .section-heading > p { margin: 0 0 .4em !important; }

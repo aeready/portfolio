@@ -452,6 +452,7 @@
   function syncRoute() {
     if (location.hash.startsWith('#project/')) {
       const id = location.hash.slice(9);
+      if (!projects.some(p => p.id === id)) { history.replaceState(null, '', '#work'); document.getElementById?.('work')?.scrollIntoView?.(); return; }
       if (!dialog.open || activeProject?.id !== id) openProject(id, false);
     } else if (dialog.open) {
       if (closingProject) return;
