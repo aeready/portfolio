@@ -3,6 +3,17 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 21 Nov 2026 (2) — Polish round (main)
+
+- **Project pages:** "02 / 07" sits between Previous and Next (above Next on phones), and a 3 px lime line along the top shows how far down the page you are. Undo: "21 Nov polish" block at the end of `edition.js` and `edition.css`.
+- **Hero stats** count up once (0.9 s) the first time they are seen; reduced motion shows them as printed.
+- **Downloads** show their size after the page count ("PDF · 89 pages · 20.5 MB"), read from the server when the page opens. Page labels made consistent: "PDF · N pages" / "PDF · N쪽" (was "27-page PDF" / "27쪽 PDF").
+- **Spacing:** the paper strip after band 07 is gone at every width (it was already gone on phones); less paper between the hero and "Selected projects" (260 to 197 px at 1440).
+- **Hero image:** phones get a 768 or 1080 px version (72 KB / 165 KB instead of 482 KB) via `srcset`; desktop unchanged.
+- **Browser colour:** `theme-color` is now paper (#F3EBDD), matching the header, instead of aubergine (a dark Android address bar sat on a paper header).
+- **Text selection:** aubergine with lime text (lime with aubergine text on aubergine bands).
+- Checked and left as they are: the existing return sweep and numeral ink pass (not duplicated), tab order, zoom view on phone and desktop.
+
 ## 21 Nov 2026 — Booklet back cover, page turn and audit fixes (main)
 
 From the 21 Nov audit, approved by the owner ("enact what you can").

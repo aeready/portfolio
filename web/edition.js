@@ -656,3 +656,79 @@
   if (document.readyState === 'complete') missing(); else window.addEventListener('load', missing);
   window.addEventListener('hashchange', () => { if (document.documentElement.dataset.missingProject) missing(); });
 })();
+
+/* ---------- 21 Nov polish: position, progress, return tint, ink motion ----
+   One motion vocabulary ("ink settling"): short, eased, plays once, then
+   rests. Reduced motion: none of it runs, values are shown as printed. */
+(() => {
+  const root = document.documentElement;
+  const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const dialog = document.getElementById('project-dialog');
+  const detail = document.getElementById('project-detail');
+
+  // 1. "03 / 07" between Previous and Next, and a thin ink progress line.
+  const syncPosition = () => {
+    if (!dialog?.open || !detail) return;
+    const foot = detail.querySelector('.detail-footer');
+    const cards = [...document.querySelectorAll('.project-collection > .project-card')].filter(c => !c.hidden && getComputedStyle(c).display !== 'none');
+    const id = history.state?.portfolioProject || (location.hash.startsWith('#project/') ? location.hash.slice(9) : '');
+    let list = cards.some(c => c.dataset.projectCard === id) ? cards : [...document.querySelectorAll('.project-collection > .project-card')];
+    const i = list.findIndex(c => c.dataset.projectCard === id);
+    if (!foot || i < 0) return;
+    let pos = foot.querySelector('.ed-pos');
+    if (!pos) { pos = document.createElement('p'); pos.className = 'ed-pos'; foot.querySelector('[data-neighbor="next"]')?.before(pos); }
+    const pad = n => String(n).padStart(2, '0');
+    const text = `${pad(i + 1)} / ${pad(list.length)}`;
+    if (pos.textContent !== text) pos.textContent = text;
+  };
+  let bar = null;
+  const scroller = () => (dialog && dialog.scrollHeight > dialog.clientHeight + 4 ? dialog : document.scrollingElement);
+  const syncBar = () => {
+    if (!bar) return;
+    const s = scroller(); const max = s.scrollHeight - s.clientHeight;
+    bar.style.transform = `scaleX(${max > 0 ? Math.min(1, s.scrollTop / max) : 0})`;
+  };
+  if (dialog && detail) {
+    bar = document.createElement('span'); bar.className = 'ed-progress'; bar.setAttribute('aria-hidden', 'true');
+    dialog.prepend(bar);
+    dialog.addEventListener('scroll', syncBar, {passive: true});
+    window.addEventListener('scroll', () => { if (dialog.open) syncBar(); }, {passive: true});
+    new MutationObserver(() => requestAnimationFrame(() => { syncPosition(); syncBar(); })).observe(detail, {childList: true});
+    new MutationObserver(() => { if (dialog.open) requestAnimationFrame(() => { syncPosition(); syncBar(); }); }).observe(dialog, {attributes: true, attributeFilter: ['open']});
+  }
+
+  // 2. Stats count up once, on first sight (numerals already register on scroll).
+  if (!still && 'IntersectionObserver' in window) {
+    const stats = [...document.querySelectorAll('.hero-proof strong')];
+    const countUp = el => {
+      const m = el.textContent.match(/^(\d+)(.*)$/); if (!m) return;
+      const end = +m[1], tail = m[2], t0 = performance.now(), dur = 900;
+      el.style.minWidth = `${el.getBoundingClientRect().width}px`; el.style.display = 'inline-block';
+      const tick = now => { const k = Math.min(1, (now - t0) / dur), e = 1 - (1 - k) ** 3; el.textContent = `${Math.round(end * e)}${tail}`; if (k < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    };
+    const seen = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      seen.unobserve(e.target);
+      countUp(e.target);
+    }), {threshold: .6});
+    stats.forEach(s => seen.observe(s));
+  }
+
+  // 3. Downloads add their size to "PDF · 27 pages" (read from the server once).
+  const sizes = new Map();
+  const human = bytes => (bytes >= 1048576 ? `${(bytes / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`);
+  const addSizes = () => {
+    if (!detail || typeof fetch !== 'function') return;
+    detail.querySelectorAll('.document-card').forEach(card => {
+      const link = card.querySelector('a[download]'), fmt = card.querySelector('.document-format');
+      if (!link || !fmt || fmt.dataset.sized) return;
+      fmt.dataset.sized = '1';
+      const href = link.getAttribute('href');
+      const put = bytes => { if (bytes > 0 && !fmt.textContent.includes(' MB') && !fmt.textContent.includes(' KB')) fmt.textContent += ` · ${human(bytes)}`; };
+      if (sizes.has(href)) { put(sizes.get(href)); return; }
+      fetch(href, {method: 'HEAD'}).then(r => (r.ok ? +r.headers.get('content-length') : 0)).then(b => { sizes.set(href, b); put(b); }).catch(() => {});
+    });
+  };
+  if (detail) new MutationObserver(() => requestAnimationFrame(addSizes)).observe(detail, {childList: true, subtree: true});
+})();

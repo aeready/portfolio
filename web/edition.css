@@ -966,9 +966,12 @@ html[lang="ko"] #background .software-skills li > span[data-i18n^="skills."]:not
   #project-dialog .ed-next-kicker { position: static !important; translate: none !important; }
 }
 #project-dialog .ed-next-button .ed-next-text { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 8px; } #project-dialog .ed-next-button .ed-next-text > * { grid-area: auto !important; }
-/* Phones: less empty paper between Work, Background and the timeline. */
+/* Band 07 meets Background directly at every width (21 Nov: the paper strip
+   after the last band read as a gap); phones also trim the timeline spacing. */
+#work { padding-bottom: 0 !important; }
+/* 21 Nov: less empty paper between the hero stats and "Selected projects". */
+#work.work-section { padding-top: clamp(48px, 4.5vw, 72px); }
 @media (max-width: 760px) {
-  #work { padding-bottom: 0 !important; }
   .project-collection > .project-card.project-card:last-child { padding-bottom: 40px !important; }
   #background { padding-top: 40px !important; padding-bottom: 48px !important; }
   #background .background-layout { gap: 20px !important; }
@@ -1998,3 +2001,29 @@ html body .zoom-view .zv-nav button { width: 96px !important; }
 html body .zoom-view .zv-nav .zv-prev { justify-self: end !important; }
 html body .zoom-view .zv-nav .zv-next { justify-self: start !important; }
 @media (min-width: 1001px) { html body #home .hero-copy > .hero-actions { display: flex !important; flex-wrap: wrap !important; gap: 12px !important; max-width: 100%; min-width: 0; } }
+
+/* ---------- 21 Nov polish ---------------------------------------------------
+   Motion tokens: 150 / 300 / 500 ms, one easing (--ease-press). */
+:root { --t-fast: 150ms; --t-mid: 300ms; --t-slow: 500ms; }
+::selection { background: var(--ink); color: var(--acid); }
+.project-collection > .project-card[data-tone="ink"] ::selection { background: var(--acid); color: var(--ink); }
+
+/* Project page: a thin ink line along the top shows how far down you are. */
+#project-dialog .ed-progress {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 3px; background: var(--acid);
+  transform: scaleX(0); transform-origin: left center; pointer-events: none;
+}
+#project-dialog:not([open]) .ed-progress { display: none; }
+/* "03 / 07" between Previous and Next. */
+#project-dialog .detail-footer .ed-pos {
+  align-self: center; justify-self: center; margin: 0; font: 700 clamp(1.25rem, 1rem + .8vw, 1.75rem)/1 var(--display);
+  letter-spacing: .02em; font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap;
+}
+#project-dialog .detail-footer.is-single > [data-neighbor="previous"]:not([hidden]) ~ .ed-pos { order: 3; }
+
+#project-dialog .detail-footer:has(> .ed-pos) { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+#project-dialog .detail-footer.is-single:has(> .ed-pos) { grid-template-columns: auto minmax(0, 1fr); }
+@media (max-width: 760px) {
+  #project-dialog .detail-footer:has(> .ed-pos), #project-dialog .detail-footer.is-single:has(> .ed-pos) { grid-template-columns: minmax(0, 1fr); }
+  #project-dialog .detail-footer .ed-pos { order: -1; justify-self: start; font-size: 1.125rem; }
+}

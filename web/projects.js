@@ -571,12 +571,12 @@ window.PORTFOLIO_PROJECTS = [
       [
         "assets/epik-workshop-full.pdf",
         "Workshop slide deck",
-        "89-page PDF"
+        "PDF · 89 pages"
       ],
       [
         "assets/epik-course-guide.pdf",
         "Course guide",
-        "10-page PDF"
+        "PDF · 10 pages"
       ]
     ],
     "source": "The gallery shows selected workshop slides. The course guide includes citations and adaptation credit.",
@@ -682,11 +682,11 @@ window.PORTFOLIO_PROJECTS = [
       "documents": [
         [
           "워크숍 슬라이드 자료",
-          "89쪽 PDF"
+          "PDF · 89쪽"
         ],
         [
           "강의 원고",
-          "10쪽 PDF"
+          "PDF · 10쪽"
         ]
       ],
       "previewTertiaryAlt": "바람과 소망을 표현하는 팝송에서 음악 활용 지점을 찾습니다.",
@@ -968,7 +968,7 @@ window.PORTFOLIO_PROJECTS = [
       [
         "assets/downloads/teacher-development-final.pdf",
         "Revised presentation",
-        "16-page PDF"
+        "PDF · 16 pages"
       ]
     ],
     "materialsNote": "The gallery and PDF contain the same complete 16-slide presentation.",
@@ -1061,7 +1061,7 @@ window.PORTFOLIO_PROJECTS = [
       "documents": [
         [
           "개정된 발표 자료",
-          "16쪽 PDF"
+          "PDF · 16쪽"
         ]
       ],
       "materialsNote": "갤러리와 PDF에 개정된 16장 전체 발표 자료를 담았습니다.",
@@ -1457,7 +1457,7 @@ window.PORTFOLIO_PROJECTS = [
       [
         "assets/how-does-it-taste-handout-optimized.pdf",
         "Taste-word handout",
-        "2-page PDF"
+        "PDF · 2 pages"
       ],
       [
         "assets/downloads/how-does-it-taste-complete.pdf",
@@ -1525,7 +1525,7 @@ window.PORTFOLIO_PROJECTS = [
       "documents": [
         [
           "맛 표현 유인물",
-          "2쪽 PDF"
+          "PDF · 2쪽"
         ],
         [
           "How does it taste 전체 자료",
@@ -1624,7 +1624,7 @@ window.PORTFOLIO_PROJECTS = [
       [
         "assets/advice-suggestions.pdf",
         "Full lesson deck",
-        "27-page PDF"
+        "PDF · 27 pages"
       ]
     ],
     "source": "The gallery shows selected slides and the student handout; the complete lesson PDF is below.",
@@ -1686,7 +1686,7 @@ window.PORTFOLIO_PROJECTS = [
       "documents": [
         [
           "전체 수업 자료",
-          "27쪽 PDF"
+          "PDF · 27쪽"
         ]
       ],
       "displayTitle": "조언과 제안 표현",
