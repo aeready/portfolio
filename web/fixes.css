@@ -157,3 +157,6 @@ html[lang="ko"] .site-footer .footer-links a { letter-spacing: 0; font-family: v
 
 /* No JavaScript: the project grid cannot fill, so do not show empty loading shells (the noscript note explains). */
 html:not(.js) .project-skeleton { display: none; }
+
+/* 21 Nov: the licence link is a 44 px tap target on touch screens without moving the text. */
+@media (pointer: coarse) { .site-footer .footer-licence a { display: inline-block; padding-block: 12px; margin-block: -12px; } }

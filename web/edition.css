@@ -366,22 +366,29 @@ html[lang="ko"] #project-dialog .gallery-tabs button { font-family: var(--read) 
 
 /* Booklets: the blank facing page is never a copy of the last page. */
 #project-dialog .gallery-stage > #gallery-image-b.is-blank { display: none !important; }
-/* "The end!": a lime facing page, set in the title face, a little cheeky. */
+/* Last page alone: the facing page is the booklet's back cover (owner, 21 Nov).
+   Lime paper, the page count as an outlined numeral, a pointer to the full
+   PDF, and the AR mark at the foot. Flat, upright, no shadow. */
 #project-dialog .gallery-stage .gallery-end {
-  position: relative; z-index: 1; display: grid; place-items: center; align-self: stretch; height: auto; width: auto;
+  position: relative; z-index: 1; display: grid; grid-template-rows: 1fr auto 1fr; justify-items: start; align-content: stretch; gap: 14px;
+  align-self: stretch; height: auto; width: auto; padding: clamp(20px, 3vw, 44px);
   background: var(--acid) var(--grain-ink) 0 0 / 320px; border: clamp(4px, .5vw, 8px) solid var(--paper); border-left-width: 0;
-  box-shadow: inset 1px 0 0 rgb(73 43 81 / .25); overflow: hidden;
+  box-shadow: inset 10px 0 18px -12px rgb(73 43 81 / .35); overflow: hidden; color: var(--ink);
 }
 #project-dialog .gallery-stage .gallery-end[hidden] { display: none; }
-#project-dialog .gallery-end-text {
-  font: 700 clamp(2.5rem, 1rem + 3.4vw, 4.75rem)/.9 var(--display); text-transform: uppercase; color: var(--ink);
-  rotate: -6deg; text-shadow: .06em .05em 0 var(--paper);
+#project-dialog .gallery-end-count {
+  align-self: end; font: 700 clamp(4.5rem, 2rem + 6vw, 8.5rem)/.8 var(--display);
+  color: transparent; -webkit-text-stroke: 1.5px var(--ink); font-variant-numeric: tabular-nums;
 }
-html[lang="ko"] #project-dialog .gallery-end-text { line-height: 1.1; }
+#project-dialog .gallery-end-text { max-width: 22ch; font: 400 clamp(.9375rem, .85rem + .3vw, 1.125rem)/1.45 var(--read); text-wrap: balance; }
+html[lang="ko"] #project-dialog .gallery-end-text { word-break: keep-all; }
+#project-dialog .gallery-end-mark {
+  align-self: end; justify-self: end; padding: 6px 8px; background: var(--ink); color: var(--acid);
+  font: 700 1.125rem/1 var(--display); letter-spacing: .02em;
+}
 @media (prefers-reduced-motion: no-preference) {
-  #project-dialog .gallery-end.slide-enter { animation: turn-right 520ms var(--ease-press) 60ms both; transform-origin: left center; }
-  #project-dialog .gallery-end.slide-enter .gallery-end-text { animation: ed-stamp 420ms var(--ease-press) 420ms both; }
-  @keyframes ed-stamp { from { opacity: 0; scale: 1.35; rotate: -14deg; } }
+  #project-dialog .gallery-end.slide-enter .gallery-end-count { animation: ed-ink-fill 600ms var(--ease-press) 380ms both; }
+  @keyframes ed-ink-fill { from { opacity: 0; translate: 0 6px; } }
 }
 
 /* ---------- Band colours: lime, aubergine, cream, repeating ----------------

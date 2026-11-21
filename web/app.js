@@ -168,6 +168,8 @@
   const spreadStart = i => i === 0 ? 0 : (i % 2 ? i : i - 1);
   function stepSlide(direction) {
     const last = currentSlides().length - 1;
+    const stage = $('#open-image');
+    if (stage?.dataset) stage.dataset.turn = direction > 0 ? 'next' : 'prev';
     if (!isSpread()) slideIndex = Math.max(0, Math.min(last, slideIndex + direction));
     else {
       const start = spreadStart(slideIndex);
@@ -222,14 +224,16 @@
     const showEnd = spread && slideIndex > 0 && !pair;
     if (showEnd && !endPage && typeof document.createElement === 'function') {
       endPage = document.createElement('span'); endPage.id = 'gallery-end'; endPage.className = 'gallery-end';
-      endPage.innerHTML = '<span class="gallery-end-text"></span>';
+      endPage.innerHTML = '<span class="gallery-end-count"></span><span class="gallery-end-text"></span><span class="gallery-end-mark" aria-hidden="true">AR</span>';
       stage.append(endPage);
     }
     if (endPage) {
       endPage.hidden = !showEnd;
       const dims = variants[src];
       if (dims && endPage.style) endPage.style.aspectRatio = `${dims.width} / ${dims.height}`;
-      endPage.querySelector('.gallery-end-text').textContent = t('theEnd');
+      const endCount = endPage.querySelector('.gallery-end-count'), endText = endPage.querySelector('.gallery-end-text');
+      if (endCount && endCount.textContent !== String(slides.length)) endCount.textContent = String(slides.length);
+      if (endText && endText.textContent !== t('theEnd')) endText.textContent = t('theEnd');
       if (showEnd && changed) { endPage.classList.remove('slide-enter'); void endPage.offsetWidth; endPage.classList.add('slide-enter'); }
     }
     stage.classList?.toggle('is-end', showEnd);
@@ -389,7 +393,10 @@
     stepSlide(delta < 0 ? 1 : -1);
   }, {passive:true});
   dialog.addEventListener('keydown', event => {
-    if (!event.target.closest('.gallery') || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    // Arrow keys turn pages from anywhere on the project page, except inside
+    // controls that use the arrows themselves (strips, cabinet, fields).
+    if (!['ArrowLeft', 'ArrowRight'].includes(event.key) || event.altKey || event.metaKey || event.ctrlKey) return;
+    if (!event.target.closest('.gallery') && event.target.closest('input, textarea, select, [role="tablist"], [role="slider"], .ed-cabinet, .ed-strip, .gallery-thumbnails')) return;
     event.preventDefault(); stepSlide(event.key === 'ArrowRight' ? 1 : -1);
   });
   dialog.addEventListener('close', () => {
@@ -452,7 +459,7 @@
   function syncRoute() {
     if (location.hash.startsWith('#project/')) {
       const id = location.hash.slice(9);
-      if (!projects.some(p => p.id === id)) { history.replaceState(null, '', '#work'); document.getElementById?.('work')?.scrollIntoView?.(); return; }
+      if (!projects.some(p => p.id === id)) { if (document.documentElement?.dataset) document.documentElement.dataset.missingProject = id; history.replaceState(null, '', '#work'); document.getElementById?.('work')?.scrollIntoView?.(); return; }
       if (!dialog.open || activeProject?.id !== id) openProject(id, false);
     } else if (dialog.open) {
       if (closingProject) return;

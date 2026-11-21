@@ -639,8 +639,10 @@
 
   // S9: a link to a project that doesn't exist says so instead of failing silently.
   const missing = () => {
-    if (!location.hash.startsWith('#project/')) return;
-    const id = decodeURIComponent(location.hash.slice(9));
+    const flagged = document.documentElement.dataset.missingProject;
+    if (!flagged && !location.hash.startsWith('#project/')) return;
+    const id = flagged || decodeURIComponent(location.hash.slice(9));
+    delete document.documentElement.dataset.missingProject;
     if ((window.PORTFOLIO_PROJECTS || []).some(p => p.id === id)) return;
     const note = document.createElement('p');
     note.className = 'ed-missing'; note.setAttribute('role', 'status');
@@ -652,4 +654,5 @@
     if (work) setTimeout(() => work.scrollIntoView({block: 'start'}), 50);
   };
   if (document.readyState === 'complete') missing(); else window.addEventListener('load', missing);
+  window.addEventListener('hashchange', () => { if (document.documentElement.dataset.missingProject) missing(); });
 })();

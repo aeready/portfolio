@@ -383,7 +383,7 @@ html[lang="ko"] .project-title { font: 700 clamp(1.35rem, 2.4vw, 2rem)/1.25 var(
 .linkedin-mark { width: 20px; height: 20px; border-radius: 0; }
 #email-details { display: grid; justify-items: start; gap: 6px; margin-top: 14px; }
 .contact-section .email-link { justify-content: flex-start; margin: 0; padding: 8px 0; color: var(--ink); }
-.contact-section #copy-status { width: fit-content; min-height: 28px; margin: 0; padding: 4px 10px; border: 0; background: var(--ink); color: var(--acid); font: 700 .68rem/1.3 var(--mono); letter-spacing: .1em; opacity: 0; transform: none; }
+.contact-section #copy-status { width: fit-content; min-height: 28px; margin: 0; padding: 4px 10px; border: 0; background: var(--ink); color: var(--acid); font: 700 .75rem/1.3 var(--mono); letter-spacing: .1em; opacity: 0; transform: none; }
 .contact-section #copy-status.is-copied:not(:empty), .contact-section #copy-status.is-fallback:not(:empty) { opacity: 1; }
 .site-footer { background: var(--paper); color: var(--ink-70); font: 600 .65rem/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
 

@@ -4,7 +4,7 @@ Read first: `AGENTS.md` (bilingual, originals, publishing rules; overrides defau
 Before any visual change: read `docs/overhaul/OWNER_DECISIONS.md` (owner's standing decisions; don't reopen without asking). Background and design rules: `docs/overhaul/WORKPLAN.md`, `MANIFESTO.md`, `DESIGN_DNA.md`, `PRESERVE.md`, `STYLE_GUIDE.md`.
 
 ## Git and publishing
-- Push to `main` only when the owner says so (fast-forward only); otherwise use a branch. Last push: 18 Nov audit fixes (`93a6421`, `ecedd8c`) at the owner's word; not yet uploaded to the live site.
+- Push to `main` only when the owner says so (fast-forward only); otherwise use a branch. Last push: 21 Nov booklet back cover, page turn and audit fixes, at the owner's word; not yet uploaded to the live site (18 Nov fixes may also still be pending upload).
 - We don't publish. Site is on OpenAI Sites (`.openai/hosting.json`), files in the R2 bucket; the owner/ChatGPT uploads and publishes the Worker. After each round, list the files to upload (plus the three current `web/assets/fonts/NotoSans-Korean-site*--*.woff2` if the font was rebuilt; old ones get deleted).
 - Owner reviews the live site (may lag `main`) on a Galaxy phone in Chrome: check the code before "fixing" something already fixed.
 - Explain changes to the owner in plain language with before/after screenshots.
@@ -48,6 +48,7 @@ Test phones with Playwright devices (`Galaxy S9+`, `Pixel 7`), not just a narrow
 - USA Camp PDF page order (10/12) unverified. Korean job title is our translation; its trailing "·" (mirrors the English "&") wraps oddly at some widths: needs a native speaker.
 - Owner decisions: GitHub repo is public while the site is meant to be private and the repo holds the CV PDF (contact details); Contact email row is not visually primary (17 Nov decision kept).
 - To check live: the six R2-only originals/downloads (HEAD, Content-Type, bytes vs `web/originals.js`); Worker bundle is 47 MB and the upload route caps files at 25 MB (`epik-workshop-full.pdf` is 21.5 MB); response compression; real-phone and Safari/Firefox pass.
+- USA Camp has no Project brief / Design choices cards and an empty `h2` (needs owner content). Project-page title band (~440 px) pushes the booklet spread below the first screen at 1440×900: owner decision.
 - Small: `uc-santa-cruz` logo is an 82 KB PNG for a ~48 px badge; committed `.bak`/draft files (`CLAUDE.md.bak`, `claude-code/`, `design/`) not deleted.
 - Owner to-dos: photos of printed materials, more project context, textbook 첫 출근 했습니다!.
 

@@ -3,6 +3,19 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 21 Nov 2026 — Booklet back cover, page turn and audit fixes (main)
+
+From the 21 Nov audit, approved by the owner ("enact what you can").
+- **Booklet end page:** "The end!" (tilted, with a text shadow, against the no-tilt rule) is now the booklet's back cover: lime paper, the page count as an outlined numeral, "pages in this booklet. The full PDF is under Project files." / "쪽 책자. 전체 PDF는 아래 프로젝트 파일에 있어요.", and the AR mark at the foot. Upright, no shadow. Undo: `app.js` end-page block, `edition.css` "Last page alone" block, `theEnd` in `locales.js`.
+- **Page turn:** the fade, 10° wobble and blur are replaced by a leaf that swings over the spine and lands flat, with a soft shade lifting off the page underneath (460 ms). Forward turns move the left leaf, backward the right. Reduced motion: no animation. Undo: `press.css` "Page turn (21 Nov)" block and the `data-turn` line in `stepSlide`.
+- **Arrow keys** turn pages from anywhere on a project page (before: only with focus inside the gallery), except inside strips, the cabinet and fields.
+- **Broken project links** now show the existing "That project isn't here" note (it never appeared: the address was rewritten before it could check). Undo: `missingProject` lines in `app.js` and `edition.js`.
+- **Ornaments 16 px clear:** bands 01, 03 and 07 had their riso piece over the work. `press.js` now measures each piece against the images and nudges it up (via `--orn-dx/--orn-dy`, a `translate` on the band `::after`). Measured 17–19 px clear at 1024, 1440 and 1920. Undo: the "Band ornaments" block in `press.js`.
+- **Contact:** "Email me" shows a ↓ (the address opens below), so all three rows carry an arrow. The fallback copy note is 12 px (was 10.9).
+- **Footer:** the CC BY-NC link is a 44 px tap target on touch screens (was 19 px).
+- **Images:** `linkedin-mark` 1024 px to 96 px (10 KB to 0.4 KB), Southampton logo 554 px to 240 px (17 KB to 4.5 KB). New hashed names.
+- `!important` count unchanged (2 added, 2 removed in `press.css`).
+
 ## 18 Nov 2026 — Audit fixes and code-quality pass (branch `polish/audit-fixes`, not on main)
 
 From the read-only audit of 17 Nov. Two commits: a **pure refactor** (no visual change) and the **fixes**.

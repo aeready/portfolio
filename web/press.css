@@ -87,6 +87,7 @@ body,
   top: calc(var(--orn-w) / var(--orn-ratio) * -.34) !important;
   width: var(--orn-w) !important; aspect-ratio: var(--orn-ratio) !important;
   background: var(--orn) center / contain no-repeat !important;
+  translate: var(--orn-dx, 0) var(--orn-dy, 0); /* set by press.js: 16 px clear of the work */
   pointer-events: none;
 }
 /* Media on the left: the piece sits behind the mount's top-left corner. */
@@ -722,7 +723,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
 .project-card:is(:hover, :focus-visible) .project-action { background: var(--band-ink) !important; color: var(--band) !important; }
 
 /* Arrows only where a link leaves the page. */
-.hero-actions > a > span[aria-hidden="true"], #contact-email > span[aria-hidden="true"] { display: none !important; }
+.hero-actions > a > span[aria-hidden="true"] { display: none !important; }
 
 /* Project pages: callouts and day plans as ruled text, not coloured boxes. */
 #project-dialog :is(.detail-callout, .case-days li, .case-block, .evidence-section) {
@@ -1460,12 +1461,20 @@ html { overflow-x: clip; }
 /* Cover: alone on the right-hand side, like a closed booklet's front. */
 #project-dialog .gallery-stage.is-cover > #gallery-image-b { order: -1; visibility: hidden; }
 #project-dialog .gallery-stage.is-cover > #gallery-image { border-right-width: clamp(4px, .5vw, 8px); border-right-color: var(--paper); }
-/* Page turn: the two pages dissolve in from the spine. */
+/* Page turn (21 Nov): the turning leaf swings over the spine and lands flat;
+   the page underneath is revealed with a soft shade sweeping off it. Forward
+   turns move the left leaf, backward turns the right one. No blur or fade. */
 @media (prefers-reduced-motion: no-preference) {
-  #project-dialog .gallery-stage.is-spread > #gallery-image.slide-enter { animation: turn-left 520ms var(--ease-press) both !important; transform-origin: right center; }
-  #project-dialog .gallery-stage.is-spread > #gallery-image-b.slide-enter { animation: turn-right 520ms var(--ease-press) 60ms both !important; transform-origin: left center; }
-  @keyframes turn-left  { from { opacity: 0; transform: perspective(1400px) rotateY(10deg); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
-  @keyframes turn-right { from { opacity: 0; transform: perspective(1400px) rotateY(-10deg); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+  #project-dialog .gallery-stage.is-spread { perspective: 2200px; }
+  #project-dialog .gallery-stage.is-spread:not([data-turn="prev"]) > #gallery-image.slide-enter { animation: leaf-land-left 460ms cubic-bezier(.3, .6, .2, 1) both !important; transform-origin: right center; backface-visibility: hidden; }
+  #project-dialog .gallery-stage.is-spread:not([data-turn="prev"]) > #gallery-image-b.slide-enter,
+  #project-dialog .gallery-stage.is-spread:not([data-turn="prev"]) > .gallery-end.slide-enter { animation: leaf-shade 460ms ease-out both; }
+  #project-dialog .gallery-stage.is-spread[data-turn="prev"] > #gallery-image-b.slide-enter,
+  #project-dialog .gallery-stage.is-spread[data-turn="prev"] > .gallery-end.slide-enter { animation: leaf-land-right 460ms cubic-bezier(.3, .6, .2, 1) both; transform-origin: left center; backface-visibility: hidden; }
+  #project-dialog .gallery-stage.is-spread[data-turn="prev"] > #gallery-image.slide-enter { animation: leaf-shade 460ms ease-out both !important; }
+  @keyframes leaf-land-left { from { transform: rotateY(88deg); filter: brightness(.82); } 70% { filter: brightness(.97); } to { transform: none; filter: none; } }
+  @keyframes leaf-land-right { from { transform: rotateY(-88deg); filter: brightness(.82); } 70% { filter: brightness(.97); } to { transform: none; filter: none; } }
+  @keyframes leaf-shade { from { filter: brightness(.86); } to { filter: none; } }
 }
 
 /* ---------- Tap to zoom (phones) ----------------------------------------- */

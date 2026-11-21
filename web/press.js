@@ -156,6 +156,35 @@
   window.addEventListener('resize', fitStage, {passive: true});
   document.addEventListener('load', e => { if (e.target?.closest?.('#project-dialog .gallery-thumbnails')) fitStage(); }, true);
 
+  /* ---------- Band ornaments keep 16 px clear of the work (owner rule) ----
+     Each band's riso piece is placed by CSS; here it is measured against the
+     images it sits beside and nudged up (then outward) until clear. */
+  const clearOrnaments = () => {
+    document.querySelectorAll('.project-collection > .project-card').forEach(card => {
+      card.style.removeProperty('--orn-dx'); card.style.removeProperty('--orn-dy');
+      const s = getComputedStyle(card, '::after');
+      if (s.content === 'none' || s.display === 'none' || s.backgroundImage === 'none') return;
+      const c = card.getBoundingClientRect();
+      const o = {l: c.left + parseFloat(s.left), t: c.top + parseFloat(s.top), w: parseFloat(s.width), h: parseFloat(s.height)};
+      if (!(o.w > 0 && o.h > 0) || Number.isNaN(o.l) || Number.isNaN(o.t)) return;
+      const imgs = [...card.querySelectorAll('.artifact-arrangement img')].map(i => i.getBoundingClientRect()).filter(r => r.width && r.height);
+      if (!imgs.length) return;
+      const gap = 16;
+      const hits = (dx, dy) => imgs.some(r => o.l + dx < r.right + gap && o.l + dx + o.w > r.left - gap && o.t + dy < r.bottom + gap && o.t + dy + o.h > r.top - gap);
+      if (!hits(0, 0)) return;
+      const side = o.l + o.w / 2 < c.left + c.width / 2 ? -1 : 1;
+      for (let step = 4; step <= o.h * .75; step += 4) if (!hits(0, -step)) { card.style.setProperty('--orn-dy', `${-step}px`); return; }
+      for (let step = 4; step <= o.w; step += 4) if (!hits(side * step, -o.h * .4)) { card.style.setProperty('--orn-dx', `${side * step}px`); card.style.setProperty('--orn-dy', `${Math.round(-o.h * .4)}px`); return; }
+    });
+  };
+  let ornTimer = 0;
+  const queueOrnaments = () => { clearTimeout(ornTimer); ornTimer = setTimeout(clearOrnaments, 120); };
+  window.addEventListener('resize', queueOrnaments, {passive: true});
+  window.addEventListener('load', queueOrnaments);
+  document.addEventListener('load', e => { if (e.target?.closest?.('.project-collection')) queueOrnaments(); }, true);
+  const collection = document.querySelector('.project-collection, #project-grid');
+  if (collection) new MutationObserver(queueOrnaments).observe(collection, {childList: true});
+
   /* ---------- Phones: tap the page to view it full screen and zoom -------- */
   const dlg = document.querySelector('#project-dialog');
   if (dlg && window.matchMedia) {
