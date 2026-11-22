@@ -147,7 +147,10 @@
     // so a booklet spread is fully visible without scrolling (owner, 22 Nov).
     const scroller = stage.closest('dialog') && stage.closest('dialog').scrollHeight > stage.closest('dialog').clientHeight ? stage.closest('dialog') : document.scrollingElement;
     const stageTop = stage.getBoundingClientRect().top + (scroller ? scroller.scrollTop : 0);
-    const cap = window.innerWidth > 1000 ? Math.max(320, window.innerHeight - stageTop - 28) : window.innerHeight * .52;
+    // Leave room for the control bar when it sits under the work (desktop redesign).
+    const ctrl = stage.parentElement?.querySelector('.gallery-controls');
+    const below = ctrl && ctrl.getBoundingClientRect().top > stage.getBoundingClientRect().top + 40 ? ctrl.getBoundingClientRect().height + 18 : 0;
+    const cap = window.innerWidth > 1000 ? Math.max(320, window.innerHeight - stageTop - 28 - below) : window.innerHeight * .52;
     const spread = window.innerWidth > 1000 && tallest > 1.15;
     const h = Math.min(cap, 760, stage.getBoundingClientRect().width * tallest / (spread ? 2 : 1));
     if (h > 0) stage.style.setProperty('--stage-h', `${Math.round(h)}px`);

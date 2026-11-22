@@ -805,26 +805,32 @@ html[lang="ko"] .filter-toggle :is(.ft-label, .ft-value) { font-family: var(--re
    so it must not be turned 180° like the Latin spines. */
 html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { rotate: none !important; text-orientation: upright; }
 
-/* ---------- Project gallery on desktop: everything visible at once ---------
-   Counter, arrows, All pages and caption sit in a column on the left; the
-   work and its page strip on the right, so nothing falls below the fold. */
+/* ---------- Project gallery on desktop (redesigned 22 Nov) ----------------
+   The work is the hero: centred on paper with a soft shadow, no crop marks or
+   dotted frame. One slim bar under it — counter, arrows, All pages — with the
+   caption beside it; the page strip below. Phones keep their own layout. */
 @media (min-width: 1001px) {
   #project-dialog .gallery.gallery {
-    display: grid !important; grid-template-columns: minmax(220px, 3fr) minmax(0, 9fr) !important; column-gap: clamp(28px, 3vw, 56px) !important;
-    grid-template-rows: auto auto auto 1fr auto !important;
-    grid-template-areas: 'tabs stage' 'ctrl stage' 'cap stage' '. stage' '. strip' !important; align-items: start !important;
+    display: grid !important; grid-template-columns: auto minmax(0, 1fr) !important; column-gap: clamp(24px, 3vw, 48px) !important;
+    grid-template-rows: auto auto auto auto !important;
+    grid-template-areas: 'tabs tabs' 'stage stage' 'ctrl cap' 'strip strip' !important; align-items: center !important;
+    --room: var(--paper); --room-ink: var(--ink); --room-dot: transparent;
   }
-  #project-dialog .gallery.gallery > .gallery-tabs { grid-area: tabs !important; grid-template-columns: 1fr !important; gap: 4px !important; margin-bottom: 20px !important; }
+  #project-dialog .gallery.gallery > .gallery-tabs { grid-area: tabs !important; display: flex !important; justify-content: center; gap: 4px !important; margin-bottom: 16px !important; }
   #project-dialog .gallery.gallery > .gallery-stage { grid-area: stage !important; justify-self: center !important; }
+  #project-dialog .gallery.gallery > .gallery-stage :is(#gallery-image, #gallery-image-b, .gallery-end) { filter: drop-shadow(0 20px 28px rgb(40 22 45 / .2)); }
+  #project-dialog .gallery.gallery > .gallery-stage .ed-crop { display: none; }
+  #project-dialog .gallery.gallery > .gallery-stage::before { display: none; }
   #project-dialog .gallery.gallery > .gallery-controls {
-    grid-area: ctrl !important; margin: 0 !important; display: flex !important; flex-wrap: wrap; align-items: center !important; gap: 12px !important;
+    grid-area: ctrl !important; margin: 18px 0 0 !important; display: flex !important; flex-wrap: nowrap; align-items: center !important; gap: 12px !important;
   }
-  #project-dialog .gallery.gallery > .gallery-controls #slide-count { flex-basis: 100%; }
-  #project-dialog .gallery.gallery > .gallery-controls > div { order: 2; }
+  #project-dialog .gallery.gallery > .gallery-controls #slide-count { order: 1; flex-basis: auto; white-space: nowrap; }
+  #project-dialog .gallery.gallery > .gallery-controls #slide-count .count-source { display: none; }
+  #project-dialog .gallery.gallery > .gallery-controls > div { order: 0; }
   #project-dialog .gallery.gallery > .gallery-controls .ed-sheet-open { order: 3; }
-  #project-dialog .gallery.gallery > .gallery-controls .ed-loupe-hint { order: 4; flex-basis: 100%; }
-  #project-dialog .gallery.gallery > .gallery-caption { grid-area: cap !important; margin: 18px 0 0 !important; font-size: 1.0625rem !important; line-height: 1.5 !important; }
-  #project-dialog .gallery.gallery > .gallery-thumbnails { grid-area: strip !important; margin-top: 18px !important; }
+  #project-dialog .gallery.gallery > .gallery-controls .ed-loupe-hint { display: none; }
+  #project-dialog .gallery.gallery > .gallery-caption { grid-area: cap !important; margin: 18px 0 0 !important; font-size: 1rem !important; line-height: 1.45 !important; justify-self: end; text-align: right; max-width: 60ch; opacity: .85; }
+  #project-dialog .gallery.gallery > .gallery-thumbnails { grid-area: strip !important; margin-top: 20px !important; }
 }
 /* Cabinet: full width; long spine titles wrap into a second column instead
    of being cut off; Korean spines without wide word gaps. */
@@ -1949,14 +1955,17 @@ html body .project-collection > .project-card.project-card:is(:hover, :focus-vis
 html body #home.hero .intro { font-size: clamp(1.0625rem, .95rem + .3vw, 1.1875rem) !important; line-height: 1.75 !important; }
 html[lang="ko"] body #home.hero .intro { font-size: clamp(1.125rem, 1rem + .32vw, 1.25rem) !important; line-height: 1.8 !important; }
 
-/* M7 */
+/* M7, redesigned 22 Nov: one compact title strip — numeral, tag over title,
+   summary on the right. Padding comes from F1 above. */
 @media (min-width: 1001px) {
   html body #project-dialog .detail-head {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr) !important; column-gap: clamp(32px, 5vw, 80px) !important;
-    align-items: end !important; padding-top: 32px !important; padding-bottom: 40px !important;
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 46ch) !important; column-gap: clamp(20px, 2.6vw, 44px) !important;
+    align-items: end !important; row-gap: 8px;
   }
-  html body #project-dialog .detail-head > :not(:last-child) { grid-column: 1 !important; }
-  html body #project-dialog .detail-head > p:last-child { grid-column: 2 !important; grid-row: 1 / span 3 !important; align-self: end; margin: 0 0 .4em !important; }
+  html body #project-dialog .detail-head > .detail-number { grid-area: 1 / 1 / span 2 / 2 !important; margin: 0 0 .12em; line-height: .8; align-self: end; }
+  html body #project-dialog .detail-head > .eyebrow { grid-area: 1 / 2 !important; justify-self: start; align-self: end; margin: 0; }
+  html body #project-dialog .detail-head > #project-title { grid-area: 2 / 2 !important; }
+  html body #project-dialog .detail-head > p:last-child { grid-area: 1 / 3 / span 2 / 4 !important; align-self: end; margin: 0 0 .4em !important; }
 }
 html body #project-dialog .ed-file-body > .detail-role > p:first-of-type strong {
   font: 700 clamp(1.25rem, 1.05rem + .5vw, 1.5rem)/1.35 var(--read) !important; text-transform: none !important; max-width: 46ch !important;
