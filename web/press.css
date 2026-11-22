@@ -1042,7 +1042,7 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
   --room: var(--ink); --room-ink: var(--paper); --room-dot: var(--acid);
   position: relative; isolation: isolate;
   display: grid !important;
-  gap: 0 24px; margin: calc(-1 * var(--s6, 64px)) 0 var(--s5, 48px) !important; padding: clamp(32px, 5vw, 72px) 0 clamp(24px, 3vw, 40px) !important;
+  gap: 0 24px; margin: calc(-1 * var(--s6, 64px)) 0 var(--s5, 48px) !important; padding: clamp(20px, 2.2vw, 32px) 0 clamp(24px, 3vw, 40px) !important;
   background: var(--room) !important; box-shadow: 0 0 0 100vmax var(--room) !important; clip-path: inset(0 -100vmax);
   color: var(--room-ink);
 }

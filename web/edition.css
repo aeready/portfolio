@@ -1747,8 +1747,8 @@ html body .hero .hero-actions > a.text-link { background: var(--paper-deep) !imp
 html body .hero .hero-actions > a:hover { background: var(--ink) !important; color: var(--acid) !important; translate: none !important; box-shadow: none !important; }
 
 /* F1: a shorter project header so the gallery shows on the first screen. */
-html body #project-dialog .detail-head { padding: clamp(28px, 3vw, 44px) 0 clamp(24px, 2.4vw, 36px) !important; }
-html body #project-dialog .detail-head .detail-number { font-size: clamp(3.5rem, 2rem + 4vw, 6rem) !important; margin-bottom: 8px; }
+html body #project-dialog .detail-head { padding: clamp(20px, 1.8vw, 28px) 0 clamp(16px, 1.6vw, 24px) !important; } /* 22 Nov: tighter so a booklet spread fits the first desktop screen */
+html body #project-dialog .detail-head .detail-number { font-size: clamp(3rem, 1.5rem + 2.6vw, 4.5rem) !important; margin-bottom: 8px; }
 html body #project-dialog #project-title { font-size: clamp(2.25rem, 1.4rem + 2.6vw, 4rem) !important; text-shadow: none !important; margin: 10px 0 12px !important; }
 #project-dialog #project-title:focus { outline: none; }
 

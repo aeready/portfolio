@@ -3,6 +3,11 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 (3) — Booklet on the first desktop screen; Gyeonggi-do job text (main)
+
+- **Project pages, desktop:** the gallery is sized to the space left below its top edge (`fitStage` in `press.js`, minimum 320 px), and the title band is tighter (smaller numeral, less padding above the gallery). A booklet spread is now fully visible without scrolling at 1024×768, 1280×720, 1366×768, 1440×900, 1536×864 and 1920×1080. Phones unchanged. Undo: restore `innerHeight - 330` in `fitStage`, the `.detail-head` padding / numeral size in `edition.css` (~1750) and the gallery padding in `press.css` (~1045).
+- **Teacher Trainer (Gyeonggi-do) card:** description expanded from the résumé to match the other two jobs (EN and KO: training for 250+ educators and 30+ incoming foreign teachers; curriculum units, teacher guides and materials revised from participant feedback). The Cheongsol mention was dropped for length.
+
 ## 22 Nov 2026 (2) — Education cards follow the timeline (main)
 
 - Desktop: BA in History on the left, MSc in Education on the right (oldest first, like the timeline above), and the two cards span the full content width so their edges line up with the map and timeline (they were shrink-wrapped to the left). Phones and tablets, whose timeline runs newest first, keep the MSc first via CSS `order`. Undo: swap the two `.degree` blocks back in `index.html`, restore `justify-content: start; width: fit-content` in the U6 rule and delete the "22 Nov: phones list the timeline" block in `edition.css`.
