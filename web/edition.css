@@ -1832,9 +1832,10 @@ html body #project-dialog .ed-prev-button .ed-next-title { color: var(--ink) !im
 .project-card dt, .project-card dl dt, .site-footer small, #project-dialog .gallery-thumbnails::before { opacity: 1 !important; color: inherit !important; }
 .project-card dl dt { color: var(--band-ink, var(--ink)) !important; }
 
-/* U6: education cards: equal width, sized to the wider card's text. */
+/* U6: education cards: equal width. 22 Nov: they span the full content width,
+   lined up with the map and timeline above; oldest (BA) left, MSc right. */
 @media (min-width: 1001px) {
-  html body #background .qualifications > div:first-child { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; justify-content: start !important; width: fit-content; max-width: 100%; column-gap: 24px !important; }
+  html body #background .qualifications > div:first-child { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; width: auto; max-width: none; column-gap: 24px !important; }
   html body #background .qualifications > div:first-child > h3 { grid-column: 1 / -1; }
   html body #background .degree { padding-right: 40px !important; }
 }
@@ -2030,3 +2031,8 @@ html body .zoom-view .zv-nav .zv-next { justify-self: start !important; }
 
 /* AI tools: a drawn sparkle instead of the letters "AI". */
 .skill-logo--ai img { width: 60%; height: auto; }
+/* 22 Nov: phones list the timeline newest first, so the MSc stays on top there. */
+@media (max-width: 1000px) {
+  #background .qualifications > div:first-child > .degree { order: 2; }
+  #background .qualifications > div:first-child > .degree:has(.degree-badge) { order: 1; }
+}

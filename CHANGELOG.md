@@ -3,6 +3,10 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 (2) — Education cards follow the timeline (main)
+
+- Desktop: BA in History on the left, MSc in Education on the right (oldest first, like the timeline above), and the two cards span the full content width so their edges line up with the map and timeline (they were shrink-wrapped to the left). Phones and tablets, whose timeline runs newest first, keep the MSc first via CSS `order`. Undo: swap the two `.degree` blocks back in `index.html`, restore `justify-content: start; width: fit-content` in the U6 rule and delete the "22 Nov: phones list the timeline" block in `edition.css`.
+
 ## 22 Nov 2026 — Decor refresh from the owner's image pack (main)
 
 - **Band ornaments (01, 03, 07)** are the new matched set: registration target, overprint circles, quartered target (`assets/riso/lib/orn-*`). Still kept 16 px clear of the work by `press.js`. Undo: three `--orn` lines in `press.css` (~1390).
