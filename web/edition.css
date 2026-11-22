@@ -372,7 +372,7 @@ html[lang="ko"] #project-dialog .gallery-tabs button { font-family: var(--read) 
 #project-dialog .gallery-stage .gallery-end {
   position: relative; z-index: 1; display: grid; grid-template-rows: 1fr auto 1fr; justify-items: start; align-content: stretch; gap: 14px;
   align-self: stretch; height: auto; width: auto; padding: clamp(20px, 3vw, 44px);
-  background: var(--acid) var(--grain-ink) 0 0 / 320px; border: clamp(4px, .5vw, 8px) solid var(--paper); border-left-width: 0;
+  background: var(--acid) url('assets/booklet-back-cover--9f3a82da3019.webp') center / cover no-repeat; border: clamp(4px, .5vw, 8px) solid var(--paper); border-left-width: 0;
   box-shadow: inset 10px 0 18px -12px rgb(73 43 81 / .35); overflow: hidden; color: var(--ink);
 }
 #project-dialog .gallery-stage .gallery-end[hidden] { display: none; }
@@ -1424,7 +1424,7 @@ html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-al
   background: radial-gradient(circle, var(--acid) 1.3px, transparent 1.6px) 0 0 / 7px 7px;
   -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); mask-image: radial-gradient(closest-side, #000 55%, transparent);
 }
-.work-map .map-land { fill: var(--paper-deep, #eadfcb); }
+.work-map .map-land { fill: url(#map-dots) var(--paper-deep, #eadfcb); } /* 22 Nov: lime halftone land, riso style */
 @media (max-width: 1000px) { #background .work-map::before { inset: 0 6% 0 10%; } }
 /* AI tools tile; languages line; quieter dots behind the tool text. */
 #background .skills-notebook .software-skills li .skill-logo--ai { font: 700 2.25rem/1 var(--display) !important; color: var(--ink); letter-spacing: .02em; }
@@ -2027,3 +2027,6 @@ html body .zoom-view .zv-nav .zv-next { justify-self: start !important; }
   #project-dialog .detail-footer:has(> .ed-pos), #project-dialog .detail-footer.is-single:has(> .ed-pos) { grid-template-columns: minmax(0, 1fr); }
   #project-dialog .detail-footer .ed-pos { order: -1; justify-self: start; font-size: 1.125rem; }
 }
+
+/* AI tools: a drawn sparkle instead of the letters "AI". */
+.skill-logo--ai img { width: 60%; height: auto; }

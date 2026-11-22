@@ -830,7 +830,8 @@ html[lang="ko"] #project-dialog .detail-head h2 { font-size: clamp(2.25rem, 1.2r
   #home.hero--poster .hero-copy { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: 'role role' 'intro proof' 'location location' 'actions actions'; }
 }
 @media (max-width: 760px) {
-  #home.hero--poster .hero-art { height: auto; aspect-ratio: 4 / 4.6 !important; }
+  #home.hero--poster .hero-art { height: auto; aspect-ratio: 4 / 3.6 !important; } /* 22 Nov: phone collage has no empty paper below the book */
+  #home.hero--poster .hero-art .hero-image { object-position: 50% 28%; }
   #home.hero--poster .hero-art .hero-name { left: 16px !important; font-size: clamp(3.25rem, 16.5vw, 5.5rem) !important; }
   #home.hero--poster .hero-art-note { left: 16px !important; right: 16px; top: 16px !important; }
   #home.hero--poster .hero-copy { padding: calc(clamp(3.25rem, 16.5vw, 5.5rem) * .55 + 24px) var(--gutter) 0 !important; grid-template-columns: minmax(0, 1fr); grid-template-areas: 'role' 'intro' 'proof' 'location' 'actions'; }
@@ -1387,9 +1388,9 @@ html { overflow-x: clip; }
 /* ---------- Finer riso pieces (owner: "chunky squares distract") ---------
    Registration marks, overprint circles, halftone dots, torn grid paper:
    precise and light, never a solid block. */
-.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/reg-circle--4a30f4ec4cba.webp') !important; --orn-ratio: 248 / 256 !important; --orn-w: 260px !important; }
-.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/moon-overprint--7871739a814c.webp') !important; --orn-ratio: 362 / 268 !important; --orn-w: 340px !important; }
-.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/quarter-target--0d756a39498b.webp') !important; --orn-ratio: 224 / 173 !important; --orn-w: 240px !important; }
+.project-collection > .project-card:nth-child(7n+1) { --orn: url('assets/riso/lib/orn-target--ad1be9e17c92.webp') !important; --orn-ratio: 1 / 1 !important; --orn-w: 260px !important; }
+.project-collection > .project-card:nth-child(7n+3) { --orn: url('assets/riso/lib/orn-overprint-circles--0fc7d91726ee.webp') !important; --orn-ratio: 680 / 481 !important; --orn-w: 340px !important; }
+.project-collection > .project-card:nth-child(7n+7) { --orn: url('assets/riso/lib/orn-quarter-target--1d375b130837.webp') !important; --orn-ratio: 1 / 1 !important; --orn-w: 240px !important; }
 @media (max-width: 1000px) { .project-collection > .project-card:nth-child(n) { --orn-w: 150px !important; } .project-collection > .project-card:nth-child(7n+5) { --orn-w: 220px !important; } }
 #home::after { background-image: url('assets/riso/lib/halftone-disc--2be18b346bb8.webp') !important; aspect-ratio: 271 / 213 !important; rotate: none !important; width: 200px !important; }
 @media (min-width: 1440px) { #background::after { background-image: url('assets/riso/lib/grid-torn--10837020f74d.webp') !important; aspect-ratio: 396 / 264 !important; width: 340px !important; } }

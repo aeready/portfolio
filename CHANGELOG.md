@@ -3,6 +3,17 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 — Decor refresh from the owner's image pack (main)
+
+- **Band ornaments (01, 03, 07)** are the new matched set: registration target, overprint circles, quartered target (`assets/riso/lib/orn-*`). Still kept 16 px clear of the work by `press.js`. Undo: three `--orn` lines in `press.css` (~1390).
+- **Booklet back cover** uses the new lime back-cover texture (halftone foot, registration mark) behind the page count. Undo: `.gallery-end` background in `edition.css`.
+- **Map:** the accurate coastline stays (the generated maps are not geographically accurate, so the pins would land wrong); the land is now filled with a lime halftone dot pattern (`<pattern id="map-dots">` in `index.html`, fill in `edition.css`).
+- **Phone hero:** phones get the new 4:5 recomposed collage (800/1200 px via `<picture>`); the hero box on phones is 4:3.6 (was 4:4.6) so the name, intro and stats rise by about 100 px and there is no empty paper under the book.
+- **Skills:** Hancom shows its square product icon (was an unreadable wordmark); AI tools shows the drawn sparkle instead of the letters "AI". Adobe unchanged (the supplied file was identical).
+- **UC Santa Cruz seal:** kept the existing, sharper artwork (the supplied seal was upscaled from 195 px); now a 18 KB WebP instead of an 82 KB PNG.
+- Tried and removed at the owner's request: a large envelope drawing in the Contact band.
+- Not used yet (kept full size in `archive/unused-assets/decor-refresh-2026-11/`): icon set, crop marks, colour bar, graph-paper ornament, both generated maps.
+
 ## 21 Nov 2026 (2) — Polish round (main)
 
 - **Project pages:** "02 / 07" sits between Previous and Next (above Next on phones), and a 3 px lime line along the top shows how far down the page you are. Undo: "21 Nov polish" block at the end of `edition.js` and `edition.css`.
