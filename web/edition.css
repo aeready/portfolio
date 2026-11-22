@@ -1424,7 +1424,7 @@ html[lang="ko"] #background .skills-notebook .software-skills li > span.skill-al
   background: radial-gradient(circle, var(--acid) 1.3px, transparent 1.6px) 0 0 / 7px 7px;
   -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); mask-image: radial-gradient(closest-side, #000 55%, transparent);
 }
-.work-map .map-land { fill: url(#map-dots) var(--paper-deep, #eadfcb); } /* 22 Nov: lime halftone land, riso style */
+.work-map .map-land { fill: var(--paper-deep, #eadfcb); }
 @media (max-width: 1000px) { #background .work-map::before { inset: 0 6% 0 10%; } }
 /* AI tools tile; languages line; quieter dots behind the tool text. */
 #background .skills-notebook .software-skills li .skill-logo--ai { font: 700 2.25rem/1 var(--display) !important; color: var(--ink); letter-spacing: .02em; }
