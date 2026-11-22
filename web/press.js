@@ -121,10 +121,13 @@
   const fitShadow = img => {
     const stage = img?.parentElement;
     if (!stage || !img.isConnected) return;
-    const b = stage.getBoundingClientRect();
-    const pages = [...stage.querySelectorAll('img, .gallery-end:not([hidden])')].filter(i => !i.classList.contains('is-blank') && getComputedStyle(i).visibility !== 'hidden').map(i => i.getBoundingClientRect()).filter(r => r.width);
+    // Layout box (offset*), not getBoundingClientRect: pages turn with a 3D
+    // transform, and measuring mid-turn put the gutter shadow in the wrong
+    // place for half a second (22 Nov).
+    const pages = [...stage.querySelectorAll('img, .gallery-end:not([hidden])')].filter(i => !i.classList.contains('is-blank') && getComputedStyle(i).visibility !== 'hidden' && i.offsetWidth).map(i => ({left: i.offsetLeft, top: i.offsetTop, right: i.offsetLeft + i.offsetWidth, bottom: i.offsetTop + i.offsetHeight}));
     if (!pages.length) return;
     const a = {left: Math.min(...pages.map(r => r.left)), top: Math.min(...pages.map(r => r.top)), width: Math.max(...pages.map(r => r.right)) - Math.min(...pages.map(r => r.left)), height: Math.max(...pages.map(r => r.bottom)) - Math.min(...pages.map(r => r.top))};
+    const b = {left: 0, top: 0};
     stage.style.setProperty('--sx', `${a.left - b.left}px`); stage.style.setProperty('--sy', `${a.top - b.top}px`);
     stage.style.setProperty('--sw', `${a.width}px`); stage.style.setProperty('--sh', `${a.height}px`);
   };

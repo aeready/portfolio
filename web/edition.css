@@ -159,10 +159,7 @@ html[lang="ko"] #project-dialog .detail-story :is(p, li) { line-height: 1.8 !imp
   background: linear-gradient(90deg, transparent, rgb(30 16 34 / .14) 42%, rgb(30 16 34 / .26) 50%, rgb(30 16 34 / .14) 58%, transparent);
   mix-blend-mode: multiply;
 }
-@media (prefers-reduced-motion: no-preference) {
-  #project-dialog .gallery-stage.is-spread:not(.is-cover):has(.slide-enter) .ed-spine { animation: ed-spine-turn 520ms var(--ease-press) both; }
-  @keyframes ed-spine-turn { 0% { opacity: 1; width: 160px; } 100% { opacity: 1; width: 64px; } }
-}
+/* 22 Nov: the spine no longer widens and narrows on every turn (read as a flicker). */
 
 /* Light table: on desktop, the page catches a little light from below. */
 @media (hover: hover) and (pointer: fine) {
@@ -367,28 +364,22 @@ html[lang="ko"] #project-dialog .gallery-tabs button { font-family: var(--read) 
 /* Booklets: the blank facing page is never a copy of the last page. */
 #project-dialog .gallery-stage > #gallery-image-b.is-blank { display: none !important; }
 /* Last page alone: the facing page is the booklet's back cover (owner, 21 Nov).
-   Lime paper, the page count as an outlined numeral, a pointer to the full
-   PDF, and the AR mark at the foot. Flat, upright, no shadow. */
+   Lime paper, a short pointer to the full PDF, and the AR mark at the foot
+   (22 Nov: the big page-count numeral was dropped). Flat, upright, no shadow. */
 #project-dialog .gallery-stage .gallery-end {
-  position: relative; z-index: 1; display: grid; grid-template-rows: 1fr auto 1fr; justify-items: start; align-content: stretch; gap: 14px;
+  position: relative; z-index: 1; display: grid; grid-template-rows: 1fr auto; justify-items: start; align-content: stretch; gap: 14px;
   align-self: stretch; height: auto; width: auto; padding: clamp(20px, 3vw, 44px);
   background: var(--acid) url('assets/booklet-back-cover--9f3a82da3019.webp') center / cover no-repeat; border: clamp(4px, .5vw, 8px) solid var(--paper); border-left-width: 0;
   box-shadow: inset 10px 0 18px -12px rgb(73 43 81 / .35); overflow: hidden; color: var(--ink);
 }
 #project-dialog .gallery-stage .gallery-end[hidden] { display: none; }
-#project-dialog .gallery-end-count {
-  align-self: end; font: 700 clamp(4.5rem, 2rem + 6vw, 8.5rem)/.8 var(--display);
-  color: transparent; -webkit-text-stroke: 1.5px var(--ink); font-variant-numeric: tabular-nums;
-}
-#project-dialog .gallery-end-text { max-width: 22ch; font: 400 clamp(.9375rem, .85rem + .3vw, 1.125rem)/1.45 var(--read); text-wrap: balance; }
+#project-dialog .gallery-end-text { align-self: start; max-width: 14ch; font: 700 clamp(1.25rem, .9rem + 1.1vw, 1.875rem)/1.2 var(--read); text-wrap: balance; }
 html[lang="ko"] #project-dialog .gallery-end-text { word-break: keep-all; }
 #project-dialog .gallery-end-mark {
   align-self: end; justify-self: end; padding: 6px 8px; background: var(--ink); color: var(--acid);
   font: 700 1.125rem/1 var(--display); letter-spacing: .02em;
 }
 @media (prefers-reduced-motion: no-preference) {
-  #project-dialog .gallery-end.slide-enter .gallery-end-count { animation: ed-ink-fill 600ms var(--ease-press) 380ms both; }
-  @keyframes ed-ink-fill { from { opacity: 0; translate: 0 6px; } }
 }
 
 /* ---------- Band colours: lime, aubergine, cream, repeating ----------------
@@ -831,11 +822,11 @@ html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { rotate: none !important;
      them room. Applies to every gallery, tabs included. */
   #project-dialog .gallery.gallery { position: relative; }
   #project-dialog .gallery.gallery > .gallery-controls > div { display: contents; }
-  #project-dialog .gallery.gallery > .gallery-controls > div > button { position: absolute; grid-area: stage; top: 50%; translate: 0 -50%; z-index: 3; min-width: 56px !important; min-height: 56px !important; background: var(--acid) !important; color: var(--ink) !important; border-color: transparent !important; }
+  #project-dialog .gallery.gallery > .gallery-controls > div > button { position: absolute; grid-area: stage; top: 50%; translate: 0 -50%; z-index: 3; background: var(--acid) !important; color: var(--ink); border-color: transparent; }
   #project-dialog .gallery.gallery > .gallery-controls > div > button:disabled { background: var(--paper) !important; }
   #project-dialog .gallery.gallery > .gallery-controls > div > #previous-slide { left: 0; }
   #project-dialog .gallery.gallery > .gallery-controls > div > #next-slide { right: 0; }
-  #project-dialog .gallery.gallery > .gallery-stage { max-width: calc(100% - 152px) !important; }
+  #project-dialog .gallery.gallery > .gallery-stage { max-width: calc(100% - 152px); }
   #project-dialog .gallery.gallery > .gallery-controls .ed-sheet-open { order: 3; }
   #project-dialog .gallery.gallery > .gallery-controls .ed-loupe-hint { display: none; }
   #project-dialog .gallery.gallery > .gallery-caption { grid-area: cap !important; margin: 18px 0 0 !important; font-size: 1rem !important; line-height: 1.45 !important; justify-self: end; text-align: right; max-width: 60ch; opacity: .85; }
@@ -2034,9 +2025,38 @@ html body .zoom-view .zv-nav .zv-next { justify-self: start !important; }
    Phones keep their own wrapped / toggle layout. */
 @media (min-width: 1001px) {
   .work-tools { container-type: inline-size; }
-  #category-filters { justify-content: space-between !important; flex-wrap: nowrap !important; width: 100%; }
+  #category-filters { justify-content: space-between; flex-wrap: nowrap; width: 100%; }
   #category-filters button { font-size: min(2.25rem, 2.1cqw) !important; white-space: nowrap; margin-right: 0 !important; padding-right: 22px !important; }
   #category-filters button:last-child { padding-right: 0 !important; }
   #category-filters button::after { font-size: max(.8125rem, .55em); }
   html[lang="ko"] #category-filters button { font-size: min(2rem, 2.25cqw) !important; }
+}
+
+/* Gallery tabs (22 Nov, owner: "two different things" was unclear): a small
+   label, then two separate boxes with a gap. The open one is solid ink with a
+   lime count; the other is outlined paper. Tablet and desktop; phones keep
+   their joined lime switch. */
+@media (min-width: 761px) {
+  html body #project-dialog .gallery .gallery-tabs { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 16px; border: 0; width: auto; }
+  html body #project-dialog .gallery .gallery-tabs-label { flex: 0 0 100%; text-align: center; font: 700 .75rem/1 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-70, rgb(73 43 81 / .85)); }
+  html[lang="ko"] #project-dialog .gallery .gallery-tabs-label { font-family: var(--read); letter-spacing: 0; text-transform: none; font-size: .875rem; }
+  html body #project-dialog .gallery .gallery-tabs button { display: inline-flex; align-items: center; gap: 12px; width: auto; min-height: 48px; padding: 8px 18px !important; white-space: nowrap; opacity: 1; text-align: left;
+    background: var(--paper) !important; color: var(--ink); border: 2px solid var(--ink) !important; font-size: 1.0625rem !important; }
+  html body #project-dialog .gallery .gallery-tabs button:is(:hover, :active, :focus-visible) { transform: none; translate: none; }
+  html body #project-dialog .gallery .gallery-tabs button .tab-sep { display: none; }
+  html body #project-dialog .gallery .gallery-tabs button .tab-n { display: inline-block; min-width: 2.2em; padding: 3px 8px; text-align: center; font: 700 .8125rem/1.2 var(--label); letter-spacing: 0; background: var(--ink); color: var(--paper); }
+  html body #project-dialog .gallery .gallery-tabs button:hover:not([aria-pressed="true"]) { background: var(--acid); }
+  html body #project-dialog .gallery .gallery-tabs button[aria-pressed="true"] { background: var(--ink) !important; color: var(--paper) !important; border-color: var(--ink); }
+  html body #project-dialog .gallery .gallery-tabs button[aria-pressed="true"] .tab-n { background: var(--acid); color: var(--ink); }
+}
+@media (max-width: 760px) { #project-dialog .gallery-tabs-label { display: none; } #project-dialog .gallery-tabs .tab-sep { display: inline; } #project-dialog .gallery-tabs .tab-n { all: unset; } }
+
+/* Career track on the map: the route draws along its path when the map
+   appears (reveal mask), then the dashes keep marching for a few loops. */
+.work-map .map-route-reveal { fill: none; stroke: #fff; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  #background.tl-motion .work-map:not(.map-on) .map-route-reveal { stroke-dashoffset: 1; }
+  #background.tl-motion .work-map.map-on .map-route-reveal { animation: map-route-draw 3.4s cubic-bezier(.45, .05, .35, 1) 700ms both; }
+  #background.tl-motion .work-map .map-route { transition: opacity 400ms ease 600ms; }
+  @keyframes map-route-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 }

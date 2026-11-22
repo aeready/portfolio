@@ -559,6 +559,38 @@
     });
   }
 
+  // Suwon label on two lines, "(home!)" / "(우리 집!)" under the name, so it
+  // does not run into Seongnam (owner, 22 Nov). The i18n layer rewrites the
+  // text on every language switch, so split again whenever it is plain text.
+  const home = map && map.querySelector('.map-label--home');
+  if (home) {
+    const split = () => {
+      const node = home.firstChild;
+      if (!node || node.nodeType !== 3) return;
+      const m = /^(.*?)\s*(\(.*\))$/.exec(node.textContent);
+      if (!m) return;
+      const first = document.createElementNS(ns, 'tspan'), second = document.createElementNS(ns, 'tspan');
+      first.setAttribute('x', home.getAttribute('x')); first.textContent = m[1];
+      second.setAttribute('x', home.getAttribute('x')); second.setAttribute('dy', '1.05em'); second.textContent = m[2];
+      home.replaceChildren(first, second);
+    };
+    split();
+    new MutationObserver(split).observe(home, {childList: true});
+  }
+
+  // Career track (22 Nov, owner missed it): the dashed route is revealed along
+  // its own path, oldest job first, when the map scrolls into view. A solid
+  // twin of the path drives an SVG mask over the dashes.
+  const route = map && map.querySelector('.map-route');
+  if (route && !map.querySelector('#map-route-mask')) {
+    const defs = document.createElementNS(ns, 'defs'), mask = document.createElementNS(ns, 'mask'), twin = document.createElementNS(ns, 'path');
+    mask.setAttribute('id', 'map-route-mask'); mask.setAttribute('maskUnits', 'userSpaceOnUse');
+    ['x', 'y'].forEach(k => mask.setAttribute(k, '-1000')); ['width', 'height'].forEach(k => mask.setAttribute(k, '3000'));
+    twin.setAttribute('class', 'map-route-reveal'); twin.setAttribute('d', route.getAttribute('d')); twin.setAttribute('pathLength', '1');
+    mask.appendChild(twin); defs.appendChild(mask); map.insertBefore(defs, route);
+    route.setAttribute('mask', 'url(#map-route-mask)');
+  }
+
   const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   timeline.querySelectorAll(':scope > article').forEach(card => {

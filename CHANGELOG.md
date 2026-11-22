@@ -3,6 +3,17 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 (6) — Gutter flicker, gallery tabs, map track, back cover (branch)
+
+- **Booklet gutter shadow:** it was measured while the new page was still mid-turn, so it jumped (wrong spot and height) for about half a second on every turn, and it also widened/narrowed. Now measured from layout size (`fitShadow` in `press.js`) and the widen/narrow animation is gone. Undo: restore `getBoundingClientRect` in `fitShadow` and the `ed-spine-turn` block in `edition.css`.
+- **Gallery tabs (two sets):** a small "Gallery selection" label, then two separate boxes; the open one is solid ink with a lime count, the other outlined paper. Tablet and desktop; phones unchanged. Block "Gallery tabs (22 Nov" in `edition.css`; tab markup in `app.js`.
+- **Map:** the dashed career route draws along its path (teaching → GIGE → Compass) when the map scrolls into view, then keeps marching for a few loops (`edition.js` reveal mask + `edition.css`). Reduced motion: shown as printed.
+- **Suwon label:** "SUWON" with "(HOME!)" / "(우리 집!)" on the line below, so it clears Seongnam (`edition.js`, re-split after each language switch).
+- **Projects intro:** added "Each project’s galleries also offer extended previews and downloads." (KO: 프로젝트별 갤러리에서 전체 미리보기와 다운로드도 볼 수 있습니다.)
+- **Booklet back cover:** big page-count numeral removed; short text "Full PDF download below." / "전체 PDF 다운로드는 아래에."; AR mark sits inside the page.
+- Gallery arrows now use the standard 64 px size. `!important` budget 1276 → 1275.
+Upload: `site.css`, `app.js`, `edition.js`, `press.js`, `locales.js`.
+
 ## 22 Nov 2026 (5) — Gallery arrows, USA band, counter, filter row (branch)
 
 - **Project galleries (desktop, all of them incl. tabs):** Previous / next are lime buttons either side of the work, vertically centred; counter and All pages stay in the bar below. Block "Previous / next sit either side" in `edition.css`. Phones unchanged.

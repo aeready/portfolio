@@ -224,15 +224,14 @@
     const showEnd = spread && slideIndex > 0 && !pair;
     if (showEnd && !endPage && typeof document.createElement === 'function') {
       endPage = document.createElement('span'); endPage.id = 'gallery-end'; endPage.className = 'gallery-end';
-      endPage.innerHTML = '<span class="gallery-end-count"></span><span class="gallery-end-text"></span><span class="gallery-end-mark" aria-hidden="true">AR</span>';
+      endPage.innerHTML = '<span class="gallery-end-text"></span><span class="gallery-end-mark" aria-hidden="true">AR</span>';
       stage.append(endPage);
     }
     if (endPage) {
       endPage.hidden = !showEnd;
       const dims = variants[src];
       if (dims && endPage.style) endPage.style.aspectRatio = `${dims.width} / ${dims.height}`;
-      const endCount = endPage.querySelector('.gallery-end-count'), endText = endPage.querySelector('.gallery-end-text');
-      if (endCount && endCount.textContent !== String(slides.length)) endCount.textContent = String(slides.length);
+      const endText = endPage.querySelector('.gallery-end-text');
       if (endText && endText.textContent !== t('theEnd')) endText.textContent = t('theEnd');
       if (showEnd && changed) { endPage.classList.remove('slide-enter'); void endPage.offsetWidth; endPage.classList.add('slide-enter'); }
     }
@@ -286,7 +285,7 @@
       <div class="detail-body">
         <div class="detail-left">
         <div class="gallery" tabindex="0" role="group" aria-label="${escape(t('galleryLabel'))}">
-          ${p.bookSlides ? `<div class="gallery-tabs" role="group" aria-label="${escape(t('galleryGroup'))}"><button type="button" data-gallery="slides" aria-pressed="${activeGallery === 'slides'}">${escape(p.galleryLabels?.[0] || t('trainingGallery'))} · ${p.slides.length}</button><button type="button" data-gallery="bookSlides" aria-pressed="${activeGallery === 'bookSlides'}">${escape(p.galleryLabels?.[1] || t('bookGallery'))} · ${p.bookSlides.length}</button></div>` : ''}
+          ${p.bookSlides ? `<div class="gallery-tabs" role="group" aria-label="${escape(t('galleryGroup'))}"><span class="gallery-tabs-label" aria-hidden="true">${escape(t('galleryGroup'))}</span><button type="button" data-gallery="slides" aria-pressed="${activeGallery === 'slides'}"><span class="tab-name">${escape(p.galleryLabels?.[0] || t('trainingGallery'))}</span><span class="tab-sep"> · </span><span class="tab-n">${p.slides.length}</span></button><button type="button" data-gallery="bookSlides" aria-pressed="${activeGallery === 'bookSlides'}"><span class="tab-name">${escape(p.galleryLabels?.[1] || t('bookGallery'))}</span><span class="tab-sep"> · </span><span class="tab-n">${p.bookSlides.length}</span></button></div>` : ''}
           <a id="open-image" class="gallery-stage" target="_blank" rel="noopener noreferrer" href="${escape(mainSample[0])}" aria-label="${escape(t('openImage') + t('imageNewTab'))}"><img id="gallery-image" src="${escape(mainSample[0])}" alt="${escape(mainSample[1])}" width="${dimensions.width}" height="${dimensions.height}"><span class="image-enlarge" aria-hidden="true">↗</span></a>
           <div class="gallery-controls"><span id="slide-count"></span><div><button id="previous-slide" type="button" aria-label="${escape(t('previousSample'))}">←</button><button id="next-slide" type="button" aria-label="${escape(t('nextSample'))}">→</button></div></div>
           <p id="gallery-caption" class="gallery-caption" aria-live="polite"></p>
