@@ -1,0 +1,11 @@
+{
+  "name": "annaready-portfolio",
+  "private": true,
+  "description": "Build tooling only; the site itself has no runtime dependencies.",
+  "scripts": {
+    "build": "node scripts/build-css.mjs && node scripts/build-js.mjs && node scripts/build-html.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

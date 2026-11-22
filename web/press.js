@@ -200,11 +200,13 @@
   if (dlg && window.matchMedia) {
     const phone = window.matchMedia('(max-width: 760px)');
     const ui = () => window.PORTFOLIO_LOCALES?.[root.lang === 'ko' ? 'ko' : 'en']?.ui || {};
-    const view = document.createElement('div');
-    view.className = 'zoom-view'; view.hidden = true;
-    view.setAttribute('role', 'dialog'); view.setAttribute('aria-modal', 'true');
-    view.innerHTML = '<div class="zv-bar"><span class="zv-hint"></span><button type="button" class="zv-close">×</button></div><div class="zv-scroll"><img alt=""></div><div class="zv-nav"><button type="button" class="zv-prev">←</button><span class="zv-count"></span><button type="button" class="zv-next">→</button></div>';
-    dlg.append(view);
+    // Top-level modal <dialog> (not nested in #project-dialog): native top layer, inert background,
+    // Escape and focus restoration. Icon-only buttons get aria-labels (localized in sync()).
+    const view = document.createElement('dialog');
+    view.className = 'zoom-view';
+    view.setAttribute('aria-label', 'Full-screen view');
+    view.innerHTML = '<div class="zv-bar"><span class="zv-hint"></span><button type="button" class="zv-close" aria-label="Close full-screen view"><span aria-hidden="true">×</span></button></div><div class="zv-scroll"><img alt=""></div><div class="zv-nav"><button type="button" class="zv-prev" aria-label="Previous sample"><span aria-hidden="true">←</span></button><span class="zv-count"></span><button type="button" class="zv-next" aria-label="Next sample"><span aria-hidden="true">→</span></button></div>';
+    document.body.append(view);
     const big = view.querySelector('img');
     const sync = () => {
       const src = document.getElementById('gallery-image');
@@ -214,17 +216,20 @@
       view.querySelector('.zv-prev').disabled = !!document.getElementById('previous-slide')?.disabled;
       view.querySelector('.zv-next').disabled = !!document.getElementById('next-slide')?.disabled;
       view.querySelector('.zv-hint').textContent = ((window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches && ui().zoomHintMouse) || ui().zoomHint || '');
-      view.querySelector('.zv-close').setAttribute('aria-label', ui().zoomClose || 'Close');
-      view.querySelector('.zv-prev').setAttribute('aria-label', ui().previousSample || 'Previous');
-      view.querySelector('.zv-next').setAttribute('aria-label', ui().nextSample || 'Next');
+      view.setAttribute('aria-label', ui().zoomLabel || 'Full-screen view');
+      view.querySelector('.zv-close').setAttribute('aria-label', ui().zoomClose || 'Close full-screen view');
+      view.querySelector('.zv-prev').setAttribute('aria-label', ui().previousSample || 'Previous sample');
+      view.querySelector('.zv-next').setAttribute('aria-label', ui().nextSample || 'Next sample');
       view.classList.remove('is-zoomed');
     };
     let opener = null;
-    const close = () => { view.hidden = true; opener?.focus({preventScroll: true}); };
+    const close = () => { if (view.open) view.close(); };
+    // Focus returns to the exact trigger inside #project-dialog, which stays open.
+    view.addEventListener('close', () => { const back = opener?.isConnected ? opener : document.getElementById('open-image'); if (dlg.open) back?.focus({preventScroll: true}); });
     dlg.addEventListener('click', event => {
       const stage = event.target.closest('#open-image');
       if (!stage) return; // click opens the large view on every screen (audit F5)
-      event.preventDefault(); opener = stage; sync(); view.hidden = false; view.querySelector('.zv-close').focus();
+      event.preventDefault(); opener = stage; sync(); if (!view.open) view.showModal(); view.querySelector('.zv-close').focus();
     }, true);
     view.querySelector('.zv-close').addEventListener('click', close);
     view.querySelector('.zv-prev').addEventListener('click', () => { document.getElementById('previous-slide')?.click(); requestAnimationFrame(sync); });
@@ -235,13 +240,7 @@
       view.classList.toggle('is-zoomed');
       requestAnimationFrame(() => { scroller.scrollLeft = fx * big.clientWidth - scroller.clientWidth / 2; scroller.scrollTop = fy * big.clientHeight - scroller.clientHeight / 2; });
     });
-    dlg.addEventListener('keydown', event => {
-      if (view.hidden) return;
-      if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close(); }
-      if (event.key === 'Tab') { const f = [...view.querySelectorAll('button:not(:disabled)')]; const i = f.indexOf(document.activeElement); if (event.shiftKey ? i <= 0 : i === f.length - 1) { event.preventDefault(); f[event.shiftKey ? f.length - 1 : 0].focus(); } }
-    }, true);
-    dlg.addEventListener('cancel', event => { if (!view.hidden) { event.preventDefault(); close(); } });
-    dlg.addEventListener('close', () => { view.hidden = true; });
+    dlg.addEventListener('close', close);
   }
 
   /* ---------- Motion v2: print each element once when it arrives ---------- */

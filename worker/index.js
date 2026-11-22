@@ -6,11 +6,11 @@ const authorised=(request,env)=>Boolean(env.PORTFOLIO_UPLOAD_SECRET)&&safeEqual(
 const respond=(message,status)=>new Response(message,{status,headers:secure(new Headers({'content-type':'text/plain; charset=utf-8','cache-control':'no-store'}))});
 // Use the requested website file's extension rather than trusting object metadata.
 const SITE_OVERRIDES = new Map();
-const immutableAsset=path=>/^\/assets\/.+--[a-f0-9]{12}\.(?:svg|png|jpe?g|webp|avif|woff2?)$/.test(path);
+const immutableAsset=path=>/^\/assets\/.+--[a-f0-9]{12}\.(?:svg|png|jpe?g|webp|avif|woff2?)$/.test(path)||/^\/site--[a-f0-9]{12}\.js$/.test(path);
 const siteContentType=key=>{
  if(!key.startsWith('site/'))return null;
  const extension=key.slice(key.lastIndexOf('.')+1).toLowerCase();
- return {html:'text/html; charset=utf-8',css:'text/css; charset=utf-8',js:'text/javascript; charset=utf-8',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',avif:'image/avif',ico:'image/x-icon',woff:'font/woff',woff2:'font/woff2',ttf:'font/ttf',otf:'font/otf',pdf:'application/pdf',json:'application/json; charset=utf-8'}[extension]||null;
+ return {html:'text/html; charset=utf-8',css:'text/css; charset=utf-8',js:'text/javascript; charset=utf-8',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',avif:'image/avif',ico:'image/x-icon',woff:'font/woff',woff2:'font/woff2',ttf:'font/ttf',otf:'font/otf',pdf:'application/pdf',txt:'text/plain; charset=utf-8',xml:'application/xml; charset=utf-8',json:'application/json; charset=utf-8'}[extension]||null;
 };
 export default {async fetch(request,env){
  const url=new URL(request.url);

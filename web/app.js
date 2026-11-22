@@ -4,10 +4,7 @@
   const variants = window.PORTFOLIO_PREVIEWS || {};
   const $ = selector => document.querySelector(selector);
   const $$ = selector => [...document.querySelectorAll(selector)];
-  const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const projectTitleMarkup = value => escape(value)
-    .replace(/USA Camp ·/g, 'USA Camp&nbsp;·')
-    .replace(/12-period/g, '<span class="nowrap">12-period</span>');
+  const {escape, projectTitleMarkup, ORDER} = window.PortfolioCards;
   let language = 'en';
   try { if (localStorage.getItem('portfolio-language') === 'ko') language = 'ko'; } catch {}
   let category = 'all', activeProject = null, slideIndex = 0, activeGallery = 'slides', lastFocus = null, projects = [];
@@ -98,17 +95,7 @@
       documents: project.documents.map((doc, i) => [doc[0], ...project.ko.documents[i]]),
       bookSlides: project.bookSlides?.map((slide, i) => [slide[0], ...project.ko.bookSlides[i]])};
   }
-  function previewImage(src, sizes, eager = false) {
-    const asset = variants[src];
-    const loading = eager ? 'eager' : 'lazy';
-    if (!asset) return `<img class="preview-image image-pending" src="${escape(src)}" alt="" loading="${loading}" decoding="async">`;
-    const small = asset.outputs[0];
-    const candidates = asset.outputs.map(v => `${v.path} ${v.width}w`);
-    // Offer the full-size original too, so covers stay sharp on high-density screens.
-    if (asset.width > Math.max(...asset.outputs.map(v => v.width))) candidates.push(`${src} ${asset.width}w`);
-    const srcset = candidates.join(', ');
-    return `<img class="preview-image image-pending" src="${escape(small.path)}" srcset="${escape(srcset)}" sizes="${escape(sizes)}" width="${asset.width}" height="${asset.height}" alt="" loading="${loading}" decoding="async">`;
-  }
+  const previewImage = (src, sizes, eager = false) => window.PortfolioCards.previewImage(variants, src, sizes, eager);
   function wirePreviewImages(root) {
     if (typeof root.querySelectorAll !== 'function') return;
     root.querySelectorAll('.image-pending').forEach(img => {
@@ -119,23 +106,17 @@
     });
   }
   const matchedProjects = () => projects.filter(p => category === 'all' || p.categories.includes(category));
+  // Hydrate: index.html ships the cards pre-rendered (scripts/build-html.mjs). On the first English
+  // render with no filter we keep that DOM and only wire it up; any other state re-renders from data.
+  let hydrate = typeof grid.querySelectorAll === 'function' && grid.dataset?.prerendered === 'true';
   function renderProjects() {
     const visible = matchedProjects();
-    grid.innerHTML = visible.map((p, position) => {
-      const featured = ['adult-communication', 'reading-for-meaning', 'epik-music'].includes(p.id);
-      const previews = [p.cover, p.previewSecondary, p.previewTertiary].filter(Boolean);
-      const previewButtons = previews.map((src, index) => {
-        const sample = p.previewIndices[index];
-        const caption = p.slides[sample][1];
-        const name = index === 0 ? 'artifact-main' : index === 1 ? 'artifact-fixed' : 'artifact-fixed artifact-tertiary';
-        const sizes = index === 0
-          ? '(max-width: 900px) calc(100vw - 64px), (min-width: 1100px) 600px, 56vw'
-          : featured ? '(max-width: 760px) 34vw, 180px' : '(min-width: 1100px) 150px, (max-width: 760px) 34vw, 18vw';
-        const frame = `<span id="preview-${escape(p.id)}-${index}" class="preview-open ${name}" data-preview="${sample}" title="${escape(caption)}" aria-hidden="true">${previewImage(src, sizes)}</span>`;
-        return index === 0 ? `<div class="artifact-main-frame">${frame}</div>` : frame;
-      }).join('');
-      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" data-tone="${['lime', 'ink', 'cream'][position % 3]}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div>${bandExtras(p)}</div><div class="project-copy"><dl class="wall-label"><div><dt>${escape(t('format'))}</dt><dd>${escape(p.format)}</dd></div><div><dt>${escape(t('audience'))}</dt><dd>${escape(p.audienceLabel)}</dd></div></dl><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
-    }).join('');
+    if (hydrate && language === 'en' && category === 'all' && grid.querySelectorAll('[data-project-card]').length === visible.length) {
+      grid.removeAttribute?.('data-prerendered');
+    } else {
+      grid.innerHTML = visible.map((p, position) => window.PortfolioCards.renderCard(p, position, {t, variants})).join('');
+    }
+    hydrate = false;
     wirePreviewImages(grid);
     grid.setAttribute('aria-busy', 'false');
     $('#result-count').textContent = visible.length === 1 ? t('resultOne') : t('resultMany', {count:visible.length});
@@ -153,15 +134,11 @@
   const currentSlides = () => activeGallery === 'bookSlides' ? activeProject.bookSlides : activeProject.slides;
   function renderThumbnails() {
     const slides = currentSlides();
-    $('#gallery-thumbnails').innerHTML = slides.map((slide, i) => `<button type="button" data-slide="${i}" aria-pressed="${i === slideIndex}" aria-label="${escape(t('sampleLabel', {number:i + 1, source:slide[2]}))}">${previewImage(slide[0], '72px', true)}</button>`).join('');
+    $('#gallery-thumbnails').innerHTML = slides.map((slide, i) => `<button type="button" data-slide="${i}" aria-pressed="${i === slideIndex}" aria-label="${escape(t('sampleLabel', {number:i + 1, source:slide[2]}))}">${previewImage(slide[0], '72px', i < 6)}</button>`).join('');
     wirePreviewImages($('#gallery-thumbnails'));
     $$('.gallery-tabs button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.gallery === activeGallery)));
   }
   let slideLoadTimer = 0, slideLoadSequence = 0;
-  // Two more workbook pages beside the USA Camp cover on desktop (decoration
-  // only, pictured by CSS; the gallery has every page).
-  const bandExtras = p => p.id !== 'usa-camp-workbook' ? '' : '<span class="band-extra band-extra--1" aria-hidden="true"></span><span class="band-extra band-extra--2" aria-hidden="true"></span>';
-
   // Booklet spreads (desktop, portrait galleries): the cover alone on the right,
   // then pages side by side (2–3, 4–5 …), like an open booklet.
   function isSpread() {
@@ -295,7 +272,7 @@
           <p id="gallery-caption" class="gallery-caption" aria-live="polite"></p>
           <div id="gallery-thumbnails" class="gallery-thumbnails" role="group" aria-label="${escape(t('chooseSample'))}"></div>
         </div>
-        <section class="project-materials"><h3>${escape(t('materials'))}</h3><p class="file-scope">${escape(p.materialsNote || (file.available !== false ? t('sourceAvailable') : p.documents.length ? t('editableUnavailable') : p.originalFormat === 'pdf' ? t('workbookUnavailable') : t('noFullFile')))}</p><div class="document-links">${p.documents.map((doc, i) => {const external=doc[0].startsWith('https://');return external ? `<a class="button ${i === 0 ? 'primary' : 'outline'}" href="${escape(doc[0])}" target="_blank" rel="noopener noreferrer"><span class="document-label">${escape(doc[1])}${doc[2] ? `<span class="document-format">${escape(doc[2])}</span>` : ''}</span><span class="document-action">${escape(doc[1])} <span aria-hidden="true">↗</span></span><span class="sr-only">${escape(t('newTab'))}</span></a>` : `<div class="document-card ${i === 0 ? 'primary' : 'outline'}"><span class="document-label">${escape(doc[1])}${doc[2] ? `<span class="document-format">${escape(doc[2])}</span>` : ''}</span><span class="document-actions"><a href="${escape(doc[0])}" target="_blank" rel="noopener noreferrer">${escape(t('viewInNewTab'))} <span aria-hidden="true">↗</span><span class="sr-only">${escape(t('newTab'))}</span></a><a href="${escape(doc[0])}" download>${escape(t('downloadFile'))} <span aria-hidden="true">↓</span></a></span></div>`}).join('')}</div><div class="original-material"${file.available === false ? ' hidden' : ''}><button id="download-original" class="text-link" type="button" data-original="${escape(p.original)}"${file.available === false ? ' hidden' : ''}>${escape(t(p.originalFormat === 'pdf' ? 'downloadOriginalPdf' : 'downloadOriginal'))} <span aria-hidden="true">↓</span></button><p class="download-meta"${file.available === false ? ' hidden' : ''}>${escape(t('largeDownload', {size:(file.bytes / 1000000).toFixed(1)}))}</p><p id="download-status" class="download-status" role="status" aria-live="polite"></p></div></section>
+        <section class="project-materials"><h3>${escape(t('materials'))}</h3><p class="file-scope">${escape(p.materialsNote || (file.available !== false ? t('sourceAvailable') : p.documents.length ? t('editableUnavailable') : p.originalFormat === 'pdf' ? t('workbookUnavailable') : t('noFullFile')))}</p><div class="document-links">${p.documents.map((doc, i) => {const external=doc[0].startsWith('https://');return external ? `<a class="button ${i === 0 ? 'primary' : 'outline'}" href="${escape(doc[0])}" target="_blank" rel="noopener noreferrer"><span class="document-label">${escape(doc[1])}${doc[2] ? `<span class="document-format">${escape(doc[2])}</span>` : ''}</span><span class="document-action">${escape(doc[1])} <span aria-hidden="true">↗</span></span><span class="sr-only">${escape(t('newTab'))}</span></a>` : `<div class="document-card ${i === 0 ? 'primary' : 'outline'}"><span class="document-label">${escape(doc[1])}${doc[2] ? `<span class="document-format">${escape(doc[2])}</span>` : ''}</span><span class="document-actions"><a href="${escape(doc[0])}" target="_blank" rel="noopener noreferrer">${escape(t('viewInNewTab'))} <span aria-hidden="true">↗</span><span class="sr-only">${escape(t('newTab'))}</span></a><a href="${escape(doc[0])}" download>${escape(t('downloadFile'))} <span aria-hidden="true">↓</span></a></span></div>`}).join('')}</div>${file.available === false ? '' : `<div class="original-material"><button id="download-original" class="text-link" type="button" data-original="${escape(p.original)}">${escape(t(p.originalFormat === 'pdf' ? 'downloadOriginalPdf' : 'downloadOriginal'))} <span aria-hidden="true">↓</span></button><p class="download-meta">${escape(t('largeDownload', {size:(file.bytes / 1000000).toFixed(1)}))}</p><p id="download-status" class="download-status" role="status" aria-live="polite"></p></div>`}</section>
         </div>
         <section class="detail-role"><h3>${escape(t('myContribution'))}</h3><p><strong>${escape(p.role)}</strong></p><p>${escape(p.contribution)}</p></section>
         <div class="detail-story">${renderProjectStory(p)}${p.evidence ? `<section class="story-section evidence-section"><h3>${escape(t('evidence'))}</h3><p>${escape(p.evidence)}</p></section>` : ''}${p.note ? `<p class="detail-callout">${escape(p.note)}</p>` : ''}<section class="story-section detail-context"><h3>${escape(t('projectDetails'))}</h3>${p.caseStudy ? `<p>${escape(p.intro)}</p>` : ''}<div class="detail-facts"><div><strong>${escape(t('audience'))}</strong>${escape(p.audienceLabel)}</div><div><strong>${escape(t('context'))}</strong>${escape(p.context)}</div><div><strong>${escape(t('format'))}</strong>${escape(p.format)}</div></div></section>${p.source ? `<section class="story-section source-note"><h3>${escape(t('sourceScope'))}</h3><p>${escape(p.source)}</p></section>` : ''}</div>
@@ -320,17 +297,8 @@
   }
   function setLanguage(next, persist = true) {
     const oldId = activeProject?.id, oldSlide = slideIndex, oldGallery = activeGallery, scroll = dialog.scrollTop;
-    const projectOrder = [
-      'reading-for-meaning',
-      'epik-music',
-      'adult-communication',
-      'teacher-development',
-      'usa-camp-workbook',
-      'chuseok-thanksgiving-storybook',
-      'advice-suggestions-lesson'
-    ];
     language = next === 'ko' ? 'ko' : 'en';
-    projects = baseProjects.map(localize).sort((a, b) => projectOrder.indexOf(a.id) - projectOrder.indexOf(b.id));
+    projects = baseProjects.map(localize).sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
     document.documentElement.setAttribute('lang', language); document.title = t('siteTitle');
     $('meta[name="description"]').setAttribute('content', t('description'));
     const page = window.PORTFOLIO_LOCALES[language].page;
@@ -358,6 +326,7 @@
     document.body.classList.remove('menu-open');
     if (returnFocus) $('#menu-toggle').focus();
   }
+  for (const id of ['language-toggle', 'dialog-language-toggle']) for (const intent of ['pointerenter', 'focus', 'touchstart']) $('#' + id).addEventListener(intent, () => window.warmKo?.(), {passive: true, once: true});
   for (const id of ['language-toggle', 'dialog-language-toggle']) $('#' + id).addEventListener('click', () => {
     const button = $('#' + id);
     if (!reduceMotion) { button.classList.add('is-switching'); window.setTimeout(() => button.classList.remove('is-switching'), 240); }
@@ -366,10 +335,14 @@
   $('#category-filters').addEventListener('click', event => { const button = event.target.closest('button[data-filter]'); if (button) setFilters(button.dataset.filter); });
   $('#empty-reset').addEventListener('click', () => setFilters());
   grid.addEventListener('click', event => {
-    const opener = event.target.closest('[data-project]'); if (!opener) return;
+    const hit = event.target.closest('[data-project]'); if (!hit) return;
+    const card = event.target.closest('[data-project-card]') || hit;
+    const opener = event.target.closest('a[data-project]') || $('#project-link-' + hit.dataset.project) || hit;
     event.preventDefault();
     opener.focus({preventScroll:true});
-    const sample = event.target.closest('[data-preview]')?.dataset.preview ?? 0;
+    // The title link's ::after covers the card, so find a preview thumbnail under the pointer by position.
+    const under = typeof document.elementsFromPoint === 'function' && event.clientX !== undefined ? document.elementsFromPoint(event.clientX, event.clientY) : [];
+    const sample = (event.target.closest('[data-preview]') || under.find(el => el.matches?.('[data-preview]') && card.contains(el)))?.dataset.preview ?? 0;
     closeMenu(); openProject(opener.dataset.project, true, Number(sample));
   });
   $('#close-dialog').addEventListener('click', closeProject);

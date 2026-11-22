@@ -38,15 +38,15 @@ const document={querySelector:s=>{if(s==='meta[name="description"]')return activ
 const initialHash=process.env.PORTFOLIO_TEST_DIRECT_ENTRY?'#project/adult-communication':'';const location={hash:initialHash};const window={events:{},addEventListener(k,f){this.events[k]=f;},scrollTo(){},setTimeout(fn,ms){this.lastTimer={fn,ms};return 1;},clearTimeout(){}};const entries=[{hash:initialHash,state:null}];let historyIndex=0;const history={state:null,replaceState(state,_b,value){entries[historyIndex]={hash:value,state};this.state=state;location.hash=value;},pushState(state,_b,value){entries.splice(historyIndex+1);entries.push({hash:value,state});historyIndex++;this.state=state;location.hash=value;},back(){if(historyIndex===0)return;historyIndex--;const e=entries[historyIndex];location.hash=e.hash;this.state=e.state;window.events.popstate?.();window.events.hashchange?.();},forward(){if(historyIndex===entries.length-1)return;historyIndex++;const e=entries[historyIndex];location.hash=e.hash;this.state=e.state;window.events.popstate?.();window.events.hashchange?.();}};
 const storage=new Map();const localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)};
 document.documentElement=new Element({lang:'en'});
-const context={localStorage,window,document,location,history,navigator:{clipboard:{async writeText(v){clipboard=v;}}},console};vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(root,'preview-assets.js'),'utf8'),context);vm.runInContext(data,context);vm.runInContext(fs.readFileSync(path.join(root,'locales.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(root,'originals.js'),'utf8'),context);window.PortfolioDownloads={getState:()=>undefined,download:()=>{}};vm.runInContext(app,context);
+const context={localStorage,window,document,location,history,navigator:{clipboard:{async writeText(v){clipboard=v;}}},console};vm.createContext(context);vm.runInContext(fs.readFileSync(path.join(root,'preview-assets.js'),'utf8'),context);vm.runInContext(data,context);vm.runInContext(fs.readFileSync(path.join(root,'locales.js'),'utf8'),context);vm.runInContext(fs.readFileSync(path.join(root,'originals.js'),'utf8'),context);window.PortfolioDownloads={getState:()=>undefined,download:()=>{}};vm.runInContext(fs.readFileSync(path.join(root,'cards.js'),'utf8'),context);vm.runInContext(app,context);
 if(initialHash){assert(byId('project-dialog').open);assert.equal(history.state.portfolioProject,'adult-communication');assert.equal(byId('gallery-image').src,window.PORTFOLIO_PROJECTS.find(p=>p.id==='adult-communication').slides[0][0]);await byId('back-projects').emit('click');assert.equal(location.hash,'#work');assert(!byId('project-dialog').open);}
 const projects=window.PORTFOLIO_PROJECTS;
 const grid=byId('project-grid');
 const cards=()=>[...grid.innerHTML.matchAll(/class="project-card\b/g)].length;
 assert.equal(projects.length,7);assert.equal(cards(),7);assert.equal(JSON.stringify(projects.map(p=>p.id)),JSON.stringify(['reading-for-meaning','epik-music','adult-communication','teacher-development','usa-camp-workbook','chuseok-thanksgiving-storybook','advice-suggestions-lesson']));const reading=projects.find(p=>p.id==='reading-for-meaning');assert.equal(reading.slides.length,32);assert.equal(reading.bookSlides.length,6);assert.equal(projects[0].id,'reading-for-meaning');assert.equal(projects.at(-1).id,'advice-suggestions-lesson');assert(!projects.some(p=>p.id==='ordering-food-game'));assert(!projects.some(p=>p.id==='weather-speaking-game'||p.id==='usa-turkiye-exchange'));assert(projects.some(p=>p.id==='epik-music'));assert(projects.some(p=>p.id==='advice-suggestions-lesson'));
-function assertCardActions(){const previewCount=grid.children.filter(e=>e.classes.has('preview-open')).length;assert.equal(grid.children.filter(e=>e.attrs.tag==='img').length,previewCount,'Each preview has an image');assert.equal(previewCount,cards()*3,'Every card shows three preview images');assert(!grid.innerHTML.includes('artifact-caption'),'Descriptor slips are removed');const links=grid.children.filter(e=>e.classes.has('project-card'));assert.equal(links.length,cards(),'One focus target per card');assert.equal(grid.children.filter(e=>e.attrs.tag==='button').length,0,'No nested card buttons');for(const link of links){assert.equal(link.attrs.tag,'a');assert(link.attrs['aria-label']?.length>10,'Card names its project');assert(link.attrs.href.startsWith('#project/'),'Card has a hash fallback');}}
+function assertCardActions(){const previewCount=grid.children.filter(e=>e.classes.has('preview-open')).length;assert.equal(grid.children.filter(e=>e.attrs.tag==='img').length,previewCount,'Each preview has an image');assert.equal(previewCount,cards()*3,'Every card shows three preview images');assert(!grid.innerHTML.includes('artifact-caption'),'Descriptor slips are removed');const articles=grid.children.filter(e=>e.classes.has('project-card'));assert.equal(articles.length,cards(),'Every card is rendered');const links=grid.children.filter(e=>e.attrs.tag==='a'&&'data-project' in e.attrs);assert.equal(links.length,cards(),'One focus target (the title link) per card');assert.equal(grid.children.filter(e=>e.attrs.tag==='button').length,0,'No nested card buttons');assert(!grid.innerHTML.includes('title="'),'No hover tooltips on aria-hidden previews');for(const card of articles){assert.equal(card.attrs.tag,'article','Card is an <article>');assert(!('aria-label' in card.attrs),'Card text is not overridden by an aria-label');}for(const link of links){assert(link.attrs.href.startsWith('#project/'),'Card has a hash fallback');assert.equal(link.attrs['aria-controls'],'project-dialog');}}
 assertCardActions();assert.equal(document.documentElement.getAttribute('lang'),'en');
-await grid.emit('click',{target:byId('explore-reading-for-meaning')});
+await grid.emit('click',{target:byId('project-link-reading-for-meaning')});
 assert.equal(thumbs().length,32);
 assert.equal(byId('slide-count').textContent.startsWith('1 / 32'),true);
 await byId('project-dialog').emit('click',{target:active.find(e=>e.dataset.gallery==='bookSlides')});
@@ -62,7 +62,7 @@ await byId('project-dialog').emit('click',{target:active.find(e=>e.dataset.galle
 assert.equal(thumbs().length,32);assert.equal(byId('gallery-image').src,reading.slides[0][0]);
 await byId('close-dialog').emit('click');
 const assetPaths=new Set(['preview-assets.js','assets/identity-cutouts--302c2deed319.svg','locales.js','originals.js','downloads.js','assets/contact-cutouts-ko--ca73061fcfe0.svg','assets/learning-collage-ko.svg']);for(const p of projects){assert(p.contribution.length>50);assert(p.slides.length>=2);for(const s of p.slides)assetPaths.add(s[0]);for(const s of p.bookSlides||[])assetPaths.add(s[0]);for(const d of p.documents)assetPaths.add(d[0]);assetPaths.add(p.cover);if(p.previewSecondary)assetPaths.add(p.previewSecondary);if(p.previewTertiary){assetPaths.add(p.previewTertiary);assert(p.previewTertiary!==p.cover&&p.previewTertiary!==p.previewSecondary);}}
-for(const match of html.matchAll(/\s(?:src|href)="([^"]+)"/g)){const url=match[1];if(!url.startsWith('#')&&!url.startsWith('mailto:'))assetPaths.add(url);if(url.startsWith('#'))assert(all.has(url.slice(1)),`Broken anchor ${url}`);}
+for(const match of html.matchAll(/\s(?:src|href)="([^"]+)"/g)){const url=match[1];if(!url.startsWith('#')&&!url.startsWith('mailto:'))assetPaths.add(url);if(url.startsWith('#')&&!url.startsWith('#project/'))assert(all.has(url.slice(1)),`Broken anchor ${url}`);}
 for(const entry of Object.values(window.PORTFOLIO_PREVIEWS))for(const output of entry.outputs){assetPaths.add(output.path);assert.equal(fs.statSync(path.join(root,output.path)).size,output.bytes);}
 for(const match of fs.readFileSync(path.join(root,'style.css'),'utf8').matchAll(/url\(["']?([^"')]+)["']?\)/g)){if(!match[1].startsWith('data:'))assetPaths.add(match[1]);}
 const r2HostedAssets=new Set(['assets/downloads/editing-skills.pdf','assets/downloads/usa-camp-book.pdf','assets/downloads/how-does-it-taste-complete.pdf','assets/downloads/dogica-font-pack.zip','assets/downloads/teacher-development-final.pdf']);
@@ -80,14 +80,12 @@ await byId('empty-reset').emit('click');assert.equal(cards(),projects.length);hi
 assert.equal(projects.filter(p=>p.categories.includes('students')).length,3);
 assert.equal(projects.filter(p=>p.audiences.includes('young')).length,3);
 for(const p of projects){
- const target=byId('explore-'+p.id);document.activeElement=target;await grid.emit('click',{target});assert(byId('project-dialog').open);assert(location.hash.endsWith(p.id));assert(byId('project-detail').innerHTML.includes(p.title.replaceAll('&','&amp;')));
+ const target=byId('project-link-'+p.id);document.activeElement=target;await grid.emit('click',{target});assert(byId('project-dialog').open);assert(location.hash.endsWith(p.id));assert(byId('project-detail').innerHTML.includes(p.title.replaceAll('&','&amp;')));
  assert.equal(byId('gallery-image').src,p.slides[0][0]);assert(byId('previous-slide').disabled);
  const detail=byId('project-detail').innerHTML,unavailable=window.PORTFOLIO_ORIGINALS[p.original].available===false;
  assert(detail.includes('class="file-scope"'),'Every project explains its file availability');
- assert(detail.indexOf('id="open-image"')<detail.indexOf('id="download-original"'),'Samples come before the full original');
- assert.equal(byId('download-original').hidden,unavailable);
- assert.equal(byId('download-original').disabled,unavailable);
- if(unavailable)assert.equal(byId('download-status').textContent,'');
+ {const d=detail.indexOf('id="download-original"');assert(d===-1?!detail.includes('original-material'):detail.indexOf('id="open-image"')<d,'Samples come before the full original; no empty original-material block when there is no file');}
+ if(unavailable){assert(!all.has('download-original'),'No hidden download controls rendered when there is no original');assert(!all.has('download-status'));}else{assert.equal(byId('download-original').hidden,false);assert.equal(byId('download-original').disabled,false);}
  assert(detail.includes(p.intro.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;')),'Teaching brief is visible');
 
  if(p.documents.length){const materials=byId('project-detail').innerHTML;assert(materials.includes('class="document-card primary"'),'First PDF is the primary material card');assert(materials.includes(`href="${p.documents[0][0]}" download`),'First PDF retains a direct download action');}
@@ -96,7 +94,7 @@ for(const p of projects){
  assert(byId('next-slide').disabled);
  await byId('project-dialog').emit('keydown',{key:'ArrowLeft',target:byId('gallery-image')});assert.equal(byId('gallery-image').src,p.slides[p.slides.length-2][0]);
  await byId('project-dialog').emit('click',{target:thumbs()[0]});assert.equal(byId('gallery-image').src,p.slides[0][0]);
- await byId('close-dialog').emit('click');assert(!byId('project-dialog').open);assert(!document.body.classList.contains('modal-open'));assert.equal(location.hash,'#work');assert.equal(document.activeElement,byId('explore-'+p.id),'Closing returns to the single card action');
+ await byId('close-dialog').emit('click');assert(!byId('project-dialog').open);assert(!document.body.classList.contains('modal-open'));assert.equal(location.hash,'#work');assert.equal(document.activeElement,byId('project-link-'+p.id),'Closing returns to the single card action');
 }
 await byId('language-toggle').emit('click');assert.equal(document.documentElement.getAttribute('lang'),'ko');assert.equal(storage.get('portfolio-language'),'ko');
 assert.equal(byId('result-count').textContent,'프로젝트 7개');
@@ -122,11 +120,11 @@ for(const lang of ['en','ko']){
   const preview=byId('preview-'+p.id+'-'+i);await grid.emit('click',{target:preview});
   assert.equal(byId('gallery-image').src,p.slides[p.previewIndices[i]][0]);
   const detail=byId('project-detail').innerHTML;assert(detail.indexOf('class="gallery"')<detail.indexOf('class="detail-role"'),'Gallery comes before role details in mobile reading order');if(detail.includes('class="project-materials"')){assert(detail.indexOf('class="gallery"')<detail.indexOf('class="project-materials"'),'Project files follow the gallery');assert(detail.indexOf('class="project-materials"')<detail.indexOf('class="detail-role"'),'Project files stay with the gallery before role details');}
-  await byId('back-projects').emit('click');assert(!byId('project-dialog').open);assert.equal(document.activeElement,byId('explore-'+p.id));
+  await byId('back-projects').emit('click');assert(!byId('project-dialog').open);assert.equal(document.activeElement,byId('project-link-'+p.id));
  }}
 }
 if(document.documentElement.getAttribute('lang')!=='en')await byId('language-toggle').emit('click');
-history.replaceState(null,'','#work');await grid.emit('click',{target:byId('explore-adult-communication')});assert(history.state.portfolioProject);history.back();assert(!byId('project-dialog').open);assert.equal(location.hash,'#work');history.forward();assert(byId('project-dialog').open);await byId('close-dialog').emit('click');
+history.replaceState(null,'','#work');await grid.emit('click',{target:byId('project-link-adult-communication')});assert(history.state.portfolioProject);history.back();assert(!byId('project-dialog').open);assert.equal(location.hash,'#work');history.forward();assert(byId('project-dialog').open);await byId('close-dialog').emit('click');
 assert(byId('email-details').hidden);
 assert.equal(byId('contact-email').getAttribute('aria-expanded'),'false');
 assert(!html.includes('annaready@live.com'));

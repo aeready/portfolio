@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-const core=['index.html','style.css','overhaul-v2.css','refine.css','press.css','edition.css','fixes.css','site.css','press-boot.js','press.js','edition.js','preview-assets.js','projects.js','app.js','downloads.js','locales.js','originals.js'];
-const fileTypes={html:'text/html; charset=utf-8',css:'text/css; charset=utf-8',js:'text/javascript; charset=utf-8',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',avif:'image/avif',woff2:'font/woff2',otf:'font/otf',pdf:'application/pdf'};
+const core=['index.html','style.css','overhaul-v2.css','refine.css','press.css','edition.css','fixes.css','site.css','press-boot.js','robots.txt','sitemap.xml',...fs.readdirSync('web').filter(name=>/^site--[a-f0-9]{12}\.js$/.test(name))];
+const fileTypes={html:'text/html; charset=utf-8',css:'text/css; charset=utf-8',js:'text/javascript; charset=utf-8',svg:'image/svg+xml',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',avif:'image/avif',woff2:'font/woff2',otf:'font/otf',pdf:'application/pdf',txt:'text/plain; charset=utf-8',xml:'application/xml; charset=utf-8'};
 const sources=core.map(name=>fs.readFileSync(`web/${name}`,'utf8')).join('\n');
 const referenced=[...sources.matchAll(/assets\/[\w./()+ -]+?\.(?:svg|png|jpe?g|webp|avif|woff2?|otf|pdf)/g)].map(match=>match[0]);
 const available=referenced.filter(path=>fs.existsSync(`web/${path}`));

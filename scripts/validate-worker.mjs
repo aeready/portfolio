@@ -38,10 +38,12 @@ for(const method of ['GET','HEAD']){
  assert.equal(pdf.status,200);assert.equal(pdf.headers.get('content-type'),'application/pdf');
  assert.equal(pdf.headers.get('x-robots-tag'),'noindex, nofollow');
 }
+const bundleName=fs.readdirSync('web').find(name=>/^site--[a-f0-9]{12}\.js$/.test(name));
+for(const [route,type] of [['/robots.txt','text/plain; charset=utf-8'],['/sitemap.xml','application/xml; charset=utf-8'],['/'+bundleName,'text/javascript; charset=utf-8']]){const res=await built.fetch(new Request('https://test'+route),{BUCKET:{get:async()=>{throw Error('Expected embedded '+route);}}});assert.equal(res.status,200);assert.equal(res.headers.get('content-type'),type);assert.equal(res.headers.get('x-robots-tag'),null,route+' is indexable');}
 console.log('Worker upload authorization, storage hash, routing, content type, HEAD, cache, and embedded homepage checks passed.');
 
 // Lossless text packaging and shared identity/favicon payloads must serve original bytes.
-for(const file of ['style.css','overhaul-v2.css','app.js','assets/favicon-ar-v3.svg',...fs.readdirSync('web/assets').filter(name=>name.startsWith('zine-book-collage--')).map(name=>'assets/'+name)]){
+for(const file of ['style.css','overhaul-v2.css',bundleName,'robots.txt','sitemap.xml','assets/favicon-ar-v3.svg',...fs.readdirSync('web/assets').filter(name=>name.startsWith('zine-book-collage--')).map(name=>'assets/'+name)]){
  const res=await built.fetch(new Request('https://test/'+file),{BUCKET:{get:async()=>{throw Error('Expected embedded asset '+file);}}});
  assert.equal(res.status,200);const expected=fs.readFileSync('web/'+file);
  assert.deepEqual(Buffer.from(await res.arrayBuffer()),expected,file+' must remain byte-identical');

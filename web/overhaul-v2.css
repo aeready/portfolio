@@ -335,7 +335,7 @@ html[lang="ko"] .project-title { font: 700 clamp(1.35rem, 2.4vw, 2rem)/1.25 var(
 .project-copy > p { color: var(--ink-text); }
 .project-foot { justify-content: flex-start; }
 .project-action { display: inline-flex; min-height: 36px; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 2px solid var(--ink); color: var(--ink); font: 700 .68rem/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; transition: background-size 120ms var(--ease-print), padding 120ms var(--ease-print) !important; }
-.project-card:focus-visible { box-shadow: 0 0 0 2px var(--ink); }
+.project-card:has(:focus-visible) { box-shadow: 0 0 0 2px var(--ink); }
 .project-skeleton { min-height: 220px; border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: transparent; box-shadow: none; transform: none; }
 .project-skeleton:nth-child(even) { transform: none; }
 .project-skeleton i { border: 0; border-radius: 0; background: var(--paper-deep); }
@@ -508,10 +508,10 @@ html[lang="ko"] #home .hero-art .hero-name { text-transform: uppercase;
 .artifact-fixed { position: relative !important; inset: auto !important; width: 100% !important; height: auto !important; aspect-ratio: 16 / 9; transform: none !important; grid-column: auto; }
 
 /* USA Camp: show a clear landscape workbook lead with two supporting pages beneath. */
-.project-05 .artifact-arrangement { align-items: stretch; aspect-ratio: auto; }
-.project-05 .artifact-main-frame { grid-row: auto; position: relative !important; left: auto !important; bottom: auto !important; width: auto !important; transform: none !important; z-index: auto; }
-.project-05 .artifact-main-frame .artifact-main { position: relative !important; inset: auto !important; width: 100% !important; height: 100% !important; transform: none !important; }
-.project-05 .artifact-fixed { position: relative !important; top: auto !important; right: auto !important; left: auto !important; width: 100% !important; transform: none !important; }
+[data-project-card="usa-camp-workbook"] .artifact-arrangement { align-items: stretch; aspect-ratio: auto; }
+[data-project-card="usa-camp-workbook"] .artifact-main-frame { grid-row: auto; position: relative !important; left: auto !important; bottom: auto !important; width: auto !important; transform: none !important; z-index: auto; }
+[data-project-card="usa-camp-workbook"] .artifact-main-frame .artifact-main { position: relative !important; inset: auto !important; width: 100% !important; height: 100% !important; transform: none !important; }
+[data-project-card="usa-camp-workbook"] .artifact-fixed { position: relative !important; top: auto !important; right: auto !important; left: auto !important; width: 100% !important; transform: none !important; }
 
 /* Education and skills: clearer section titles and room for university names. */
 .qualifications { display: grid; grid-template-columns: minmax(0, 1fr); border-left: 0; }

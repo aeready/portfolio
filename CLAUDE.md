@@ -10,6 +10,7 @@ Before any visual change: read `docs/overhaul/OWNER_DECISIONS.md` (owner's stand
 - Explain changes to the owner in plain language with before/after screenshots.
 
 ## Where things live
+- **Scripts:** pages load `web/site--<hash>.js`, built from `preview-assets, projects, locales, originals, downloads, cards, app, press, edition` by `scripts/build-js.mjs`; `press-boot.js` is separate. `index.html` has generated blocks (`<!--cards:start-->`, `scripts`, `ko-font`): never hand-edit between the markers, run `npm run build`. Card markup lives in `web/cards.js`.
 - **Pages load `web/site.css`**, generated from the six sheets. Edit the sources, then run `node scripts/build-css.mjs` (also after `hash-assets.mjs` or a Korean font rebuild). `404.html` still loads its own sheets.
 - `web/edition.css` / `edition.js`: newest work. Prefer editing the rule that actually wins over appending another override; every new `!important` must be paid for by removing one (`scripts/lint-source.mjs`).
 - `web/press.css` / `press.js`: motion, bands, gallery sizing (`fitStage`), phone filter, tap-to-zoom.
@@ -23,6 +24,7 @@ Before any visual change: read `docs/overhaul/OWNER_DECISIONS.md` (owner's stand
 
 ## Checks (after every change)
 ```
+npm run build          # site.css + script bundle + index.html (cards, script tag); run after editing any web/*.js or *.css
 cd web && python3 -m http.server 8765
 node scripts/validate.mjs && PORTFOLIO_TEST_DIRECT_ENTRY=1 node scripts/validate.mjs
 node scripts/validate-locales.mjs && node scripts/validate-downloads.mjs

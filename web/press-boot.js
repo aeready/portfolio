@@ -12,3 +12,21 @@
     root.classList.add('press-intro');
   } catch (e) { /* storage blocked: no sequence */ }
 })();
+
+/* Korean font on demand: English visitors never download it for layout. When Korean is already chosen
+   (saved) we preload it at once; otherwise app.js calls warmKo() when the language button is approached. */
+(function () {
+  var done = false;
+  window.warmKo = function () {
+    if (done) return; done = true;
+    try {
+      var m = document.querySelector('meta[name="ko-fonts"]');
+      (m ? m.content.split(',') : []).forEach(function (href) {
+        var l = document.createElement('link');
+        l.rel = 'preload'; l.as = 'font'; l.type = 'font/woff2'; l.crossOrigin = 'anonymous'; l.href = href;
+        document.head.appendChild(l);
+      });
+    } catch (e) { /* font loads normally via @font-face when Korean text appears */ }
+  };
+  try { if (localStorage.getItem('portfolio-language') === 'ko') window.warmKo(); } catch (e) {}
+})();

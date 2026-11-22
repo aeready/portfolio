@@ -3,6 +3,19 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 (8) — Accessibility, pre-rendered cards, one script bundle, indexing (main)
+
+- **Project cards** are now `<article>`s with the link on the title and a stretched `::after` (no more `aria-label` override; text readable by screen readers). Focus ring still shows on the whole card (`:has(:focus-visible)`); the title link draws none. `.project-0X` classes are gone: CSS uses `[data-project-card="…"]`.
+- **Overlays:** the full-screen zoom view and "All pages" sheet are top-level modal `<dialog>`s (not nested in the project dialog): Escape closes only them, focus returns to the exact button. Their icon buttons have localized `aria-label`s (new `zoomLabel` string). Hidden preview frames no longer carry `title` tooltips.
+- **Pre-rendered cards:** `scripts/build-html.mjs` writes the 7 English cards into `index.html` (same renderer as the browser, `web/cards.js`); `app.js` hydrates them. `<noscript>` text updated.
+- **One script bundle:** `scripts/build-js.mjs` (esbuild, now in `package.json`) joins and minifies the 9 scripts into `web/site--<hash>.js`; `press-boot.js` stays separate. Old per-file scripts remain as sources only (not uploaded). Worker caches the bundle as immutable.
+- **Small fixes:** Adobe logo has width/height; gallery thumbnails lazy-load after the first 6; no empty `.original-material` block when a project has no file; Korean fonts are preloaded when Korean is saved or the language button is approached.
+- **Indexing:** `noindex` removed from `index.html`; canonical + `og:url`; `robots.txt`, `sitemap.xml` (Worker now serves .txt/.xml). The résumé PDF keeps `X-Robots-Tag: noindex`; `404.html` keeps `noindex`.
+- **Portrait slot:** commented-out frame in `#background` + `.ed-portrait` CSS (inert).
+- **Tried and reverted:** a Capital-area inset map (owner did not like it); original map restored.
+- **Not done:** Korea-map change, logo duotone treatment (conflicts with the standing "logos keep their colours" decision), and the CSS dead-rule consolidation (needs a byte-identical `visual-regression` run per step).
+Upload: `index.html`, `site.css`, `site--<hash>.js`, `press-boot.js`, `robots.txt`, `sitemap.xml`, rebuilt Worker. Undo: revert the commit.
+
 ## 22 Nov 2026 (7) — USA Camp band keeps five pages (main)
 
 - Owner likes five pages on desktop: the two extra workbook pages (landmarks, school life) are back, now stacked tidily on the free side of the cover (mirroring the two samples), fully inside the card, no tilt beyond 2.5°. Two decorative `<span>`s from `bandExtras` in `app.js`, pictured in `edition.css` ("USA Camp band (desktop)"). Phones hide them. No new `!important`. Undo: delete that block and `bandExtras`.

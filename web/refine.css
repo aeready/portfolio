@@ -191,7 +191,7 @@ html[lang="ko"] .filter-group button { font-size: .875rem; }
 .project-action { font-size: var(--fs-label); }
 
 /* Interaction 1: the card answers the pointer with the house "press" offset */
-.project-card:focus-visible .artifact-arrangement { box-shadow: 10px 10px 0 var(--acid); }
+.project-card:has(:focus-visible) .artifact-arrangement { box-shadow: 10px 10px 0 var(--acid); }
 
 /* ---------- Professional background ------------------------------------ */
 .background-layout {
@@ -454,14 +454,14 @@ html[lang="ko"] .project-card .project-title { color: var(--band-ink); }
 .project-card .project-action {
   font-size: var(--fs-button); box-shadow: 4px 4px 0 var(--frame-shadow);
 }
-.project-card:hover .project-action, .project-card:focus-visible .project-action { padding-inline: 20px; background: var(--band-ink); color: var(--band); }
+.project-card:hover .project-action, .project-card:has(:focus-visible) .project-action { padding-inline: 20px; background: var(--band-ink); color: var(--band); }
 .project-card .artifact-arrangement { background: var(--paper); border-color: var(--ink); box-shadow: 10px 10px 0 var(--frame-shadow); }
 .project-collection > .project-card:nth-child(4n+2) .artifact-arrangement { box-shadow: 10px 10px 0 var(--ink); }
 @media (hover: hover) {
   .project-card:hover .artifact-arrangement { transform: translate(-3px, -3px); box-shadow: 13px 13px 0 var(--frame-shadow); }
   .project-collection > .project-card:nth-child(4n+2):hover .artifact-arrangement { box-shadow: 13px 13px 0 var(--ink); }
 }
-.project-card:focus-visible { outline: 3px solid var(--ink); outline-offset: -6px; }
+.project-card:has(:focus-visible) { outline: 3px solid var(--ink); outline-offset: -6px; }
 
 /* One Riso piece per spread, top corner of the text column */
 .project-card::after {
@@ -470,9 +470,9 @@ html[lang="ko"] .project-card .project-title { color: var(--band-ink); }
 }
 
 /* USA Camp workbook: three portrait pages side by side */
-.project-05 .artifact-arrangement { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; grid-template-rows: auto !important; }
-.project-05 .artifact-main-frame { grid-column: auto !important; aspect-ratio: 3 / 4 !important; }
-.project-05 .artifact-fixed { aspect-ratio: 3 / 4 !important; }
+[data-project-card="usa-camp-workbook"] .artifact-arrangement { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; grid-template-rows: auto !important; }
+[data-project-card="usa-camp-workbook"] .artifact-main-frame { grid-column: auto !important; aspect-ratio: 3 / 4 !important; }
+[data-project-card="usa-camp-workbook"] .artifact-fixed { aspect-ratio: 3 / 4 !important; }
 
 /* Phones and tablets: same bands, stacked samples then text */
 @media (max-width: 1000px) {
@@ -581,11 +581,11 @@ html[lang="ko"] :is(.project-meta, .eyebrow, .timeline-date, .project-results, .
 }
 html[lang="ko"] .project-collection .project-card .project-action { font-size: .9375rem; letter-spacing: .02em; text-transform: none; }
 .project-collection .project-card:hover .project-action,
-.project-collection .project-card:focus-visible .project-action {
+.project-collection .project-card:has(:focus-visible) .project-action {
   padding-inline: 28px; background: var(--btn-bg); color: var(--btn-fg);
   transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--btn-shadow);
 }
-.project-collection .project-card:focus-visible .project-action { outline: 3px solid var(--btn-shadow); outline-offset: 3px; }
+.project-collection .project-card:has(:focus-visible) .project-action { outline: 3px solid var(--btn-shadow); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
   .project-collection .project-card:hover .project-action { transform: none; }
 }

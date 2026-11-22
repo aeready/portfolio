@@ -17,10 +17,12 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 
   /* ---------- Contact sheet: every page of the gallery at once ---------- */
-  const sheet = el('div', 'ed-sheet');
-  sheet.hidden = true; sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true');
-  sheet.innerHTML = '<div class="ed-sheet-bar"><h2 class="ed-sheet-title"></h2><button type="button" class="ed-sheet-close"><span aria-hidden="true">×</span></button></div><ol class="ed-sheet-grid"></ol>';
-  dialog.append(sheet);
+  // A top-level modal <dialog> (sibling of #project-dialog, not nested in it): the browser stacks it in the
+  // top layer, makes everything behind it inert, closes it on Escape and restores focus.
+  const sheet = el('dialog', 'ed-sheet');
+  sheet.setAttribute('aria-labelledby', 'ed-sheet-title');
+  sheet.innerHTML = '<div class="ed-sheet-bar"><h2 class="ed-sheet-title" id="ed-sheet-title"></h2><button type="button" class="ed-sheet-close" aria-label="Close all pages"><span aria-hidden="true">×</span></button></div><ol class="ed-sheet-grid"></ol>';
+  document.body.append(sheet);
   let sheetOpener = null;
   const openSheet = opener => {
     const thumbs = [...detail.querySelectorAll('.gallery-thumbnails button')];
@@ -37,13 +39,14 @@
       return `<li style="--i:${i}"><button type="button" data-go="${i}" aria-label="${esc(b.getAttribute('aria-label') || String(i + 1))}"${current ? ' aria-current="page"' : ''}><img src="${esc(src)}"${srcset ? ` srcset="${esc(srcset)}" sizes="(max-width: 760px) 45vw, 260px"` : ''} alt="" loading="lazy" decoding="async"><span class="ed-sheet-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span></button></li>`;
     }).join('');
     sheet.querySelector('.ed-sheet-title').textContent = ui().sheetTitle || 'All pages';
-    sheet.querySelector('.ed-sheet-close').setAttribute('aria-label', ui().sheetClose || 'Close');
-    sheet.setAttribute('aria-label', ui().sheetOpen || 'All pages');
-    sheet.hidden = false;
+    sheet.querySelector('.ed-sheet-close').setAttribute('aria-label', ui().sheetClose || 'Close all pages');
+    if (!sheet.open) sheet.showModal();
     (grid.querySelector('[aria-current]') || grid.querySelector('button'))?.focus({preventScroll: true});
     grid.querySelector('[aria-current]')?.scrollIntoView({block: 'center'});
   };
-  const closeSheet = () => { if (sheet.hidden) return; sheet.hidden = true; sheetOpener?.focus({preventScroll: true}); };
+  const closeSheet = () => { if (sheet.open) sheet.close(); };
+  // Focus goes back to the exact button that opened the sheet (the project dialog stays open).
+  sheet.addEventListener('close', () => { if (dialog.open && sheetOpener?.isConnected) sheetOpener.focus({preventScroll: true}); });
   sheet.addEventListener('click', event => {
     if (event.target.closest('.ed-sheet-close')) return closeSheet();
     const go = event.target.closest('[data-go]');
@@ -52,17 +55,7 @@
     closeSheet();
     detail.querySelector('#open-image')?.focus({preventScroll: true});
   });
-  dialog.addEventListener('keydown', event => {
-    if (sheet.hidden) return;
-    if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); closeSheet(); }
-    if (event.key === 'Tab') {
-      const f = [...sheet.querySelectorAll('button')]; const i = f.indexOf(document.activeElement);
-      if (event.shiftKey ? i <= 0 : i === f.length - 1) { event.preventDefault(); f[event.shiftKey ? f.length - 1 : 0].focus(); }
-    }
-    if (/^Arrow/.test(event.key)) event.stopPropagation(); // don't turn gallery pages behind the sheet
-  }, true);
-  dialog.addEventListener('cancel', event => { if (!sheet.hidden) { event.preventDefault(); closeSheet(); } });
-  dialog.addEventListener('close', () => { sheet.hidden = true; });
+  dialog.addEventListener('close', closeSheet);
 
   /* ---------- Loupe: press and hold the page to magnify (desktop) ------- */
   const loupe = el('div', 'ed-loupe'); loupe.hidden = true; loupe.setAttribute('aria-hidden', 'true');
@@ -627,7 +620,7 @@
       onProject();
       setTimeout(() => {
         const h = detail.querySelector('#project-title');
-        if (!h || dialog.querySelector('.zoom-view:not([hidden])')) return;
+        if (!h || document.querySelector('.zoom-view[open]')) return;
         const a = document.activeElement;
         if (a && a !== dialog && a !== document.body && !a.closest('.dialog-top')) return;
         h.setAttribute('tabindex', '-1'); h.focus({preventScroll: true});

@@ -643,7 +643,7 @@ html[lang="ko"] .heading-accent{font:inherit;letter-spacing:inherit;word-spacing
 .project-card:nth-child(even){--project-backing:#d18c7b}
 .project-card:nth-child(3n+2){--card-tape:var(--tape-cobalt);--card-tag:var(--tag-cobalt);--card-accent:var(--accent-cobalt);--tape-angle:1.5deg}
 .project-card:nth-child(3n){--card-tape:var(--tape-mustard);--card-tag:var(--tag-mustard);--card-accent:var(--accent-mustard);--tape-angle:-1deg}
-.project-card.project-02,.project-card.project-06{--main-tilt:0deg;--fixed-tilt:0deg;--extra-tilt:0deg}
+.project-card[data-project-card="reading-for-meaning"],.project-card[data-project-card="chuseok-thanksgiving-storybook"]{--main-tilt:0deg;--fixed-tilt:0deg;--extra-tilt:0deg}
 .project-card::before{
  content:"";
  position:absolute;
@@ -745,17 +745,17 @@ html[lang="ko"] .project-title{
 }
 .artifact-fixed.artifact-tertiary{transform:rotate(var(--extra-tilt))!important}
 .preview-open img{display:block;filter:grayscale(.2) sepia(.06)}
-.project-05 .preview-papers{
+[data-project-card="usa-camp-workbook"] .preview-papers{
  position:relative;
  display:block;
  aspect-ratio:1.15/1;
  overflow:hidden;
 }
-.project-05 .artifact-fixed{
+[data-project-card="usa-camp-workbook"] .artifact-fixed{
  z-index:1;
 }
-.project-05 .artifact-fixed:not(.artifact-tertiary){right:var(--project-mat-padding)!important}
-.project-05 .artifact-fixed.artifact-tertiary{left:var(--project-mat-padding)!important}
+[data-project-card="usa-camp-workbook"] .artifact-fixed:not(.artifact-tertiary){right:var(--project-mat-padding)!important}
+[data-project-card="usa-camp-workbook"] .artifact-fixed.artifact-tertiary{left:var(--project-mat-padding)!important}
 .project-card:hover .preview-open img,.project-card:focus-within .preview-open img{filter:none}
 .project-card:hover .preview-open,.project-card:focus-within .preview-open{box-shadow:0 3px 8px #27534c26,0 16px 30px #203c351b}
 .preview-open:focus-visible{outline-offset:6px}

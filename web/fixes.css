@@ -160,3 +160,14 @@ html:not(.js) .project-skeleton { display: none; }
 
 /* 21 Nov: the licence link is a 44 px tap target on touch screens without moving the text. */
 @media (pointer: coarse) { .site-footer .footer-licence a { display: inline-block; padding-block: 12px; margin-block: -12px; } }
+
+/* Project cards are <article>s: the title link stretches over the whole card (no aria-label override,
+   text stays readable by assistive tech). Focus ring comes from .project-card:has(:focus-visible). */
+.project-card { position: relative; }
+.project-title a { color: inherit; text-decoration: none; }
+.project-title a::after { content: ""; position: absolute; inset: 0; z-index: 3; }
+.project-title a:focus-visible { outline: none; }
+
+/* Zoom view and contact sheet are top-level modal <dialog>s: reset the generic dialog box styling. */
+dialog.zoom-view, dialog.ed-sheet { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; overflow: auto; background: rgb(28 16 32 / .97); color: var(--paper); }
+dialog.zoom-view::backdrop, dialog.ed-sheet::backdrop { background: transparent; }
