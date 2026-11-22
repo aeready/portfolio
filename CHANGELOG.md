@@ -3,6 +3,14 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 (5) — Gallery arrows, USA band, counter, filter row (branch)
+
+- **Project galleries (desktop, all of them incl. tabs):** Previous / next are lime buttons either side of the work, vertically centred; counter and All pages stay in the bar below. Block "Previous / next sit either side" in `edition.css`. Phones unchanged.
+- **USA Camp band:** removed the two extra tilted decoration pages (one ran off the card edge); now cover + two samples like the other bands. Undo: restore the "USA Camp band (desktop)" block in `edition.css` from git.
+- **Hero numbers:** two count-up scripts were fighting over the same figures and could freeze on a half-way number (226+ / 14+). The duplicate in `edition.js` is gone; it always lands on 250+ / 15+.
+- **Category filter (desktop):** larger type that runs the full width of the rule, one line, EN and KO. Undo: "Category filter on desktop" block in `edition.css`.
+Upload: `site.css`, `edition.js` (and rebuilt Worker).
+
 ## 22 Nov 2026 (4) — Project page redesign, desktop (main)
 
 Approved by the owner after before/after screenshots. Desktop (1001 px and up) only; phones unchanged.

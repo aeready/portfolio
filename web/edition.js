@@ -697,23 +697,7 @@
     new MutationObserver(() => { if (dialog.open) requestAnimationFrame(() => { syncPosition(); syncBar(); }); }).observe(dialog, {attributes: true, attributeFilter: ['open']});
   }
 
-  // 2. Stats count up once, on first sight (numerals already register on scroll).
-  if (!still && 'IntersectionObserver' in window) {
-    const stats = [...document.querySelectorAll('.hero-proof strong')];
-    const countUp = el => {
-      const m = el.textContent.match(/^(\d+)(.*)$/); if (!m) return;
-      const end = +m[1], tail = m[2], t0 = performance.now(), dur = 900;
-      el.style.minWidth = `${el.getBoundingClientRect().width}px`; el.style.display = 'inline-block';
-      const tick = now => { const k = Math.min(1, (now - t0) / dur), e = 1 - (1 - k) ** 3; el.textContent = `${Math.round(end * e)}${tail}`; if (k < 1) requestAnimationFrame(tick); };
-      requestAnimationFrame(tick);
-    };
-    const seen = new IntersectionObserver(entries => entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      seen.unobserve(e.target);
-      countUp(e.target);
-    }), {threshold: .6});
-    stats.forEach(s => seen.observe(s));
-  }
+  // 2. (Stats count up in the hero block above; one counter only.)
 
   // 3. Downloads add their size to "PDF · 27 pages" (read from the server once).
   const sizes = new Map();

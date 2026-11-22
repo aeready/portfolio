@@ -826,7 +826,16 @@ html[lang="ko"] .ed-file:not(.is-open) .ed-file-title { rotate: none !important;
   }
   #project-dialog .gallery.gallery > .gallery-controls #slide-count { order: 1; flex-basis: auto; white-space: nowrap; }
   #project-dialog .gallery.gallery > .gallery-controls #slide-count .count-source { display: none; }
-  #project-dialog .gallery.gallery > .gallery-controls > div { order: 0; }
+  /* Previous / next sit either side of the work (22 Nov, owner): absolutely
+     placed in the stage's own grid row, vertically centred; the stage leaves
+     them room. Applies to every gallery, tabs included. */
+  #project-dialog .gallery.gallery { position: relative; }
+  #project-dialog .gallery.gallery > .gallery-controls > div { display: contents; }
+  #project-dialog .gallery.gallery > .gallery-controls > div > button { position: absolute; grid-area: stage; top: 50%; translate: 0 -50%; z-index: 3; min-width: 56px !important; min-height: 56px !important; background: var(--acid) !important; color: var(--ink) !important; border-color: transparent !important; }
+  #project-dialog .gallery.gallery > .gallery-controls > div > button:disabled { background: var(--paper) !important; }
+  #project-dialog .gallery.gallery > .gallery-controls > div > #previous-slide { left: 0; }
+  #project-dialog .gallery.gallery > .gallery-controls > div > #next-slide { right: 0; }
+  #project-dialog .gallery.gallery > .gallery-stage { max-width: calc(100% - 152px) !important; }
   #project-dialog .gallery.gallery > .gallery-controls .ed-sheet-open { order: 3; }
   #project-dialog .gallery.gallery > .gallery-controls .ed-loupe-hint { display: none; }
   #project-dialog .gallery.gallery > .gallery-caption { grid-area: cap !important; margin: 18px 0 0 !important; font-size: 1rem !important; line-height: 1.45 !important; justify-self: end; text-align: right; max-width: 60ch; opacity: .85; }
@@ -1242,32 +1251,6 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
   @media (hover: none) and (prefers-reduced-motion: no-preference) {
     .project-collection > .project-card.project-card .artifact-main-frame { animation: fan-1 linear both; animation-timeline: view(); animation-range: entry 10% cover 45%; }
     @keyframes fan-1 { from { translate: 0 8%; rotate: -2deg; scale: .94; } to { translate: 0 0; rotate: 0deg; scale: 1; } }
-  }
-}
-
-/* USA Camp band (desktop): two more workbook pages on the free side of the
-   cover so the pile balances (landmarks p.4, school life p.8). Decoration
-   only (the gallery has every page). Undo: delete these lines. */
-@media (min-width: 1001px) {
-  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-arrangement::after,
-  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-main-frame::before {
-    content: '' !important; display: block !important; position: absolute; box-sizing: border-box; pointer-events: none;
-    width: 25%; aspect-ratio: 165 / 221; height: auto; border: 9px solid var(--paper); opacity: 1 !important;
-    background: var(--paper) center / cover no-repeat; background-size: cover !important; transition: translate 480ms var(--ease-press), rotate 480ms var(--ease-press);
-    translate: none; -webkit-mask-image: none !important; mask-image: none !important; filter: none !important; mix-blend-mode: normal !important;
-  }
-  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-arrangement::after {
-    background-image: url('assets/previews/usa-camp-booklet-04-480--586ddef5c4b5.webp') !important;
-    inset: -1% auto auto 0 !important; z-index: 1; rotate: -3deg;
-  }
-  .project-collection > .project-card[data-project="usa-camp-workbook"] .artifact-main-frame::before {
-    background-image: url('assets/previews/usa-camp-booklet-08-480--7437e07f6f1c.webp') !important;
-    width: 59%; inset: 52% auto auto -57% !important; z-index: -1; rotate: 2.5deg;
-  }
-  .project-collection > .project-card[data-project="usa-camp-workbook"]:nth-child(even) .artifact-arrangement::after { inset: -1% 0 auto auto !important; rotate: 3deg; }
-  .project-collection > .project-card[data-project="usa-camp-workbook"]:nth-child(even) .artifact-main-frame::before { inset: 52% -57% auto auto !important; rotate: -2.5deg; }
-  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .project-collection > .project-card[data-project="usa-camp-workbook"]:is(:hover, :focus-visible) .artifact-arrangement::after { translate: -8% 0; rotate: -6deg; }
   }
 }
 
@@ -2044,4 +2027,16 @@ html body .zoom-view .zv-nav .zv-next { justify-self: start !important; }
 @media (max-width: 1000px) {
   #background .qualifications > div:first-child > .degree { order: 2; }
   #background .qualifications > div:first-child > .degree:has(.degree-badge) { order: 1; }
+}
+
+/* Category filter on desktop (22 Nov, owner): bigger type that runs the
+   full width of the rule above it, so the row ends where the line ends.
+   Phones keep their own wrapped / toggle layout. */
+@media (min-width: 1001px) {
+  .work-tools { container-type: inline-size; }
+  #category-filters { justify-content: space-between !important; flex-wrap: nowrap !important; width: 100%; }
+  #category-filters button { font-size: min(2.25rem, 2.1cqw) !important; white-space: nowrap; margin-right: 0 !important; padding-right: 22px !important; }
+  #category-filters button:last-child { padding-right: 0 !important; }
+  #category-filters button::after { font-size: max(.8125rem, .55em); }
+  html[lang="ko"] #category-filters button { font-size: min(2rem, 2.25cqw) !important; }
 }
