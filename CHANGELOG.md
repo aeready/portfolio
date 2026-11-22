@@ -3,6 +3,11 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 (7) — USA Camp band keeps five pages (main)
+
+- Owner likes five pages on desktop: the two extra workbook pages (landmarks, school life) are back, now stacked tidily on the free side of the cover (mirroring the two samples), fully inside the card, no tilt beyond 2.5°. Two decorative `<span>`s from `bandExtras` in `app.js`, pictured in `edition.css` ("USA Camp band (desktop)"). Phones hide them. No new `!important`. Undo: delete that block and `bandExtras`.
+Upload: `site.css`, `app.js` (with the 22 Nov (6) files).
+
 ## 22 Nov 2026 (6) — Gutter flicker, gallery tabs, map track, back cover (branch)
 
 - **Booklet gutter shadow:** it was measured while the new page was still mid-turn, so it jumped (wrong spot and height) for about half a second on every turn, and it also widened/narrowed. Now measured from layout size (`fitShadow` in `press.js`) and the widen/narrow animation is gone. Undo: restore `getBoundingClientRect` in `fitShadow` and the `ed-spine-turn` block in `edition.css`.

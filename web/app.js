@@ -134,7 +134,7 @@
         const frame = `<span id="preview-${escape(p.id)}-${index}" class="preview-open ${name}" data-preview="${sample}" title="${escape(caption)}" aria-hidden="true">${previewImage(src, sizes)}</span>`;
         return index === 0 ? `<div class="artifact-main-frame">${frame}</div>` : frame;
       }).join('');
-      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" data-tone="${['lime', 'ink', 'cream'][position % 3]}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div></div><div class="project-copy"><dl class="wall-label"><div><dt>${escape(t('format'))}</dt><dd>${escape(p.format)}</dd></div><div><dt>${escape(t('audience'))}</dt><dd>${escape(p.audienceLabel)}</dd></div></dl><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
+      return `<a id="explore-${escape(p.id)}" class="project-card project-${escape(p.number)} ${featured ? 'is-featured' : 'is-compact'}" data-tone="${['lime', 'ink', 'cream'][position % 3]}" href="#project/${escape(p.id)}" data-project="${escape(p.id)}" data-project-card="${escape(p.id)}" aria-controls="project-dialog" aria-label="${escape(t('exploreAria', {title:p.title}))}"><header class="project-heading"><span class="project-index" aria-hidden="true">${String(position + 1).padStart(2, '0')}</span><p class="project-meta">${escape(p.displayLabel)}</p><h3 class="project-title">${projectTitleMarkup(p.displayTitle)}</h3></header><div class="artifact-arrangement"><div class="project-cover"><div class="preview-papers">${previewButtons}</div></div>${bandExtras(p)}</div><div class="project-copy"><dl class="wall-label"><div><dt>${escape(t('format'))}</dt><dd>${escape(p.format)}</dd></div><div><dt>${escape(t('audience'))}</dt><dd>${escape(p.audienceLabel)}</dd></div></dl><p>${escape(p.summary)}</p><div class="project-foot"><span class="project-action">${escape(t('explore'))} <span aria-hidden="true">→</span></span></div></div></a>`;
     }).join('');
     wirePreviewImages(grid);
     grid.setAttribute('aria-busy', 'false');
@@ -158,6 +158,10 @@
     $$('.gallery-tabs button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.gallery === activeGallery)));
   }
   let slideLoadTimer = 0, slideLoadSequence = 0;
+  // Two more workbook pages beside the USA Camp cover on desktop (decoration
+  // only, pictured by CSS; the gallery has every page).
+  const bandExtras = p => p.id !== 'usa-camp-workbook' ? '' : '<span class="band-extra band-extra--1" aria-hidden="true"></span><span class="band-extra band-extra--2" aria-hidden="true"></span>';
+
   // Booklet spreads (desktop, portrait galleries): the cover alone on the right,
   // then pages side by side (2–3, 4–5 …), like an open booklet.
   function isSpread() {

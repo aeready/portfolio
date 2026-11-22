@@ -1245,6 +1245,27 @@ html[lang="ko"] .work-map .map-label { font: 700 16px/1 var(--read) !important; 
   }
 }
 
+/* USA Camp band (desktop): two more workbook pages (landmarks p.4, school life
+   p.8) stacked on the free side of the cover, like the two samples on the other
+   side, so the band keeps five pages (owner, 22 Nov). Real <img> elements from
+   app.js (`bandExtras`); decoration only, the gallery has every page. Phones
+   hide them. Undo: delete this block and `bandExtras` in app.js. */
+.band-extra { display: none; }
+@media (min-width: 1001px) {
+  .project-collection > .project-card .artifact-arrangement { position: relative; }
+  .project-collection > .project-card .band-extra {
+    display: block; position: absolute; left: 0; width: 23%; height: auto; aspect-ratio: 165 / 221; box-sizing: border-box;
+    border: 9px solid var(--paper); background: var(--paper) center / cover no-repeat; pointer-events: none; z-index: 1; transition: translate 480ms var(--ease-press), rotate 480ms var(--ease-press);
+  }
+  .project-collection > .project-card .band-extra--1 { top: 3%; rotate: -2.5deg; background-image: url('assets/previews/usa-camp-booklet-04-480--586ddef5c4b5.webp'); }
+  .project-collection > .project-card .band-extra--2 { top: 54%; rotate: 2deg; background-image: url('assets/previews/usa-camp-booklet-08-480--7437e07f6f1c.webp'); }
+  .project-collection > .project-card:nth-child(even) .band-extra { left: auto; right: 0; }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .project-collection > .project-card:is(:hover, :focus-visible) .band-extra { translate: -8% 0; }
+    .project-collection > .project-card:nth-child(even):is(:hover, :focus-visible) .band-extra { translate: 8% 0; }
+  }
+}
+
 /* ---------- Skills as a notebook page (owner's moodboard, 18 Nov) ----------
    A ruled sheet with punched holes and a lime margin, set slightly askew.
    English and Korean mixed: heading "SKILLS 역량" / "역량 Skills", each tool
