@@ -12,7 +12,7 @@ Read before any visual or content change. Moved here from `CLAUDE.md`, 17 Nov 20
 ## Projects
 - Order: Reading for Meaning, Music in English Classes, Clearer Global Communication, then the rest.
 - Bands: colours cycle lime → aubergine → cream by position as shown (also when filtered), via `data-tone`. One layout for all (work one side, text the other, alternating); bands size to content with View visible; cover plus the two other samples all fully visible.
-- Project pages: gallery and controls visible together (desktop: controls left, work right; phones: one-row top bar, compact strip). No Close button (Back only). Click the image to zoom.
+- Project pages: gallery and controls visible together (desktop, 22 Nov: compact title strip, work centred on paper, one control bar under it; phones: one-row top bar, compact strip). No Close button (Back only). Click the image to zoom.
 - File cabinet: coloured cards, Korean spines upright, four cards on every project: My role, Project brief, Design choices, What it includes / 구성 (was "Evidence"; rename back when real outcomes are added).
 - Foot: files card, then Previous / Next cards (name and cover; no wrap-around; no sticky bar on phones).
 - Booklets (USA Camp, Reading "Being a Bee", Music course guide): spreads on desktop, lime "The end!" / "끝!" facing the last page. USA pages 10 and 12 swapped in the gallery only.

@@ -3,6 +3,16 @@
 Base: the colour-band layout (`claude/wizardly-newton-mtmf99`). This branch: `claude/colour-bands-polish`.
 Each entry: what changed, the rule it serves, how to undo it. Nothing here is live until the owner uploads and publishes.
 
+## 22 Nov 2026 (4) — Project page redesign, desktop (main)
+
+Approved by the owner after before/after screenshots. Desktop (1001 px and up) only; phones unchanged.
+- **Title strip:** numeral, tag and title in one compact group on the left, summary on the right (about half the old height). Rule "M7" in `edition.css`.
+- **Gallery:** the work is centred on paper (`--room: var(--paper)`), with one soft paper shadow; crop marks and the dotted frame are hidden. One control bar under it (arrows, counter, All pages) with the caption on the right; the page strip below. Block "Project gallery on desktop (redesigned 22 Nov)" in `edition.css`.
+- **Sizing:** `fitStage` (`press.js`) leaves room for the control bar under the work, so spread and controls fit the first screen at 1280×720 to 1920×1080.
+- `!important` budget lowered by 2 (edition.css 1278 → 1276).
+- This replaces the saved decision "desktop: controls left, work right" (owner, 22 Nov).
+Undo: revert the redesign commit on branch `project-page-redesign`.
+
 ## 22 Nov 2026 (3) — Booklet on the first desktop screen; Gyeonggi-do job text (main)
 
 - **Project pages, desktop:** the gallery is sized to the space left below its top edge (`fitStage` in `press.js`, minimum 320 px), and the title band is tighter (smaller numeral, less padding above the gallery). A booklet spread is now fully visible without scrolling at 1024×768, 1280×720, 1366×768, 1440×900, 1536×864 and 1920×1080. Phones unchanged. Undo: restore `innerHeight - 330` in `fitStage`, the `.detail-head` padding / numeral size in `edition.css` (~1750) and the gallery padding in `press.css` (~1045).
